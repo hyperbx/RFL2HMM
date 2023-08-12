@@ -4,7 +4,7 @@ namespace RFL2HMM
 {
     class Program
     {
-        private const string _version = "1.0.0";
+        private const string _version = "1.1.0";
         private const string _arrayDelimiter = "__arr";
 
         private static StringBuilder _output = new();
@@ -17,13 +17,17 @@ namespace RFL2HMM
                 "Written by Hyper\n"
             );
 
-            if (args.Length > 4 || args.Length < 3)
+            if (args.Length > 5 || args.Length < 4)
             {
                 Console.Write
                 (
                     "Usage;\n" +
-                    "- RFL2HMM.exe templateName \"original.rfl\" \"modified.rfl\"\n" +
-                    "- RFL2HMM.exe templateName \"original.rfl\" \"modified.rfl\" \"output.hmm\"\n\n" +
+                    "- RFL2HMM.exe gameName templateName \"original.rfl\" \"modified.rfl\"\n" +
+                    "- RFL2HMM.exe gameName templateName \"original.rfl\" \"modified.rfl\" \"output.hmm\"\n\n" +
+                    "" +
+                    "Examples;\n" +
+                    "- RFL2HMM.exe Frontiers SonicParameters \"player_common.rfl\" \"modified_player_common.rfl\"\n" +
+                    "- RFL2HMM.exe Origins UIRflParam \"ui_rfl_param.rfl\" \"modified_ui_rfl_param.rfl\"\n\n" +
                     "" +
                     "Information;\n" +
                     "- For the template name, browse the \"Templates\" folder provided and use the file name.\n" +
@@ -37,13 +41,14 @@ namespace RFL2HMM
                 return;
             }
 
-            string templateName = args[0];
-            string originalFilePath = args[1];
-            string modifiedFilePath = args[2];
+            string gameName = args[0];
+            string templateName = args[1];
+            string originalFilePath = args[2];
+            string modifiedFilePath = args[3];
 
-            if (!File.Exists(Path.Combine("Templates", $"{templateName}.cs")))
+            if (!File.Exists(Path.Combine("Templates", gameName, $"{templateName}.cs")))
             {
-                Console.WriteLine($"Failed to load template: \"{templateName}.cs\"");
+                Console.WriteLine($"Failed to locate file: \"{templateName}.cs\"");
                 return;
             }
 
@@ -61,12 +66,12 @@ namespace RFL2HMM
 
             string outputFilePath = Path.Combine(Path.GetDirectoryName(modifiedFilePath), $"{Path.GetFileNameWithoutExtension(modifiedFilePath)}.hmm");
 
-            if (args.Length > 3)
-                outputFilePath = args[3];
+            if (args.Length > 4)
+                outputFilePath = args[4];
 
             Console.Write("Comparing reflection data...");
 
-            var diffResults = DiffVmProvider.Run(originalFilePath, modifiedFilePath, templateName);
+            var diffResults = DiffVmProvider.Run(originalFilePath, modifiedFilePath, gameName, templateName);
 
             if (diffResults == null)
             {
@@ -156,11 +161,11 @@ namespace RFL2HMM
 
             try
             {
-                if (templateName != "SonicParameters")
+                if (gameName != "Frontiers" || templateName != "SonicParameters")
                 {
                     Console.WriteLine("Writing external template to code file...\n");
 
-                    string libraryFilePath = Path.Combine("Libraries", $"{templateName}.hmm");
+                    string libraryFilePath = Path.Combine("Libraries", gameName, $"{templateName}.hmm");
 
                     if (File.Exists(libraryFilePath))
                     {
@@ -173,7 +178,7 @@ namespace RFL2HMM
                     }
                     else
                     {
-                        Console.WriteLine($"Failed to load library: \"{templateName}.hmm\"\n");
+                        Console.WriteLine($"Failed to locate file: \"{templateName}.hmm\"\n");
                         Console.WriteLine("WARNING: writing code file without external template!\n");
                     }
                 }

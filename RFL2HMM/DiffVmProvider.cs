@@ -6,14 +6,14 @@ namespace RFL2HMM
 {
     class DiffVmProvider
     {
-        private static string _scriptTemplate(string originalFilePath, string modifiedFilePath, string templateName) =>
+        private static string _scriptTemplate(string originalFilePath, string modifiedFilePath, string gameName, string templateName) =>
         $$"""
             using System;
             using System.Collections.Generic;
             using System.IO;
             using System.Reflection;
 
-            {{File.ReadAllText($@"Templates\{templateName}.cs")}}
+            {{File.ReadAllText($@"Templates\{gameName}\{templateName}.cs")}}
 
             namespace RFL2HMM
             {
@@ -85,10 +85,10 @@ namespace RFL2HMM
             }
         """;
 
-        public static Dictionary<string, object> Run(string originalFilePath, string modifiedFilePath, string templateName)
+        public static Dictionary<string, object> Run(string originalFilePath, string modifiedFilePath, string gameName, string templateName)
         {
             var options = new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true);
-            var syntaxTree = CSharpSyntaxTree.ParseText(_scriptTemplate(originalFilePath, modifiedFilePath, templateName));
+            var syntaxTree = CSharpSyntaxTree.ParseText(_scriptTemplate(originalFilePath, modifiedFilePath, gameName, templateName));
             var references = new MetadataReference[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) };
             var compilation = CSharpCompilation.Create("DynamicScript", new[] { syntaxTree }, references, options);
 

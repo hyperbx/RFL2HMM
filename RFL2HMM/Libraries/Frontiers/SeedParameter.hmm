@@ -4,7 +4,7 @@ Library "SeedParameter"
     using System.Runtime.InteropServices;
 
     public enum SeedType : byte
-{
+    {
         SeedSensor = 0,
         ObjItem = 1
     }

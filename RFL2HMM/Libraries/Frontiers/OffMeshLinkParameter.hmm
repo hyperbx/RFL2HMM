@@ -4,7 +4,7 @@ Library "OffMeshLinkParameter"
     using System.Runtime.InteropServices;
 
     public enum OffMeshLinkDirection : byte
-{
+    {
         OffMeshLinkUnidirectional = 0,
         OffMeshLinkBidirectional = 1
     }

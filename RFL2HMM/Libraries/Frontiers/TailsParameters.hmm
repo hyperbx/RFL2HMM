@@ -35,7 +35,7 @@ Library "TailsParameters"
     }
 
     public enum HitSE : sbyte
-{
+    {
         SE_None = -1,
         Weak = 0,
         Strong = 1,
@@ -261,7 +261,7 @@ Library "TailsParameters"
     }
 
     public enum SupportedPlane : sbyte
-{
+    {
         Flat = 0,
         Slope = 1,
         Wall = 2
@@ -1222,7 +1222,7 @@ Library "TailsParameters"
     }
 
     public enum AirAccelMode : sbyte
-{
+    {
         Alawys = 0,
         None = 1,
         Speed = 2

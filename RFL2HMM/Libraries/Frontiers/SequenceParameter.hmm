@@ -4,7 +4,7 @@ Library "SequenceParameter"
     using System.Runtime.InteropServices;
 
     public enum SequenceType : byte
-{
+    {
         SequenceSensor = 0,
         ObjItem = 1
     }

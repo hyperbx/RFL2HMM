@@ -4,7 +4,7 @@ Library "HeightFieldConfig"
     using System.Runtime.InteropServices;
 
     public enum LayerType : sbyte
-{
+    {
         LAYER_NONE = 0,
         LAYER_SOLID = 1,
         LAYER_LIQUID = 2,
@@ -40,7 +40,7 @@ Library "HeightFieldConfig"
     }
 
     public enum MaterialType : sbyte
-{
+    {
         MAT_NONE = 0,
         MAT_STONE = 1,
         MAT_EARTH = 2,

@@ -4,7 +4,7 @@ Library "PracticeParameters"
     using System.Runtime.InteropServices;
 
     public enum Checker : sbyte
-{
+    {
         InvalidChecker = -1,
         CountActions = 0,
         CountAirTrick = 1,
@@ -15,7 +15,7 @@ Library "PracticeParameters"
     }
 
     public enum Type : byte
-{
+    {
         None = 0,
         ControlCamera = 1,
         Cyloop = 2,
@@ -59,7 +59,7 @@ Library "PracticeParameters"
     }
 
     public enum Judge : sbyte
-{
+    {
         Succeed = 0,
         Failed = 1,
         Skiped = 2,

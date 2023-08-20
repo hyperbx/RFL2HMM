@@ -68,7 +68,7 @@ Library "EnemyJellymanConfig"
     }
 
     public enum VolumeShape : sbyte
-{
+    {
         SPHERE = 0,
         BOX = 1,
         CYLINDER = 2,
@@ -157,7 +157,7 @@ Library "EnemyJellymanConfig"
     }
 
     public enum SuperArmorType : sbyte
-{
+    {
         None = 0,
         Attack = 1,
         Always = 2

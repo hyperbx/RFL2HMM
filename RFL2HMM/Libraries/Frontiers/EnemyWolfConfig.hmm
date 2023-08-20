@@ -44,7 +44,7 @@ Library "EnemyWolfConfig"
     }
 
     public enum WolfVolumeShape : sbyte
-{
+    {
         SPHERE = 0,
         BOX = 1,
         CYLINDER = 2,

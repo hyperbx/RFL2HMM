@@ -4,7 +4,7 @@ Library "DevConfigParameters"
     using System.Runtime.InteropServices;
 
     public enum Value : sbyte
-{
+    {
         Invalid = -1,
         Sonic = 0,
         Amy = 1,

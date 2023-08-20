@@ -23,7 +23,7 @@ Library "CustomMusicParameter"
     }
 
     public enum MusicType : sbyte
-{
+    {
         THEME_SONG = 0,
         OTHER = 1
     }

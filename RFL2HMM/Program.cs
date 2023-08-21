@@ -4,7 +4,7 @@ namespace RFL2HMM
 {
     class Program
     {
-        private const string _version = "1.1.0";
+        private const string _version = "1.1.1";
         private const string _arrayDelimiter = "__arr";
 
         private static StringBuilder _output = new();
@@ -89,7 +89,7 @@ namespace RFL2HMM
 
             _output.AppendLine
             (
-                $"Code \"{templateName}-{DateTime.Now:hhmmssddMMyyyy}\" by \"{Environment.UserName}\"\n" +
+                $"Code \"{templateName}-{DateTime.Now:hhmmssddMMyyyy}\"\n" +
                 "//\n" +
                 "\t#include \"ReflectionHelpers\" noemit\n\n" +
                 $"\t#lib \"{templateName}\"\n" +

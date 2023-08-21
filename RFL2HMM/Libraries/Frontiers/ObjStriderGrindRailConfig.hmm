@@ -1,5 +1,7 @@
 Library "ObjStriderGrindRailConfig"
 {
+    #load "System.Numerics.dll"
+
     using System.Numerics;
     using System.Runtime.InteropServices;
 

@@ -33,7 +33,17 @@ Library "EnemyAquaballConfig"
     public struct EnemyAquaballActionConfig
     {
         [FieldOffset(0)]  public int maxSuccessCount;
-        [FieldOffset(4)]  public unsafe fixed Vector2 bounceSuccessTiming[3];
+        [FieldOffset(4)] public unsafe fixed byte /* Vector2[3] */ _bounceSuccessTiming[3];
+
+        public unsafe Vector2* bounceSuccessTiming
+        {
+            get
+            {
+                fixed (byte* p_bounceSuccessTiming = _bounceSuccessTiming)
+                    return (Vector2*)p_bounceSuccessTiming;
+            }
+        }
+        
         [FieldOffset(28)] public float captureLimitTime;
         [FieldOffset(32)] public float captureLimitHeight;
         [FieldOffset(36)] public float failLimitTime;

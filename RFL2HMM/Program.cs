@@ -5,7 +5,7 @@ namespace RFL2HMM
 {
     class Program
     {
-        private const string _version = "1.1.1";
+        private const string _version = "1.1.2";
         private const string _arrayDelimiter = "__arr";
 
         private static StringBuilder _output = new();
@@ -140,14 +140,17 @@ namespace RFL2HMM
                     {
                         _output.Append(value.ToString().ToLowerInvariant());
                     }
-                    else
+                    else if (value.GetType() == typeof(float))
                     {
-                        _output.Append(value);
-                    }
+                        string floatStr = ((float)value).ToString();
 
-                    if (value.GetType() == typeof(float))
-                    {
-                        if (value.ToString().Contains("."))
+                        // Handle precise floats with E notation on string output.
+                        if (floatStr.Contains('e', StringComparison.OrdinalIgnoreCase))
+                            floatStr = ((float)value).ToString("F99").TrimEnd('0');
+
+                        _output.Append(floatStr);
+
+                        if (floatStr.ToString().Contains("."))
                         {
                             _output.Append("f");
                         }
@@ -155,6 +158,10 @@ namespace RFL2HMM
                         {
                             _output.Append(".0f");
                         }
+                    }
+                    else
+                    {
+                        _output.Append(value);
                     }
                 }
 

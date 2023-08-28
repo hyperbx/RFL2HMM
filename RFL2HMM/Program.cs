@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Globalization;
+using System.Text;
 
 namespace RFL2HMM
 {
@@ -16,6 +17,9 @@ namespace RFL2HMM
                 $"RFL2HMM v{_version} - RFL to HMM Code Converter\n" +
                 "Written by Hyper\n"
             );
+
+            // Force culture info to English (United Kingdom) to prevent erroneous formatting from other regions.
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-GB");
 
             if (args.Length > 5 || args.Length < 4)
             {

@@ -104,8 +104,8 @@ namespace RFL2HMM
 
                     public static Dictionary<string, object> Main()
                     {
-                        byte[] originalFileData = File.ReadAllBytes("{{originalFilePath}}");
-                        byte[] modifiedFileData = File.ReadAllBytes("{{modifiedFilePath}}");
+                        byte[] originalFileData = File.ReadAllBytes(@"{{originalFilePath}}");
+                        byte[] modifiedFileData = File.ReadAllBytes(@"{{modifiedFilePath}}");
 
                         unsafe
                         {
@@ -172,6 +172,17 @@ namespace RFL2HMM
             var syntaxTree = CSharpSyntaxTree.ParseText(_scriptTemplate(originalFilePath, modifiedFilePath, gameName, templateName));
             var references = new MetadataReference[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) };
             var compilation = CSharpCompilation.Create("DynamicScript", new[] { syntaxTree }, references, options);
+
+#if DEBUG
+            Console.WriteLine();
+
+            int i = 0;
+            foreach (var line in _scriptTemplate(originalFilePath, modifiedFilePath, gameName, templateName).Split("\n"))
+            {
+                i++;
+                Console.WriteLine($"{i:0000} | {line}");
+            }
+#endif
 
             using (var ms = new MemoryStream())
             {

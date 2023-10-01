@@ -5,10 +5,20 @@ namespace RFL2HMM
 {
     class Program
     {
-        private const string _version = "1.1.3";
+        private const string _version = "1.2.0";
         private const string _arrayDelimiter = "__arr";
 
         private static StringBuilder _output = new();
+
+        private static List<string> _builtInTypes = new()
+        {
+            "CustomMusicParameter",
+            "SonicParameters",
+            "AmyParameters",
+            "KnucklesParameters",
+            "TailsParameters",
+            "UIRflParam"
+        };
 
         static void Main(string[] args)
         {
@@ -95,7 +105,7 @@ namespace RFL2HMM
             (
                 $"Code \"{templateName}-{DateTime.Now:hhmmssddMMyyyy}\"\n" +
                 "//\n" +
-                "\t#include \"ReflectionHelpers\" noemit\n\n" +
+                $"\t#include \"{(gameName == "Origins" ? "ReflectionHelpers" : "Reflection")}\" noemit\n\n" +
                 $"\t#lib \"{templateName}\"\n" +
                 "//\n" +
                 "{\n" +
@@ -172,7 +182,7 @@ namespace RFL2HMM
 
             try
             {
-                if (gameName != "Frontiers" || templateName != "SonicParameters")
+                if (!_builtInTypes.Contains(templateName))
                 {
                     Console.WriteLine("Writing external template to code file...\n");
 

@@ -17,7 +17,7 @@ namespace RFL2HMM
 
             namespace RFL2HMM
             {
-                public class DiffVm
+                public unsafe class DiffVm
                 {
                     private static Dictionary<string, object> _diffResults = new();
                     
@@ -101,31 +101,27 @@ namespace RFL2HMM
         	            "volatile",
         	            "while"
                     };
+        
+                    private static {{templateName}}Class.{{templateName}}* _pOriginal{{templateName}};
+                    private static {{templateName}}Class.{{templateName}}* _pModified{{templateName}};
 
-                    public static Dictionary<string, object> Main()
+                    public static unsafe Dictionary<string, object> Main()
                     {
                         byte[] originalFileData = File.ReadAllBytes(@"{{originalFilePath}}");
                         byte[] modifiedFileData = File.ReadAllBytes(@"{{modifiedFilePath}}");
 
-                        unsafe
-                        {
-                            {{templateName}}Class.{{templateName}}* pOriginal{{templateName}};
+                        fixed (byte* pOriginalFileData = originalFileData)
+                            _pOriginal{{templateName}} = ({{templateName}}Class.{{templateName}}*)(pOriginalFileData + 0x40);
 
-                            fixed (byte* pOriginalFileData = originalFileData)
-                                pOriginal{{templateName}} = ({{templateName}}Class.{{templateName}}*)(pOriginalFileData + 0x40);
+                        fixed (byte* pModifiedFileData = modifiedFileData)
+                            _pModified{{templateName}} = ({{templateName}}Class.{{templateName}}*)(pModifiedFileData + 0x40);
 
-                            {{templateName}}Class.{{templateName}}* pModified{{templateName}};
-
-                            fixed (byte* pModifiedFileData = modifiedFileData)
-                                pModified{{templateName}} = ({{templateName}}Class.{{templateName}}*)(pModifiedFileData + 0x40);
-
-                            DiffStructs(*pOriginal{{templateName}}, *pModified{{templateName}}, string.Empty, "{{templateName}}");
-                        }
+                        DiffStructs(*_pOriginal{{templateName}}, *_pModified{{templateName}}, string.Empty, "{{templateName}}");
 
                         return _diffResults;
                     }
 
-                    static void DiffStructs(object instance1, object instance2, string currentStructName, string hierarchy)
+                    static unsafe void DiffStructs(object instance1, object instance2, string currentStructName, string hierarchy)
                     {
                         Type type1 = instance1.GetType();
                         Type type2 = instance2.GetType();
@@ -145,7 +141,7 @@ namespace RFL2HMM
                             {
                                 string newHierarchy = string.Empty;
 
-                                if (field.Name != currentStructName)
+                                if (fieldName != currentStructName)
                                     newHierarchy = hierarchy + $".{fieldName}";
 
                                 DiffStructs(value1, value2, fieldName, newHierarchy);
@@ -157,7 +153,23 @@ namespace RFL2HMM
                                     int firstHierarchyIndex = hierarchy.IndexOf(".") + 1;
                                     string hierarchyWithoutRoot = hierarchy.Substring(firstHierarchyIndex, hierarchy.Length - firstHierarchyIndex);
 
-                                    _diffResults.Add($"{hierarchyWithoutRoot}.{fieldName}", value2);
+                                    if (field.ReflectedType == typeof({{templateName}}Class.UnmanagedString))
+                                    {
+                                        if ((long)value2 == 0)
+                                        {
+                                            _diffResults.Add($"{hierarchyWithoutRoot}.{fieldName}", value2);
+                                        }
+                                        else
+                                        {
+                                            string actualValue = Marshal.PtrToStringAnsi((IntPtr)(((long)_pModified{{templateName}}) + ((long)value2)));
+        
+                                            _diffResults.Add(hierarchyWithoutRoot, value2 == null ? "(null)" : $"\"{actualValue}\"");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        _diffResults.Add($"{hierarchyWithoutRoot}.{fieldName}", value2);
+                                    }
                                 }
                             }
                         }

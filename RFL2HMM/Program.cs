@@ -5,7 +5,7 @@ namespace RFL2HMM
 {
     class Program
     {
-        private const string _version = "1.2.2";
+        private const string _version = "1.2.3";
         private const string _arrayDelimiter = "__arr";
 
         private static StringBuilder _output = new();

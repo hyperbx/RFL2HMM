@@ -5,7 +5,7 @@ namespace RFL2HMM
 {
     class Program
     {
-        private const string _version = "1.2.1";
+        private const string _version = "1.2.2";
         private const string _arrayDelimiter = "__arr";
 
         private static StringBuilder _output = new();
@@ -101,19 +101,20 @@ namespace RFL2HMM
                 return;
             }
 
+            _output.AppendLine($"Code \"{templateName}-{DateTime.Now:hhmmssddMMyyyy}\"\n//");
+            _output.AppendLine($"\t#include \"{(gameName == "Origins" ? "ReflectionHelpers" : "Reflection")}\" noemit\n");
+
+            if (gameName == "Frontiers")
+                _output.AppendLine("\t#lib \"Reflection\"");
+
+            _output.AppendLine($"\t#lib \"{templateName}\"\n//\n{{");
+
             _output.AppendLine
             (
-                $"Code \"{templateName}-{DateTime.Now:hhmmssddMMyyyy}\"\n" +
-                "//\n" +
-                $"\t#include \"{(gameName == "Origins" ? "ReflectionHelpers" : "Reflection")}\" noemit\n\n" +
-                $"\t#lib \"{templateName}\"\n" +
-                "//\n" +
-                "{\n" +
                 $"\tvar {templateName}Info = Reflection.GetDataInfo<{templateName}.Root>(\"{Path.GetFileNameWithoutExtension(originalFilePath)}\");\n\n" +
                 "" +
                 $"\tif ({templateName}Info.pData == null)\n" +
-                "\t\treturn;\n" +
-                ""
+                "\t\treturn;\n"
             );
 
             foreach (var diff in diffResults)

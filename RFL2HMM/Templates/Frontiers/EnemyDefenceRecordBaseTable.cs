@@ -24,7 +24,7 @@ public class EnemyDefenceRecordBaseTableClass
                 return Marshal.PtrToStringAnsi((nint)pValue);
             }
 
-            set => pValue = Marshal.StringToHGlobalAnsi(value);
+            set => pValue = (long)Marshal.StringToHGlobalAnsi(value);
         }
 
         public UnmanagedString(string in_value)

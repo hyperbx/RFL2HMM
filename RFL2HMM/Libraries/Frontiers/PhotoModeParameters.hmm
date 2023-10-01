@@ -5,48 +5,48 @@ Library "PhotoModeParameters"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 48)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct PhotoModeCameraParameters
     {
-        [FieldOffset(0)]  public float translationLimit;
-        [FieldOffset(4)]  public float translationSpeedXZ;
-        [FieldOffset(8)]  public float translationSpeedY;
-        [FieldOffset(12)] public float elevLimit;
-        [FieldOffset(16)] public float rotationSpeed;
-        [FieldOffset(20)] public float rollRange;
-        [FieldOffset(24)] public float rollSpeed;
-        [FieldOffset(28)] public float fovyRange;
-        [FieldOffset(32)] public float fovySpeed;
-        [FieldOffset(36)] public float speedRatioFast;
-        [FieldOffset(40)] public float speedRatioSlow;
-        [FieldOffset(44)] public float distance;
+        [FieldOffset(0x00)] public float translationLimit;
+        [FieldOffset(0x04)] public float translationSpeedXZ;
+        [FieldOffset(0x08)] public float translationSpeedY;
+        [FieldOffset(0x0C)] public float elevLimit;
+        [FieldOffset(0x10)] public float rotationSpeed;
+        [FieldOffset(0x14)] public float rollRange;
+        [FieldOffset(0x18)] public float rollSpeed;
+        [FieldOffset(0x1C)] public float fovyRange;
+        [FieldOffset(0x20)] public float fovySpeed;
+        [FieldOffset(0x24)] public float speedRatioFast;
+        [FieldOffset(0x28)] public float speedRatioSlow;
+        [FieldOffset(0x2C)] public float distance;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 60)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x3C)]
     public struct PhotoModeFilterParameters
     {
-        [FieldOffset(0)]  public float sepiaSaturationOffset;
-        [FieldOffset(4)]  public float sepiaColorizeRate;
-        [FieldOffset(8)]  public float sepiaColorizeHue;
-        [FieldOffset(12)] public float increaseSaturationOffset;
-        [FieldOffset(16)] public int warmColorROffset;
-        [FieldOffset(20)] public int warmColorGOffset;
-        [FieldOffset(24)] public int warmColorBOffset;
-        [FieldOffset(28)] public int coldColorROffset;
-        [FieldOffset(32)] public int coldColorGOffset;
-        [FieldOffset(36)] public int coldColorBOffset;
-        [FieldOffset(40)] public float retroContrastOffset;
-        [FieldOffset(44)] public int retroROffset;
-        [FieldOffset(48)] public int retroGOffset;
-        [FieldOffset(52)] public int retroBOffset;
-        [FieldOffset(56)] public float retroSaturationOffset;
+        [FieldOffset(0x00)] public float sepiaSaturationOffset;
+        [FieldOffset(0x04)] public float sepiaColorizeRate;
+        [FieldOffset(0x08)] public float sepiaColorizeHue;
+        [FieldOffset(0x0C)] public float increaseSaturationOffset;
+        [FieldOffset(0x10)] public int warmColorROffset;
+        [FieldOffset(0x14)] public int warmColorGOffset;
+        [FieldOffset(0x18)] public int warmColorBOffset;
+        [FieldOffset(0x1C)] public int coldColorROffset;
+        [FieldOffset(0x20)] public int coldColorGOffset;
+        [FieldOffset(0x24)] public int coldColorBOffset;
+        [FieldOffset(0x28)] public float retroContrastOffset;
+        [FieldOffset(0x2C)] public int retroROffset;
+        [FieldOffset(0x30)] public int retroGOffset;
+        [FieldOffset(0x34)] public int retroBOffset;
+        [FieldOffset(0x38)] public float retroSaturationOffset;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 108)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x6C)]
     public struct PhotoModeParameters
     {
-        [FieldOffset(0)]  public PhotoModeCameraParameters camera;
-        [FieldOffset(48)] public PhotoModeFilterParameters filter;
+        [FieldOffset(0x00)] public PhotoModeCameraParameters camera;
+        [FieldOffset(0x30)] public PhotoModeFilterParameters filter;
     }
 
 }

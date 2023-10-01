@@ -5,16 +5,17 @@ Library "GameSkillParameter"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 3)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x03)]
     public struct SkillParam
     {
-        [FieldOffset(0)] public byte unlockPoint;
-        [FieldOffset(1)] public byte addUnlockPoint;
-        [FieldOffset(2)] public bool present;
+        [FieldOffset(0x00)] public byte unlockPoint;
+        [FieldOffset(0x01)] public byte addUnlockPoint;
+        [FieldOffset(0x02)] public bool present;
     }
 
     public enum Value : sbyte
     {
+        BeginSonicSkill = 0,
         Cyloop = 0,
         Smash = 1,
         QuickCyloop = 2,
@@ -30,36 +31,106 @@ Library "GameSkillParameter"
         HomingShot = 12,
         CrossSlash = 13,
         AutoCombo = 14,
+        NumUsed = 15,
         Dummy0 = 15,
         Dummy1 = 16,
         Dummy2 = 17,
         Dummy3 = 18,
         Dummy4 = 19,
         Num = 20,
-        NumUsed = 15,
+        BeginAmySkill = 20,
+        AmyJump = 20,
+        AmyPropellerJump = 21,
+        AmyHomingAtatck = 22,
+        AmyBoost = 23,
+        AmyPowerBoost = 24,
+        AmyTarotAttack = 25,
+        AmyTarotRolling = 26,
+        AmyCharmAttack = 27,
+        AmyStomp = 28,
+        AmyHighJump = 29,
+        AmyCyHammer = 30,
+        AmyTarotRollingInfinity = 31,
+        AmySpinDash = 32,
+        AmyParry = 33,
+        AmyParryDebuff = 34,
+        AmyCyloop = 35,
+        AmyDoubleJump = 36,
+        AmyNumUsed = 37,
+        AmyDummy0 = 37,
+        AmyDummy1 = 38,
+        AmyDummy2 = 39,
+        AmyNum = 40,
+        BeginKnucklesSkill = 40,
+        KnucklesJump = 40,
+        KnucklesGliding = 41,
+        KnucklesHomingAtatck = 42,
+        KnucklesBoost = 43,
+        KnucklesWallRun = 44,
+        KnucklesPowerBoost = 45,
+        KnucklesComboAttack = 46,
+        KnucklesMaximumHeatKnuckle = 47,
+        KnucklesStomp = 48,
+        KnucklesCyKnuckle = 49,
+        KnucklesGlidingInfinity = 50,
+        KnucklesSpinDash = 51,
+        KnucklesParry = 52,
+        KnucklesDoubleJump = 53,
+        KnucklesParryDebuff = 54,
+        KnucklesCyloop = 55,
+        KnucklesNumUsed = 56,
+        KnucklesDummy0 = 56,
+        KnucklesDummy1 = 57,
+        KnucklesDummy2 = 58,
+        KnucklesDummy3 = 59,
+        KnucklesNum = 60,
+        BeginTailsSkill = 60,
+        TailsJump = 60,
+        TailsFly = 61,
+        TailsHomingAtatck = 62,
+        TailsBoost = 63,
+        TailsPowerBoost = 64,
+        TailsSpannerAttack = 65,
+        TailsChargeSpanner = 66,
+        TailsStomp = 67,
+        TailsCyBlaster = 68,
+        TailsCycloneCannon = 69,
+        TailsSpinDash = 70,
+        TailsParry = 71,
+        TailsDoubleJump = 72,
+        TailsParryDebuff = 73,
+        TailsCyloop = 74,
+        TailsNumUsed = 75,
+        TailsDummy0 = 75,
+        TailsDummy1 = 76,
+        TailsDummy2 = 77,
+        TailsDummy3 = 78,
+        TailsDummy4 = 79,
+        TailsNum = 80,
+        AllNum = 80,
         Invalid = -1
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 3)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x03)]
     public struct SkillLinkSetting
     {
-        [FieldOffset(0)] public bool down;
-        [FieldOffset(1)] public bool left;
-        [FieldOffset(2)] public bool right;
+        [FieldOffset(0x00)] public bool down;
+        [FieldOffset(0x01)] public bool left;
+        [FieldOffset(0x02)] public bool right;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 5)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x05)]
     public struct SkillNodeParam
     {
-        [FieldOffset(0)] public bool enable;
-        [FieldOffset(1)] public Value skill;
-        [FieldOffset(2)] public SkillLinkSetting link;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x01)] public Value skill;
+        [FieldOffset(0x02)] public SkillLinkSetting link;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 151)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x97)]
     public struct SkillTreeParam
     {
-        [FieldOffset(0)]   public unsafe fixed byte /* SkillNodeParam[30] */ _nodeParams[150];
+        [FieldOffset(0x00)] public unsafe fixed byte /* SkillNodeParam[30] */ _nodeParams[150];
 
         public unsafe SkillNodeParam* nodeParams
         {
@@ -70,13 +141,13 @@ Library "GameSkillParameter"
             }
         }
 
-        [FieldOffset(150)] public sbyte startIndex;
+        [FieldOffset(0x96)] public sbyte startIndex;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 211)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x34C)]
     public struct GameSkillParameter
     {
-        [FieldOffset(0)]  public unsafe fixed byte /* SkillParam[20] */ _skillParams[60];
+        [FieldOffset(0x00)] public unsafe fixed byte /* SkillParam[80] */ _skillParams[240];
 
         public unsafe SkillParam* skillParams
         {
@@ -87,7 +158,10 @@ Library "GameSkillParameter"
             }
         }
 
-        [FieldOffset(60)] public SkillTreeParam treeParams;
+        [FieldOffset(0xF0)] public SkillTreeParam treeParams;
+        [FieldOffset(0x187)] public SkillTreeParam treeParamsAmy;
+        [FieldOffset(0x21E)] public SkillTreeParam treeParamsKnuckles;
+        [FieldOffset(0x2B5)] public SkillTreeParam treeParamsTails;
     }
 
 }

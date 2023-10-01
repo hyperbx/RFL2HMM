@@ -5,15 +5,60 @@ Library "DecoTechParams"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
-    public struct CString
+    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    public struct UnmanagedString
     {
         [FieldOffset(0)] public long pValue;
 
         public string Value
         {
-        	get => Marshal.PtrToStringAnsi((IntPtr)pValue);
-        	set => pValue = (long)Marshal.StringToHGlobalAnsi(value);
+            get
+            {
+                if (pValue == 0)
+                    return string.Empty;
+
+                return Marshal.PtrToStringAnsi((nint)pValue);
+            }
+
+            set => pValue = Marshal.StringToHGlobalAnsi(value);
+        }
+
+        public UnmanagedString(string in_value)
+        {
+            Value = in_value;
+        }
+
+        public static implicit operator UnmanagedString(string in_value)
+        {
+            return new UnmanagedString(in_value);
+        }
+
+        public static bool operator ==(UnmanagedString in_left, string in_right)
+        {
+            return in_left.Value == in_right;
+        }
+
+        public static bool operator !=(UnmanagedString in_left, string in_right)
+        {
+            return !(in_left == in_right);
+        }
+
+        public override bool Equals(object in_obj)
+        {
+            if (in_obj is string str)
+                return Value == str;
+
+            return base.Equals(in_obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Value;
         }
     }
 
@@ -33,16 +78,16 @@ Library "DecoTechParams"
         ORIENTATION_DIAGONAL = 3
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct DecoGradationParam
     {
-        [FieldOffset(0)]  public Orientation orientation;
-        [FieldOffset(1)]  public sbyte srcPosX;
-        [FieldOffset(2)]  public sbyte srcPosY;
-        [FieldOffset(3)]  public sbyte dstPosX;
-        [FieldOffset(4)]  public sbyte dstPosY;
-        [FieldOffset(8)]  public Color8 srcColor;
-        [FieldOffset(12)] public Color8 dstColor;
+        [FieldOffset(0x00)] public Orientation orientation;
+        [FieldOffset(0x01)] public sbyte srcPosX;
+        [FieldOffset(0x02)] public sbyte srcPosY;
+        [FieldOffset(0x03)] public sbyte dstPosX;
+        [FieldOffset(0x04)] public sbyte dstPosY;
+        [FieldOffset(0x08)] public Color8 srcColor;
+        [FieldOffset(0x0C)] public Color8 dstColor;
     }
 
     public enum DecoLayerBlendOp : sbyte
@@ -51,50 +96,50 @@ Library "DecoTechParams"
         DECO_LAYER_BLEND_OP_SUBTRACT_ALPHA = 1
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct DecoDropShadowParam
     {
-        [FieldOffset(0)] public Color8 color;
-        [FieldOffset(4)] public byte size;
-        [FieldOffset(5)] public byte spread;
-        [FieldOffset(6)] public sbyte distanceX;
-        [FieldOffset(7)] public sbyte distanceY;
+        [FieldOffset(0x00)] public Color8 color;
+        [FieldOffset(0x04)] public byte size;
+        [FieldOffset(0x05)] public byte spread;
+        [FieldOffset(0x06)] public sbyte distanceX;
+        [FieldOffset(0x07)] public sbyte distanceY;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct DecoRimParam
     {
-        [FieldOffset(0)]  public Color8 color;
-        [FieldOffset(4)]  public int thickness;
-        [FieldOffset(8)]  public int offsetX;
-        [FieldOffset(12)] public int offsetY;
+        [FieldOffset(0x00)] public Color8 color;
+        [FieldOffset(0x04)] public int thickness;
+        [FieldOffset(0x08)] public int offsetX;
+        [FieldOffset(0x0C)] public int offsetY;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct DecoBlurParam
     {
-        [FieldOffset(0)] public int radius;
+        [FieldOffset(0x00)] public int radius;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 48)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct DecoPassParam
     {
-        [FieldOffset(0)]  public DecoDropShadowParam dropShadow;
-        [FieldOffset(8)]  public DecoRimParam rim;
-        [FieldOffset(24)] public DecoGradationParam gradation;
-        [FieldOffset(40)] public DecoBlurParam blur;
-        [FieldOffset(44)] public bool avoidEdgeArtifact;
+        [FieldOffset(0x00)] public DecoDropShadowParam dropShadow;
+        [FieldOffset(0x08)] public DecoRimParam rim;
+        [FieldOffset(0x18)] public DecoGradationParam gradation;
+        [FieldOffset(0x28)] public DecoBlurParam blur;
+        [FieldOffset(0x2C)] public bool avoidEdgeArtifact;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 288)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x120)]
     public struct DecoTechParam
     {
-        [FieldOffset(0)]  public CString name;
-        [FieldOffset(16)] public Color8 fontColor;
-        [FieldOffset(20)] public DecoGradationParam fontGradParam;
-        [FieldOffset(36)] public DecoLayerBlendOp layerBlendOp;
-        [FieldOffset(40)] public int numPasses;
-        [FieldOffset(44)] public unsafe fixed byte /* DecoPassParam[5] */ _passParams[240];
+        [FieldOffset(0x00)] public UnmanagedString name;
+        [FieldOffset(0x10)] public Color8 fontColor;
+        [FieldOffset(0x14)] public DecoGradationParam fontGradParam;
+        [FieldOffset(0x24)] public DecoLayerBlendOp layerBlendOp;
+        [FieldOffset(0x28)] public int numPasses;
+        [FieldOffset(0x2C)] public unsafe fixed byte /* DecoPassParam[5] */ _passParams[240];
 
         public unsafe DecoPassParam* passParams
         {
@@ -106,10 +151,10 @@ Library "DecoTechParams"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 147456)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x24000)]
     public struct DecoTechParams
     {
-        [FieldOffset(0)] public unsafe fixed byte /* DecoTechParam[512] */ __params[147456];
+        [FieldOffset(0x00)] public unsafe fixed byte /* DecoTechParam[512] */ __params[147456];
 
         public unsafe DecoTechParam* _params
         {

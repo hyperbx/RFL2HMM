@@ -1,0 +1,14 @@
+Library "ObjFlashSwitchConfig"
+{
+    #load "System.Numerics.dll"
+
+    using System.Numerics;
+    using System.Runtime.InteropServices;
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
+    public struct ObjFlashSwitchConfig
+    {
+        [FieldOffset(0x00)] public float recoveryQuickCyloopValue;
+    }
+
+}

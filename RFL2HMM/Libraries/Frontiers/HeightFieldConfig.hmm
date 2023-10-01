@@ -76,20 +76,20 @@ Library "HeightFieldConfig"
         MAT_SAND3 = 30
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 5)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x05)]
     public struct HeightFieldConfigData
     {
-        [FieldOffset(0)] public LayerType layer;
-        [FieldOffset(1)] public MaterialType material;
-        [FieldOffset(2)] public bool notStand;
-        [FieldOffset(3)] public bool wall;
-        [FieldOffset(4)] public bool parkour;
+        [FieldOffset(0x00)] public LayerType layer;
+        [FieldOffset(0x01)] public MaterialType material;
+        [FieldOffset(0x02)] public bool notStand;
+        [FieldOffset(0x03)] public bool wall;
+        [FieldOffset(0x04)] public bool parkour;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 1275)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x4FB)]
     public struct HeightFieldConfig
     {
-        [FieldOffset(0)] public unsafe fixed byte /* HeightFieldConfigData[255] */ _data[1275];
+        [FieldOffset(0x00)] public unsafe fixed byte /* HeightFieldConfigData[255] */ _data[1275];
 
         public unsafe HeightFieldConfigData* data
         {

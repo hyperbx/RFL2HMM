@@ -5,19 +5,19 @@ Library "ElectricLineParameter"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct ElectricLineConnectData
     {
-        [FieldOffset(0)] public int challengeNo0;
-        [FieldOffset(4)] public int challengeNo1;
+        [FieldOffset(0x00)] public int challengeNo0;
+        [FieldOffset(0x04)] public int challengeNo1;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct ElectricLineConnectParameter
     {
-        [FieldOffset(0)] public int challengeNo0;
-        [FieldOffset(4)] public int challengeNo1;
-        [FieldOffset(8)] public unsafe fixed byte /* ElectricLineConnectData[3] */ _data[24];
+        [FieldOffset(0x00)] public int challengeNo0;
+        [FieldOffset(0x04)] public int challengeNo1;
+        [FieldOffset(0x08)] public unsafe fixed byte /* ElectricLineConnectData[3] */ _data[24];
 
         public unsafe ElectricLineConnectData* data
         {
@@ -29,10 +29,10 @@ Library "ElectricLineParameter"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 6400)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1900)]
     public struct ElectricLineParameter
     {
-        [FieldOffset(0)] public unsafe fixed byte /* ElectricLineConnectParameter[200] */ _connect[6400];
+        [FieldOffset(0x00)] public unsafe fixed byte /* ElectricLineConnectParameter[200] */ _connect[6400];
 
         public unsafe ElectricLineConnectParameter* connect
         {

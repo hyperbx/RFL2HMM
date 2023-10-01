@@ -5,116 +5,116 @@ Library "EnemyJumperConfig"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 52)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x34)]
     public struct EnemyJumperPatrolConfig
     {
-        [FieldOffset(0)]  public float rotateSpeedMin;
-        [FieldOffset(4)]  public float rotateSpeedMax;
-        [FieldOffset(8)]  public float speedMin;
-        [FieldOffset(12)] public float speedMax;
-        [FieldOffset(16)] public float changeTimeIdlePatrolMin;
-        [FieldOffset(20)] public float changeTimeIdlePatrolMax;
-        [FieldOffset(24)] public float lockonDistance;
-        [FieldOffset(28)] public float unlockDistance;
-        [FieldOffset(32)] public float distance;
-        [FieldOffset(36)] public float minElevation;
-        [FieldOffset(40)] public float maxElevation;
-        [FieldOffset(44)] public float panningSuspensionK;
-        [FieldOffset(48)] public float interiorPanningSuspensionK;
+        [FieldOffset(0x00)] public float rotateSpeedMin;
+        [FieldOffset(0x04)] public float rotateSpeedMax;
+        [FieldOffset(0x08)] public float speedMin;
+        [FieldOffset(0x0C)] public float speedMax;
+        [FieldOffset(0x10)] public float changeTimeIdlePatrolMin;
+        [FieldOffset(0x14)] public float changeTimeIdlePatrolMax;
+        [FieldOffset(0x18)] public float lockonDistance;
+        [FieldOffset(0x1C)] public float unlockDistance;
+        [FieldOffset(0x20)] public float distance;
+        [FieldOffset(0x24)] public float minElevation;
+        [FieldOffset(0x28)] public float maxElevation;
+        [FieldOffset(0x2C)] public float panningSuspensionK;
+        [FieldOffset(0x30)] public float interiorPanningSuspensionK;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct EnemyJumperAutoLockonParam
     {
-        [FieldOffset(0)]  public float distance;
-        [FieldOffset(4)]  public float lockOnMinDistance;
-        [FieldOffset(16)] public Vector3 playerOffset;
+        [FieldOffset(0x00)] public float distance;
+        [FieldOffset(0x04)] public float lockOnMinDistance;
+        [FieldOffset(0x10)] public Vector3 playerOffset;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 128)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x80)]
     public struct EnemyJumperCommonParam
     {
-        [FieldOffset(0)]  public float killWaitTime;
-        [FieldOffset(4)]  public float colliderRadius;
-        [FieldOffset(8)]  public float colliderHeight;
-        [FieldOffset(12)] public float headRadius;
-        [FieldOffset(16)] public float headHeight;
-        [FieldOffset(20)] public float damageColliderRadiusOffset;
-        [FieldOffset(24)] public float eyesightDistance;
-        [FieldOffset(28)] public float maxSpeed;
-        [FieldOffset(32)] public float checkBarrierDistance;
-        [FieldOffset(36)] public EnemyJumperPatrolConfig patrolConfig;
-        [FieldOffset(96)] public EnemyJumperAutoLockonParam lockonCamera;
+        [FieldOffset(0x00)] public float killWaitTime;
+        [FieldOffset(0x04)] public float colliderRadius;
+        [FieldOffset(0x08)] public float colliderHeight;
+        [FieldOffset(0x0C)] public float headRadius;
+        [FieldOffset(0x10)] public float headHeight;
+        [FieldOffset(0x14)] public float damageColliderRadiusOffset;
+        [FieldOffset(0x18)] public float eyesightDistance;
+        [FieldOffset(0x1C)] public float maxSpeed;
+        [FieldOffset(0x20)] public float checkBarrierDistance;
+        [FieldOffset(0x24)] public EnemyJumperPatrolConfig patrolConfig;
+        [FieldOffset(0x60)] public EnemyJumperAutoLockonParam lockonCamera;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct EnemyJumperCommonLevelParam
     {
-        [FieldOffset(0)]  public int maxHealthPoint;
-        [FieldOffset(4)]  public float attackRate;
-        [FieldOffset(8)]  public ushort expItemNum;
-        [FieldOffset(10)] public ushort exp;
+        [FieldOffset(0x00)] public int maxHealthPoint;
+        [FieldOffset(0x04)] public float attackRate;
+        [FieldOffset(0x08)] public ushort expItemNum;
+        [FieldOffset(0x0A)] public ushort exp;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct EnemyJumperLevelParam
     {
-        [FieldOffset(0)] public int level;
-        [FieldOffset(4)] public EnemyJumperCommonLevelParam common;
+        [FieldOffset(0x00)] public int level;
+        [FieldOffset(0x04)] public EnemyJumperCommonLevelParam common;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct EnemyJumperLevelBand
     {
-        [FieldOffset(0)] public int level;
+        [FieldOffset(0x00)] public int level;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 48)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct CharacterControllerCollision
     {
-        [FieldOffset(0)]  public float height;
-        [FieldOffset(4)]  public float radius;
-        [FieldOffset(16)] public Vector3 offset;
-        [FieldOffset(32)] public Vector3 scale;
+        [FieldOffset(0x00)] public float height;
+        [FieldOffset(0x04)] public float radius;
+        [FieldOffset(0x10)] public Vector3 offset;
+        [FieldOffset(0x20)] public Vector3 scale;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct MovementParam
     {
-        [FieldOffset(0)]  public float rotateSpeedMin;
-        [FieldOffset(4)]  public float rotateSpeedMax;
-        [FieldOffset(8)]  public float speedMin;
-        [FieldOffset(12)] public float speedMax;
+        [FieldOffset(0x00)] public float rotateSpeedMin;
+        [FieldOffset(0x04)] public float rotateSpeedMax;
+        [FieldOffset(0x08)] public float speedMin;
+        [FieldOffset(0x0C)] public float speedMax;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct SpringPlayer
     {
-        [FieldOffset(0)] public float velocity;
-        [FieldOffset(4)] public float targetCursorMaxDistance;
+        [FieldOffset(0x00)] public float velocity;
+        [FieldOffset(0x04)] public float targetCursorMaxDistance;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 48)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct BattleParam
     {
-        [FieldOffset(0)]  public float stompingRange;
-        [FieldOffset(4)]  public float stompingTotalNum;
-        [FieldOffset(8)]  public float interpalTimeFinal;
-        [FieldOffset(12)] public float range;
-        [FieldOffset(16)] public float riseDistance;
-        [FieldOffset(20)] public float riseTime;
-        [FieldOffset(24)] public float upLoopTime;
-        [FieldOffset(28)] public float chaseSpeed;
-        [FieldOffset(32)] public float speed;
-        [FieldOffset(36)] public float groundImpactRadius;
-        [FieldOffset(40)] public SpringPlayer springPlayer;
+        [FieldOffset(0x00)] public float stompingRange;
+        [FieldOffset(0x04)] public float stompingTotalNum;
+        [FieldOffset(0x08)] public float interpalTimeFinal;
+        [FieldOffset(0x0C)] public float range;
+        [FieldOffset(0x10)] public float riseDistance;
+        [FieldOffset(0x14)] public float riseTime;
+        [FieldOffset(0x18)] public float upLoopTime;
+        [FieldOffset(0x1C)] public float chaseSpeed;
+        [FieldOffset(0x20)] public float speed;
+        [FieldOffset(0x24)] public float groundImpactRadius;
+        [FieldOffset(0x28)] public SpringPlayer springPlayer;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 352)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x160)]
     public struct EnemyJumperConfig
     {
-        [FieldOffset(0)]   public EnemyJumperCommonParam commonParam;
-        [FieldOffset(128)] public unsafe fixed byte /* EnemyJumperLevelParam[5] */ _levelParams[80];
+        [FieldOffset(0x00)] public EnemyJumperCommonParam commonParam;
+        [FieldOffset(0x80)] public unsafe fixed byte /* EnemyJumperLevelParam[5] */ _levelParams[80];
 
         public unsafe EnemyJumperLevelParam* levelParams
         {
@@ -125,7 +125,7 @@ Library "EnemyJumperConfig"
             }
         }
 
-        [FieldOffset(208)] public unsafe fixed byte /* EnemyJumperLevelBand[5] */ _levelBand[20];
+        [FieldOffset(0xD0)] public unsafe fixed byte /* EnemyJumperLevelBand[5] */ _levelBand[20];
 
         public unsafe EnemyJumperLevelBand* levelBand
         {
@@ -136,9 +136,9 @@ Library "EnemyJumperConfig"
             }
         }
 
-        [FieldOffset(240)] public CharacterControllerCollision characterControllerCollision;
-        [FieldOffset(288)] public MovementParam movement;
-        [FieldOffset(304)] public BattleParam battleParam;
+        [FieldOffset(0xF0)] public CharacterControllerCollision characterControllerCollision;
+        [FieldOffset(0x120)] public MovementParam movement;
+        [FieldOffset(0x130)] public BattleParam battleParam;
     }
 
 }

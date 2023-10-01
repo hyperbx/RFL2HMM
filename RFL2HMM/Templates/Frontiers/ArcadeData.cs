@@ -28,7 +28,8 @@ public class ArcadeDataClass
         IconIsland3 = 3,
         IconIsland4 = 4,
         IconIsland5 = 5,
-        IconLastBoss = 6
+        IconLastBoss = 6,
+        IconExtra = 7
     }
 
     public enum AppVersion : byte
@@ -39,85 +40,85 @@ public class ArcadeDataClass
         AppVersion_1_40 = 3
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 40)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct HeaderData
     {
-        [FieldOffset(0)]  public uint signature;
-        [FieldOffset(4)]  public byte version;
-        [FieldOffset(5)]  public Status status;
-        [FieldOffset(6)]  public byte config;
-        [FieldOffset(7)]  public Sequence sequence;
-        [FieldOffset(8)]  public uint playTime;
-        [FieldOffset(12)] public SaveDataIcon icon;
-        [FieldOffset(13)] public AppVersion appVersion;
-        [FieldOffset(14)] public byte config2;
-        [FieldOffset(15)] public byte reserved1;
-        [FieldOffset(16)] public uint saveDate;
-        [FieldOffset(20)] public byte index;
-        [FieldOffset(24)] public uint reserved__arr0;
-        [FieldOffset(28)] public uint reserved__arr1;
-        [FieldOffset(32)] public uint reserved__arr2;
-        [FieldOffset(36)] public uint reserved__arr3;
+        [FieldOffset(0x00)] public uint signature;
+        [FieldOffset(0x04)] public byte version;
+        [FieldOffset(0x05)] public Status status;
+        [FieldOffset(0x06)] public byte config;
+        [FieldOffset(0x07)] public Sequence sequence;
+        [FieldOffset(0x08)] public uint playTime;
+        [FieldOffset(0x0C)] public SaveDataIcon icon;
+        [FieldOffset(0x0D)] public AppVersion appVersion;
+        [FieldOffset(0x0E)] public byte config2;
+        [FieldOffset(0x0F)] public byte reserved1;
+        [FieldOffset(0x10)] public uint saveDate;
+        [FieldOffset(0x14)] public byte index;
+        [FieldOffset(0x18)] public uint reserved__arr0;
+        [FieldOffset(0x1C)] public uint reserved__arr1;
+        [FieldOffset(0x20)] public uint reserved__arr2;
+        [FieldOffset(0x24)] public uint reserved__arr3;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 24)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct CyberStageData
     {
-        [FieldOffset(0)] public ushort flags;
-        [FieldOffset(4)] public uint bestTime;
-        [FieldOffset(8)] public uint reserved__arr0;
-        [FieldOffset(12)] public uint reserved__arr1;
-        [FieldOffset(16)] public uint reserved__arr2;
-        [FieldOffset(20)] public uint reserved__arr3;
+        [FieldOffset(0x00)] public ushort flags;
+        [FieldOffset(0x04)] public uint bestTime;
+        [FieldOffset(0x08)] public uint flags2;
+        [FieldOffset(0x0C)] public uint reserved__arr0;
+        [FieldOffset(0x10)] public uint reserved__arr1;
+        [FieldOffset(0x14)] public uint reserved__arr2;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 768)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x300)]
     public struct CyberStageContainerData
     {
-        [FieldOffset(0)] public CyberStageData actStages__arr0;
-        [FieldOffset(24)] public CyberStageData actStages__arr1;
-        [FieldOffset(48)] public CyberStageData actStages__arr2;
-        [FieldOffset(72)] public CyberStageData actStages__arr3;
-        [FieldOffset(96)] public CyberStageData actStages__arr4;
-        [FieldOffset(120)] public CyberStageData actStages__arr5;
-        [FieldOffset(144)] public CyberStageData actStages__arr6;
-        [FieldOffset(168)] public CyberStageData actStages__arr7;
-        [FieldOffset(192)] public CyberStageData actStages__arr8;
-        [FieldOffset(216)] public CyberStageData actStages__arr9;
-        [FieldOffset(240)] public CyberStageData actStages__arr10;
-        [FieldOffset(264)] public CyberStageData actStages__arr11;
-        [FieldOffset(288)] public CyberStageData actStages__arr12;
-        [FieldOffset(312)] public CyberStageData actStages__arr13;
-        [FieldOffset(336)] public CyberStageData actStages__arr14;
-        [FieldOffset(360)] public CyberStageData actStages__arr15;
-        [FieldOffset(384)] public CyberStageData actStages__arr16;
-        [FieldOffset(408)] public CyberStageData actStages__arr17;
-        [FieldOffset(432)] public CyberStageData actStages__arr18;
-        [FieldOffset(456)] public CyberStageData actStages__arr19;
-        [FieldOffset(480)] public CyberStageData actStages__arr20;
-        [FieldOffset(504)] public CyberStageData actStages__arr21;
-        [FieldOffset(528)] public CyberStageData actStages__arr22;
-        [FieldOffset(552)] public CyberStageData actStages__arr23;
-        [FieldOffset(576)] public CyberStageData actStages__arr24;
-        [FieldOffset(600)] public CyberStageData actStages__arr25;
-        [FieldOffset(624)] public CyberStageData actStages__arr26;
-        [FieldOffset(648)] public CyberStageData actStages__arr27;
-        [FieldOffset(672)] public CyberStageData actStages__arr28;
-        [FieldOffset(696)] public CyberStageData actStages__arr29;
-        [FieldOffset(720)] public CyberStageData actStages__arr30;
-        [FieldOffset(744)] public CyberStageData actStages__arr31;
+        [FieldOffset(0x00)] public CyberStageData actStages__arr0;
+        [FieldOffset(0x18)] public CyberStageData actStages__arr1;
+        [FieldOffset(0x30)] public CyberStageData actStages__arr2;
+        [FieldOffset(0x48)] public CyberStageData actStages__arr3;
+        [FieldOffset(0x60)] public CyberStageData actStages__arr4;
+        [FieldOffset(0x78)] public CyberStageData actStages__arr5;
+        [FieldOffset(0x90)] public CyberStageData actStages__arr6;
+        [FieldOffset(0xA8)] public CyberStageData actStages__arr7;
+        [FieldOffset(0xC0)] public CyberStageData actStages__arr8;
+        [FieldOffset(0xD8)] public CyberStageData actStages__arr9;
+        [FieldOffset(0xF0)] public CyberStageData actStages__arr10;
+        [FieldOffset(0x108)] public CyberStageData actStages__arr11;
+        [FieldOffset(0x120)] public CyberStageData actStages__arr12;
+        [FieldOffset(0x138)] public CyberStageData actStages__arr13;
+        [FieldOffset(0x150)] public CyberStageData actStages__arr14;
+        [FieldOffset(0x168)] public CyberStageData actStages__arr15;
+        [FieldOffset(0x180)] public CyberStageData actStages__arr16;
+        [FieldOffset(0x198)] public CyberStageData actStages__arr17;
+        [FieldOffset(0x1B0)] public CyberStageData actStages__arr18;
+        [FieldOffset(0x1C8)] public CyberStageData actStages__arr19;
+        [FieldOffset(0x1E0)] public CyberStageData actStages__arr20;
+        [FieldOffset(0x1F8)] public CyberStageData actStages__arr21;
+        [FieldOffset(0x210)] public CyberStageData actStages__arr22;
+        [FieldOffset(0x228)] public CyberStageData actStages__arr23;
+        [FieldOffset(0x240)] public CyberStageData actStages__arr24;
+        [FieldOffset(0x258)] public CyberStageData actStages__arr25;
+        [FieldOffset(0x270)] public CyberStageData actStages__arr26;
+        [FieldOffset(0x288)] public CyberStageData actStages__arr27;
+        [FieldOffset(0x2A0)] public CyberStageData actStages__arr28;
+        [FieldOffset(0x2B8)] public CyberStageData actStages__arr29;
+        [FieldOffset(0x2D0)] public CyberStageData actStages__arr30;
+        [FieldOffset(0x2E8)] public CyberStageData actStages__arr31;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 828)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x33C)]
     public struct ArcadeData
     {
-        [FieldOffset(0)]   public HeaderData header;
-        [FieldOffset(40)]  public bool unlocked;
-        [FieldOffset(44)]  public CyberStageContainerData stages;
-        [FieldOffset(812)] public uint reserved__arr0;
-        [FieldOffset(816)] public uint reserved__arr1;
-        [FieldOffset(820)] public uint reserved__arr2;
-        [FieldOffset(824)] public uint reserved__arr3;
+        [FieldOffset(0x00)] public HeaderData header;
+        [FieldOffset(0x28)] public bool unlocked;
+        [FieldOffset(0x2C)] public CyberStageContainerData stages;
+        [FieldOffset(0x32C)] public uint reserved__arr0;
+        [FieldOffset(0x330)] public uint reserved__arr1;
+        [FieldOffset(0x334)] public uint reserved__arr2;
+        [FieldOffset(0x338)] public uint reserved__arr3;
     }
 
 }

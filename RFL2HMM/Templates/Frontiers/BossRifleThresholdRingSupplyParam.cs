@@ -10,11 +10,11 @@ public class BossRifleThresholdRingSupplyParamClass
         LT_HOMING = 2
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct BossRifleThresholdRingSupplyParam
     {
-        [FieldOffset(0)] public float hpRatio;
-        [FieldOffset(4)] public LaserType type;
+        [FieldOffset(0x00)] public float hpRatio;
+        [FieldOffset(0x04)] public LaserType type;
     }
 
 }

@@ -3,29 +3,29 @@ using System.Runtime.InteropServices;
 
 public class QuestDrawBridgeParameterClass
 {
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct QuestDrawBridgeTimerParameter
     {
-        [FieldOffset(0)]  public float timeLimitSeconds;
-        [FieldOffset(4)]  public float cautionTime;
-        [FieldOffset(8)]  public float warningTime;
-        [FieldOffset(12)] public bool useCautionAnimation;
-        [FieldOffset(13)] public bool useWarningAnimation;
+        [FieldOffset(0x00)] public float timeLimitSeconds;
+        [FieldOffset(0x04)] public float cautionTime;
+        [FieldOffset(0x08)] public float warningTime;
+        [FieldOffset(0x0C)] public bool useCautionAnimation;
+        [FieldOffset(0x0D)] public bool useWarningAnimation;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 20)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
     public struct QuestDrawBridgeParameterElement
     {
-        [FieldOffset(0)] public int applicableFailedCount;
-        [FieldOffset(4)] public QuestDrawBridgeTimerParameter timerParam;
+        [FieldOffset(0x00)] public int applicableFailedCount;
+        [FieldOffset(0x04)] public QuestDrawBridgeTimerParameter timerParam;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 60)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x3C)]
     public struct QuestDrawBridgeParameter
     {
-        [FieldOffset(0)] public QuestDrawBridgeParameterElement element__arr0;
-        [FieldOffset(20)] public QuestDrawBridgeParameterElement element__arr1;
-        [FieldOffset(40)] public QuestDrawBridgeParameterElement element__arr2;
+        [FieldOffset(0x00)] public QuestDrawBridgeParameterElement element__arr0;
+        [FieldOffset(0x14)] public QuestDrawBridgeParameterElement element__arr1;
+        [FieldOffset(0x28)] public QuestDrawBridgeParameterElement element__arr2;
     }
 
 }

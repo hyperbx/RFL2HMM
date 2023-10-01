@@ -3,24 +3,69 @@ using System.Runtime.InteropServices;
 
 public class GismoConfigDesignDataClass
 {
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
-    public struct CString
+    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    public struct UnmanagedString
     {
         [FieldOffset(0)] public long pValue;
 
         public string Value
         {
-        	get => Marshal.PtrToStringAnsi((IntPtr)pValue);
-        	set => pValue = (long)Marshal.StringToHGlobalAnsi(value);
+            get
+            {
+                if (pValue == 0)
+                    return string.Empty;
+
+                return Marshal.PtrToStringAnsi((nint)pValue);
+            }
+
+            set => pValue = Marshal.StringToHGlobalAnsi(value);
+        }
+
+        public UnmanagedString(string in_value)
+        {
+            Value = in_value;
+        }
+
+        public static implicit operator UnmanagedString(string in_value)
+        {
+            return new UnmanagedString(in_value);
+        }
+
+        public static bool operator ==(UnmanagedString in_left, string in_right)
+        {
+            return in_left.Value == in_right;
+        }
+
+        public static bool operator !=(UnmanagedString in_left, string in_right)
+        {
+            return !(in_left == in_right);
+        }
+
+        public override bool Equals(object in_obj)
+        {
+            if (in_obj is string str)
+                return Value == str;
+
+            return base.Equals(in_obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Value;
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 40)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct GismoBasicParam
     {
-        [FieldOffset(0)]  public CString modelName;
-        [FieldOffset(16)] public CString skeltonName;
-        [FieldOffset(32)] public bool noInstance;
+        [FieldOffset(0x00)] public UnmanagedString modelName;
+        [FieldOffset(0x10)] public UnmanagedString skeltonName;
+        [FieldOffset(0x20)] public bool noInstance;
     }
 
     public enum ShapeType : sbyte
@@ -41,17 +86,17 @@ public class GismoConfigDesignDataClass
         BASE_Y_PLANE = 3
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 64)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public struct GismoCollision
     {
-        [FieldOffset(0)]  public ShapeType shape;
-        [FieldOffset(1)]  public BasePoint basePoint;
-        [FieldOffset(4)]  public float width;
-        [FieldOffset(8)]  public float height;
-        [FieldOffset(12)] public float depth;
-        [FieldOffset(16)] public CString meshName;
-        [FieldOffset(32)] public Vector3 shapeOffset;
-        [FieldOffset(48)] public float shapeSizeOffset;
+        [FieldOffset(0x00)] public ShapeType shape;
+        [FieldOffset(0x01)] public BasePoint basePoint;
+        [FieldOffset(0x04)] public float width;
+        [FieldOffset(0x08)] public float height;
+        [FieldOffset(0x0C)] public float depth;
+        [FieldOffset(0x10)] public UnmanagedString meshName;
+        [FieldOffset(0x20)] public Vector3 shapeOffset;
+        [FieldOffset(0x30)] public float shapeSizeOffset;
     }
 
     public enum RigidBodyType : sbyte
@@ -69,46 +114,46 @@ public class GismoConfigDesignDataClass
         NUM_RIGID_BODY_MATS = 3
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 28)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct PhysicsParam
     {
-        [FieldOffset(0)]  public float mass;
-        [FieldOffset(4)]  public float friction;
-        [FieldOffset(8)]  public float gravityFactor;
-        [FieldOffset(12)] public float restitution;
-        [FieldOffset(16)] public float linearDamping;
-        [FieldOffset(20)] public float angularDamping;
-        [FieldOffset(24)] public float maxLinearVelocity;
+        [FieldOffset(0x00)] public float mass;
+        [FieldOffset(0x04)] public float friction;
+        [FieldOffset(0x08)] public float gravityFactor;
+        [FieldOffset(0x0C)] public float restitution;
+        [FieldOffset(0x10)] public float linearDamping;
+        [FieldOffset(0x14)] public float angularDamping;
+        [FieldOffset(0x18)] public float maxLinearVelocity;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct GismoRegidBody
     {
-        [FieldOffset(0)] public RigidBodyType rigidBodyType;
-        [FieldOffset(1)] public RigidBodyMaterial rigidBodyMaterial;
-        [FieldOffset(4)] public PhysicsParam physicsParam;
+        [FieldOffset(0x00)] public RigidBodyType rigidBodyType;
+        [FieldOffset(0x01)] public RigidBodyMaterial rigidBodyMaterial;
+        [FieldOffset(0x04)] public PhysicsParam physicsParam;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 24)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct MotionData
     {
-        [FieldOffset(0)]  public CString motionName;
-        [FieldOffset(16)] public bool syncFrame;
-        [FieldOffset(17)] public bool stopEndFrame;
+        [FieldOffset(0x00)] public UnmanagedString motionName;
+        [FieldOffset(0x10)] public bool syncFrame;
+        [FieldOffset(0x11)] public bool stopEndFrame;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 144)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x90)]
     public struct MirageAnimData
     {
-        [FieldOffset(0)]  public CString texSrtAnimName__arr0;
-        [FieldOffset(255)] public CString texSrtAnimName__arr1;
-        [FieldOffset(510)] public CString texSrtAnimName__arr2;
-        [FieldOffset(48)] public CString texPatAnimName__arr0;
-        [FieldOffset(303)] public CString texPatAnimName__arr1;
-        [FieldOffset(558)] public CString texPatAnimName__arr2;
-        [FieldOffset(96)] public CString matAnimName__arr0;
-        [FieldOffset(351)] public CString matAnimName__arr1;
-        [FieldOffset(606)] public CString matAnimName__arr2;
+        [FieldOffset(0x00)] public UnmanagedString texSrtAnimName__arr0;
+        [FieldOffset(0xFF)] public UnmanagedString texSrtAnimName__arr1;
+        [FieldOffset(0x1FE)] public UnmanagedString texSrtAnimName__arr2;
+        [FieldOffset(0x30)] public UnmanagedString texPatAnimName__arr0;
+        [FieldOffset(0x12F)] public UnmanagedString texPatAnimName__arr1;
+        [FieldOffset(0x22E)] public UnmanagedString texPatAnimName__arr2;
+        [FieldOffset(0x60)] public UnmanagedString matAnimName__arr0;
+        [FieldOffset(0x15F)] public UnmanagedString matAnimName__arr1;
+        [FieldOffset(0x25E)] public UnmanagedString matAnimName__arr2;
     }
 
     public enum MotionType : byte
@@ -118,27 +163,27 @@ public class GismoConfigDesignDataClass
         MOTION_LINEAR_SWING = 2
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 48)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct ProgramMotionData
     {
-        [FieldOffset(0)]  public MotionType motionType;
-        [FieldOffset(16)] public Vector3 axis;
-        [FieldOffset(32)] public float power;
-        [FieldOffset(36)] public float speedScale;
-        [FieldOffset(40)] public float time;
+        [FieldOffset(0x00)] public MotionType motionType;
+        [FieldOffset(0x10)] public Vector3 axis;
+        [FieldOffset(0x20)] public float power;
+        [FieldOffset(0x24)] public float speedScale;
+        [FieldOffset(0x28)] public float time;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 24)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct EffectData
     {
-        [FieldOffset(0)]  public CString effectName;
-        [FieldOffset(16)] public bool linkMotionStop;
+        [FieldOffset(0x00)] public UnmanagedString effectName;
+        [FieldOffset(0x10)] public bool linkMotionStop;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct SoundData
     {
-        [FieldOffset(0)] public CString cueName;
+        [FieldOffset(0x00)] public UnmanagedString cueName;
     }
 
     public enum KillType : sbyte
@@ -149,52 +194,52 @@ public class GismoConfigDesignDataClass
         KILL_TYPE_MOTION = 3
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 24)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct DebrisData
     {
-        [FieldOffset(0)]  public float gravity;
-        [FieldOffset(4)]  public float lifeTime;
-        [FieldOffset(8)]  public float mass;
-        [FieldOffset(12)] public float friction;
-        [FieldOffset(16)] public float explosionScale;
-        [FieldOffset(20)] public float impulseScale;
+        [FieldOffset(0x00)] public float gravity;
+        [FieldOffset(0x04)] public float lifeTime;
+        [FieldOffset(0x08)] public float mass;
+        [FieldOffset(0x0C)] public float friction;
+        [FieldOffset(0x10)] public float explosionScale;
+        [FieldOffset(0x14)] public float impulseScale;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 48)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct KillData
     {
-        [FieldOffset(0)]  public KillType killType;
-        [FieldOffset(4)]  public float killTime;
-        [FieldOffset(8)]  public CString breakMotionName;
-        [FieldOffset(24)] public DebrisData debrisData;
+        [FieldOffset(0x00)] public KillType killType;
+        [FieldOffset(0x04)] public float killTime;
+        [FieldOffset(0x08)] public UnmanagedString breakMotionName;
+        [FieldOffset(0x18)] public DebrisData debrisData;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 320)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x140)]
     public struct ReactionData
     {
-        [FieldOffset(0)]   public MotionData motionData;
-        [FieldOffset(24)]  public MirageAnimData mirageAnimData;
-        [FieldOffset(176)] public ProgramMotionData programMotionData;
-        [FieldOffset(224)] public EffectData effectData;
-        [FieldOffset(248)] public SoundData soundData;
-        [FieldOffset(264)] public KillData killData;
+        [FieldOffset(0x00)] public MotionData motionData;
+        [FieldOffset(0x18)] public MirageAnimData mirageAnimData;
+        [FieldOffset(0xB0)] public ProgramMotionData programMotionData;
+        [FieldOffset(0xE0)] public EffectData effectData;
+        [FieldOffset(0xF8)] public SoundData soundData;
+        [FieldOffset(0x108)] public KillData killData;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 2080)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x820)]
     public struct GismoConfigDesignData
     {
-        [FieldOffset(0)]    public float rangeIn;
-        [FieldOffset(4)]    public float rangeDistance;
-        [FieldOffset(8)]    public GismoBasicParam basicParam;
-        [FieldOffset(48)]   public GismoCollision collision;
-        [FieldOffset(112)]  public GismoRegidBody rigidBody;
-        [FieldOffset(144)]  public ReactionData reactionIdle;
-        [FieldOffset(464)]  public ReactionData reactionEnter;
-        [FieldOffset(784)]  public ReactionData reactionLeave;
-        [FieldOffset(1104)] public ReactionData reactionStay;
-        [FieldOffset(1424)] public ReactionData reactionStayMove;
-        [FieldOffset(1744)] public ReactionData reactionDamage;
-        [FieldOffset(2064)] public bool ignoreMeteorShowerAndRespawnOnReenterRange;
+        [FieldOffset(0x00)] public float rangeIn;
+        [FieldOffset(0x04)] public float rangeDistance;
+        [FieldOffset(0x08)] public GismoBasicParam basicParam;
+        [FieldOffset(0x30)] public GismoCollision collision;
+        [FieldOffset(0x70)] public GismoRegidBody rigidBody;
+        [FieldOffset(0x90)] public ReactionData reactionIdle;
+        [FieldOffset(0x1D0)] public ReactionData reactionEnter;
+        [FieldOffset(0x310)] public ReactionData reactionLeave;
+        [FieldOffset(0x450)] public ReactionData reactionStay;
+        [FieldOffset(0x590)] public ReactionData reactionStayMove;
+        [FieldOffset(0x6D0)] public ReactionData reactionDamage;
+        [FieldOffset(0x810)] public bool ignoreMeteorShowerAndRespawnOnReenterRange;
     }
 
 }

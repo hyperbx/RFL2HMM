@@ -12,42 +12,42 @@ public class UIWireframeParameterClass
         RTSIZE_INVALID = 3
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 84)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x54)]
     public struct FxDOFParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(1)]  public bool useFocusLookAt;
-        [FieldOffset(4)]  public float foregroundBokehMaxDepth;
-        [FieldOffset(8)]  public float foregroundBokehStartDepth;
-        [FieldOffset(12)] public float backgroundBokehStartDepth;
-        [FieldOffset(16)] public float backgroundBokehMaxDepth;
-        [FieldOffset(20)] public bool enableCircleDOF;
-        [FieldOffset(24)] public float cocMaxRadius;
-        [FieldOffset(28)] public float bokehRadiusScale;
-        [FieldOffset(32)] public int bokehSampleCount;
-        [FieldOffset(36)] public float skyFocusDistance;
-        [FieldOffset(40)] public float bokehBias;
-        [FieldOffset(44)] public bool drawFocalPlane;
-        [FieldOffset(48)] public RenderTargetSize rtScale;
-        [FieldOffset(52)] public bool enableSWA;
-        [FieldOffset(56)] public float swaFocus;
-        [FieldOffset(60)] public float swaFocusRange;
-        [FieldOffset(64)] public float swaNear;
-        [FieldOffset(68)] public float swaFar;
-        [FieldOffset(72)] public bool enableEnhancedForeBokeh;
-        [FieldOffset(76)] public float foreBokehScale;
-        [FieldOffset(80)] public float foreBokehMaxLuminance;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x01)] public bool useFocusLookAt;
+        [FieldOffset(0x04)] public float foregroundBokehMaxDepth;
+        [FieldOffset(0x08)] public float foregroundBokehStartDepth;
+        [FieldOffset(0x0C)] public float backgroundBokehStartDepth;
+        [FieldOffset(0x10)] public float backgroundBokehMaxDepth;
+        [FieldOffset(0x14)] public bool enableCircleDOF;
+        [FieldOffset(0x18)] public float cocMaxRadius;
+        [FieldOffset(0x1C)] public float bokehRadiusScale;
+        [FieldOffset(0x20)] public int bokehSampleCount;
+        [FieldOffset(0x24)] public float skyFocusDistance;
+        [FieldOffset(0x28)] public float bokehBias;
+        [FieldOffset(0x2C)] public bool drawFocalPlane;
+        [FieldOffset(0x30)] public RenderTargetSize rtScale;
+        [FieldOffset(0x34)] public bool enableSWA;
+        [FieldOffset(0x38)] public float swaFocus;
+        [FieldOffset(0x3C)] public float swaFocusRange;
+        [FieldOffset(0x40)] public float swaNear;
+        [FieldOffset(0x44)] public float swaFar;
+        [FieldOffset(0x48)] public bool enableEnhancedForeBokeh;
+        [FieldOffset(0x4C)] public float foreBokehScale;
+        [FieldOffset(0x50)] public float foreBokehMaxLuminance;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 128)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x80)]
     public struct UIWireframeParameter
     {
-        [FieldOffset(0)]  public Vector3 camerapos;
-        [FieldOffset(16)] public float lineAlpha;
-        [FieldOffset(20)] public float noiseScale;
-        [FieldOffset(24)] public float noiseSpeed;
-        [FieldOffset(28)] public float moveWidth;
-        [FieldOffset(32)] public FxDOFParameter dofparam;
+        [FieldOffset(0x00)] public Vector3 camerapos;
+        [FieldOffset(0x10)] public float lineAlpha;
+        [FieldOffset(0x14)] public float noiseScale;
+        [FieldOffset(0x18)] public float noiseSpeed;
+        [FieldOffset(0x1C)] public float moveWidth;
+        [FieldOffset(0x20)] public FxDOFParameter dofparam;
     }
 
 }

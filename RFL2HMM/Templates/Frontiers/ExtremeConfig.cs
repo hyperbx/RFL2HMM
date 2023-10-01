@@ -18,22 +18,22 @@ public class ExtremeConfigClass
         public byte B;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 80)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x50)]
     public struct ExtremeConfig
     {
-        [FieldOffset(0)]  public LineType lineType;
-        [FieldOffset(4)]  public float lineWidth;
-        [FieldOffset(8)]  public float roadLength;
-        [FieldOffset(12)] public float speed;
-        [FieldOffset(16)] public float barricadeInterval;
-        [FieldOffset(20)] public float emergencyDistance;
-        [FieldOffset(32)] public Vector3 barricadeSize;
-        [FieldOffset(48)] public Color8 roadColor;
-        [FieldOffset(52)] public Color8 barricadeColor;
-        [FieldOffset(56)] public float cameraFovy;
-        [FieldOffset(60)] public float cameraDistance;
-        [FieldOffset(64)] public float cameraUpOffset;
-        [FieldOffset(68)] public float cameraShakeOffset;
+        [FieldOffset(0x00)] public LineType lineType;
+        [FieldOffset(0x04)] public float lineWidth;
+        [FieldOffset(0x08)] public float roadLength;
+        [FieldOffset(0x0C)] public float speed;
+        [FieldOffset(0x10)] public float barricadeInterval;
+        [FieldOffset(0x14)] public float emergencyDistance;
+        [FieldOffset(0x20)] public Vector3 barricadeSize;
+        [FieldOffset(0x30)] public Color8 roadColor;
+        [FieldOffset(0x34)] public Color8 barricadeColor;
+        [FieldOffset(0x38)] public float cameraFovy;
+        [FieldOffset(0x3C)] public float cameraDistance;
+        [FieldOffset(0x40)] public float cameraUpOffset;
+        [FieldOffset(0x44)] public float cameraShakeOffset;
     }
 
 }

@@ -5,33 +5,33 @@ Library "ObjWolfManagerConfig"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 24)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct FocusCameraConfig
     {
-        [FieldOffset(0)]  public float duration;
-        [FieldOffset(4)]  public float distance;
-        [FieldOffset(8)]  public float minElevation;
-        [FieldOffset(12)] public float maxElevation;
-        [FieldOffset(16)] public float panningSuspensionK;
-        [FieldOffset(20)] public float interiorPanningSuspensionK;
+        [FieldOffset(0x00)] public float duration;
+        [FieldOffset(0x04)] public float distance;
+        [FieldOffset(0x08)] public float minElevation;
+        [FieldOffset(0x0C)] public float maxElevation;
+        [FieldOffset(0x10)] public float panningSuspensionK;
+        [FieldOffset(0x14)] public float interiorPanningSuspensionK;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 72)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x48)]
     public struct ObjWolfManagerConfig
     {
-        [FieldOffset(0)]  public FocusCameraConfig focusCamera;
-        [FieldOffset(24)] public float shotInterval;
-        [FieldOffset(28)] public float shotInterval_Parried;
-        [FieldOffset(32)] public float shotInterval_Reborn;
-        [FieldOffset(36)] public float shotInterval_First;
-        [FieldOffset(40)] public float shotInterval_NoReborn;
-        [FieldOffset(44)] public float stunTime;
-        [FieldOffset(48)] public float approachWait;
-        [FieldOffset(52)] public float dispWait;
-        [FieldOffset(56)] public float rollWait;
-        [FieldOffset(60)] public float reactionTime;
-        [FieldOffset(64)] public float controlDelay;
-        [FieldOffset(68)] public float shotAngle;
+        [FieldOffset(0x00)] public FocusCameraConfig focusCamera;
+        [FieldOffset(0x18)] public float shotInterval;
+        [FieldOffset(0x1C)] public float shotInterval_Parried;
+        [FieldOffset(0x20)] public float shotInterval_Reborn;
+        [FieldOffset(0x24)] public float shotInterval_First;
+        [FieldOffset(0x28)] public float shotInterval_NoReborn;
+        [FieldOffset(0x2C)] public float stunTime;
+        [FieldOffset(0x30)] public float approachWait;
+        [FieldOffset(0x34)] public float dispWait;
+        [FieldOffset(0x38)] public float rollWait;
+        [FieldOffset(0x3C)] public float reactionTime;
+        [FieldOffset(0x40)] public float controlDelay;
+        [FieldOffset(0x44)] public float shotAngle;
     }
 
 }

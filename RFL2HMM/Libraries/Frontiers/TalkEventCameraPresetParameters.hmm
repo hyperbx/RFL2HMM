@@ -13,26 +13,26 @@ Library "TalkEventCameraPresetParameters"
         Center = 3
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 36)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x24)]
     public struct TalkEventCameraPresetParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(1)]  public GazePositionType primaryTarget;
-        [FieldOffset(2)]  public GazePositionType secondaryTarget;
-        [FieldOffset(4)]  public float targetRatio;
-        [FieldOffset(8)]  public float rotateDegreePitch;
-        [FieldOffset(12)] public float rotateDegreeYaw;
-        [FieldOffset(16)] public float cameraOffsetRatio;
-        [FieldOffset(20)] public float fovy;
-        [FieldOffset(24)] public float targetOffsetX;
-        [FieldOffset(28)] public float targetOffsetY;
-        [FieldOffset(32)] public float targetOffsetZ;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x01)] public GazePositionType primaryTarget;
+        [FieldOffset(0x02)] public GazePositionType secondaryTarget;
+        [FieldOffset(0x04)] public float targetRatio;
+        [FieldOffset(0x08)] public float rotateDegreePitch;
+        [FieldOffset(0x0C)] public float rotateDegreeYaw;
+        [FieldOffset(0x10)] public float cameraOffsetRatio;
+        [FieldOffset(0x14)] public float fovy;
+        [FieldOffset(0x18)] public float targetOffsetX;
+        [FieldOffset(0x1C)] public float targetOffsetY;
+        [FieldOffset(0x20)] public float targetOffsetZ;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 576)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x240)]
     public struct TalkEventCameraPresetParameters
     {
-        [FieldOffset(0)] public unsafe fixed byte /* TalkEventCameraPresetParameter[16] */ _param[576];
+        [FieldOffset(0x00)] public unsafe fixed byte /* TalkEventCameraPresetParameter[16] */ _param[576];
 
         public unsafe TalkEventCameraPresetParameter* param
         {

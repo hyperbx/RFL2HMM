@@ -5,29 +5,29 @@ Library "ActionChainStageParameter"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct ActionChainScoreThresholdParameter
     {
-        [FieldOffset(0)]  public uint scoreS;
-        [FieldOffset(4)]  public uint scoreA;
-        [FieldOffset(8)]  public uint scoreB;
-        [FieldOffset(12)] public uint scoreC;
+        [FieldOffset(0x00)] public uint scoreS;
+        [FieldOffset(0x04)] public uint scoreA;
+        [FieldOffset(0x08)] public uint scoreB;
+        [FieldOffset(0x0C)] public uint scoreC;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 68)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x44)]
     public struct ActionChainPlaceParameter
     {
-        [FieldOffset(0)]  public float time;
-        [FieldOffset(4)]  public ActionChainScoreThresholdParameter scoreEasy;
-        [FieldOffset(20)] public ActionChainScoreThresholdParameter scoreNormal;
-        [FieldOffset(36)] public ActionChainScoreThresholdParameter scoreHard;
-        [FieldOffset(52)] public ActionChainScoreThresholdParameter scoreVeryHard;
+        [FieldOffset(0x00)] public float time;
+        [FieldOffset(0x04)] public ActionChainScoreThresholdParameter scoreEasy;
+        [FieldOffset(0x14)] public ActionChainScoreThresholdParameter scoreNormal;
+        [FieldOffset(0x24)] public ActionChainScoreThresholdParameter scoreHard;
+        [FieldOffset(0x34)] public ActionChainScoreThresholdParameter scoreVeryHard;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 1088)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x440)]
     public struct ActionChainStageParameter
     {
-        [FieldOffset(0)] public unsafe fixed byte /* ActionChainPlaceParameter[16] */ _placeParam[1088];
+        [FieldOffset(0x00)] public unsafe fixed byte /* ActionChainPlaceParameter[16] */ _placeParam[1088];
 
         public unsafe ActionChainPlaceParameter* placeParam
         {

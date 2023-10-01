@@ -3,17 +3,17 @@ using System.Runtime.InteropServices;
 
 public class FxDirectionalRadialBlurParameterClass
 {
-    [StructLayout(LayoutKind.Explicit, Size = 80)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x50)]
     public struct FxDirectionalRadialBlurParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(16)] public Vector3 center;
-        [FieldOffset(32)] public Vector3 direction;
-        [FieldOffset(48)] public float blurPowerMax;
-        [FieldOffset(52)] public float blurPowerMin;
-        [FieldOffset(56)] public float focusRange;
-        [FieldOffset(60)] public float alphaSlope;
-        [FieldOffset(64)] public int sampleNum;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x10)] public Vector3 center;
+        [FieldOffset(0x20)] public Vector3 direction;
+        [FieldOffset(0x30)] public float blurPowerMax;
+        [FieldOffset(0x34)] public float blurPowerMin;
+        [FieldOffset(0x38)] public float focusRange;
+        [FieldOffset(0x3C)] public float alphaSlope;
+        [FieldOffset(0x40)] public int sampleNum;
     }
 
 }

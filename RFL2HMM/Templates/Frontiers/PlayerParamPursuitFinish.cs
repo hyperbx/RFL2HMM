@@ -16,22 +16,22 @@ public class PlayerParamPursuitFinishClass
         Box = 2
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 48)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct PlayerParamAttackCollider
     {
-        [FieldOffset(0)]  public Condition condition;
-        [FieldOffset(1)]  public sbyte count;
-        [FieldOffset(4)]  public float spanTime;
-        [FieldOffset(8)]  public Shape shape;
-        [FieldOffset(16)] public Vector3 shapeSize;
-        [FieldOffset(32)] public Vector3 shapeOffset;
+        [FieldOffset(0x00)] public Condition condition;
+        [FieldOffset(0x01)] public sbyte count;
+        [FieldOffset(0x04)] public float spanTime;
+        [FieldOffset(0x08)] public Shape shape;
+        [FieldOffset(0x10)] public Vector3 shapeSize;
+        [FieldOffset(0x20)] public Vector3 shapeOffset;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 64)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public struct PlayerParamPursuitFinish
     {
-        [FieldOffset(0)]  public PlayerParamAttackCollider hit;
-        [FieldOffset(48)] public float ignoreSwingingTime;
+        [FieldOffset(0x00)] public PlayerParamAttackCollider hit;
+        [FieldOffset(0x30)] public float ignoreSwingingTime;
     }
 
 }

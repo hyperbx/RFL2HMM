@@ -27,13 +27,13 @@ public class MiniBossChargerAttackParamClass
         AttackTypeNum = 19
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct MiniBossChargerAttackParam
     {
-        [FieldOffset(0)]  public AttackType type;
-        [FieldOffset(4)]  public int index;
-        [FieldOffset(8)]  public float rate;
-        [FieldOffset(12)] public float restTime;
+        [FieldOffset(0x00)] public AttackType type;
+        [FieldOffset(0x04)] public int index;
+        [FieldOffset(0x08)] public float rate;
+        [FieldOffset(0x0C)] public float restTime;
     }
 
 }

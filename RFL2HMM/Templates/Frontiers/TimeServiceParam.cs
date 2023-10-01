@@ -3,12 +3,12 @@ using System.Runtime.InteropServices;
 
 public class TimeServiceParamClass
 {
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct TimeServiceParam
     {
-        [FieldOffset(0)] public float speed;
-        [FieldOffset(4)] public float timeMagnification;
-        [FieldOffset(8)] public int addMinuteReturnFromCyber;
+        [FieldOffset(0x00)] public float speed;
+        [FieldOffset(0x04)] public float timeMagnification;
+        [FieldOffset(0x08)] public int addMinuteReturnFromCyber;
     }
 
 }

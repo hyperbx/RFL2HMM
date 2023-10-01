@@ -12,12 +12,12 @@ public class NeedleFxSceneDataClass
         DOF_RTSIZE_INVALID = 3
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct FxRenderTargetSetting
     {
-        [FieldOffset(0)] public DOFRenderTargetSize dofRenderTargetScale;
-        [FieldOffset(4)] public int shadowMapWidth;
-        [FieldOffset(8)] public int shadowMapHeight;
+        [FieldOffset(0x00)] public DOFRenderTargetSize dofRenderTargetScale;
+        [FieldOffset(0x04)] public int shadowMapWidth;
+        [FieldOffset(0x08)] public int shadowMapHeight;
     }
 
     public enum AntiAliasingType : sbyte
@@ -37,63 +37,63 @@ public class NeedleFxSceneDataClass
         USTYPE_FSR_RCAS = 3
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct FxAntiAliasing
     {
-        [FieldOffset(0)] public AntiAliasingType aaType;
-        [FieldOffset(1)] public UpscaleType usType;
-        [FieldOffset(4)] public float fsrSharpness;
+        [FieldOffset(0x00)] public AntiAliasingType aaType;
+        [FieldOffset(0x01)] public UpscaleType usType;
+        [FieldOffset(0x04)] public float fsrSharpness;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct StageCommonAtmosphereParameter
     {
-        [FieldOffset(0)] public float illuminanceScale;
+        [FieldOffset(0x00)] public float illuminanceScale;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 132)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x84)]
     public struct FxLODParameter
     {
-        [FieldOffset(0)] public bool enableDebugDrawLayerRange;
-        [FieldOffset(4)] public float layerRange__arr0;
-        [FieldOffset(8)] public float layerRange__arr1;
-        [FieldOffset(12)] public float layerRange__arr2;
-        [FieldOffset(16)] public float layerRange__arr3;
-        [FieldOffset(20)] public float layerRange__arr4;
-        [FieldOffset(24)] public float layerRange__arr5;
-        [FieldOffset(28)] public float layerRange__arr6;
-        [FieldOffset(32)] public float layerRange__arr7;
-        [FieldOffset(36)] public float layerRange__arr8;
-        [FieldOffset(40)] public float layerRange__arr9;
-        [FieldOffset(44)] public float layerRange__arr10;
-        [FieldOffset(48)] public float layerRange__arr11;
-        [FieldOffset(52)] public float layerRange__arr12;
-        [FieldOffset(56)] public float layerRange__arr13;
-        [FieldOffset(60)] public float layerRange__arr14;
-        [FieldOffset(64)] public float layerRange__arr15;
-        [FieldOffset(68)] public float layerRange__arr16;
-        [FieldOffset(72)] public float layerRange__arr17;
-        [FieldOffset(76)] public float layerRange__arr18;
-        [FieldOffset(80)] public float layerRange__arr19;
-        [FieldOffset(84)] public float layerRange__arr20;
-        [FieldOffset(88)] public float layerRange__arr21;
-        [FieldOffset(92)] public float layerRange__arr22;
-        [FieldOffset(96)] public float layerRange__arr23;
-        [FieldOffset(100)] public float layerRange__arr24;
-        [FieldOffset(104)] public float layerRange__arr25;
-        [FieldOffset(108)] public float layerRange__arr26;
-        [FieldOffset(112)] public float layerRange__arr27;
-        [FieldOffset(116)] public float layerRange__arr28;
-        [FieldOffset(120)] public float layerRange__arr29;
-        [FieldOffset(124)] public float layerRange__arr30;
-        [FieldOffset(128)] public float layerRange__arr31;
+        [FieldOffset(0x00)] public bool enableDebugDrawLayerRange;
+        [FieldOffset(0x04)] public float layerRange__arr0;
+        [FieldOffset(0x08)] public float layerRange__arr1;
+        [FieldOffset(0x0C)] public float layerRange__arr2;
+        [FieldOffset(0x10)] public float layerRange__arr3;
+        [FieldOffset(0x14)] public float layerRange__arr4;
+        [FieldOffset(0x18)] public float layerRange__arr5;
+        [FieldOffset(0x1C)] public float layerRange__arr6;
+        [FieldOffset(0x20)] public float layerRange__arr7;
+        [FieldOffset(0x24)] public float layerRange__arr8;
+        [FieldOffset(0x28)] public float layerRange__arr9;
+        [FieldOffset(0x2C)] public float layerRange__arr10;
+        [FieldOffset(0x30)] public float layerRange__arr11;
+        [FieldOffset(0x34)] public float layerRange__arr12;
+        [FieldOffset(0x38)] public float layerRange__arr13;
+        [FieldOffset(0x3C)] public float layerRange__arr14;
+        [FieldOffset(0x40)] public float layerRange__arr15;
+        [FieldOffset(0x44)] public float layerRange__arr16;
+        [FieldOffset(0x48)] public float layerRange__arr17;
+        [FieldOffset(0x4C)] public float layerRange__arr18;
+        [FieldOffset(0x50)] public float layerRange__arr19;
+        [FieldOffset(0x54)] public float layerRange__arr20;
+        [FieldOffset(0x58)] public float layerRange__arr21;
+        [FieldOffset(0x5C)] public float layerRange__arr22;
+        [FieldOffset(0x60)] public float layerRange__arr23;
+        [FieldOffset(0x64)] public float layerRange__arr24;
+        [FieldOffset(0x68)] public float layerRange__arr25;
+        [FieldOffset(0x6C)] public float layerRange__arr26;
+        [FieldOffset(0x70)] public float layerRange__arr27;
+        [FieldOffset(0x74)] public float layerRange__arr28;
+        [FieldOffset(0x78)] public float layerRange__arr29;
+        [FieldOffset(0x7C)] public float layerRange__arr30;
+        [FieldOffset(0x80)] public float layerRange__arr31;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct FxDetailParameter
     {
-        [FieldOffset(0)] public float detailDistance;
-        [FieldOffset(4)] public float detailFadeRange;
+        [FieldOffset(0x00)] public float detailDistance;
+        [FieldOffset(0x04)] public float detailFadeRange;
     }
 
     public enum Mode : sbyte
@@ -103,111 +103,111 @@ public class NeedleFxSceneDataClass
         FIXED_RESOLUTION = 2
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 40)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct FxDynamicResolutionParameter
     {
-        [FieldOffset(0)]  public Mode mode;
-        [FieldOffset(4)]  public float fixedResolutionRatio;
-        [FieldOffset(8)]  public float minResolutionRatio;
-        [FieldOffset(12)] public float minTargetTimeDifference;
-        [FieldOffset(16)] public float maxTargetTimeDifference;
-        [FieldOffset(20)] public float increaseRate;
-        [FieldOffset(24)] public float decreaseRate;
-        [FieldOffset(28)] public float increaseMaxScaleDelta;
-        [FieldOffset(32)] public float decreaseMaxScaleDelta;
-        [FieldOffset(36)] public bool debugSineFluctuation;
+        [FieldOffset(0x00)] public Mode mode;
+        [FieldOffset(0x04)] public float fixedResolutionRatio;
+        [FieldOffset(0x08)] public float minResolutionRatio;
+        [FieldOffset(0x0C)] public float minTargetTimeDifference;
+        [FieldOffset(0x10)] public float maxTargetTimeDifference;
+        [FieldOffset(0x14)] public float increaseRate;
+        [FieldOffset(0x18)] public float decreaseRate;
+        [FieldOffset(0x1C)] public float increaseMaxScaleDelta;
+        [FieldOffset(0x20)] public float decreaseMaxScaleDelta;
+        [FieldOffset(0x24)] public bool debugSineFluctuation;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 2)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x02)]
     public struct HourMinuteData
     {
-        [FieldOffset(0)] public byte hour;
-        [FieldOffset(1)] public byte minute;
+        [FieldOffset(0x00)] public byte hour;
+        [FieldOffset(0x01)] public byte minute;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct TimeIntervalData
     {
-        [FieldOffset(0)] public HourMinuteData beginTime;
-        [FieldOffset(2)] public HourMinuteData endTime;
+        [FieldOffset(0x00)] public HourMinuteData beginTime;
+        [FieldOffset(0x02)] public HourMinuteData endTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct ProgressTimePairData
     {
         [FieldOffset(0)] public TimeIntervalData timeIntervalData;
-        [FieldOffset(4)] public float hourlyTime;
+        [FieldOffset(0x04)] public float hourlyTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 104)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x68)]
     public struct StageCommonTimeProgressParameter
     {
-        [FieldOffset(0)]   public bool enable;
-        [FieldOffset(4)]   public float solarRadiusScale;
-        [FieldOffset(8)]   public float azimuthAngle;
-        [FieldOffset(12)]  public float latitude;
-        [FieldOffset(16)]  public float longitude;
-        [FieldOffset(20)]  public int month;
-        [FieldOffset(24)]  public int day;
-        [FieldOffset(28)]  public float time;
-        [FieldOffset(32)]  public float hourlyTime;
-        [FieldOffset(36)]  public ProgressTimePairData overrideSpeeds__arr0;
-        [FieldOffset(44)] public ProgressTimePairData overrideSpeeds__arr1;
-        [FieldOffset(52)] public ProgressTimePairData overrideSpeeds__arr2;
-        [FieldOffset(60)] public ProgressTimePairData overrideSpeeds__arr3;
-        [FieldOffset(68)] public ProgressTimePairData overrideSpeeds__arr4;
-        [FieldOffset(76)] public ProgressTimePairData overrideSpeeds__arr5;
-        [FieldOffset(84)] public ProgressTimePairData overrideSpeeds__arr6;
-        [FieldOffset(92)] public ProgressTimePairData overrideSpeeds__arr7;
-        [FieldOffset(100)] public TimeIntervalData night;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public float solarRadiusScale;
+        [FieldOffset(0x08)] public float azimuthAngle;
+        [FieldOffset(0x0C)] public float latitude;
+        [FieldOffset(0x10)] public float longitude;
+        [FieldOffset(0x14)] public int month;
+        [FieldOffset(0x18)] public int day;
+        [FieldOffset(0x1C)] public float time;
+        [FieldOffset(0x20)] public float hourlyTime;
+        [FieldOffset(0x24)] public ProgressTimePairData overrideSpeeds__arr0;
+        [FieldOffset(0x2C)] public ProgressTimePairData overrideSpeeds__arr1;
+        [FieldOffset(0x34)] public ProgressTimePairData overrideSpeeds__arr2;
+        [FieldOffset(0x3C)] public ProgressTimePairData overrideSpeeds__arr3;
+        [FieldOffset(0x44)] public ProgressTimePairData overrideSpeeds__arr4;
+        [FieldOffset(0x4C)] public ProgressTimePairData overrideSpeeds__arr5;
+        [FieldOffset(0x54)] public ProgressTimePairData overrideSpeeds__arr6;
+        [FieldOffset(0x5C)] public ProgressTimePairData overrideSpeeds__arr7;
+        [FieldOffset(0x64)] public TimeIntervalData night;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 1)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x01)]
     public struct StageCommonWeatherProgressParameter
     {
-        [FieldOffset(0)] public bool enable;
+        [FieldOffset(0x00)] public bool enable;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 1)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x01)]
     public struct FxTerrainParameter
     {
-        [FieldOffset(0)] public bool enableDrawGrid;
+        [FieldOffset(0x00)] public bool enableDrawGrid;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 2)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x02)]
     public struct FxModelParameter
     {
-        [FieldOffset(0)] public bool zprepass;
-        [FieldOffset(1)] public bool ditherAsBlueNoize;
+        [FieldOffset(0x00)] public bool zprepass;
+        [FieldOffset(0x01)] public bool ditherAsBlueNoize;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct StageCommonDecalModelParameter
     {
-        [FieldOffset(0)] public float cullingRange;
+        [FieldOffset(0x00)] public float cullingRange;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct PerformanceSetting
     {
-        [FieldOffset(0)] public float smallCullingThreshold;
+        [FieldOffset(0x00)] public float smallCullingThreshold;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 320)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x140)]
     public struct NeedleFxSceneConfig
     {
-        [FieldOffset(0)]   public FxRenderTargetSetting rendertarget;
-        [FieldOffset(12)]  public FxAntiAliasing antialiasing;
-        [FieldOffset(20)]  public StageCommonAtmosphereParameter atmosphere;
-        [FieldOffset(24)]  public FxLODParameter lod;
-        [FieldOffset(156)] public FxDetailParameter detail;
-        [FieldOffset(164)] public FxDynamicResolutionParameter dynamicResolution;
-        [FieldOffset(204)] public StageCommonTimeProgressParameter timeProgress;
-        [FieldOffset(308)] public StageCommonWeatherProgressParameter weatherProgress;
-        [FieldOffset(309)] public FxTerrainParameter terrain;
-        [FieldOffset(310)] public FxModelParameter modelParam;
-        [FieldOffset(312)] public StageCommonDecalModelParameter decalModelParam;
-        [FieldOffset(316)] public PerformanceSetting performance;
+        [FieldOffset(0x00)] public FxRenderTargetSetting rendertarget;
+        [FieldOffset(0x0C)] public FxAntiAliasing antialiasing;
+        [FieldOffset(0x14)] public StageCommonAtmosphereParameter atmosphere;
+        [FieldOffset(0x18)] public FxLODParameter lod;
+        [FieldOffset(0x9C)] public FxDetailParameter detail;
+        [FieldOffset(0xA4)] public FxDynamicResolutionParameter dynamicResolution;
+        [FieldOffset(0xCC)] public StageCommonTimeProgressParameter timeProgress;
+        [FieldOffset(0x134)] public StageCommonWeatherProgressParameter weatherProgress;
+        [FieldOffset(0x135)] public FxTerrainParameter terrain;
+        [FieldOffset(0x136)] public FxModelParameter modelParam;
+        [FieldOffset(0x138)] public StageCommonDecalModelParameter decalModelParam;
+        [FieldOffset(0x13C)] public PerformanceSetting performance;
     }
 
     public enum DebugViewType : sbyte
@@ -262,18 +262,18 @@ public class NeedleFxSceneDataClass
         SHADOW_AND_DISTANT_LIGHT = 2
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct GlobalLightAngleLimit
     {
-        [FieldOffset(0)] public Type type;
-        [FieldOffset(4)] public float minLightElevationAngle;
+        [FieldOffset(0x00)] public Type type;
+        [FieldOffset(0x04)] public float minLightElevationAngle;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct GlobalLightParameter
     {
-        [FieldOffset(0)] public bool enable;
-        [FieldOffset(4)] public GlobalLightAngleLimit limit;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public GlobalLightAngleLimit limit;
     }
 
     public enum LocalLightCullingType : sbyte
@@ -364,19 +364,19 @@ public class NeedleFxSceneDataClass
         VECTOR2D_TYPE2 = 6
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 24)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct DebugScreenOption
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(1)]  public bool fullScreen;
-        [FieldOffset(2)]  public ChannelMode channelMode;
-        [FieldOffset(4)]  public float min;
-        [FieldOffset(8)]  public float max;
-        [FieldOffset(12)] public int renderTargetType;
-        [FieldOffset(16)] public int depthTargetType;
-        [FieldOffset(20)] public DebugScreenType screenType;
-        [FieldOffset(21)] public ErrorCheckType errorCheck;
-        [FieldOffset(22)] public VisualizeMode visualizeMode;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x01)] public bool fullScreen;
+        [FieldOffset(0x02)] public ChannelMode channelMode;
+        [FieldOffset(0x04)] public float min;
+        [FieldOffset(0x08)] public float max;
+        [FieldOffset(0x0C)] public int renderTargetType;
+        [FieldOffset(0x10)] public int depthTargetType;
+        [FieldOffset(0x14)] public DebugScreenType screenType;
+        [FieldOffset(0x15)] public ErrorCheckType errorCheck;
+        [FieldOffset(0x16)] public VisualizeMode visualizeMode;
     }
 
     public enum DebugScreenView : sbyte
@@ -386,130 +386,130 @@ public class NeedleFxSceneDataClass
         DEBUG_SCREEN_VIEW_ALL_DISABLE = 2
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct GlobalUserParamOption
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(16)] public Vector4 value;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x10)] public Vector4 value;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 592)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x250)]
     public struct FxRenderOption
     {
-        [FieldOffset(0)]   public DebugViewType debugViewType;
-        [FieldOffset(1)]   public bool clearRenderTarget;
-        [FieldOffset(2)]   public bool enableDrawCubeProbe;
-        [FieldOffset(4)]   public GlobalLightParameter globalLight;
-        [FieldOffset(16)]  public bool enablePointLight;
-        [FieldOffset(17)]  public bool enableEffectDeformation;
-        [FieldOffset(18)]  public bool enablePreMergeIBL;
-        [FieldOffset(19)]  public bool enableLitePostEffect;
-        [FieldOffset(20)]  public LocalLightCullingType localLightCullingType;
-        [FieldOffset(24)]  public float localLightScale;
-        [FieldOffset(28)]  public float shadowIBLAttenuation;
-        [FieldOffset(32)]  public int maxCubeProbe;
-        [FieldOffset(36)]  public bool debugEnableDrawLocalLight;
-        [FieldOffset(37)]  public TextureViewType debugTextureViewType;
-        [FieldOffset(38)]  public bool debugEnableOutputTextureView;
-        [FieldOffset(40)]  public int debugScreenshotResolutionHeight;
-        [FieldOffset(44)]  public float debugScreenshotDepthNear;
-        [FieldOffset(48)]  public float debugScreenshotDepthFar;
-        [FieldOffset(52)]  public AmbientSpecularType debugAmbientSpecularType;
-        [FieldOffset(53)]  public bool debugEnableSGGIVer2nd;
-        [FieldOffset(54)]  public bool debugEnableAOGI;
-        [FieldOffset(56)]  public DebugScreenOption debugScreen__arr0;
-        [FieldOffset(80)] public DebugScreenOption debugScreen__arr1;
-        [FieldOffset(104)] public DebugScreenOption debugScreen__arr2;
-        [FieldOffset(128)] public DebugScreenOption debugScreen__arr3;
-        [FieldOffset(152)] public DebugScreenOption debugScreen__arr4;
-        [FieldOffset(176)] public DebugScreenOption debugScreen__arr5;
-        [FieldOffset(200)] public DebugScreenOption debugScreen__arr6;
-        [FieldOffset(224)] public DebugScreenOption debugScreen__arr7;
-        [FieldOffset(248)] public DebugScreenOption debugScreen__arr8;
-        [FieldOffset(272)] public DebugScreenOption debugScreen__arr9;
-        [FieldOffset(296)] public DebugScreenOption debugScreen__arr10;
-        [FieldOffset(320)] public DebugScreenOption debugScreen__arr11;
-        [FieldOffset(344)] public DebugScreenOption debugScreen__arr12;
-        [FieldOffset(368)] public DebugScreenOption debugScreen__arr13;
-        [FieldOffset(392)] public DebugScreenOption debugScreen__arr14;
-        [FieldOffset(416)] public DebugScreenOption debugScreen__arr15;
-        [FieldOffset(440)] public DebugScreenView debugScreenView;
-        [FieldOffset(441)] public bool enableMSAA;
-        [FieldOffset(442)] public bool debugEnableDrawFrustumCullFrustum;
-        [FieldOffset(443)] public bool debugEnableFixFrustumCullFrustum;
-        [FieldOffset(444)] public int debugDrawFrustumCullGroupSettingIndex;
-        [FieldOffset(448)] public bool debugEnableOcclusionCullingView;
-        [FieldOffset(452)] public int debugOccluderVertThreshold;
-        [FieldOffset(464)] public GlobalUserParamOption globalUserParam__arr0;
-        [FieldOffset(496)] public GlobalUserParamOption globalUserParam__arr1;
-        [FieldOffset(528)] public GlobalUserParamOption globalUserParam__arr2;
-        [FieldOffset(560)] public GlobalUserParamOption globalUserParam__arr3;
+        [FieldOffset(0x00)] public DebugViewType debugViewType;
+        [FieldOffset(0x01)] public bool clearRenderTarget;
+        [FieldOffset(0x02)] public bool enableDrawCubeProbe;
+        [FieldOffset(0x04)] public GlobalLightParameter globalLight;
+        [FieldOffset(0x10)] public bool enablePointLight;
+        [FieldOffset(0x11)] public bool enableEffectDeformation;
+        [FieldOffset(0x12)] public bool enablePreMergeIBL;
+        [FieldOffset(0x13)] public bool enableLitePostEffect;
+        [FieldOffset(0x14)] public LocalLightCullingType localLightCullingType;
+        [FieldOffset(0x18)] public float localLightScale;
+        [FieldOffset(0x1C)] public float shadowIBLAttenuation;
+        [FieldOffset(0x20)] public int maxCubeProbe;
+        [FieldOffset(0x24)] public bool debugEnableDrawLocalLight;
+        [FieldOffset(0x25)] public TextureViewType debugTextureViewType;
+        [FieldOffset(0x26)] public bool debugEnableOutputTextureView;
+        [FieldOffset(0x28)] public int debugScreenshotResolutionHeight;
+        [FieldOffset(0x2C)] public float debugScreenshotDepthNear;
+        [FieldOffset(0x30)] public float debugScreenshotDepthFar;
+        [FieldOffset(0x34)] public AmbientSpecularType debugAmbientSpecularType;
+        [FieldOffset(0x35)] public bool debugEnableSGGIVer2nd;
+        [FieldOffset(0x36)] public bool debugEnableAOGI;
+        [FieldOffset(0x38)] public DebugScreenOption debugScreen__arr0;
+        [FieldOffset(0x50)] public DebugScreenOption debugScreen__arr1;
+        [FieldOffset(0x68)] public DebugScreenOption debugScreen__arr2;
+        [FieldOffset(0x80)] public DebugScreenOption debugScreen__arr3;
+        [FieldOffset(0x98)] public DebugScreenOption debugScreen__arr4;
+        [FieldOffset(0xB0)] public DebugScreenOption debugScreen__arr5;
+        [FieldOffset(0xC8)] public DebugScreenOption debugScreen__arr6;
+        [FieldOffset(0xE0)] public DebugScreenOption debugScreen__arr7;
+        [FieldOffset(0xF8)] public DebugScreenOption debugScreen__arr8;
+        [FieldOffset(0x110)] public DebugScreenOption debugScreen__arr9;
+        [FieldOffset(0x128)] public DebugScreenOption debugScreen__arr10;
+        [FieldOffset(0x140)] public DebugScreenOption debugScreen__arr11;
+        [FieldOffset(0x158)] public DebugScreenOption debugScreen__arr12;
+        [FieldOffset(0x170)] public DebugScreenOption debugScreen__arr13;
+        [FieldOffset(0x188)] public DebugScreenOption debugScreen__arr14;
+        [FieldOffset(0x1A0)] public DebugScreenOption debugScreen__arr15;
+        [FieldOffset(0x1B8)] public DebugScreenView debugScreenView;
+        [FieldOffset(0x1B9)] public bool enableMSAA;
+        [FieldOffset(0x1BA)] public bool debugEnableDrawFrustumCullFrustum;
+        [FieldOffset(0x1BB)] public bool debugEnableFixFrustumCullFrustum;
+        [FieldOffset(0x1BC)] public int debugDrawFrustumCullGroupSettingIndex;
+        [FieldOffset(0x1C0)] public bool debugEnableOcclusionCullingView;
+        [FieldOffset(0x1C4)] public int debugOccluderVertThreshold;
+        [FieldOffset(0x1D0)] public GlobalUserParamOption globalUserParam__arr0;
+        [FieldOffset(0x1F0)] public GlobalUserParamOption globalUserParam__arr1;
+        [FieldOffset(0x210)] public GlobalUserParamOption globalUserParam__arr2;
+        [FieldOffset(0x230)] public GlobalUserParamOption globalUserParam__arr3;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 24)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct FxSGGIParameter
     {
-        [FieldOffset(0)]  public float sgStartSmoothness;
-        [FieldOffset(4)]  public float sgEndSmoothness;
-        [FieldOffset(8)]  public float doStartSmoothness;
-        [FieldOffset(12)] public float doEndSmoothness;
-        [FieldOffset(16)] public float doOffset;
-        [FieldOffset(20)] public float aoOffset;
+        [FieldOffset(0x00)] public float sgStartSmoothness;
+        [FieldOffset(0x04)] public float sgEndSmoothness;
+        [FieldOffset(0x08)] public float doStartSmoothness;
+        [FieldOffset(0x0C)] public float doEndSmoothness;
+        [FieldOffset(0x10)] public float doOffset;
+        [FieldOffset(0x14)] public float aoOffset;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 40)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct FxRLRParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(1)]  public bool traceSky;
-        [FieldOffset(2)]  public bool useTrans;
-        [FieldOffset(3)]  public bool usePenet;
-        [FieldOffset(4)]  public bool useQuat;
-        [FieldOffset(5)]  public bool useNormal;
-        [FieldOffset(8)]  public float rayMarchingCount;
-        [FieldOffset(12)] public float planeNormalDist;
-        [FieldOffset(16)] public float traceThreshold;
-        [FieldOffset(20)] public float resolveReproj;
-        [FieldOffset(24)] public float overrideRatio;
-        [FieldOffset(28)] public float maxRoughness;
-        [FieldOffset(32)] public float roughnessLevel;
-        [FieldOffset(36)] public float uvOffsetScale;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x01)] public bool traceSky;
+        [FieldOffset(0x02)] public bool useTrans;
+        [FieldOffset(0x03)] public bool usePenet;
+        [FieldOffset(0x04)] public bool useQuat;
+        [FieldOffset(0x05)] public bool useNormal;
+        [FieldOffset(0x08)] public float rayMarchingCount;
+        [FieldOffset(0x0C)] public float planeNormalDist;
+        [FieldOffset(0x10)] public float traceThreshold;
+        [FieldOffset(0x14)] public float resolveReproj;
+        [FieldOffset(0x18)] public float overrideRatio;
+        [FieldOffset(0x1C)] public float maxRoughness;
+        [FieldOffset(0x20)] public float roughnessLevel;
+        [FieldOffset(0x24)] public float uvOffsetScale;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct FxSSGIDebugParameter
     {
-        [FieldOffset(0)] public bool useDenoise;
-        [FieldOffset(4)] public float rayLength;
+        [FieldOffset(0x00)] public bool useDenoise;
+        [FieldOffset(0x04)] public float rayLength;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 20)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
     public struct FxSSGIParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(4)]  public float intensity;
-        [FieldOffset(8)]  public bool useAlbedo;
-        [FieldOffset(9)]  public bool useParameter;
-        [FieldOffset(12)] public FxSSGIDebugParameter debugParam;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public float intensity;
+        [FieldOffset(0x08)] public bool useAlbedo;
+        [FieldOffset(0x09)] public bool useParameter;
+        [FieldOffset(0x0C)] public FxSSGIDebugParameter debugParam;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 48)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct FxPlanarReflectionParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(16)] public Vector4 plane;
-        [FieldOffset(32)] public uint width;
-        [FieldOffset(36)] public uint height;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x10)] public Vector4 plane;
+        [FieldOffset(0x20)] public uint width;
+        [FieldOffset(0x24)] public uint height;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct FxBloomParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(1)]  public bool fast;
-        [FieldOffset(4)]  public float bloomScale;
-        [FieldOffset(8)]  public float sampleRadiusScale;
-        [FieldOffset(12)] public int blurQuality;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x01)] public bool fast;
+        [FieldOffset(0x04)] public float bloomScale;
+        [FieldOffset(0x08)] public float sampleRadiusScale;
+        [FieldOffset(0x0C)] public int blurQuality;
     }
 
     public enum Exposure : sbyte
@@ -518,10 +518,10 @@ public class NeedleFxSceneDataClass
         EXPOSURE_AUTO = 1
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct FxManualExposureParameter
     {
-        [FieldOffset(0)] public float exposureValue;
+        [FieldOffset(0x00)] public float exposureValue;
     }
 
     public enum LUMINANCE_RANGE : sbyte
@@ -532,26 +532,26 @@ public class NeedleFxSceneDataClass
         LUMINANCE_RANGE_CUTOFF_PCT_AREA = 3
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 36)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x24)]
     public struct FxAutoExposureParameter
     {
-        [FieldOffset(0)]  public float middleGray;
-        [FieldOffset(4)]  public float lumMax;
-        [FieldOffset(8)]  public float lumMin;
-        [FieldOffset(12)] public float cutMax;
-        [FieldOffset(16)] public float cutMin;
-        [FieldOffset(20)] public float pctMax;
-        [FieldOffset(24)] public float pctMin;
-        [FieldOffset(28)] public float adaptedRatio;
-        [FieldOffset(32)] public LUMINANCE_RANGE luminanceRangeType;
+        [FieldOffset(0x00)] public float middleGray;
+        [FieldOffset(0x04)] public float lumMax;
+        [FieldOffset(0x08)] public float lumMin;
+        [FieldOffset(0x0C)] public float cutMax;
+        [FieldOffset(0x10)] public float cutMin;
+        [FieldOffset(0x14)] public float pctMax;
+        [FieldOffset(0x18)] public float pctMin;
+        [FieldOffset(0x1C)] public float adaptedRatio;
+        [FieldOffset(0x20)] public LUMINANCE_RANGE luminanceRangeType;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 44)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x2C)]
     public struct FxCameraControlParameter
     {
-        [FieldOffset(0)] public Exposure exposureType;
-        [FieldOffset(4)] public FxManualExposureParameter manualExposure;
-        [FieldOffset(8)] public FxAutoExposureParameter autoExposure;
+        [FieldOffset(0x00)] public Exposure exposureType;
+        [FieldOffset(0x04)] public FxManualExposureParameter manualExposure;
+        [FieldOffset(0x08)] public FxAutoExposureParameter autoExposure;
     }
 
     public enum Tonemap : sbyte
@@ -562,33 +562,33 @@ public class NeedleFxSceneDataClass
         TONEMAP_GT = 3
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 20)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
     public struct FxToneMapParameterFilmic
     {
-        [FieldOffset(0)]  public float whitePoint;
-        [FieldOffset(4)]  public float toeStrength;
-        [FieldOffset(8)]  public float linearAngle;
-        [FieldOffset(12)] public float linearStrength;
-        [FieldOffset(16)] public float shoulderStrength;
+        [FieldOffset(0x00)] public float whitePoint;
+        [FieldOffset(0x04)] public float toeStrength;
+        [FieldOffset(0x08)] public float linearAngle;
+        [FieldOffset(0x0C)] public float linearStrength;
+        [FieldOffset(0x10)] public float shoulderStrength;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 20)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
     public struct FxToneMapParameterGT
     {
-        [FieldOffset(0)]  public float maxDisplayBrightness;
-        [FieldOffset(4)]  public float contrast;
-        [FieldOffset(8)]  public float linearSectionStart;
-        [FieldOffset(12)] public float linearSectionLength;
-        [FieldOffset(16)] public float black;
+        [FieldOffset(0x00)] public float maxDisplayBrightness;
+        [FieldOffset(0x04)] public float contrast;
+        [FieldOffset(0x08)] public float linearSectionStart;
+        [FieldOffset(0x0C)] public float linearSectionLength;
+        [FieldOffset(0x10)] public float black;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 48)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct FxToneMapParameter
     {
-        [FieldOffset(0)]  public Tonemap tonemapType;
-        [FieldOffset(4)]  public FxToneMapParameterFilmic tonemapParamFilmic;
-        [FieldOffset(24)] public FxToneMapParameterGT tonemapParamGT;
-        [FieldOffset(44)] public bool updateLuminance;
+        [FieldOffset(0x00)] public Tonemap tonemapType;
+        [FieldOffset(0x04)] public FxToneMapParameterFilmic tonemapParamFilmic;
+        [FieldOffset(0x18)] public FxToneMapParameterGT tonemapParamGT;
+        [FieldOffset(0x2C)] public bool updateLuminance;
     }
 
     public enum LutIndex : int
@@ -604,42 +604,42 @@ public class NeedleFxSceneDataClass
         LUT_INDEX_COUNT = 8
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 76)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x4C)]
     public struct FxColorContrastParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(4)]  public float contrast;
-        [FieldOffset(8)]  public float dynamicRange;
-        [FieldOffset(12)] public float crushShadows;
-        [FieldOffset(16)] public float crushHilights;
-        [FieldOffset(20)] public bool useLut;
-        [FieldOffset(24)] public LutIndex lutIndex0;
-        [FieldOffset(28)] public LutIndex lutIndex1;
-        [FieldOffset(32)] public float blendRatio;
-        [FieldOffset(36)] public float lutRatio;
-        [FieldOffset(40)] public bool useHlsCorrection;
-        [FieldOffset(44)] public float hlsHueOffset;
-        [FieldOffset(48)] public float hlsLightnessOffset;
-        [FieldOffset(52)] public float hlsSaturationOffset;
-        [FieldOffset(56)] public int hlsColorOffset__arr0;
-        [FieldOffset(60)] public int hlsColorOffset__arr1;
-        [FieldOffset(64)] public int hlsColorOffset__arr2;
-        [FieldOffset(68)] public float hlsColorizeRate;
-        [FieldOffset(72)] public float hlsColorizeHue;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public float contrast;
+        [FieldOffset(0x08)] public float dynamicRange;
+        [FieldOffset(0x0C)] public float crushShadows;
+        [FieldOffset(0x10)] public float crushHilights;
+        [FieldOffset(0x14)] public bool useLut;
+        [FieldOffset(0x18)] public LutIndex lutIndex0;
+        [FieldOffset(0x1C)] public LutIndex lutIndex1;
+        [FieldOffset(0x20)] public float blendRatio;
+        [FieldOffset(0x24)] public float lutRatio;
+        [FieldOffset(0x28)] public bool useHlsCorrection;
+        [FieldOffset(0x2C)] public float hlsHueOffset;
+        [FieldOffset(0x30)] public float hlsLightnessOffset;
+        [FieldOffset(0x34)] public float hlsSaturationOffset;
+        [FieldOffset(0x38)] public int hlsColorOffset__arr0;
+        [FieldOffset(0x3C)] public int hlsColorOffset__arr1;
+        [FieldOffset(0x40)] public int hlsColorOffset__arr2;
+        [FieldOffset(0x44)] public float hlsColorizeRate;
+        [FieldOffset(0x48)] public float hlsColorizeHue;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 96)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x60)]
     public struct FxLightScatteringParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(16)] public Vector3 color;
-        [FieldOffset(32)] public float inScatteringScale;
-        [FieldOffset(48)] public Vector3 betaRayleigh;
-        [FieldOffset(64)] public float betaMie;
-        [FieldOffset(68)] public float g;
-        [FieldOffset(72)] public float znear;
-        [FieldOffset(76)] public float zfar;
-        [FieldOffset(80)] public float depthScale;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x10)] public Vector3 color;
+        [FieldOffset(0x20)] public float inScatteringScale;
+        [FieldOffset(0x30)] public Vector3 betaRayleigh;
+        [FieldOffset(0x40)] public float betaMie;
+        [FieldOffset(0x44)] public float g;
+        [FieldOffset(0x48)] public float znear;
+        [FieldOffset(0x4C)] public float zfar;
+        [FieldOffset(0x50)] public float depthScale;
     }
 
     public enum RenderTargetSize : int
@@ -651,31 +651,31 @@ public class NeedleFxSceneDataClass
         RTSIZE_INVALID = 3
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 84)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x54)]
     public struct FxDOFParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(1)]  public bool useFocusLookAt;
-        [FieldOffset(4)]  public float foregroundBokehMaxDepth;
-        [FieldOffset(8)]  public float foregroundBokehStartDepth;
-        [FieldOffset(12)] public float backgroundBokehStartDepth;
-        [FieldOffset(16)] public float backgroundBokehMaxDepth;
-        [FieldOffset(20)] public bool enableCircleDOF;
-        [FieldOffset(24)] public float cocMaxRadius;
-        [FieldOffset(28)] public float bokehRadiusScale;
-        [FieldOffset(32)] public int bokehSampleCount;
-        [FieldOffset(36)] public float skyFocusDistance;
-        [FieldOffset(40)] public float bokehBias;
-        [FieldOffset(44)] public bool drawFocalPlane;
-        [FieldOffset(48)] public RenderTargetSize rtScale;
-        [FieldOffset(52)] public bool enableSWA;
-        [FieldOffset(56)] public float swaFocus;
-        [FieldOffset(60)] public float swaFocusRange;
-        [FieldOffset(64)] public float swaNear;
-        [FieldOffset(68)] public float swaFar;
-        [FieldOffset(72)] public bool enableEnhancedForeBokeh;
-        [FieldOffset(76)] public float foreBokehScale;
-        [FieldOffset(80)] public float foreBokehMaxLuminance;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x01)] public bool useFocusLookAt;
+        [FieldOffset(0x04)] public float foregroundBokehMaxDepth;
+        [FieldOffset(0x08)] public float foregroundBokehStartDepth;
+        [FieldOffset(0x0C)] public float backgroundBokehStartDepth;
+        [FieldOffset(0x10)] public float backgroundBokehMaxDepth;
+        [FieldOffset(0x14)] public bool enableCircleDOF;
+        [FieldOffset(0x18)] public float cocMaxRadius;
+        [FieldOffset(0x1C)] public float bokehRadiusScale;
+        [FieldOffset(0x20)] public int bokehSampleCount;
+        [FieldOffset(0x24)] public float skyFocusDistance;
+        [FieldOffset(0x28)] public float bokehBias;
+        [FieldOffset(0x2C)] public bool drawFocalPlane;
+        [FieldOffset(0x30)] public RenderTargetSize rtScale;
+        [FieldOffset(0x34)] public bool enableSWA;
+        [FieldOffset(0x38)] public float swaFocus;
+        [FieldOffset(0x3C)] public float swaFocusRange;
+        [FieldOffset(0x40)] public float swaNear;
+        [FieldOffset(0x44)] public float swaFar;
+        [FieldOffset(0x48)] public bool enableEnhancedForeBokeh;
+        [FieldOffset(0x4C)] public float foreBokehScale;
+        [FieldOffset(0x50)] public float foreBokehMaxLuminance;
     }
 
     public enum ShadowRenderingType : sbyte
@@ -734,90 +734,90 @@ public class NeedleFxSceneDataClass
         PARTITION_MANUAL = 1
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 336)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x150)]
     public struct FxShadowMapParameter
     {
-        [FieldOffset(0)]   public ShadowRenderingType renderingType;
-        [FieldOffset(1)]   public bool enable;
-        [FieldOffset(2)]   public ShadowFilter shadowFilter;
-        [FieldOffset(3)]   public ShadowRangeType shadowRangeType;
-        [FieldOffset(4)]   public FitProjection fitProjection;
-        [FieldOffset(5)]   public FitNearFar fitNearFar;
-        [FieldOffset(6)]   public PartitionType partitionType;
-        [FieldOffset(8)]   public float sceneRange;
-        [FieldOffset(12)]  public float sceneCenter__arr0;
-        [FieldOffset(16)] public float sceneCenter__arr1;
-        [FieldOffset(20)] public float sceneCenter__arr2;
-        [FieldOffset(24)]  public float manualLightPos__arr0;
-        [FieldOffset(28)] public float manualLightPos__arr1;
-        [FieldOffset(32)] public float manualLightPos__arr2;
-        [FieldOffset(36)]  public float pssmLambda;
-        [FieldOffset(40)]  public float cascadeOffset;
-        [FieldOffset(44)]  public int cascadeLevel;
-        [FieldOffset(48)]  public float cascadeSplits__arr0;
-        [FieldOffset(52)] public float cascadeSplits__arr1;
-        [FieldOffset(56)] public float cascadeSplits__arr2;
-        [FieldOffset(60)] public float cascadeSplits__arr3;
-        [FieldOffset(64)]  public float cascadeBias__arr0;
-        [FieldOffset(68)] public float cascadeBias__arr1;
-        [FieldOffset(72)] public float cascadeBias__arr2;
-        [FieldOffset(76)] public float cascadeBias__arr3;
-        [FieldOffset(80)]  public float bias;
-        [FieldOffset(84)]  public float offset;
-        [FieldOffset(88)]  public float normalBias;
-        [FieldOffset(92)]  public int width;
-        [FieldOffset(96)]  public int height;
-        [FieldOffset(100)] public int blurQuality;
-        [FieldOffset(104)] public int blurSize;
-        [FieldOffset(108)] public float fadeoutDistance;
-        [FieldOffset(112)] public float cascadeTransitionfadeDistance;
-        [FieldOffset(116)] public bool enableCSMCache;
-        [FieldOffset(120)] public float csmCacheMaxHeight;
-        [FieldOffset(124)] public float csmCacheMinHeight;
-        [FieldOffset(128)] public int csmCacheMaxRenderPass;
-        [FieldOffset(132)] public float csmCacheFixedFovy;
-        [FieldOffset(136)] public float csmCacheLightDirectionThreshold;
-        [FieldOffset(140)] public bool csmCacheParallaxCorrectionEnabled;
-        [FieldOffset(144)] public float csmCacheParallaxCorrectionHorizontalBias;
-        [FieldOffset(148)] public float csmCacheParallaxCorrectionVerticalBias;
-        [FieldOffset(152)] public int csmCacheFramesToRender__arr0;
-        [FieldOffset(156)] public int csmCacheFramesToRender__arr1;
-        [FieldOffset(160)] public int csmCacheFramesToRender__arr2;
-        [FieldOffset(164)] public float csmCacheFadeLightElevationAngle;
-        [FieldOffset(168)] public float csmCacheMinLightElevationAngle;
-        [FieldOffset(176)] public Matrix4x4 shadowCameraViewMatrix;
-        [FieldOffset(240)] public Matrix4x4 shadowCameraProjectionMatrix;
-        [FieldOffset(304)] public float shadowCameraNearDepth;
-        [FieldOffset(308)] public float shadowCameraFarDepth;
-        [FieldOffset(312)] public float shadowCameraLookAtDepth;
-        [FieldOffset(316)] public bool enableBackFaceShadow;
-        [FieldOffset(317)] public bool enableShadowCamera;
-        [FieldOffset(318)] public bool enableDrawSceneAABB;
-        [FieldOffset(319)] public bool enableDrawShadowFrustum;
-        [FieldOffset(320)] public bool enableDrawCascade;
-        [FieldOffset(321)] public bool enableDrawCameraFrustum;
-        [FieldOffset(322)] public bool enableDrawCSMCache;
-        [FieldOffset(323)] public bool enableClearOnCSMCacheIsInvalidated;
-        [FieldOffset(324)] public bool enablePauseCamera;
+        [FieldOffset(0x00)] public ShadowRenderingType renderingType;
+        [FieldOffset(0x01)] public bool enable;
+        [FieldOffset(0x02)] public ShadowFilter shadowFilter;
+        [FieldOffset(0x03)] public ShadowRangeType shadowRangeType;
+        [FieldOffset(0x04)] public FitProjection fitProjection;
+        [FieldOffset(0x05)] public FitNearFar fitNearFar;
+        [FieldOffset(0x06)] public PartitionType partitionType;
+        [FieldOffset(0x08)] public float sceneRange;
+        [FieldOffset(0x0C)] public float sceneCenter__arr0;
+        [FieldOffset(0x10)] public float sceneCenter__arr1;
+        [FieldOffset(0x14)] public float sceneCenter__arr2;
+        [FieldOffset(0x18)] public float manualLightPos__arr0;
+        [FieldOffset(0x1C)] public float manualLightPos__arr1;
+        [FieldOffset(0x20)] public float manualLightPos__arr2;
+        [FieldOffset(0x24)] public float pssmLambda;
+        [FieldOffset(0x28)] public float cascadeOffset;
+        [FieldOffset(0x2C)] public int cascadeLevel;
+        [FieldOffset(0x30)] public float cascadeSplits__arr0;
+        [FieldOffset(0x34)] public float cascadeSplits__arr1;
+        [FieldOffset(0x38)] public float cascadeSplits__arr2;
+        [FieldOffset(0x3C)] public float cascadeSplits__arr3;
+        [FieldOffset(0x40)] public float cascadeBias__arr0;
+        [FieldOffset(0x44)] public float cascadeBias__arr1;
+        [FieldOffset(0x48)] public float cascadeBias__arr2;
+        [FieldOffset(0x4C)] public float cascadeBias__arr3;
+        [FieldOffset(0x50)] public float bias;
+        [FieldOffset(0x54)] public float offset;
+        [FieldOffset(0x58)] public float normalBias;
+        [FieldOffset(0x5C)] public int width;
+        [FieldOffset(0x60)] public int height;
+        [FieldOffset(0x64)] public int blurQuality;
+        [FieldOffset(0x68)] public int blurSize;
+        [FieldOffset(0x6C)] public float fadeoutDistance;
+        [FieldOffset(0x70)] public float cascadeTransitionfadeDistance;
+        [FieldOffset(0x74)] public bool enableCSMCache;
+        [FieldOffset(0x78)] public float csmCacheMaxHeight;
+        [FieldOffset(0x7C)] public float csmCacheMinHeight;
+        [FieldOffset(0x80)] public int csmCacheMaxRenderPass;
+        [FieldOffset(0x84)] public float csmCacheFixedFovy;
+        [FieldOffset(0x88)] public float csmCacheLightDirectionThreshold;
+        [FieldOffset(0x8C)] public bool csmCacheParallaxCorrectionEnabled;
+        [FieldOffset(0x90)] public float csmCacheParallaxCorrectionHorizontalBias;
+        [FieldOffset(0x94)] public float csmCacheParallaxCorrectionVerticalBias;
+        [FieldOffset(0x98)] public int csmCacheFramesToRender__arr0;
+        [FieldOffset(0x9C)] public int csmCacheFramesToRender__arr1;
+        [FieldOffset(0xA0)] public int csmCacheFramesToRender__arr2;
+        [FieldOffset(0xA4)] public float csmCacheFadeLightElevationAngle;
+        [FieldOffset(0xA8)] public float csmCacheMinLightElevationAngle;
+        [FieldOffset(0xB0)] public Matrix4x4 shadowCameraViewMatrix;
+        [FieldOffset(0xF0)] public Matrix4x4 shadowCameraProjectionMatrix;
+        [FieldOffset(0x130)] public float shadowCameraNearDepth;
+        [FieldOffset(0x134)] public float shadowCameraFarDepth;
+        [FieldOffset(0x138)] public float shadowCameraLookAtDepth;
+        [FieldOffset(0x13C)] public bool enableBackFaceShadow;
+        [FieldOffset(0x13D)] public bool enableShadowCamera;
+        [FieldOffset(0x13E)] public bool enableDrawSceneAABB;
+        [FieldOffset(0x13F)] public bool enableDrawShadowFrustum;
+        [FieldOffset(0x140)] public bool enableDrawCascade;
+        [FieldOffset(0x141)] public bool enableDrawCameraFrustum;
+        [FieldOffset(0x142)] public bool enableDrawCSMCache;
+        [FieldOffset(0x143)] public bool enableClearOnCSMCacheIsInvalidated;
+        [FieldOffset(0x144)] public bool enablePauseCamera;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 20)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
     public struct FxShadowHeightMapParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(4)]  public float bias;
-        [FieldOffset(8)]  public float distanceFalloff;
-        [FieldOffset(12)] public float heightFalloffMinHeight;
-        [FieldOffset(16)] public float heightFalloffDistance;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public float bias;
+        [FieldOffset(0x08)] public float distanceFalloff;
+        [FieldOffset(0x0C)] public float heightFalloffMinHeight;
+        [FieldOffset(0x10)] public float heightFalloffDistance;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct FxVolumetricShadowParameter
     {
-        [FieldOffset(0)] public bool enable;
-        [FieldOffset(1)] public bool isForceUseShadowmap;
-        [FieldOffset(2)] public bool isUseCloudShadow;
-        [FieldOffset(3)] public bool isUseHeightmapShadow;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x01)] public bool isForceUseShadowmap;
+        [FieldOffset(0x02)] public bool isUseCloudShadow;
+        [FieldOffset(0x03)] public bool isUseHeightmapShadow;
     }
 
     public enum SSAOType : sbyte
@@ -852,59 +852,59 @@ public class NeedleFxSceneDataClass
         BLUR_COUNT = 11
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct FxSSAO_Parameter
     {
-        [FieldOffset(0)]  public float intensity;
-        [FieldOffset(4)]  public float radius;
-        [FieldOffset(8)]  public float fadeoutDistance;
-        [FieldOffset(12)] public float fadeoutRadius;
-        [FieldOffset(16)] public float power;
-        [FieldOffset(20)] public float bias;
-        [FieldOffset(24)] public float occlusionDistance;
-        [FieldOffset(28)] public float directLightingInfluence;
+        [FieldOffset(0x00)] public float intensity;
+        [FieldOffset(0x04)] public float radius;
+        [FieldOffset(0x08)] public float fadeoutDistance;
+        [FieldOffset(0x0C)] public float fadeoutRadius;
+        [FieldOffset(0x10)] public float power;
+        [FieldOffset(0x14)] public float bias;
+        [FieldOffset(0x18)] public float occlusionDistance;
+        [FieldOffset(0x1C)] public float directLightingInfluence;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 28)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct FxHBAO_Parameter
     {
-        [FieldOffset(0)]  public float hbaoPower;
-        [FieldOffset(4)]  public float hbaoBias;
-        [FieldOffset(8)]  public float hbaoRadius;
-        [FieldOffset(12)] public float hbaoFalloff;
-        [FieldOffset(16)] public float hbaoSteps;
-        [FieldOffset(20)] public float hbaoGitter;
-        [FieldOffset(24)] public sbyte hbaoRaycount;
-        [FieldOffset(25)] public bool hbaoGiMaskEnable;
+        [FieldOffset(0x00)] public float hbaoPower;
+        [FieldOffset(0x04)] public float hbaoBias;
+        [FieldOffset(0x08)] public float hbaoRadius;
+        [FieldOffset(0x0C)] public float hbaoFalloff;
+        [FieldOffset(0x10)] public float hbaoSteps;
+        [FieldOffset(0x14)] public float hbaoGitter;
+        [FieldOffset(0x18)] public sbyte hbaoRaycount;
+        [FieldOffset(0x19)] public bool hbaoGiMaskEnable;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 44)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x2C)]
     public struct FxSSS_Parameter
     {
-        [FieldOffset(0)]  public float sssRayLength;
-        [FieldOffset(4)]  public sbyte sssRaycount;
-        [FieldOffset(8)]  public float sssBias;
-        [FieldOffset(12)] public float sssIntensity;
-        [FieldOffset(16)] public float sssDepthMin;
-        [FieldOffset(20)] public float sssDepthMax;
-        [FieldOffset(24)] public float sssLightDistance;
-        [FieldOffset(28)] public float sssThickness;
-        [FieldOffset(32)] public bool sssGiMaskEnable;
-        [FieldOffset(36)] public float sssLimit;
-        [FieldOffset(40)] public bool sssDitherEnable;
+        [FieldOffset(0x00)] public float sssRayLength;
+        [FieldOffset(0x04)] public sbyte sssRaycount;
+        [FieldOffset(0x08)] public float sssBias;
+        [FieldOffset(0x0C)] public float sssIntensity;
+        [FieldOffset(0x10)] public float sssDepthMin;
+        [FieldOffset(0x14)] public float sssDepthMax;
+        [FieldOffset(0x18)] public float sssLightDistance;
+        [FieldOffset(0x1C)] public float sssThickness;
+        [FieldOffset(0x20)] public bool sssGiMaskEnable;
+        [FieldOffset(0x24)] public float sssLimit;
+        [FieldOffset(0x28)] public bool sssDitherEnable;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 112)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public struct FxSSAOParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(1)]  public SSAOType postType;
-        [FieldOffset(2)]  public FxSSAOParameter_RenderTargetSize renderTargetSize;
-        [FieldOffset(3)]  public BLURType blurStep;
-        [FieldOffset(4)]  public float bilateralThreshold;
-        [FieldOffset(8)]  public FxSSAO_Parameter ssaoParam;
-        [FieldOffset(40)] public FxHBAO_Parameter hbaoParam;
-        [FieldOffset(68)] public FxSSS_Parameter sssParam;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x01)] public SSAOType postType;
+        [FieldOffset(0x02)] public FxSSAOParameter_RenderTargetSize renderTargetSize;
+        [FieldOffset(0x03)] public BLURType blurStep;
+        [FieldOffset(0x04)] public float bilateralThreshold;
+        [FieldOffset(0x08)] public FxSSAO_Parameter ssaoParam;
+        [FieldOffset(0x28)] public FxHBAO_Parameter hbaoParam;
+        [FieldOffset(0x44)] public FxSSS_Parameter sssParam;
     }
 
     public enum DebugDrawType : sbyte
@@ -914,24 +914,24 @@ public class NeedleFxSceneDataClass
         DEBUG_DRAW_ALL = 2
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct FxLightFieldMergeParameter
     {
-        [FieldOffset(0)] public bool enable;
-        [FieldOffset(4)] public float blendRatio;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public float blendRatio;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 64)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public struct FxSHLightFieldParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(1)]  public DebugDrawType debugDrawType;
-        [FieldOffset(2)]  public bool showSkyVisibility;
-        [FieldOffset(4)]  public float debugProbeSize;
-        [FieldOffset(16)] public Vector3 multiplyColorUp;
-        [FieldOffset(32)] public Vector3 multiplyColorDown;
-        [FieldOffset(48)] public float normalBias;
-        [FieldOffset(52)] public FxLightFieldMergeParameter lfMerge;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x01)] public DebugDrawType debugDrawType;
+        [FieldOffset(0x02)] public bool showSkyVisibility;
+        [FieldOffset(0x04)] public float debugProbeSize;
+        [FieldOffset(0x10)] public Vector3 multiplyColorUp;
+        [FieldOffset(0x20)] public Vector3 multiplyColorDown;
+        [FieldOffset(0x30)] public float normalBias;
+        [FieldOffset(0x34)] public FxLightFieldMergeParameter lfMerge;
     }
 
     public enum BlurType : sbyte
@@ -950,18 +950,18 @@ public class NeedleFxSceneDataClass
         FOCUSTYPE_COUNT = 3
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 48)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct FxScreenBlurParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(1)]  public BlurType blurType;
-        [FieldOffset(4)]  public float blurPower;
-        [FieldOffset(8)]  public FocusType focusType;
-        [FieldOffset(16)] public Vector3 focusPosition;
-        [FieldOffset(32)] public float focusRange;
-        [FieldOffset(36)] public float alphaSlope;
-        [FieldOffset(40)] public int sampleNum;
-        [FieldOffset(44)] public bool singleDirectionOpt;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x01)] public BlurType blurType;
+        [FieldOffset(0x04)] public float blurPower;
+        [FieldOffset(0x08)] public FocusType focusType;
+        [FieldOffset(0x10)] public Vector3 focusPosition;
+        [FieldOffset(0x20)] public float focusRange;
+        [FieldOffset(0x24)] public float alphaSlope;
+        [FieldOffset(0x28)] public int sampleNum;
+        [FieldOffset(0x2C)] public bool singleDirectionOpt;
     }
 
     public struct Color8
@@ -972,114 +972,114 @@ public class NeedleFxSceneDataClass
         public byte B;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 144)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x90)]
     public struct FxOcclusionCapsuleParameter
     {
-        [FieldOffset(0)]   public bool enable;
-        [FieldOffset(1)]   public bool enableOcclusion;
-        [FieldOffset(4)]   public Color8 occlusionColor;
-        [FieldOffset(8)]   public float occlusionPower;
-        [FieldOffset(12)]  public bool enableSpecularOcclusion;
-        [FieldOffset(16)]  public float specularOcclusionAlpha;
-        [FieldOffset(20)]  public float specularOcclusionPower;
-        [FieldOffset(24)]  public float specularOcclusionConeAngle;
-        [FieldOffset(28)]  public bool enableShadow;
-        [FieldOffset(32)]  public Color8 shadowColor;
-        [FieldOffset(36)]  public float shadowPower;
-        [FieldOffset(40)]  public float shadowConeAngle;
-        [FieldOffset(44)]  public float cullingDistance;
-        [FieldOffset(48)]  public bool enableManualLight;
-        [FieldOffset(52)]  public int manualLightCount;
-        [FieldOffset(64)]  public Vector3 manualLightPos__arr0;
-        [FieldOffset(80)] public Vector3 manualLightPos__arr1;
-        [FieldOffset(96)] public Vector3 manualLightPos__arr2;
-        [FieldOffset(112)] public Vector3 manualLightPos__arr3;
-        [FieldOffset(128)] public bool debugDraw;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x01)] public bool enableOcclusion;
+        [FieldOffset(0x04)] public Color8 occlusionColor;
+        [FieldOffset(0x08)] public float occlusionPower;
+        [FieldOffset(0x0C)] public bool enableSpecularOcclusion;
+        [FieldOffset(0x10)] public float specularOcclusionAlpha;
+        [FieldOffset(0x14)] public float specularOcclusionPower;
+        [FieldOffset(0x18)] public float specularOcclusionConeAngle;
+        [FieldOffset(0x1C)] public bool enableShadow;
+        [FieldOffset(0x20)] public Color8 shadowColor;
+        [FieldOffset(0x24)] public float shadowPower;
+        [FieldOffset(0x28)] public float shadowConeAngle;
+        [FieldOffset(0x2C)] public float cullingDistance;
+        [FieldOffset(0x30)] public bool enableManualLight;
+        [FieldOffset(0x34)] public int manualLightCount;
+        [FieldOffset(0x40)] public Vector3 manualLightPos__arr0;
+        [FieldOffset(0x50)] public Vector3 manualLightPos__arr1;
+        [FieldOffset(0x60)] public Vector3 manualLightPos__arr2;
+        [FieldOffset(0x70)] public Vector3 manualLightPos__arr3;
+        [FieldOffset(0x80)] public bool debugDraw;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 96)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x60)]
     public struct FxEffectParameter
     {
-        [FieldOffset(0)]  public float lightFieldColorCoefficient;
-        [FieldOffset(4)]  public float invTonemapCoefficient;
-        [FieldOffset(16)] public Vector3 shadowColor;
-        [FieldOffset(32)] public Vector3 directionalLightOverwrite;
-        [FieldOffset(48)] public float directionalLightIntensityOverwrite;
-        [FieldOffset(52)] public bool overwriteDirectionalLight;
-        [FieldOffset(56)] public float localLightIntensityScale;
-        [FieldOffset(60)] public float lodDistances__arr0;
-        [FieldOffset(64)] public float lodDistances__arr1;
-        [FieldOffset(68)] public float lodDistances__arr2;
-        [FieldOffset(72)] public float lodDistances__arr3;
-        [FieldOffset(76)] public float lodDistances__arr4;
-        [FieldOffset(80)] public float lodDistances__arr5;
-        [FieldOffset(84)] public float lodDistances__arr6;
-        [FieldOffset(88)] public float lodDistances__arr7;
-        [FieldOffset(92)] public bool enableVisualizeOverdraw;
-        [FieldOffset(93)] public bool renderWireframe;
-        [FieldOffset(94)] public bool upsampleBilateral;
+        [FieldOffset(0x00)] public float lightFieldColorCoefficient;
+        [FieldOffset(0x04)] public float invTonemapCoefficient;
+        [FieldOffset(0x10)] public Vector3 shadowColor;
+        [FieldOffset(0x20)] public Vector3 directionalLightOverwrite;
+        [FieldOffset(0x30)] public float directionalLightIntensityOverwrite;
+        [FieldOffset(0x34)] public bool overwriteDirectionalLight;
+        [FieldOffset(0x38)] public float localLightIntensityScale;
+        [FieldOffset(0x3C)] public float lodDistances__arr0;
+        [FieldOffset(0x40)] public float lodDistances__arr1;
+        [FieldOffset(0x44)] public float lodDistances__arr2;
+        [FieldOffset(0x48)] public float lodDistances__arr3;
+        [FieldOffset(0x4C)] public float lodDistances__arr4;
+        [FieldOffset(0x50)] public float lodDistances__arr5;
+        [FieldOffset(0x54)] public float lodDistances__arr6;
+        [FieldOffset(0x58)] public float lodDistances__arr7;
+        [FieldOffset(0x5C)] public bool enableVisualizeOverdraw;
+        [FieldOffset(0x5D)] public bool renderWireframe;
+        [FieldOffset(0x5E)] public bool upsampleBilateral;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 64)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public struct FxScreenSpaceGodrayParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(4)]  public float rayMarchingCount;
-        [FieldOffset(8)]  public float density;
-        [FieldOffset(12)] public float decay;
-        [FieldOffset(16)] public float threshold;
-        [FieldOffset(20)] public float lumMax;
-        [FieldOffset(24)] public float intensity;
-        [FieldOffset(28)] public bool enableDither;
-        [FieldOffset(32)] public Vector3 lightPos;
-        [FieldOffset(48)] public Vector3 lightDir;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public float rayMarchingCount;
+        [FieldOffset(0x08)] public float density;
+        [FieldOffset(0x0C)] public float decay;
+        [FieldOffset(0x10)] public float threshold;
+        [FieldOffset(0x14)] public float lumMax;
+        [FieldOffset(0x18)] public float intensity;
+        [FieldOffset(0x1C)] public bool enableDither;
+        [FieldOffset(0x20)] public Vector3 lightPos;
+        [FieldOffset(0x30)] public Vector3 lightDir;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct FxGodrayVolumeTexture
     {
-        [FieldOffset(0)]  public bool enableVolumeTexture;
-        [FieldOffset(4)]  public float uvScale;
-        [FieldOffset(8)]  public float timeScale;
-        [FieldOffset(12)] public float animationAngle;
+        [FieldOffset(0x00)] public bool enableVolumeTexture;
+        [FieldOffset(0x04)] public float uvScale;
+        [FieldOffset(0x08)] public float timeScale;
+        [FieldOffset(0x0C)] public float animationAngle;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 240)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xF0)]
     public struct FxGodrayParameter
     {
-        [FieldOffset(0)]   public bool enable;
-        [FieldOffset(1)]   public bool isUseShadowmap;
-        [FieldOffset(2)]   public bool isVariableStep;
-        [FieldOffset(16)]  public Matrix4x4 shadow;
-        [FieldOffset(80)]  public Matrix4x4 box;
-        [FieldOffset(144)] public Vector3 color;
-        [FieldOffset(160)] public float density;
-        [FieldOffset(164)] public float anisotropy;
-        [FieldOffset(168)] public float range;
-        [FieldOffset(172)] public float rayMarchingCount;
-        [FieldOffset(176)] public float rayMarchingStep;
-        [FieldOffset(180)] public float shadowEdge;
-        [FieldOffset(184)] public bool isScanFromBack;
-        [FieldOffset(188)] public int boxCount;
-        [FieldOffset(192)] public bool isNewMode;
-        [FieldOffset(196)] public FxGodrayVolumeTexture volumeTexture;
-        [FieldOffset(212)] public float transparency;
-        [FieldOffset(216)] public bool enable3d;
-        [FieldOffset(220)] public float reProject3d;
-        [FieldOffset(224)] public float logNear3d;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x01)] public bool isUseShadowmap;
+        [FieldOffset(0x02)] public bool isVariableStep;
+        [FieldOffset(0x10)] public Matrix4x4 shadow;
+        [FieldOffset(0x50)] public Matrix4x4 box;
+        [FieldOffset(0x90)] public Vector3 color;
+        [FieldOffset(0xA0)] public float density;
+        [FieldOffset(0xA4)] public float anisotropy;
+        [FieldOffset(0xA8)] public float range;
+        [FieldOffset(0xAC)] public float rayMarchingCount;
+        [FieldOffset(0xB0)] public float rayMarchingStep;
+        [FieldOffset(0xB4)] public float shadowEdge;
+        [FieldOffset(0xB8)] public bool isScanFromBack;
+        [FieldOffset(0xBC)] public int boxCount;
+        [FieldOffset(0xC0)] public bool isNewMode;
+        [FieldOffset(0xC4)] public FxGodrayVolumeTexture volumeTexture;
+        [FieldOffset(0xD4)] public float transparency;
+        [FieldOffset(0xD8)] public bool enable3d;
+        [FieldOffset(0xDC)] public float reProject3d;
+        [FieldOffset(0xE0)] public float logNear3d;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct FxHeatHazeParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(4)]  public float speed;
-        [FieldOffset(8)]  public float scale;
-        [FieldOffset(12)] public float cycle;
-        [FieldOffset(16)] public float nearDepth;
-        [FieldOffset(20)] public float farDepth;
-        [FieldOffset(24)] public float maxHeight;
-        [FieldOffset(28)] public float parallaxCorrectFactor;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public float speed;
+        [FieldOffset(0x08)] public float scale;
+        [FieldOffset(0x0C)] public float cycle;
+        [FieldOffset(0x10)] public float nearDepth;
+        [FieldOffset(0x14)] public float farDepth;
+        [FieldOffset(0x18)] public float maxHeight;
+        [FieldOffset(0x1C)] public float parallaxCorrectFactor;
     }
 
     public enum SunPosType : sbyte
@@ -1089,33 +1089,33 @@ public class NeedleFxSceneDataClass
         SUN_POS_TYPE_EARTH = 2
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct FxSunPosAngle
     {
-        [FieldOffset(0)] public float azimuthAngle;
-        [FieldOffset(4)] public float elevationAngle;
+        [FieldOffset(0x00)] public float azimuthAngle;
+        [FieldOffset(0x04)] public float elevationAngle;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct FxSunPosEarth
     {
-        [FieldOffset(0)]  public float azimuthAngle;
-        [FieldOffset(4)]  public float latitude;
-        [FieldOffset(8)]  public float longitude;
-        [FieldOffset(12)] public int month;
-        [FieldOffset(16)] public int day;
-        [FieldOffset(20)] public float time;
-        [FieldOffset(24)] public bool enableAnimation;
-        [FieldOffset(28)] public float animationSpeed;
+        [FieldOffset(0x00)] public float azimuthAngle;
+        [FieldOffset(0x04)] public float latitude;
+        [FieldOffset(0x08)] public float longitude;
+        [FieldOffset(0x0C)] public int month;
+        [FieldOffset(0x10)] public int day;
+        [FieldOffset(0x14)] public float time;
+        [FieldOffset(0x18)] public bool enableAnimation;
+        [FieldOffset(0x1C)] public float animationSpeed;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 48)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct FxSun
     {
-        [FieldOffset(0)]  public float solarRadiusScale;
-        [FieldOffset(4)]  public SunPosType sunPosType;
-        [FieldOffset(8)]  public FxSunPosAngle posTypeAngle;
-        [FieldOffset(16)] public FxSunPosEarth posTypeEarth;
+        [FieldOffset(0x00)] public float solarRadiusScale;
+        [FieldOffset(0x04)] public SunPosType sunPosType;
+        [FieldOffset(0x08)] public FxSunPosAngle posTypeAngle;
+        [FieldOffset(0x10)] public FxSunPosEarth posTypeEarth;
     }
 
     public enum MoonPosType : sbyte
@@ -1125,10 +1125,10 @@ public class NeedleFxSceneDataClass
         MOON_POS_TYPE_EARTH = 2
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 1)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x01)]
     public struct FxMoon
     {
-        [FieldOffset(0)] public MoonPosType moonPosType;
+        [FieldOffset(0x00)] public MoonPosType moonPosType;
     }
 
     public enum SkyModel : sbyte
@@ -1137,275 +1137,275 @@ public class NeedleFxSceneDataClass
         SEBASTIEN = 1
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct FxSkyCommon
     {
-        [FieldOffset(0)]  public SkyModel skyModel;
-        [FieldOffset(4)]  public float illuminanceScale;
-        [FieldOffset(8)]  public bool enableScattering;
-        [FieldOffset(12)] public float scatteringRatio;
+        [FieldOffset(0x00)] public SkyModel skyModel;
+        [FieldOffset(0x04)] public float illuminanceScale;
+        [FieldOffset(0x08)] public bool enableScattering;
+        [FieldOffset(0x0C)] public float scatteringRatio;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 64)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public struct FxBrunetonSkyNight
     {
-        [FieldOffset(0)]  public float lunarIntensityInSky;
-        [FieldOffset(4)]  public float starIntensityInSky;
-        [FieldOffset(8)]  public float lunarIntensityInCloud;
-        [FieldOffset(12)] public float lunarIntensity;
-        [FieldOffset(16)] public float skyIntensity;
-        [FieldOffset(20)] public Color8 lunarLightColor;
-        [FieldOffset(32)] public Vector4 lunarLightColorOffset;
-        [FieldOffset(48)] public float lunarLightPower;
+        [FieldOffset(0x00)] public float lunarIntensityInSky;
+        [FieldOffset(0x04)] public float starIntensityInSky;
+        [FieldOffset(0x08)] public float lunarIntensityInCloud;
+        [FieldOffset(0x0C)] public float lunarIntensity;
+        [FieldOffset(0x10)] public float skyIntensity;
+        [FieldOffset(0x14)] public Color8 lunarLightColor;
+        [FieldOffset(0x20)] public Vector4 lunarLightColorOffset;
+        [FieldOffset(0x30)] public float lunarLightPower;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 144)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x90)]
     public struct FxBrunetonSky
     {
-        [FieldOffset(0)]   public float illuminanceScale;
-        [FieldOffset(4)]   public Color8 rayleighColor;
-        [FieldOffset(8)]   public Color8 lightColorScale;
-        [FieldOffset(12)]  public float miePhaseFunctionG;
-        [FieldOffset(16)]  public Color8 mieScatteringColor;
-        [FieldOffset(20)]  public float mieScatteringScale;
-        [FieldOffset(24)]  public Color8 mieAbsorptionColor;
-        [FieldOffset(28)]  public float mieAbsorptionScale;
-        [FieldOffset(32)]  public Color8 rayleighScatteringColor;
-        [FieldOffset(36)]  public float rayleighScatteringScale;
-        [FieldOffset(40)]  public Color8 groundAlbedo;
-        [FieldOffset(44)]  public Color8 groundIrradianceScale;
-        [FieldOffset(48)]  public Color8 cubemapColorScale;
-        [FieldOffset(52)]  public float cubemapColorAngleRatio;
-        [FieldOffset(56)]  public bool enableScattering;
-        [FieldOffset(60)]  public float scatteringRatio;
-        [FieldOffset(64)]  public FxBrunetonSkyNight night;
-        [FieldOffset(128)] public bool enableLimitY;
-        [FieldOffset(132)] public float debugSkyCubeIntensity;
+        [FieldOffset(0x00)] public float illuminanceScale;
+        [FieldOffset(0x04)] public Color8 rayleighColor;
+        [FieldOffset(0x08)] public Color8 lightColorScale;
+        [FieldOffset(0x0C)] public float miePhaseFunctionG;
+        [FieldOffset(0x10)] public Color8 mieScatteringColor;
+        [FieldOffset(0x14)] public float mieScatteringScale;
+        [FieldOffset(0x18)] public Color8 mieAbsorptionColor;
+        [FieldOffset(0x1C)] public float mieAbsorptionScale;
+        [FieldOffset(0x20)] public Color8 rayleighScatteringColor;
+        [FieldOffset(0x24)] public float rayleighScatteringScale;
+        [FieldOffset(0x28)] public Color8 groundAlbedo;
+        [FieldOffset(0x2C)] public Color8 groundIrradianceScale;
+        [FieldOffset(0x30)] public Color8 cubemapColorScale;
+        [FieldOffset(0x34)] public float cubemapColorAngleRatio;
+        [FieldOffset(0x38)] public bool enableScattering;
+        [FieldOffset(0x3C)] public float scatteringRatio;
+        [FieldOffset(0x40)] public FxBrunetonSkyNight night;
+        [FieldOffset(0x80)] public bool enableLimitY;
+        [FieldOffset(0x84)] public float debugSkyCubeIntensity;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 144)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x90)]
     public struct FxSebastienSky
     {
-        [FieldOffset(0)]   public float miePhaseFunctionG;
-        [FieldOffset(4)]   public Color8 mieScatteringColor;
-        [FieldOffset(16)]  public Vector4 mieScatteringColorOffset;
-        [FieldOffset(32)]  public float mieScatteringScale;
-        [FieldOffset(36)]  public Color8 mieAbsorptionColor;
-        [FieldOffset(48)]  public Vector4 mieAbsorptionColorOffset;
-        [FieldOffset(64)]  public float mieAbsorptionScale;
-        [FieldOffset(68)]  public Color8 rayleighScatteringColor;
-        [FieldOffset(80)]  public Vector4 rayleighScatteringColorOffset;
-        [FieldOffset(96)]  public float rayleighScatteringScale;
-        [FieldOffset(100)] public Color8 groundAlbedo;
-        [FieldOffset(112)] public Vector4 groundAlbedoOffset;
-        [FieldOffset(128)] public bool enableGround;
-        [FieldOffset(132)] public int numScatteringOrder;
-        [FieldOffset(136)] public bool enableScattering;
-        [FieldOffset(137)] public bool enableLimitY;
+        [FieldOffset(0x00)] public float miePhaseFunctionG;
+        [FieldOffset(0x04)] public Color8 mieScatteringColor;
+        [FieldOffset(0x10)] public Vector4 mieScatteringColorOffset;
+        [FieldOffset(0x20)] public float mieScatteringScale;
+        [FieldOffset(0x24)] public Color8 mieAbsorptionColor;
+        [FieldOffset(0x30)] public Vector4 mieAbsorptionColorOffset;
+        [FieldOffset(0x40)] public float mieAbsorptionScale;
+        [FieldOffset(0x44)] public Color8 rayleighScatteringColor;
+        [FieldOffset(0x50)] public Vector4 rayleighScatteringColorOffset;
+        [FieldOffset(0x60)] public float rayleighScatteringScale;
+        [FieldOffset(0x64)] public Color8 groundAlbedo;
+        [FieldOffset(0x70)] public Vector4 groundAlbedoOffset;
+        [FieldOffset(0x80)] public bool enableGround;
+        [FieldOffset(0x84)] public int numScatteringOrder;
+        [FieldOffset(0x88)] public bool enableScattering;
+        [FieldOffset(0x89)] public bool enableLimitY;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 64)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public struct FxCloudProcedural
     {
-        [FieldOffset(0)]  public Vector3 uvScale;
-        [FieldOffset(16)] public Vector3 colorGamma;
-        [FieldOffset(32)] public Vector3 colorScale;
-        [FieldOffset(48)] public Vector3 colorOffset;
+        [FieldOffset(0x00)] public Vector3 uvScale;
+        [FieldOffset(0x10)] public Vector3 colorGamma;
+        [FieldOffset(0x20)] public Vector3 colorScale;
+        [FieldOffset(0x30)] public Vector3 colorOffset;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 80)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x50)]
     public struct FxCloudBlendParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(4)]  public float probability;
-        [FieldOffset(8)]  public float cloudiness;
-        [FieldOffset(16)] public FxCloudProcedural proceduralCloud;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public float probability;
+        [FieldOffset(0x08)] public float cloudiness;
+        [FieldOffset(0x10)] public FxCloudProcedural proceduralCloud;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 256)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x100)]
     public struct FxCloudParameter
     {
-        [FieldOffset(0)]   public bool enable;
-        [FieldOffset(1)]   public bool enableAnimation;
-        [FieldOffset(4)]   public float animationFrame;
-        [FieldOffset(8)]   public float animationSpeed;
-        [FieldOffset(12)]  public float animationAngle;
-        [FieldOffset(16)]  public float animationSpeedCirrus;
-        [FieldOffset(20)]  public float animationAngleCirrus;
-        [FieldOffset(24)]  public float skyHorizonOffset;
-        [FieldOffset(28)]  public float cloudStartHeight;
-        [FieldOffset(32)]  public float cloudCoverageSpeed;
-        [FieldOffset(36)]  public float cloudTypeSpeed;
-        [FieldOffset(40)]  public float cloudWetnessSpeed;
-        [FieldOffset(44)]  public float miePhaseFunctionG;
-        [FieldOffset(48)]  public float silverIntensity;
-        [FieldOffset(52)]  public float silverSpread;
-        [FieldOffset(56)]  public float scale;
-        [FieldOffset(60)]  public float density;
-        [FieldOffset(64)]  public float densityThreshold;
-        [FieldOffset(68)]  public Color8 cloudsExtinctionColor1;
-        [FieldOffset(80)]  public Vector4 cloudsExtinctionColor1Offset;
-        [FieldOffset(96)]  public Color8 cloudsExtinctionColor2;
-        [FieldOffset(112)] public Vector4 cloudsExtinctionColor2Offset;
-        [FieldOffset(128)] public Color8 cloudsExtinctionColor3;
-        [FieldOffset(144)] public Vector4 cloudsExtinctionColor3Offset;
-        [FieldOffset(160)] public float cloudExtinctionBlend;
-        [FieldOffset(164)] public bool enableShadow;
-        [FieldOffset(168)] public int shadowCoverage;
-        [FieldOffset(172)] public float shadowValueMin;
-        [FieldOffset(176)] public FxCloudBlendParameter blendParam;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x01)] public bool enableAnimation;
+        [FieldOffset(0x04)] public float animationFrame;
+        [FieldOffset(0x08)] public float animationSpeed;
+        [FieldOffset(0x0C)] public float animationAngle;
+        [FieldOffset(0x10)] public float animationSpeedCirrus;
+        [FieldOffset(0x14)] public float animationAngleCirrus;
+        [FieldOffset(0x18)] public float skyHorizonOffset;
+        [FieldOffset(0x1C)] public float cloudStartHeight;
+        [FieldOffset(0x20)] public float cloudCoverageSpeed;
+        [FieldOffset(0x24)] public float cloudTypeSpeed;
+        [FieldOffset(0x28)] public float cloudWetnessSpeed;
+        [FieldOffset(0x2C)] public float miePhaseFunctionG;
+        [FieldOffset(0x30)] public float silverIntensity;
+        [FieldOffset(0x34)] public float silverSpread;
+        [FieldOffset(0x38)] public float scale;
+        [FieldOffset(0x3C)] public float density;
+        [FieldOffset(0x40)] public float densityThreshold;
+        [FieldOffset(0x44)] public Color8 cloudsExtinctionColor1;
+        [FieldOffset(0x50)] public Vector4 cloudsExtinctionColor1Offset;
+        [FieldOffset(0x60)] public Color8 cloudsExtinctionColor2;
+        [FieldOffset(0x70)] public Vector4 cloudsExtinctionColor2Offset;
+        [FieldOffset(0x80)] public Color8 cloudsExtinctionColor3;
+        [FieldOffset(0x90)] public Vector4 cloudsExtinctionColor3Offset;
+        [FieldOffset(0xA0)] public float cloudExtinctionBlend;
+        [FieldOffset(0xA4)] public bool enableShadow;
+        [FieldOffset(0xA8)] public int shadowCoverage;
+        [FieldOffset(0xAC)] public float shadowValueMin;
+        [FieldOffset(0xB0)] public FxCloudBlendParameter blendParam;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct FxCrepuscularRay
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(4)]  public float density;
-        [FieldOffset(8)]  public float decay;
-        [FieldOffset(12)] public float weight;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public float density;
+        [FieldOffset(0x08)] public float decay;
+        [FieldOffset(0x0C)] public float weight;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct FxManualHeightFog
     {
-        [FieldOffset(0)]  public Vector3 sunColor;
-        [FieldOffset(16)] public Vector3 ambColor;
+        [FieldOffset(0x00)] public Vector3 sunColor;
+        [FieldOffset(0x10)] public Vector3 ambColor;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 112)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public struct FxHeightFog
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(1)]  public bool enableFogMap;
-        [FieldOffset(4)]  public float heightScale;
-        [FieldOffset(8)]  public float distanceOffset;
-        [FieldOffset(12)] public float distanceScale;
-        [FieldOffset(16)] public Vector3 rayleighScale;
-        [FieldOffset(32)] public Vector3 mieScale;
-        [FieldOffset(48)] public float noiseBlend;
-        [FieldOffset(52)] public float noiseScale;
-        [FieldOffset(56)] public float noiseDistance;
-        [FieldOffset(60)] public float animationSpeed;
-        [FieldOffset(64)] public float animationAngle;
-        [FieldOffset(68)] public bool isAtmospheric;
-        [FieldOffset(80)] public FxManualHeightFog manualFog;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x01)] public bool enableFogMap;
+        [FieldOffset(0x04)] public float heightScale;
+        [FieldOffset(0x08)] public float distanceOffset;
+        [FieldOffset(0x0C)] public float distanceScale;
+        [FieldOffset(0x10)] public Vector3 rayleighScale;
+        [FieldOffset(0x20)] public Vector3 mieScale;
+        [FieldOffset(0x30)] public float noiseBlend;
+        [FieldOffset(0x34)] public float noiseScale;
+        [FieldOffset(0x38)] public float noiseDistance;
+        [FieldOffset(0x3C)] public float animationSpeed;
+        [FieldOffset(0x40)] public float animationAngle;
+        [FieldOffset(0x44)] public bool isAtmospheric;
+        [FieldOffset(0x50)] public FxManualHeightFog manualFog;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 752)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x2F0)]
     public struct FxAtmosphereParameter
     {
-        [FieldOffset(0)]   public bool enable;
-        [FieldOffset(4)]   public FxSun sunParam;
-        [FieldOffset(52)]  public FxMoon moonParam;
-        [FieldOffset(56)]  public FxSkyCommon commonSkyParam;
-        [FieldOffset(80)]  public FxBrunetonSky brunetonSkyParam;
-        [FieldOffset(224)] public FxSebastienSky sebastienSkyParam;
-        [FieldOffset(368)] public FxCloudParameter cloudParam;
-        [FieldOffset(624)] public FxCrepuscularRay crepuscularRayParam;
-        [FieldOffset(640)] public FxHeightFog heightFogParam;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public FxSun sunParam;
+        [FieldOffset(0x34)] public FxMoon moonParam;
+        [FieldOffset(0x38)] public FxSkyCommon commonSkyParam;
+        [FieldOffset(0x50)] public FxBrunetonSky brunetonSkyParam;
+        [FieldOffset(0xE0)] public FxSebastienSky sebastienSkyParam;
+        [FieldOffset(0x170)] public FxCloudParameter cloudParam;
+        [FieldOffset(0x270)] public FxCrepuscularRay crepuscularRayParam;
+        [FieldOffset(0x280)] public FxHeightFog heightFogParam;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 24)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct FxPuddleParameter
     {
-        [FieldOffset(0)]  public float heightThreshold;
-        [FieldOffset(4)]  public float slopeThreshold;
-        [FieldOffset(8)]  public float noiseScaleXZ;
-        [FieldOffset(12)] public float noiseScaleY;
-        [FieldOffset(16)] public float noiseThreshold;
-        [FieldOffset(20)] public float noiseAttenuationRange;
+        [FieldOffset(0x00)] public float heightThreshold;
+        [FieldOffset(0x04)] public float slopeThreshold;
+        [FieldOffset(0x08)] public float noiseScaleXZ;
+        [FieldOffset(0x0C)] public float noiseScaleY;
+        [FieldOffset(0x10)] public float noiseThreshold;
+        [FieldOffset(0x14)] public float noiseAttenuationRange;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct FxRippleParameter
     {
-        [FieldOffset(0)]  public float intensity;
-        [FieldOffset(4)]  public float uvScale;
-        [FieldOffset(8)]  public float timeScale;
-        [FieldOffset(12)] public float normalIntensity;
+        [FieldOffset(0x00)] public float intensity;
+        [FieldOffset(0x04)] public float uvScale;
+        [FieldOffset(0x08)] public float timeScale;
+        [FieldOffset(0x0C)] public float normalIntensity;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct FxDropParameter
     {
-        [FieldOffset(0)] public float uvScale;
-        [FieldOffset(4)] public float timeScale;
-        [FieldOffset(8)] public float normalIntensity;
+        [FieldOffset(0x00)] public float uvScale;
+        [FieldOffset(0x04)] public float timeScale;
+        [FieldOffset(0x08)] public float normalIntensity;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 128)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x80)]
     public struct FxRainParameter
     {
-        [FieldOffset(0)]   public bool enableDrop;
-        [FieldOffset(1)]   public bool enableFilter;
-        [FieldOffset(2)]   public bool enableRipple;
-        [FieldOffset(4)]   public float intensity;
-        [FieldOffset(16)]  public Vector4 dropColor;
-        [FieldOffset(32)]  public bool dropRotTarget;
-        [FieldOffset(33)]  public bool enableDropOcc;
-        [FieldOffset(36)]  public float dropCameraLerp;
-        [FieldOffset(40)]  public float dropCameraRate;
-        [FieldOffset(44)]  public float dropCameraRotation;
-        [FieldOffset(48)]  public float dropWidth;
-        [FieldOffset(52)]  public float dropLength;
-        [FieldOffset(56)]  public float dropWind;
-        [FieldOffset(60)]  public float dropRange;
-        [FieldOffset(64)]  public Vector4 filterColor;
-        [FieldOffset(80)]  public float filterRange;
-        [FieldOffset(84)]  public float filterEdge;
-        [FieldOffset(88)]  public float filterAngle;
-        [FieldOffset(92)]  public FxRippleParameter ripple;
-        [FieldOffset(108)] public FxDropParameter drop;
+        [FieldOffset(0x00)] public bool enableDrop;
+        [FieldOffset(0x01)] public bool enableFilter;
+        [FieldOffset(0x02)] public bool enableRipple;
+        [FieldOffset(0x04)] public float intensity;
+        [FieldOffset(0x10)] public Vector4 dropColor;
+        [FieldOffset(0x20)] public bool dropRotTarget;
+        [FieldOffset(0x21)] public bool enableDropOcc;
+        [FieldOffset(0x24)] public float dropCameraLerp;
+        [FieldOffset(0x28)] public float dropCameraRate;
+        [FieldOffset(0x2C)] public float dropCameraRotation;
+        [FieldOffset(0x30)] public float dropWidth;
+        [FieldOffset(0x34)] public float dropLength;
+        [FieldOffset(0x38)] public float dropWind;
+        [FieldOffset(0x3C)] public float dropRange;
+        [FieldOffset(0x40)] public Vector4 filterColor;
+        [FieldOffset(0x50)] public float filterRange;
+        [FieldOffset(0x54)] public float filterEdge;
+        [FieldOffset(0x58)] public float filterAngle;
+        [FieldOffset(0x5C)] public FxRippleParameter ripple;
+        [FieldOffset(0x6C)] public FxDropParameter drop;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 160)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
     public struct FxWeatherParameter
     {
-        [FieldOffset(0)]  public float wetness;
-        [FieldOffset(4)]  public FxPuddleParameter puddle;
-        [FieldOffset(32)] public FxRainParameter rain;
+        [FieldOffset(0x00)] public float wetness;
+        [FieldOffset(0x04)] public FxPuddleParameter puddle;
+        [FieldOffset(0x20)] public FxRainParameter rain;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 96)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x60)]
     public struct FxSceneEnvironmentParameter
     {
-        [FieldOffset(0)]  public float windRotationY;
-        [FieldOffset(4)]  public float windStrength;
-        [FieldOffset(8)]  public float windNoise;
-        [FieldOffset(12)] public float windAmplitude;
-        [FieldOffset(16)] public float windFrequencies__arr0;
-        [FieldOffset(20)] public float windFrequencies__arr1;
-        [FieldOffset(24)] public float windFrequencies__arr2;
-        [FieldOffset(28)] public float windFrequencies__arr3;
-        [FieldOffset(32)] public bool enableTreadGrass;
-        [FieldOffset(48)] public Vector4 grassLodDistance;
-        [FieldOffset(64)] public bool enableHighLight;
-        [FieldOffset(68)] public float highLightThreshold;
-        [FieldOffset(72)] public float highLightObjectAmbientScale;
-        [FieldOffset(76)] public float highLightObjectAlbedoHeighten;
-        [FieldOffset(80)] public float highLightCharaAmbientScale;
-        [FieldOffset(84)] public float highLightCharaAlbedoHeighten;
-        [FieldOffset(88)] public float highLightCharaFalloffScale;
+        [FieldOffset(0x00)] public float windRotationY;
+        [FieldOffset(0x04)] public float windStrength;
+        [FieldOffset(0x08)] public float windNoise;
+        [FieldOffset(0x0C)] public float windAmplitude;
+        [FieldOffset(0x10)] public float windFrequencies__arr0;
+        [FieldOffset(0x14)] public float windFrequencies__arr1;
+        [FieldOffset(0x18)] public float windFrequencies__arr2;
+        [FieldOffset(0x1C)] public float windFrequencies__arr3;
+        [FieldOffset(0x20)] public bool enableTreadGrass;
+        [FieldOffset(0x30)] public Vector4 grassLodDistance;
+        [FieldOffset(0x40)] public bool enableHighLight;
+        [FieldOffset(0x44)] public float highLightThreshold;
+        [FieldOffset(0x48)] public float highLightObjectAmbientScale;
+        [FieldOffset(0x4C)] public float highLightObjectAlbedoHeighten;
+        [FieldOffset(0x50)] public float highLightCharaAmbientScale;
+        [FieldOffset(0x54)] public float highLightCharaAlbedoHeighten;
+        [FieldOffset(0x58)] public float highLightCharaFalloffScale;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 64)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public struct FxTAAParameter
     {
-        [FieldOffset(0)]  public bool enableUpscaling;
-        [FieldOffset(4)]  public float jitterScale;
-        [FieldOffset(8)]  public float mipBias;
-        [FieldOffset(12)] public float sharpnessPower;
-        [FieldOffset(16)] public float baseWeight;
-        [FieldOffset(20)] public float velocityVarianceBasedWeightBias;
-        [FieldOffset(24)] public float colorSpaceClippingScale;
-        [FieldOffset(28)] public float colorSpaceClippingScaleForStatic;
-        [FieldOffset(32)] public float velocityVarianceMin;
-        [FieldOffset(36)] public float velocityVarianceMax;
-        [FieldOffset(40)] public bool enableCharaStencilMask;
-        [FieldOffset(41)] public bool enableLiteMode;
-        [FieldOffset(42)] public bool enablePassThrough;
-        [FieldOffset(43)] public bool debugVisualizeVelcotiyVariance;
-        [FieldOffset(48)] public Vector4 debug;
+        [FieldOffset(0x00)] public bool enableUpscaling;
+        [FieldOffset(0x04)] public float jitterScale;
+        [FieldOffset(0x08)] public float mipBias;
+        [FieldOffset(0x0C)] public float sharpnessPower;
+        [FieldOffset(0x10)] public float baseWeight;
+        [FieldOffset(0x14)] public float velocityVarianceBasedWeightBias;
+        [FieldOffset(0x18)] public float colorSpaceClippingScale;
+        [FieldOffset(0x1C)] public float colorSpaceClippingScaleForStatic;
+        [FieldOffset(0x20)] public float velocityVarianceMin;
+        [FieldOffset(0x24)] public float velocityVarianceMax;
+        [FieldOffset(0x28)] public bool enableCharaStencilMask;
+        [FieldOffset(0x29)] public bool enableLiteMode;
+        [FieldOffset(0x2A)] public bool enablePassThrough;
+        [FieldOffset(0x2B)] public bool debugVisualizeVelcotiyVariance;
+        [FieldOffset(0x30)] public Vector4 debug;
     }
 
     public enum PlacementType : sbyte
@@ -1422,133 +1422,133 @@ public class NeedleFxSceneDataClass
         ShadowFrustum = 2
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 20)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
     public struct FxDensityLodParameter
     {
-        [FieldOffset(0)]  public float lodRatio;
-        [FieldOffset(4)]  public float lodRise;
-        [FieldOffset(8)]  public float lodDecrease;
-        [FieldOffset(12)] public float lodThreshold;
-        [FieldOffset(16)] public bool lodFadeEnable;
+        [FieldOffset(0x00)] public float lodRatio;
+        [FieldOffset(0x04)] public float lodRise;
+        [FieldOffset(0x08)] public float lodDecrease;
+        [FieldOffset(0x0C)] public float lodThreshold;
+        [FieldOffset(0x10)] public bool lodFadeEnable;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 204)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xCC)]
     public struct FxDensityDebugParameter
     {
-        [FieldOffset(0)]   public bool underSelect;
-        [FieldOffset(4)]   public float factor;
-        [FieldOffset(8)]   public float unit__arr0;
-        [FieldOffset(12)] public float unit__arr1;
-        [FieldOffset(16)] public float unit__arr2;
-        [FieldOffset(20)] public float unit__arr3;
-        [FieldOffset(24)] public float unit__arr4;
-        [FieldOffset(28)] public float unit__arr5;
-        [FieldOffset(32)] public float unit__arr6;
-        [FieldOffset(36)] public float unit__arr7;
-        [FieldOffset(40)] public float unit__arr8;
-        [FieldOffset(44)] public float unit__arr9;
-        [FieldOffset(48)] public float unit__arr10;
-        [FieldOffset(52)] public float unit__arr11;
-        [FieldOffset(56)] public float unit__arr12;
-        [FieldOffset(60)] public float unit__arr13;
-        [FieldOffset(64)] public float unit__arr14;
-        [FieldOffset(68)] public float unit__arr15;
-        [FieldOffset(72)] public float unit__arr16;
-        [FieldOffset(76)] public float unit__arr17;
-        [FieldOffset(80)] public float unit__arr18;
-        [FieldOffset(84)] public float unit__arr19;
-        [FieldOffset(88)] public float unit__arr20;
-        [FieldOffset(92)] public float unit__arr21;
-        [FieldOffset(96)] public float unit__arr22;
-        [FieldOffset(100)] public float unit__arr23;
-        [FieldOffset(104)] public float unit__arr24;
-        [FieldOffset(108)] public float unit__arr25;
-        [FieldOffset(112)] public float unit__arr26;
-        [FieldOffset(116)] public float unit__arr27;
-        [FieldOffset(120)] public float unit__arr28;
-        [FieldOffset(124)] public float unit__arr29;
-        [FieldOffset(128)] public float unit__arr30;
-        [FieldOffset(132)] public float unit__arr31;
-        [FieldOffset(136)] public sbyte chunk__arr0;
-        [FieldOffset(137)] public sbyte chunk__arr1;
-        [FieldOffset(138)] public sbyte chunk__arr2;
-        [FieldOffset(139)] public sbyte chunk__arr3;
-        [FieldOffset(140)] public sbyte chunk__arr4;
-        [FieldOffset(141)] public sbyte chunk__arr5;
-        [FieldOffset(142)] public sbyte chunk__arr6;
-        [FieldOffset(143)] public sbyte chunk__arr7;
-        [FieldOffset(144)] public sbyte chunk__arr8;
-        [FieldOffset(145)] public sbyte chunk__arr9;
-        [FieldOffset(146)] public sbyte chunk__arr10;
-        [FieldOffset(147)] public sbyte chunk__arr11;
-        [FieldOffset(148)] public sbyte chunk__arr12;
-        [FieldOffset(149)] public sbyte chunk__arr13;
-        [FieldOffset(150)] public sbyte chunk__arr14;
-        [FieldOffset(151)] public sbyte chunk__arr15;
-        [FieldOffset(152)] public sbyte chunk__arr16;
-        [FieldOffset(153)] public sbyte chunk__arr17;
-        [FieldOffset(154)] public sbyte chunk__arr18;
-        [FieldOffset(155)] public sbyte chunk__arr19;
-        [FieldOffset(156)] public sbyte chunk__arr20;
-        [FieldOffset(157)] public sbyte chunk__arr21;
-        [FieldOffset(158)] public sbyte chunk__arr22;
-        [FieldOffset(159)] public sbyte chunk__arr23;
-        [FieldOffset(160)] public sbyte chunk__arr24;
-        [FieldOffset(161)] public sbyte chunk__arr25;
-        [FieldOffset(162)] public sbyte chunk__arr26;
-        [FieldOffset(163)] public sbyte chunk__arr27;
-        [FieldOffset(164)] public sbyte chunk__arr28;
-        [FieldOffset(165)] public sbyte chunk__arr29;
-        [FieldOffset(166)] public sbyte chunk__arr30;
-        [FieldOffset(167)] public sbyte chunk__arr31;
-        [FieldOffset(168)] public float lodAddition;
-        [FieldOffset(172)] public int chunkAddition;
-        [FieldOffset(176)] public float drawLimitLenght;
-        [FieldOffset(180)] public bool drawCallReduction;
-        [FieldOffset(181)] public bool enableDither;
-        [FieldOffset(184)] public int ditherGrass;
-        [FieldOffset(188)] public int ditherOther;
-        [FieldOffset(192)] public int ditherPreComputeGrass;
-        [FieldOffset(196)] public int ditherPreComputeOther;
-        [FieldOffset(200)] public int computeMode;
+        [FieldOffset(0x00)] public bool underSelect;
+        [FieldOffset(0x04)] public float factor;
+        [FieldOffset(0x08)] public float unit__arr0;
+        [FieldOffset(0x0C)] public float unit__arr1;
+        [FieldOffset(0x10)] public float unit__arr2;
+        [FieldOffset(0x14)] public float unit__arr3;
+        [FieldOffset(0x18)] public float unit__arr4;
+        [FieldOffset(0x1C)] public float unit__arr5;
+        [FieldOffset(0x20)] public float unit__arr6;
+        [FieldOffset(0x24)] public float unit__arr7;
+        [FieldOffset(0x28)] public float unit__arr8;
+        [FieldOffset(0x2C)] public float unit__arr9;
+        [FieldOffset(0x30)] public float unit__arr10;
+        [FieldOffset(0x34)] public float unit__arr11;
+        [FieldOffset(0x38)] public float unit__arr12;
+        [FieldOffset(0x3C)] public float unit__arr13;
+        [FieldOffset(0x40)] public float unit__arr14;
+        [FieldOffset(0x44)] public float unit__arr15;
+        [FieldOffset(0x48)] public float unit__arr16;
+        [FieldOffset(0x4C)] public float unit__arr17;
+        [FieldOffset(0x50)] public float unit__arr18;
+        [FieldOffset(0x54)] public float unit__arr19;
+        [FieldOffset(0x58)] public float unit__arr20;
+        [FieldOffset(0x5C)] public float unit__arr21;
+        [FieldOffset(0x60)] public float unit__arr22;
+        [FieldOffset(0x64)] public float unit__arr23;
+        [FieldOffset(0x68)] public float unit__arr24;
+        [FieldOffset(0x6C)] public float unit__arr25;
+        [FieldOffset(0x70)] public float unit__arr26;
+        [FieldOffset(0x74)] public float unit__arr27;
+        [FieldOffset(0x78)] public float unit__arr28;
+        [FieldOffset(0x7C)] public float unit__arr29;
+        [FieldOffset(0x80)] public float unit__arr30;
+        [FieldOffset(0x84)] public float unit__arr31;
+        [FieldOffset(0x88)] public sbyte chunk__arr0;
+        [FieldOffset(0x89)] public sbyte chunk__arr1;
+        [FieldOffset(0x8A)] public sbyte chunk__arr2;
+        [FieldOffset(0x8B)] public sbyte chunk__arr3;
+        [FieldOffset(0x8C)] public sbyte chunk__arr4;
+        [FieldOffset(0x8D)] public sbyte chunk__arr5;
+        [FieldOffset(0x8E)] public sbyte chunk__arr6;
+        [FieldOffset(0x8F)] public sbyte chunk__arr7;
+        [FieldOffset(0x90)] public sbyte chunk__arr8;
+        [FieldOffset(0x91)] public sbyte chunk__arr9;
+        [FieldOffset(0x92)] public sbyte chunk__arr10;
+        [FieldOffset(0x93)] public sbyte chunk__arr11;
+        [FieldOffset(0x94)] public sbyte chunk__arr12;
+        [FieldOffset(0x95)] public sbyte chunk__arr13;
+        [FieldOffset(0x96)] public sbyte chunk__arr14;
+        [FieldOffset(0x97)] public sbyte chunk__arr15;
+        [FieldOffset(0x98)] public sbyte chunk__arr16;
+        [FieldOffset(0x99)] public sbyte chunk__arr17;
+        [FieldOffset(0x9A)] public sbyte chunk__arr18;
+        [FieldOffset(0x9B)] public sbyte chunk__arr19;
+        [FieldOffset(0x9C)] public sbyte chunk__arr20;
+        [FieldOffset(0x9D)] public sbyte chunk__arr21;
+        [FieldOffset(0x9E)] public sbyte chunk__arr22;
+        [FieldOffset(0x9F)] public sbyte chunk__arr23;
+        [FieldOffset(0xA0)] public sbyte chunk__arr24;
+        [FieldOffset(0xA1)] public sbyte chunk__arr25;
+        [FieldOffset(0xA2)] public sbyte chunk__arr26;
+        [FieldOffset(0xA3)] public sbyte chunk__arr27;
+        [FieldOffset(0xA4)] public sbyte chunk__arr28;
+        [FieldOffset(0xA5)] public sbyte chunk__arr29;
+        [FieldOffset(0xA6)] public sbyte chunk__arr30;
+        [FieldOffset(0xA7)] public sbyte chunk__arr31;
+        [FieldOffset(0xA8)] public float lodAddition;
+        [FieldOffset(0xAC)] public int chunkAddition;
+        [FieldOffset(0xB0)] public float drawLimitLenght;
+        [FieldOffset(0xB4)] public bool drawCallReduction;
+        [FieldOffset(0xB5)] public bool enableDither;
+        [FieldOffset(0xB8)] public int ditherGrass;
+        [FieldOffset(0xBC)] public int ditherOther;
+        [FieldOffset(0xC0)] public int ditherPreComputeGrass;
+        [FieldOffset(0xC4)] public int ditherPreComputeOther;
+        [FieldOffset(0xC8)] public int computeMode;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 268)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10C)]
     public struct FxDensityParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(1)]  public bool precomputeEnable;
-        [FieldOffset(2)]  public bool cameraUpdate;
-        [FieldOffset(3)]  public PlacementType placement;
-        [FieldOffset(4)]  public float placementScale;
-        [FieldOffset(8)]  public bool alphaEnable;
-        [FieldOffset(12)] public float alphaThreshold;
-        [FieldOffset(16)] public float alphaScale;
-        [FieldOffset(20)] public bool complementEnable;
-        [FieldOffset(21)] public bool disableCut;
-        [FieldOffset(22)] public ShadowCullingType shadowCulling;
-        [FieldOffset(23)] public bool occlusionCulling;
-        [FieldOffset(24)] public float occlusionSize;
-        [FieldOffset(28)] public float occlusionShadowSize;
-        [FieldOffset(32)] public float occlusionBias;
-        [FieldOffset(36)] public FxDensityLodParameter lodParam;
-        [FieldOffset(56)] public bool angleCulling;
-        [FieldOffset(60)] public float angleCullingParam;
-        [FieldOffset(64)] public FxDensityDebugParameter debugParam;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x01)] public bool precomputeEnable;
+        [FieldOffset(0x02)] public bool cameraUpdate;
+        [FieldOffset(0x03)] public PlacementType placement;
+        [FieldOffset(0x04)] public float placementScale;
+        [FieldOffset(0x08)] public bool alphaEnable;
+        [FieldOffset(0x0C)] public float alphaThreshold;
+        [FieldOffset(0x10)] public float alphaScale;
+        [FieldOffset(0x14)] public bool complementEnable;
+        [FieldOffset(0x15)] public bool disableCut;
+        [FieldOffset(0x16)] public ShadowCullingType shadowCulling;
+        [FieldOffset(0x17)] public bool occlusionCulling;
+        [FieldOffset(0x18)] public float occlusionSize;
+        [FieldOffset(0x1C)] public float occlusionShadowSize;
+        [FieldOffset(0x20)] public float occlusionBias;
+        [FieldOffset(0x24)] public FxDensityLodParameter lodParam;
+        [FieldOffset(0x38)] public bool angleCulling;
+        [FieldOffset(0x3C)] public float angleCullingParam;
+        [FieldOffset(0x40)] public FxDensityDebugParameter debugParam;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 36)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x24)]
     public struct FxChromaticAberrationParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(4)]  public float offsetR;
-        [FieldOffset(8)]  public float offsetG;
-        [FieldOffset(12)] public float offsetB;
-        [FieldOffset(16)] public float curve;
-        [FieldOffset(20)] public float scaleX;
-        [FieldOffset(24)] public float scaleY;
-        [FieldOffset(28)] public float centerX;
-        [FieldOffset(32)] public float centerY;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public float offsetR;
+        [FieldOffset(0x08)] public float offsetG;
+        [FieldOffset(0x0C)] public float offsetB;
+        [FieldOffset(0x10)] public float curve;
+        [FieldOffset(0x14)] public float scaleX;
+        [FieldOffset(0x18)] public float scaleY;
+        [FieldOffset(0x1C)] public float centerX;
+        [FieldOffset(0x20)] public float centerY;
     }
 
     public enum GradationMode : sbyte
@@ -1566,273 +1566,273 @@ public class NeedleFxSceneDataClass
         BLEND_MODE_OVERLAY = 4
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 24)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct FxVfImageCircleParameter
     {
-        [FieldOffset(0)]  public float centerX;
-        [FieldOffset(4)]  public float centerY;
-        [FieldOffset(8)]  public float scaleX;
-        [FieldOffset(12)] public float scaleY;
-        [FieldOffset(16)] public float scale;
-        [FieldOffset(20)] public float rotation;
+        [FieldOffset(0x00)] public float centerX;
+        [FieldOffset(0x04)] public float centerY;
+        [FieldOffset(0x08)] public float scaleX;
+        [FieldOffset(0x0C)] public float scaleY;
+        [FieldOffset(0x10)] public float scale;
+        [FieldOffset(0x14)] public float rotation;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 20)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
     public struct FxVfLineParameter
     {
-        [FieldOffset(0)]  public float centerX;
-        [FieldOffset(4)]  public float centerY;
-        [FieldOffset(8)]  public float directionX;
-        [FieldOffset(12)] public float directionY;
-        [FieldOffset(16)] public float rotation;
+        [FieldOffset(0x00)] public float centerX;
+        [FieldOffset(0x04)] public float centerY;
+        [FieldOffset(0x08)] public float directionX;
+        [FieldOffset(0x0C)] public float directionY;
+        [FieldOffset(0x10)] public float rotation;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 40)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct FxVfDepthParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(4)]  public float minPenumbraScale;
-        [FieldOffset(8)]  public float maxPenumbraScale;
-        [FieldOffset(12)] public float bokehScale;
-        [FieldOffset(16)] public float minDofOpacityScale;
-        [FieldOffset(20)] public float maxDofOpacityScale;
-        [FieldOffset(24)] public float minOpacityScale;
-        [FieldOffset(28)] public float maxOpacityScale;
-        [FieldOffset(32)] public float minOpacityDist;
-        [FieldOffset(36)] public float maxOpacityDist;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public float minPenumbraScale;
+        [FieldOffset(0x08)] public float maxPenumbraScale;
+        [FieldOffset(0x0C)] public float bokehScale;
+        [FieldOffset(0x10)] public float minDofOpacityScale;
+        [FieldOffset(0x14)] public float maxDofOpacityScale;
+        [FieldOffset(0x18)] public float minOpacityScale;
+        [FieldOffset(0x1C)] public float maxOpacityScale;
+        [FieldOffset(0x20)] public float minOpacityDist;
+        [FieldOffset(0x24)] public float maxOpacityDist;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 128)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x80)]
     public struct FxVignetteParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(1)]  public GradationMode gradationType;
-        [FieldOffset(2)]  public BlendMode blendMode;
-        [FieldOffset(16)] public Vector3 color;
-        [FieldOffset(32)] public float opacity;
-        [FieldOffset(36)] public FxVfImageCircleParameter imageCircle;
-        [FieldOffset(60)] public FxVfLineParameter line;
-        [FieldOffset(80)] public float penumbraScale;
-        [FieldOffset(84)] public float intensity;
-        [FieldOffset(88)] public FxVfDepthParameter depth;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x01)] public GradationMode gradationType;
+        [FieldOffset(0x02)] public BlendMode blendMode;
+        [FieldOffset(0x10)] public Vector3 color;
+        [FieldOffset(0x20)] public float opacity;
+        [FieldOffset(0x24)] public FxVfImageCircleParameter imageCircle;
+        [FieldOffset(0x3C)] public FxVfLineParameter line;
+        [FieldOffset(0x50)] public float penumbraScale;
+        [FieldOffset(0x54)] public float intensity;
+        [FieldOffset(0x58)] public FxVfDepthParameter depth;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 24)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct FxWindComputeDebugParameter
     {
-        [FieldOffset(0)]  public bool debugEnable;
-        [FieldOffset(1)]  public bool debugSpace;
-        [FieldOffset(2)]  public bool debugGlobal;
-        [FieldOffset(3)]  public bool debugGlobalMap;
-        [FieldOffset(4)]  public bool debugSpaceAll;
-        [FieldOffset(8)]  public int spaceIndex;
-        [FieldOffset(12)] public float spaceThreshold;
-        [FieldOffset(16)] public float min;
-        [FieldOffset(20)] public float max;
+        [FieldOffset(0x00)] public bool debugEnable;
+        [FieldOffset(0x01)] public bool debugSpace;
+        [FieldOffset(0x02)] public bool debugGlobal;
+        [FieldOffset(0x03)] public bool debugGlobalMap;
+        [FieldOffset(0x04)] public bool debugSpaceAll;
+        [FieldOffset(0x08)] public int spaceIndex;
+        [FieldOffset(0x0C)] public float spaceThreshold;
+        [FieldOffset(0x10)] public float min;
+        [FieldOffset(0x14)] public float max;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 160)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
     public struct FxWindComputeParameter
     {
-        [FieldOffset(0)]   public bool enableAll;
-        [FieldOffset(1)]   public bool enableDynamicWind;
-        [FieldOffset(2)]   public bool enableGlobalWind;
-        [FieldOffset(4)]   public float timeScale;
-        [FieldOffset(8)]   public float decreaseRate;
-        [FieldOffset(16)]  public Vector3 globalWind;
-        [FieldOffset(32)]  public float globalWindPower;
-        [FieldOffset(36)]  public float globalWindSpeed;
-        [FieldOffset(40)]  public float globalWindOffset;
-        [FieldOffset(48)]  public Vector3 globalSecondWind;
-        [FieldOffset(64)]  public float globalSecondWindPower;
-        [FieldOffset(68)]  public float globalSecondWindSpeed;
-        [FieldOffset(72)]  public float globalSecondWindOffset;
-        [FieldOffset(80)]  public Vector3 globalWindMapSize;
-        [FieldOffset(96)]  public Vector3 globalWindMapCenter;
-        [FieldOffset(112)] public Vector3 globalWindMapOffset;
-        [FieldOffset(128)] public float globalWindMapPower;
-        [FieldOffset(132)] public float globalWindMapTimeScale;
-        [FieldOffset(136)] public FxWindComputeDebugParameter debugParam;
+        [FieldOffset(0x00)] public bool enableAll;
+        [FieldOffset(0x01)] public bool enableDynamicWind;
+        [FieldOffset(0x02)] public bool enableGlobalWind;
+        [FieldOffset(0x04)] public float timeScale;
+        [FieldOffset(0x08)] public float decreaseRate;
+        [FieldOffset(0x10)] public Vector3 globalWind;
+        [FieldOffset(0x20)] public float globalWindPower;
+        [FieldOffset(0x24)] public float globalWindSpeed;
+        [FieldOffset(0x28)] public float globalWindOffset;
+        [FieldOffset(0x30)] public Vector3 globalSecondWind;
+        [FieldOffset(0x40)] public float globalSecondWindPower;
+        [FieldOffset(0x44)] public float globalSecondWindSpeed;
+        [FieldOffset(0x48)] public float globalSecondWindOffset;
+        [FieldOffset(0x50)] public Vector3 globalWindMapSize;
+        [FieldOffset(0x60)] public Vector3 globalWindMapCenter;
+        [FieldOffset(0x70)] public Vector3 globalWindMapOffset;
+        [FieldOffset(0x80)] public float globalWindMapPower;
+        [FieldOffset(0x84)] public float globalWindMapTimeScale;
+        [FieldOffset(0x88)] public FxWindComputeDebugParameter debugParam;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct FxTerrainMaterialBlendingParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(4)]  public float blendPower;
-        [FieldOffset(8)]  public float blendHightPower;
-        [FieldOffset(12)] public float cullingDistance;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public float blendPower;
+        [FieldOffset(0x08)] public float blendHightPower;
+        [FieldOffset(0x0C)] public float cullingDistance;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct FxInteractionDebugParameter
     {
-        [FieldOffset(0)] public bool enable;
-        [FieldOffset(1)] public bool collisionEnable;
-        [FieldOffset(4)] public float threshold;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x01)] public bool collisionEnable;
+        [FieldOffset(0x04)] public float threshold;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 40)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct FxInteractionParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(4)]  public float power;
-        [FieldOffset(8)]  public float decrease;
-        [FieldOffset(12)] public float timeScale;
-        [FieldOffset(16)] public FxInteractionDebugParameter debug;
-        [FieldOffset(24)] public float tremorPower;
-        [FieldOffset(28)] public float tremorSpeed;
-        [FieldOffset(32)] public float tremorScaleCriterion;
-        [FieldOffset(36)] public float tremorScaleReduce;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public float power;
+        [FieldOffset(0x08)] public float decrease;
+        [FieldOffset(0x0C)] public float timeScale;
+        [FieldOffset(0x10)] public FxInteractionDebugParameter debug;
+        [FieldOffset(0x18)] public float tremorPower;
+        [FieldOffset(0x1C)] public float tremorSpeed;
+        [FieldOffset(0x20)] public float tremorScaleCriterion;
+        [FieldOffset(0x24)] public float tremorScaleReduce;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 56)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public struct FxGpuEnvironmentParameter
     {
-        [FieldOffset(0)]  public float grassDitherStart;
-        [FieldOffset(4)]  public float grassDitherEnd;
-        [FieldOffset(8)]  public FxInteractionParameter interaction;
-        [FieldOffset(48)] public bool enableZoomBias;
-        [FieldOffset(52)] public float zoomBias;
+        [FieldOffset(0x00)] public float grassDitherStart;
+        [FieldOffset(0x04)] public float grassDitherEnd;
+        [FieldOffset(0x08)] public FxInteractionParameter interaction;
+        [FieldOffset(0x30)] public bool enableZoomBias;
+        [FieldOffset(0x34)] public float zoomBias;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 28)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct FxInteractiveWaveParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(1)]  public bool enableDebugDisplay;
-        [FieldOffset(4)]  public float waveDamping;
-        [FieldOffset(8)]  public float waveReduceRange;
-        [FieldOffset(12)] public float waveSpeed;
-        [FieldOffset(16)] public float simurationScale;
-        [FieldOffset(20)] public float playerMaxSpeed;
-        [FieldOffset(24)] public bool isInWaterDummy;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x01)] public bool enableDebugDisplay;
+        [FieldOffset(0x04)] public float waveDamping;
+        [FieldOffset(0x08)] public float waveReduceRange;
+        [FieldOffset(0x0C)] public float waveSpeed;
+        [FieldOffset(0x10)] public float simurationScale;
+        [FieldOffset(0x14)] public float playerMaxSpeed;
+        [FieldOffset(0x18)] public bool isInWaterDummy;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 60)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x3C)]
     public struct FxCyberNoiseEffectParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(4)]  public float tileX;
-        [FieldOffset(8)]  public float tileY;
-        [FieldOffset(12)] public float tileScrollSpeed;
-        [FieldOffset(16)] public float noiseScrollSpeed;
-        [FieldOffset(20)] public float thresholdSpeed;
-        [FieldOffset(24)] public float thredholdMin;
-        [FieldOffset(28)] public float thredholdMax;
-        [FieldOffset(32)] public float selectRate;
-        [FieldOffset(36)] public float scanLineRSpeed;
-        [FieldOffset(40)] public float scanLineRBlend;
-        [FieldOffset(44)] public float scanLineGSpeed;
-        [FieldOffset(48)] public float scanLineGBlend;
-        [FieldOffset(52)] public float rgbLineScale;
-        [FieldOffset(56)] public float rgbLineBlend;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public float tileX;
+        [FieldOffset(0x08)] public float tileY;
+        [FieldOffset(0x0C)] public float tileScrollSpeed;
+        [FieldOffset(0x10)] public float noiseScrollSpeed;
+        [FieldOffset(0x14)] public float thresholdSpeed;
+        [FieldOffset(0x18)] public float thredholdMin;
+        [FieldOffset(0x1C)] public float thredholdMax;
+        [FieldOffset(0x20)] public float selectRate;
+        [FieldOffset(0x24)] public float scanLineRSpeed;
+        [FieldOffset(0x28)] public float scanLineRBlend;
+        [FieldOffset(0x2C)] public float scanLineGSpeed;
+        [FieldOffset(0x30)] public float scanLineGBlend;
+        [FieldOffset(0x34)] public float rgbLineScale;
+        [FieldOffset(0x38)] public float rgbLineBlend;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 28)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct UVShift
     {
-        [FieldOffset(0)]  public float blockLNoiseSizeX;
-        [FieldOffset(4)]  public float blockLNoiseSizeY;
-        [FieldOffset(8)]  public float blockHNoiseSizeX;
-        [FieldOffset(12)] public float blockHNoiseSizeY;
-        [FieldOffset(16)] public float bNoiseHighRate;
-        [FieldOffset(20)] public float intensity;
-        [FieldOffset(24)] public float pixelShiftIntensity;
+        [FieldOffset(0x00)] public float blockLNoiseSizeX;
+        [FieldOffset(0x04)] public float blockLNoiseSizeY;
+        [FieldOffset(0x08)] public float blockHNoiseSizeX;
+        [FieldOffset(0x0C)] public float blockHNoiseSizeY;
+        [FieldOffset(0x10)] public float bNoiseHighRate;
+        [FieldOffset(0x14)] public float intensity;
+        [FieldOffset(0x18)] public float pixelShiftIntensity;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct ColorShift
     {
-        [FieldOffset(0)]  public float blockLNoiseSize;
-        [FieldOffset(4)]  public float blockHNoiseSize;
-        [FieldOffset(8)]  public float bNoiseHighRate;
-        [FieldOffset(12)] public float intensity;
+        [FieldOffset(0x00)] public float blockLNoiseSize;
+        [FieldOffset(0x04)] public float blockHNoiseSize;
+        [FieldOffset(0x08)] public float bNoiseHighRate;
+        [FieldOffset(0x0C)] public float intensity;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 20)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
     public struct InterlaceNoise
     {
-        [FieldOffset(0)]  public float blockLNoiseSize;
-        [FieldOffset(4)]  public float blockHNoiseSize;
-        [FieldOffset(8)]  public float bNoiseHighRate;
-        [FieldOffset(12)] public float intensity;
-        [FieldOffset(16)] public float dropout;
+        [FieldOffset(0x00)] public float blockLNoiseSize;
+        [FieldOffset(0x04)] public float blockHNoiseSize;
+        [FieldOffset(0x08)] public float bNoiseHighRate;
+        [FieldOffset(0x0C)] public float intensity;
+        [FieldOffset(0x10)] public float dropout;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 24)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct ColorDropout
     {
-        [FieldOffset(0)]  public float blockLNoiseSizeX;
-        [FieldOffset(4)]  public float blockLNoiseSizeY;
-        [FieldOffset(8)]  public float blockHNoiseSizeX;
-        [FieldOffset(12)] public float blockHNoiseSizeY;
-        [FieldOffset(16)] public float bNoiseHighRate;
-        [FieldOffset(20)] public float intensity;
+        [FieldOffset(0x00)] public float blockLNoiseSizeX;
+        [FieldOffset(0x04)] public float blockLNoiseSizeY;
+        [FieldOffset(0x08)] public float blockHNoiseSizeX;
+        [FieldOffset(0x0C)] public float blockHNoiseSizeY;
+        [FieldOffset(0x10)] public float bNoiseHighRate;
+        [FieldOffset(0x14)] public float intensity;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 28)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct InvertColor
     {
-        [FieldOffset(0)]  public float blockLNoiseSizeX;
-        [FieldOffset(4)]  public float blockLNoiseSizeY;
-        [FieldOffset(8)]  public float blockHNoiseSizeX;
-        [FieldOffset(12)] public float blockHNoiseSizeY;
-        [FieldOffset(16)] public float bNoiseHighRate;
-        [FieldOffset(20)] public float intensity;
-        [FieldOffset(24)] public float invertAllRate;
+        [FieldOffset(0x00)] public float blockLNoiseSizeX;
+        [FieldOffset(0x04)] public float blockLNoiseSizeY;
+        [FieldOffset(0x08)] public float blockHNoiseSizeX;
+        [FieldOffset(0x0C)] public float blockHNoiseSizeY;
+        [FieldOffset(0x10)] public float bNoiseHighRate;
+        [FieldOffset(0x14)] public float intensity;
+        [FieldOffset(0x18)] public float invertAllRate;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 28)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct GlayScaleColor
     {
-        [FieldOffset(0)]  public float blockLNoiseSizeX;
-        [FieldOffset(4)]  public float blockLNoiseSizeY;
-        [FieldOffset(8)]  public float blockHNoiseSizeX;
-        [FieldOffset(12)] public float blockHNoiseSizeY;
-        [FieldOffset(16)] public float bNoiseHighRate;
-        [FieldOffset(20)] public float intensity;
-        [FieldOffset(24)] public float invertAllRate;
+        [FieldOffset(0x00)] public float blockLNoiseSizeX;
+        [FieldOffset(0x04)] public float blockLNoiseSizeY;
+        [FieldOffset(0x08)] public float blockHNoiseSizeX;
+        [FieldOffset(0x0C)] public float blockHNoiseSizeY;
+        [FieldOffset(0x10)] public float bNoiseHighRate;
+        [FieldOffset(0x14)] public float intensity;
+        [FieldOffset(0x18)] public float invertAllRate;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 164)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xA4)]
     public struct FxCyberSpaceStartNoiseParameter
     {
-        [FieldOffset(0)]   public bool enable;
-        [FieldOffset(4)]   public UVShift uvShift;
-        [FieldOffset(32)]  public ColorShift colorShift;
-        [FieldOffset(48)]  public InterlaceNoise interlaceNoise;
-        [FieldOffset(68)]  public ColorDropout colorDrop;
-        [FieldOffset(92)]  public InvertColor invertColor;
-        [FieldOffset(120)] public GlayScaleColor glayscaleColor;
-        [FieldOffset(148)] public float noiseSpeed;
-        [FieldOffset(152)] public float noiseBias;
-        [FieldOffset(156)] public float noiseWaveAmplitude;
-        [FieldOffset(160)] public float noiseWaveCycle;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public UVShift uvShift;
+        [FieldOffset(0x20)] public ColorShift colorShift;
+        [FieldOffset(0x30)] public InterlaceNoise interlaceNoise;
+        [FieldOffset(0x44)] public ColorDropout colorDrop;
+        [FieldOffset(0x5C)] public InvertColor invertColor;
+        [FieldOffset(0x78)] public GlayScaleColor glayscaleColor;
+        [FieldOffset(0x94)] public float noiseSpeed;
+        [FieldOffset(0x98)] public float noiseBias;
+        [FieldOffset(0x9C)] public float noiseWaveAmplitude;
+        [FieldOffset(0xA0)] public float noiseWaveCycle;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 1)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x01)]
     public struct FxCyberNPCSSEffectRenderParameter
     {
-        [FieldOffset(0)] public bool enable;
+        [FieldOffset(0x00)] public bool enable;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 80)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x50)]
     public struct FxFieldScanEffectRenderParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(16)] public Vector3 centerPos;
-        [FieldOffset(32)] public Color8 color;
-        [FieldOffset(36)] public float radius1;
-        [FieldOffset(40)] public float radius2;
-        [FieldOffset(44)] public float radius3;
-        [FieldOffset(48)] public float intensity1;
-        [FieldOffset(52)] public float intensity2;
-        [FieldOffset(56)] public float intensity3;
-        [FieldOffset(60)] public float gridIntensity;
-        [FieldOffset(64)] public float innerWidth;
-        [FieldOffset(68)] public float gridLineWidth;
-        [FieldOffset(72)] public float gridLineSpan;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x10)] public Vector3 centerPos;
+        [FieldOffset(0x20)] public Color8 color;
+        [FieldOffset(0x24)] public float radius1;
+        [FieldOffset(0x28)] public float radius2;
+        [FieldOffset(0x2C)] public float radius3;
+        [FieldOffset(0x30)] public float intensity1;
+        [FieldOffset(0x34)] public float intensity2;
+        [FieldOffset(0x38)] public float intensity3;
+        [FieldOffset(0x3C)] public float gridIntensity;
+        [FieldOffset(0x40)] public float innerWidth;
+        [FieldOffset(0x44)] public float gridLineWidth;
+        [FieldOffset(0x48)] public float gridLineSpan;
     }
 
     public enum ColorblinidSimulationType : sbyte
@@ -1844,262 +1844,262 @@ public class NeedleFxSceneDataClass
         COLORBLIND_SIM_ALL = 4
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 52)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x34)]
     public struct FxColorAccessibilityFilterParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(4)]  public float daltonizeFactor;
-        [FieldOffset(8)]  public float protanopiaFactor;
-        [FieldOffset(12)] public float deuteranopiaFactor;
-        [FieldOffset(16)] public float tritanopiaFactor;
-        [FieldOffset(20)] public float brightness;
-        [FieldOffset(24)] public float contrast;
-        [FieldOffset(28)] public float maskIntensity__arr0;
-        [FieldOffset(32)] public float maskIntensity__arr1;
-        [FieldOffset(36)] public float maskIntensity__arr2;
-        [FieldOffset(40)] public float maskIntensity__arr3;
-        [FieldOffset(44)] public float maskIntensity__arr4;
-        [FieldOffset(48)] public ColorblinidSimulationType simulationType;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public float daltonizeFactor;
+        [FieldOffset(0x08)] public float protanopiaFactor;
+        [FieldOffset(0x0C)] public float deuteranopiaFactor;
+        [FieldOffset(0x10)] public float tritanopiaFactor;
+        [FieldOffset(0x14)] public float brightness;
+        [FieldOffset(0x18)] public float contrast;
+        [FieldOffset(0x1C)] public float maskIntensity__arr0;
+        [FieldOffset(0x20)] public float maskIntensity__arr1;
+        [FieldOffset(0x24)] public float maskIntensity__arr2;
+        [FieldOffset(0x28)] public float maskIntensity__arr3;
+        [FieldOffset(0x2C)] public float maskIntensity__arr4;
+        [FieldOffset(0x30)] public ColorblinidSimulationType simulationType;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 24)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct FxDentParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(4)]  public float simRadius;
-        [FieldOffset(8)]  public float dentDepth;
-        [FieldOffset(12)] public float normalIntensity;
-        [FieldOffset(16)] public float edgeBulge;
-        [FieldOffset(20)] public float fade;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public float simRadius;
+        [FieldOffset(0x08)] public float dentDepth;
+        [FieldOffset(0x0C)] public float normalIntensity;
+        [FieldOffset(0x10)] public float edgeBulge;
+        [FieldOffset(0x14)] public float fade;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 272)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x110)]
     public struct FxSeparableSSSParameter
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(4)]  public float width;
-        [FieldOffset(8)]  public float normalOffset;
-        [FieldOffset(12)] public float blurOffsetMax;
-        [FieldOffset(16)] public Vector4 strength__arr0;
-        [FieldOffset(32)] public Vector4 strength__arr1;
-        [FieldOffset(48)] public Vector4 strength__arr2;
-        [FieldOffset(64)] public Vector4 strength__arr3;
-        [FieldOffset(80)] public Vector4 strength__arr4;
-        [FieldOffset(96)] public Vector4 strength__arr5;
-        [FieldOffset(112)] public Vector4 strength__arr6;
-        [FieldOffset(128)] public Vector4 strength__arr7;
-        [FieldOffset(144)] public Vector4 strength__arr8;
-        [FieldOffset(160)] public Vector4 strength__arr9;
-        [FieldOffset(176)] public Vector4 strength__arr10;
-        [FieldOffset(192)] public Vector4 strength__arr11;
-        [FieldOffset(208)] public Vector4 strength__arr12;
-        [FieldOffset(224)] public Vector4 strength__arr13;
-        [FieldOffset(240)] public Vector4 strength__arr14;
-        [FieldOffset(256)] public Vector4 strength__arr15;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public float width;
+        [FieldOffset(0x08)] public float normalOffset;
+        [FieldOffset(0x0C)] public float blurOffsetMax;
+        [FieldOffset(0x10)] public Vector4 strength__arr0;
+        [FieldOffset(0x20)] public Vector4 strength__arr1;
+        [FieldOffset(0x30)] public Vector4 strength__arr2;
+        [FieldOffset(0x40)] public Vector4 strength__arr3;
+        [FieldOffset(0x50)] public Vector4 strength__arr4;
+        [FieldOffset(0x60)] public Vector4 strength__arr5;
+        [FieldOffset(0x70)] public Vector4 strength__arr6;
+        [FieldOffset(0x80)] public Vector4 strength__arr7;
+        [FieldOffset(0x90)] public Vector4 strength__arr8;
+        [FieldOffset(0xA0)] public Vector4 strength__arr9;
+        [FieldOffset(0xB0)] public Vector4 strength__arr10;
+        [FieldOffset(0xC0)] public Vector4 strength__arr11;
+        [FieldOffset(0xD0)] public Vector4 strength__arr12;
+        [FieldOffset(0xE0)] public Vector4 strength__arr13;
+        [FieldOffset(0xF0)] public Vector4 strength__arr14;
+        [FieldOffset(0x100)] public Vector4 strength__arr15;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 4720)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1270)]
     public struct NeedleFxParameter
     {
-        [FieldOffset(0)]    public FxRenderOption renderOption;
-        [FieldOffset(592)]  public FxSGGIParameter sggi;
-        [FieldOffset(616)]  public FxRLRParameter rlr;
-        [FieldOffset(656)]  public FxSSGIParameter ssgi;
-        [FieldOffset(688)]  public FxPlanarReflectionParameter planarReflection;
-        [FieldOffset(736)]  public FxBloomParameter bloom;
-        [FieldOffset(752)]  public FxCameraControlParameter cameraControl;
-        [FieldOffset(796)]  public FxToneMapParameter tonemap;
-        [FieldOffset(844)]  public FxColorContrastParameter colorContrast;
-        [FieldOffset(928)]  public FxLightScatteringParameter lightscattering;
-        [FieldOffset(1024)] public FxDOFParameter dof;
-        [FieldOffset(1120)] public FxShadowMapParameter shadowmap;
-        [FieldOffset(1456)] public FxShadowHeightMapParameter shadowHeightMap;
-        [FieldOffset(1476)] public FxVolumetricShadowParameter volShadow;
-        [FieldOffset(1480)] public FxSSAOParameter ssao;
-        [FieldOffset(1600)] public FxSHLightFieldParameter shlightfield;
-        [FieldOffset(1664)] public FxScreenBlurParameter blur;
-        [FieldOffset(1712)] public FxOcclusionCapsuleParameter occlusionCapsule;
-        [FieldOffset(1856)] public FxEffectParameter effect;
-        [FieldOffset(1952)] public FxScreenSpaceGodrayParameter ssGodray;
-        [FieldOffset(2016)] public FxGodrayParameter godray;
-        [FieldOffset(2256)] public FxHeatHazeParameter heatHaze;
-        [FieldOffset(2288)] public FxAtmosphereParameter atmosphere;
-        [FieldOffset(3040)] public FxWeatherParameter weather;
-        [FieldOffset(3200)] public FxSceneEnvironmentParameter sceneEnv;
-        [FieldOffset(3296)] public FxTAAParameter taa;
-        [FieldOffset(3360)] public FxDensityParameter density;
-        [FieldOffset(3628)] public FxChromaticAberrationParameter chromaticAberration;
-        [FieldOffset(3664)] public FxVignetteParameter vignette;
-        [FieldOffset(3792)] public FxWindComputeParameter wind;
-        [FieldOffset(3952)] public FxTerrainMaterialBlendingParameter terrainBlend;
-        [FieldOffset(3968)] public FxGpuEnvironmentParameter gpuEnvironment;
-        [FieldOffset(4024)] public FxInteractiveWaveParameter interactiveWave;
-        [FieldOffset(4052)] public FxCyberNoiseEffectParameter cyberNoise;
-        [FieldOffset(4112)] public FxCyberSpaceStartNoiseParameter cyberStartNoise;
-        [FieldOffset(4276)] public FxCyberNPCSSEffectRenderParameter cyberNPCSS;
-        [FieldOffset(4288)] public FxFieldScanEffectRenderParameter fieldScan;
-        [FieldOffset(4368)] public FxColorAccessibilityFilterParameter colorAccessibility;
-        [FieldOffset(4420)] public FxDentParameter dent;
-        [FieldOffset(4448)] public FxSeparableSSSParameter ssss;
+        [FieldOffset(0x00)] public FxRenderOption renderOption;
+        [FieldOffset(0x250)] public FxSGGIParameter sggi;
+        [FieldOffset(0x268)] public FxRLRParameter rlr;
+        [FieldOffset(0x290)] public FxSSGIParameter ssgi;
+        [FieldOffset(0x2B0)] public FxPlanarReflectionParameter planarReflection;
+        [FieldOffset(0x2E0)] public FxBloomParameter bloom;
+        [FieldOffset(0x2F0)] public FxCameraControlParameter cameraControl;
+        [FieldOffset(0x31C)] public FxToneMapParameter tonemap;
+        [FieldOffset(0x34C)] public FxColorContrastParameter colorContrast;
+        [FieldOffset(0x3A0)] public FxLightScatteringParameter lightscattering;
+        [FieldOffset(0x400)] public FxDOFParameter dof;
+        [FieldOffset(0x460)] public FxShadowMapParameter shadowmap;
+        [FieldOffset(0x5B0)] public FxShadowHeightMapParameter shadowHeightMap;
+        [FieldOffset(0x5C4)] public FxVolumetricShadowParameter volShadow;
+        [FieldOffset(0x5C8)] public FxSSAOParameter ssao;
+        [FieldOffset(0x640)] public FxSHLightFieldParameter shlightfield;
+        [FieldOffset(0x680)] public FxScreenBlurParameter blur;
+        [FieldOffset(0x6B0)] public FxOcclusionCapsuleParameter occlusionCapsule;
+        [FieldOffset(0x740)] public FxEffectParameter effect;
+        [FieldOffset(0x7A0)] public FxScreenSpaceGodrayParameter ssGodray;
+        [FieldOffset(0x7E0)] public FxGodrayParameter godray;
+        [FieldOffset(0x8D0)] public FxHeatHazeParameter heatHaze;
+        [FieldOffset(0x8F0)] public FxAtmosphereParameter atmosphere;
+        [FieldOffset(0xBE0)] public FxWeatherParameter weather;
+        [FieldOffset(0xC80)] public FxSceneEnvironmentParameter sceneEnv;
+        [FieldOffset(0xCE0)] public FxTAAParameter taa;
+        [FieldOffset(0xD20)] public FxDensityParameter density;
+        [FieldOffset(0xE2C)] public FxChromaticAberrationParameter chromaticAberration;
+        [FieldOffset(0xE50)] public FxVignetteParameter vignette;
+        [FieldOffset(0xED0)] public FxWindComputeParameter wind;
+        [FieldOffset(0xF70)] public FxTerrainMaterialBlendingParameter terrainBlend;
+        [FieldOffset(0xF80)] public FxGpuEnvironmentParameter gpuEnvironment;
+        [FieldOffset(0xFB8)] public FxInteractiveWaveParameter interactiveWave;
+        [FieldOffset(0xFD4)] public FxCyberNoiseEffectParameter cyberNoise;
+        [FieldOffset(0x1010)] public FxCyberSpaceStartNoiseParameter cyberStartNoise;
+        [FieldOffset(0x10B4)] public FxCyberNPCSSEffectRenderParameter cyberNPCSS;
+        [FieldOffset(0x10C0)] public FxFieldScanEffectRenderParameter fieldScan;
+        [FieldOffset(0x1110)] public FxColorAccessibilityFilterParameter colorAccessibility;
+        [FieldOffset(0x1144)] public FxDentParameter dent;
+        [FieldOffset(0x1160)] public FxSeparableSSSParameter ssss;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 688)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x2B0)]
     public struct TimeProgressAtmosphereParameter
     {
-        [FieldOffset(0)]   public FxSkyCommon commonSkyParam;
-        [FieldOffset(16)]  public FxBrunetonSky brunetonSkyParam;
-        [FieldOffset(160)] public FxSebastienSky sebastienSkyParam;
-        [FieldOffset(304)] public FxCloudParameter cloudParam;
-        [FieldOffset(560)] public FxCrepuscularRay crepuscularRayParam;
-        [FieldOffset(576)] public FxHeightFog heightFogParam;
+        [FieldOffset(0x00)] public FxSkyCommon commonSkyParam;
+        [FieldOffset(0x10)] public FxBrunetonSky brunetonSkyParam;
+        [FieldOffset(0xA0)] public FxSebastienSky sebastienSkyParam;
+        [FieldOffset(0x130)] public FxCloudParameter cloudParam;
+        [FieldOffset(0x230)] public FxCrepuscularRay crepuscularRayParam;
+        [FieldOffset(0x240)] public FxHeightFog heightFogParam;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 1616)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x650)]
     public struct TimeProgressNeedleFxParam
     {
-        [FieldOffset(0)]    public bool enable;
-        [FieldOffset(4)]    public float time;
-        [FieldOffset(8)]    public FxBloomParameter bloom;
-        [FieldOffset(24)]   public FxCameraControlParameter cameraControl;
-        [FieldOffset(68)]   public FxCameraControlParameter cameraControlEvent;
-        [FieldOffset(112)]  public FxToneMapParameter tonemap;
-        [FieldOffset(160)]  public FxColorContrastParameter colorContrast;
-        [FieldOffset(240)]  public FxLightScatteringParameter lightscattering;
-        [FieldOffset(336)]  public FxEffectParameter effect;
-        [FieldOffset(432)]  public FxScreenSpaceGodrayParameter ssGodray;
-        [FieldOffset(496)]  public FxGodrayParameter godray;
-        [FieldOffset(736)]  public FxHeatHazeParameter heatHaze;
-        [FieldOffset(768)]  public TimeProgressAtmosphereParameter atmosphere;
-        [FieldOffset(1456)] public FxWeatherParameter weather;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public float time;
+        [FieldOffset(0x08)] public FxBloomParameter bloom;
+        [FieldOffset(0x18)] public FxCameraControlParameter cameraControl;
+        [FieldOffset(0x44)] public FxCameraControlParameter cameraControlEvent;
+        [FieldOffset(0x70)] public FxToneMapParameter tonemap;
+        [FieldOffset(0xA0)] public FxColorContrastParameter colorContrast;
+        [FieldOffset(0xF0)] public FxLightScatteringParameter lightscattering;
+        [FieldOffset(0x150)] public FxEffectParameter effect;
+        [FieldOffset(0x1B0)] public FxScreenSpaceGodrayParameter ssGodray;
+        [FieldOffset(0x1F0)] public FxGodrayParameter godray;
+        [FieldOffset(0x2E0)] public FxHeatHazeParameter heatHaze;
+        [FieldOffset(0x300)] public TimeProgressAtmosphereParameter atmosphere;
+        [FieldOffset(0x5B0)] public FxWeatherParameter weather;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 1776)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x6F0)]
     public struct WeatherFxParameter
     {
-        [FieldOffset(0)]    public bool enable;
-        [FieldOffset(4)]    public FxBloomParameter bloom;
-        [FieldOffset(20)]   public FxCameraControlParameter cameraControl;
-        [FieldOffset(64)]   public FxCameraControlParameter cameraControlEvent;
-        [FieldOffset(108)]  public FxToneMapParameter tonemap;
-        [FieldOffset(156)]  public FxColorContrastParameter colorContrast;
-        [FieldOffset(240)]  public FxLightScatteringParameter lightscattering;
-        [FieldOffset(336)]  public FxEffectParameter effect;
-        [FieldOffset(432)]  public FxScreenSpaceGodrayParameter ssGodray;
-        [FieldOffset(496)]  public FxGodrayParameter godray;
-        [FieldOffset(736)]  public FxHeatHazeParameter heatHaze;
-        [FieldOffset(768)]  public TimeProgressAtmosphereParameter atmosphere;
-        [FieldOffset(1456)] public FxWeatherParameter weather;
-        [FieldOffset(1616)] public FxWindComputeParameter wind;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public FxBloomParameter bloom;
+        [FieldOffset(0x14)] public FxCameraControlParameter cameraControl;
+        [FieldOffset(0x40)] public FxCameraControlParameter cameraControlEvent;
+        [FieldOffset(0x6C)] public FxToneMapParameter tonemap;
+        [FieldOffset(0x9C)] public FxColorContrastParameter colorContrast;
+        [FieldOffset(0xF0)] public FxLightScatteringParameter lightscattering;
+        [FieldOffset(0x150)] public FxEffectParameter effect;
+        [FieldOffset(0x1B0)] public FxScreenSpaceGodrayParameter ssGodray;
+        [FieldOffset(0x1F0)] public FxGodrayParameter godray;
+        [FieldOffset(0x2E0)] public FxHeatHazeParameter heatHaze;
+        [FieldOffset(0x300)] public TimeProgressAtmosphereParameter atmosphere;
+        [FieldOffset(0x5B0)] public FxWeatherParameter weather;
+        [FieldOffset(0x650)] public FxWindComputeParameter wind;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct StageCommonParameter
     {
-        [FieldOffset(0)] public float deadline;
-        [FieldOffset(4)] public float oceanSurface;
-        [FieldOffset(8)] public float deadFallTime;
+        [FieldOffset(0x00)] public float deadline;
+        [FieldOffset(0x04)] public float oceanSurface;
+        [FieldOffset(0x08)] public float deadFallTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct StageCameraParameter
     {
-        [FieldOffset(0)] public float zNear;
-        [FieldOffset(4)] public float zFar;
-        [FieldOffset(8)] public float fovy;
+        [FieldOffset(0x00)] public float zNear;
+        [FieldOffset(0x04)] public float zFar;
+        [FieldOffset(0x08)] public float fovy;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct StageTerrainPrecisionParameter
     {
-        [FieldOffset(0)] public float heightRange;
+        [FieldOffset(0x00)] public float heightRange;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct StageTerrainMaterialParameter
     {
-        [FieldOffset(0)]  public float uvScaleDetail;
-        [FieldOffset(4)]  public float uvScaleBase;
-        [FieldOffset(8)]  public float detailDistance;
-        [FieldOffset(12)] public float detailFadeRange;
+        [FieldOffset(0x00)] public float uvScaleDetail;
+        [FieldOffset(0x04)] public float uvScaleBase;
+        [FieldOffset(0x08)] public float detailDistance;
+        [FieldOffset(0x0C)] public float detailFadeRange;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 64)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public struct StageTerrainParameter
     {
-        [FieldOffset(0)]  public bool useHeightMapTerrain;
-        [FieldOffset(1)]  public bool useHalfPrecision;
-        [FieldOffset(4)]  public StageTerrainPrecisionParameter precision;
-        [FieldOffset(8)]  public int worldSize;
-        [FieldOffset(12)] public int heightMapTexelDensity;
-        [FieldOffset(16)] public float heightScale;
-        [FieldOffset(20)] public float smallestCellSize;
-        [FieldOffset(24)] public float slopeClipThrethold;
-        [FieldOffset(28)] public Vector2 aabbMin;
-        [FieldOffset(36)] public Vector2 aabbMax;
-        [FieldOffset(44)] public StageTerrainMaterialParameter material;
-        [FieldOffset(60)] public bool enableGbufferBlending;
+        [FieldOffset(0x00)] public bool useHeightMapTerrain;
+        [FieldOffset(0x01)] public bool useHalfPrecision;
+        [FieldOffset(0x04)] public StageTerrainPrecisionParameter precision;
+        [FieldOffset(0x08)] public int worldSize;
+        [FieldOffset(0x0C)] public int heightMapTexelDensity;
+        [FieldOffset(0x10)] public float heightScale;
+        [FieldOffset(0x14)] public float smallestCellSize;
+        [FieldOffset(0x18)] public float slopeClipThrethold;
+        [FieldOffset(0x1C)] public Vector2 aabbMin;
+        [FieldOffset(0x24)] public Vector2 aabbMax;
+        [FieldOffset(0x2C)] public StageTerrainMaterialParameter material;
+        [FieldOffset(0x3C)] public bool enableGbufferBlending;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 88)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x58)]
     public struct StageConfig
     {
-        [FieldOffset(0)]  public StageCommonParameter common;
-        [FieldOffset(12)] public StageCameraParameter camera;
-        [FieldOffset(24)] public StageTerrainParameter terrain;
+        [FieldOffset(0x00)] public StageCommonParameter common;
+        [FieldOffset(0x0C)] public StageCameraParameter camera;
+        [FieldOffset(0x18)] public StageTerrainParameter terrain;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 127152)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1F0B0)]
     public struct NeedleFxSceneData
     {
-        [FieldOffset(0)]      public NeedleFxSceneConfig config;
-        [FieldOffset(320)]    public NeedleFxParameter items__arr0;
-        [FieldOffset(5040)] public NeedleFxParameter items__arr1;
-        [FieldOffset(9760)] public NeedleFxParameter items__arr2;
-        [FieldOffset(14480)] public NeedleFxParameter items__arr3;
-        [FieldOffset(19200)] public NeedleFxParameter items__arr4;
-        [FieldOffset(23920)] public NeedleFxParameter items__arr5;
-        [FieldOffset(28640)] public NeedleFxParameter items__arr6;
-        [FieldOffset(33360)] public NeedleFxParameter items__arr7;
-        [FieldOffset(38080)] public NeedleFxParameter items__arr8;
-        [FieldOffset(42800)] public NeedleFxParameter items__arr9;
-        [FieldOffset(47520)] public NeedleFxParameter items__arr10;
-        [FieldOffset(52240)] public NeedleFxParameter items__arr11;
-        [FieldOffset(56960)] public NeedleFxParameter items__arr12;
-        [FieldOffset(61680)] public NeedleFxParameter items__arr13;
-        [FieldOffset(66400)] public NeedleFxParameter items__arr14;
-        [FieldOffset(71120)] public NeedleFxParameter items__arr15;
-        [FieldOffset(75840)]  public TimeProgressNeedleFxParam timeItems__arr0;
-        [FieldOffset(77456)] public TimeProgressNeedleFxParam timeItems__arr1;
-        [FieldOffset(79072)] public TimeProgressNeedleFxParam timeItems__arr2;
-        [FieldOffset(80688)] public TimeProgressNeedleFxParam timeItems__arr3;
-        [FieldOffset(82304)] public TimeProgressNeedleFxParam timeItems__arr4;
-        [FieldOffset(83920)] public TimeProgressNeedleFxParam timeItems__arr5;
-        [FieldOffset(85536)] public TimeProgressNeedleFxParam timeItems__arr6;
-        [FieldOffset(87152)] public TimeProgressNeedleFxParam timeItems__arr7;
-        [FieldOffset(88768)] public TimeProgressNeedleFxParam timeItems__arr8;
-        [FieldOffset(90384)] public TimeProgressNeedleFxParam timeItems__arr9;
-        [FieldOffset(92000)] public TimeProgressNeedleFxParam timeItems__arr10;
-        [FieldOffset(93616)] public TimeProgressNeedleFxParam timeItems__arr11;
-        [FieldOffset(95232)] public TimeProgressNeedleFxParam timeItems__arr12;
-        [FieldOffset(96848)] public TimeProgressNeedleFxParam timeItems__arr13;
-        [FieldOffset(98464)] public TimeProgressNeedleFxParam timeItems__arr14;
-        [FieldOffset(100080)] public TimeProgressNeedleFxParam timeItems__arr15;
-        [FieldOffset(101696)] public TimeProgressNeedleFxParam timeItems__arr16;
-        [FieldOffset(103312)] public TimeProgressNeedleFxParam timeItems__arr17;
-        [FieldOffset(104928)] public TimeProgressNeedleFxParam timeItems__arr18;
-        [FieldOffset(106544)] public TimeProgressNeedleFxParam timeItems__arr19;
-        [FieldOffset(108160)] public TimeProgressNeedleFxParam timeItems__arr20;
-        [FieldOffset(109776)] public TimeProgressNeedleFxParam timeItems__arr21;
-        [FieldOffset(111392)] public TimeProgressNeedleFxParam timeItems__arr22;
-        [FieldOffset(113008)] public TimeProgressNeedleFxParam timeItems__arr23;
-        [FieldOffset(114624)] public WeatherFxParameter weatherItems__arr0;
-        [FieldOffset(116400)] public WeatherFxParameter weatherItems__arr1;
-        [FieldOffset(118176)] public WeatherFxParameter weatherItems__arr2;
-        [FieldOffset(119952)] public WeatherFxParameter weatherItems__arr3;
-        [FieldOffset(121728)] public WeatherFxParameter weatherItems__arr4;
-        [FieldOffset(123504)] public WeatherFxParameter weatherItems__arr5;
-        [FieldOffset(125280)] public WeatherFxParameter weatherItems__arr6;
-        [FieldOffset(127056)] public StageConfig stageConfig;
+        [FieldOffset(0x00)] public NeedleFxSceneConfig config;
+        [FieldOffset(0x140)] public NeedleFxParameter items__arr0;
+        [FieldOffset(0x13B0)] public NeedleFxParameter items__arr1;
+        [FieldOffset(0x2620)] public NeedleFxParameter items__arr2;
+        [FieldOffset(0x3890)] public NeedleFxParameter items__arr3;
+        [FieldOffset(0x4B00)] public NeedleFxParameter items__arr4;
+        [FieldOffset(0x5D70)] public NeedleFxParameter items__arr5;
+        [FieldOffset(0x6FE0)] public NeedleFxParameter items__arr6;
+        [FieldOffset(0x8250)] public NeedleFxParameter items__arr7;
+        [FieldOffset(0x94C0)] public NeedleFxParameter items__arr8;
+        [FieldOffset(0xA730)] public NeedleFxParameter items__arr9;
+        [FieldOffset(0xB9A0)] public NeedleFxParameter items__arr10;
+        [FieldOffset(0xCC10)] public NeedleFxParameter items__arr11;
+        [FieldOffset(0xDE80)] public NeedleFxParameter items__arr12;
+        [FieldOffset(0xF0F0)] public NeedleFxParameter items__arr13;
+        [FieldOffset(0x10360)] public NeedleFxParameter items__arr14;
+        [FieldOffset(0x115D0)] public NeedleFxParameter items__arr15;
+        [FieldOffset(0x12840)] public TimeProgressNeedleFxParam timeItems__arr0;
+        [FieldOffset(0x12E90)] public TimeProgressNeedleFxParam timeItems__arr1;
+        [FieldOffset(0x134E0)] public TimeProgressNeedleFxParam timeItems__arr2;
+        [FieldOffset(0x13B30)] public TimeProgressNeedleFxParam timeItems__arr3;
+        [FieldOffset(0x14180)] public TimeProgressNeedleFxParam timeItems__arr4;
+        [FieldOffset(0x147D0)] public TimeProgressNeedleFxParam timeItems__arr5;
+        [FieldOffset(0x14E20)] public TimeProgressNeedleFxParam timeItems__arr6;
+        [FieldOffset(0x15470)] public TimeProgressNeedleFxParam timeItems__arr7;
+        [FieldOffset(0x15AC0)] public TimeProgressNeedleFxParam timeItems__arr8;
+        [FieldOffset(0x16110)] public TimeProgressNeedleFxParam timeItems__arr9;
+        [FieldOffset(0x16760)] public TimeProgressNeedleFxParam timeItems__arr10;
+        [FieldOffset(0x16DB0)] public TimeProgressNeedleFxParam timeItems__arr11;
+        [FieldOffset(0x17400)] public TimeProgressNeedleFxParam timeItems__arr12;
+        [FieldOffset(0x17A50)] public TimeProgressNeedleFxParam timeItems__arr13;
+        [FieldOffset(0x180A0)] public TimeProgressNeedleFxParam timeItems__arr14;
+        [FieldOffset(0x186F0)] public TimeProgressNeedleFxParam timeItems__arr15;
+        [FieldOffset(0x18D40)] public TimeProgressNeedleFxParam timeItems__arr16;
+        [FieldOffset(0x19390)] public TimeProgressNeedleFxParam timeItems__arr17;
+        [FieldOffset(0x199E0)] public TimeProgressNeedleFxParam timeItems__arr18;
+        [FieldOffset(0x1A030)] public TimeProgressNeedleFxParam timeItems__arr19;
+        [FieldOffset(0x1A680)] public TimeProgressNeedleFxParam timeItems__arr20;
+        [FieldOffset(0x1ACD0)] public TimeProgressNeedleFxParam timeItems__arr21;
+        [FieldOffset(0x1B320)] public TimeProgressNeedleFxParam timeItems__arr22;
+        [FieldOffset(0x1B970)] public TimeProgressNeedleFxParam timeItems__arr23;
+        [FieldOffset(0x1BFC0)] public WeatherFxParameter weatherItems__arr0;
+        [FieldOffset(0x1C6B0)] public WeatherFxParameter weatherItems__arr1;
+        [FieldOffset(0x1CDA0)] public WeatherFxParameter weatherItems__arr2;
+        [FieldOffset(0x1D490)] public WeatherFxParameter weatherItems__arr3;
+        [FieldOffset(0x1DB80)] public WeatherFxParameter weatherItems__arr4;
+        [FieldOffset(0x1E270)] public WeatherFxParameter weatherItems__arr5;
+        [FieldOffset(0x1E960)] public WeatherFxParameter weatherItems__arr6;
+        [FieldOffset(0x1F050)] public StageConfig stageConfig;
     }
 
 }

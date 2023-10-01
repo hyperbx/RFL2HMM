@@ -5,11 +5,11 @@ Library "BattleRushParameter"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct BattleRushPhaseRankParameter
     {
-        [FieldOffset(0)]  public unsafe fixed uint rankTime[4];
-        [FieldOffset(16)] public unsafe fixed uint rankTimeAll[4];
+        [FieldOffset(0x00)] public unsafe fixed uint rankTime[4];
+        [FieldOffset(0x10)] public unsafe fixed uint rankTimeAll[4];
     }
 
     public enum BgmType : sbyte
@@ -33,14 +33,14 @@ Library "BattleRushParameter"
         TUTORIAL_BLADE_BATTLE = 15
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 508)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1FC)]
     public struct BattleRushStageParameter
     {
-        [FieldOffset(0)]   public uint numPhases;
-        [FieldOffset(4)]   public unsafe fixed float phaseLimitTime[11];
-        [FieldOffset(48)]  public unsafe fixed float phaseClearedTime[11];
-        [FieldOffset(92)]  public unsafe fixed float phaseResultTime[11];
-        [FieldOffset(136)] public unsafe fixed byte /* BattleRushPhaseRankParameter[11] */ _phaseRank[352];
+        [FieldOffset(0x00)] public uint numPhases;
+        [FieldOffset(0x04)] public unsafe fixed float phaseLimitTime[11];
+        [FieldOffset(0x30)] public unsafe fixed float phaseClearedTime[11];
+        [FieldOffset(0x5C)] public unsafe fixed float phaseResultTime[11];
+        [FieldOffset(0x88)] public unsafe fixed byte /* BattleRushPhaseRankParameter[11] */ _phaseRank[352];
 
         public unsafe BattleRushPhaseRankParameter* phaseRank
         {
@@ -51,7 +51,7 @@ Library "BattleRushParameter"
             }
         }
 
-        [FieldOffset(488)] public unsafe fixed byte /* BgmType[11] */ _phaseBgmType[11];
+        [FieldOffset(0x1E8)] public unsafe fixed byte /* BgmType[11] */ _phaseBgmType[11];
 
         public unsafe BgmType* phaseBgmType
         {
@@ -62,14 +62,14 @@ Library "BattleRushParameter"
             }
         }
 
-        [FieldOffset(500)] public uint hour;
-        [FieldOffset(504)] public uint minute;
+        [FieldOffset(0x1F4)] public uint hour;
+        [FieldOffset(0x1F8)] public uint minute;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 2036)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x7F4)]
     public struct BattleRushParameter
     {
-        [FieldOffset(0)]    public unsafe fixed byte /* BattleRushStageParameter[4] */ _stages[2032];
+        [FieldOffset(0x00)] public unsafe fixed byte /* BattleRushStageParameter[4] */ _stages[2032];
 
         public unsafe BattleRushStageParameter* stages
         {
@@ -80,7 +80,7 @@ Library "BattleRushParameter"
             }
         }
 
-        [FieldOffset(2032)] public float viewPaseResultTime;
+        [FieldOffset(0x7F0)] public float viewPaseResultTime;
     }
 
 }

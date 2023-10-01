@@ -5,27 +5,72 @@ Library "BulletPatternSetParameters"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 28)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct HackingBulletParameter
     {
-        [FieldOffset(0)]  public float bulletRadius;
-        [FieldOffset(4)]  public float bulletModelScale;
-        [FieldOffset(8)]  public float bulletRadiusLastBoss;
-        [FieldOffset(12)] public float bulletModelScaleLastBoss;
-        [FieldOffset(16)] public float bulletModelOffsetRateLastBoss;
-        [FieldOffset(20)] public float laserNormalRadius;
-        [FieldOffset(24)] public float laserThickRadius;
+        [FieldOffset(0x00)] public float bulletRadius;
+        [FieldOffset(0x04)] public float bulletModelScale;
+        [FieldOffset(0x08)] public float bulletRadiusLastBoss;
+        [FieldOffset(0x0C)] public float bulletModelScaleLastBoss;
+        [FieldOffset(0x10)] public float bulletModelOffsetRateLastBoss;
+        [FieldOffset(0x14)] public float laserNormalRadius;
+        [FieldOffset(0x18)] public float laserThickRadius;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
-    public struct CString
+    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    public struct UnmanagedString
     {
         [FieldOffset(0)] public long pValue;
 
         public string Value
         {
-        	get => Marshal.PtrToStringAnsi((IntPtr)pValue);
-        	set => pValue = (long)Marshal.StringToHGlobalAnsi(value);
+            get
+            {
+                if (pValue == 0)
+                    return string.Empty;
+
+                return Marshal.PtrToStringAnsi((nint)pValue);
+            }
+
+            set => pValue = Marshal.StringToHGlobalAnsi(value);
+        }
+
+        public UnmanagedString(string in_value)
+        {
+            Value = in_value;
+        }
+
+        public static implicit operator UnmanagedString(string in_value)
+        {
+            return new UnmanagedString(in_value);
+        }
+
+        public static bool operator ==(UnmanagedString in_left, string in_right)
+        {
+            return in_left.Value == in_right;
+        }
+
+        public static bool operator !=(UnmanagedString in_left, string in_right)
+        {
+            return !(in_left == in_right);
+        }
+
+        public override bool Equals(object in_obj)
+        {
+            if (in_obj is string str)
+                return Value == str;
+
+            return base.Equals(in_obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Value;
         }
     }
 
@@ -44,28 +89,28 @@ Library "BulletPatternSetParameters"
         Hacking2 = 1
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct AnimationParameter
     {
-        [FieldOffset(0)] public float angle;
-        [FieldOffset(4)] public float time;
+        [FieldOffset(0x00)] public float angle;
+        [FieldOffset(0x04)] public float time;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 104)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x68)]
     public struct BulletPatternParameter
     {
-        [FieldOffset(0)]  public Type type;
-        [FieldOffset(1)]  public ElementType element;
-        [FieldOffset(4)]  public float startAngle;
-        [FieldOffset(8)]  public float endAngle;
-        [FieldOffset(12)] public byte shootNum;
-        [FieldOffset(16)] public float shootSpeed;
-        [FieldOffset(20)] public byte wayNum;
-        [FieldOffset(24)] public float wayAngle;
-        [FieldOffset(28)] public float laserLength;
-        [FieldOffset(32)] public float lifeTime;
-        [FieldOffset(36)] public bool animation;
-        [FieldOffset(40)] public unsafe fixed byte /* AnimationParameter[8] */ _animParam[64];
+        [FieldOffset(0x00)] public Type type;
+        [FieldOffset(0x01)] public ElementType element;
+        [FieldOffset(0x04)] public float startAngle;
+        [FieldOffset(0x08)] public float endAngle;
+        [FieldOffset(0x0C)] public byte shootNum;
+        [FieldOffset(0x10)] public float shootSpeed;
+        [FieldOffset(0x14)] public byte wayNum;
+        [FieldOffset(0x18)] public float wayAngle;
+        [FieldOffset(0x1C)] public float laserLength;
+        [FieldOffset(0x20)] public float lifeTime;
+        [FieldOffset(0x24)] public bool animation;
+        [FieldOffset(0x28)] public unsafe fixed byte /* AnimationParameter[8] */ _animParam[64];
 
         public unsafe AnimationParameter* animParam
         {
@@ -77,18 +122,18 @@ Library "BulletPatternSetParameters"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 120)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x78)]
     public struct BulletPatternSetParameter
     {
-        [FieldOffset(0)]  public CString name;
-        [FieldOffset(16)] public BulletPatternParameter param;
+        [FieldOffset(0x00)] public UnmanagedString name;
+        [FieldOffset(0x10)] public BulletPatternParameter param;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 30752)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x7820)]
     public struct BulletPatternSetParameters
     {
-        [FieldOffset(0)]  public HackingBulletParameter bulletParam;
-        [FieldOffset(32)] public unsafe fixed byte /* BulletPatternSetParameter[256] */ _data[30720];
+        [FieldOffset(0x00)] public HackingBulletParameter bulletParam;
+        [FieldOffset(0x20)] public unsafe fixed byte /* BulletPatternSetParameter[256] */ _data[30720];
 
         public unsafe BulletPatternSetParameter* data
         {

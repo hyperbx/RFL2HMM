@@ -16,11 +16,11 @@ public class FxSMAAParameterClass
         TEST_MODE_2 = 2
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 2)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x02)]
     public struct FxSMAAParameter
     {
-        [FieldOffset(0)] public Preset preset;
-        [FieldOffset(1)] public TestMode testMode;
+        [FieldOffset(0x00)] public Preset preset;
+        [FieldOffset(0x01)] public TestMode testMode;
     }
 
 }

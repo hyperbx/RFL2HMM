@@ -5,51 +5,51 @@ Library "MiniBossFlyerConfig"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 64)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public struct MiniBossCommonConfig
     {
-        [FieldOffset(0)]  public float scoutDistance;
-        [FieldOffset(4)]  public float scoutDistanceOutside;
-        [FieldOffset(8)]  public float zoomDistance;
-        [FieldOffset(16)] public Vector3 zoomOffset;
-        [FieldOffset(32)] public Vector3 zoomAngle;
-        [FieldOffset(48)] public float zoomFov;
+        [FieldOffset(0x00)] public float scoutDistance;
+        [FieldOffset(0x04)] public float scoutDistanceOutside;
+        [FieldOffset(0x08)] public float zoomDistance;
+        [FieldOffset(0x10)] public Vector3 zoomOffset;
+        [FieldOffset(0x20)] public Vector3 zoomAngle;
+        [FieldOffset(0x30)] public float zoomFov;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 24)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct FlyerTrailParam
     {
-        [FieldOffset(0)]  public float interval;
-        [FieldOffset(4)]  public int recordNumWander;
-        [FieldOffset(8)]  public int recordNumWatch;
-        [FieldOffset(12)] public int recordNumBattle;
-        [FieldOffset(16)] public float width;
-        [FieldOffset(20)] public float wallHeight;
+        [FieldOffset(0x00)] public float interval;
+        [FieldOffset(0x04)] public int recordNumWander;
+        [FieldOffset(0x08)] public int recordNumWatch;
+        [FieldOffset(0x0C)] public int recordNumBattle;
+        [FieldOffset(0x10)] public float width;
+        [FieldOffset(0x14)] public float wallHeight;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct FlyerWanderParam
     {
-        [FieldOffset(0)] public float speed;
+        [FieldOffset(0x00)] public float speed;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 24)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct FlyerWatchShotParam
     {
-        [FieldOffset(0)]  public float interval;
-        [FieldOffset(4)]  public float readyDuration;
-        [FieldOffset(8)]  public float shotAnimSpeed;
-        [FieldOffset(12)] public uint shotAnimNum;
-        [FieldOffset(16)] public float speed;
-        [FieldOffset(20)] public float lifeTime;
+        [FieldOffset(0x00)] public float interval;
+        [FieldOffset(0x04)] public float readyDuration;
+        [FieldOffset(0x08)] public float shotAnimSpeed;
+        [FieldOffset(0x0C)] public uint shotAnimNum;
+        [FieldOffset(0x10)] public float speed;
+        [FieldOffset(0x14)] public float lifeTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct FlyerWatchParam
     {
-        [FieldOffset(0)] public float speed;
-        [FieldOffset(4)] public float changeWanderTime;
-        [FieldOffset(8)] public FlyerWatchShotParam shot;
+        [FieldOffset(0x00)] public float speed;
+        [FieldOffset(0x04)] public float changeWanderTime;
+        [FieldOffset(0x08)] public FlyerWatchShotParam shot;
     }
 
     public enum HorizontalType : sbyte
@@ -59,10 +59,10 @@ Library "MiniBossFlyerConfig"
         HorzRight = 2
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 6)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x06)]
     public struct FlyerEscapeShotTableData
     {
-        [FieldOffset(0)] public unsafe fixed byte /* HorizontalType[6] */ _horz[6];
+        [FieldOffset(0x00)] public unsafe fixed byte /* HorizontalType[6] */ _horz[6];
 
         public unsafe HorizontalType* horz
         {
@@ -74,10 +74,10 @@ Library "MiniBossFlyerConfig"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 136)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x88)]
     public struct FlyerEscapeShotParam
     {
-        [FieldOffset(0)]   public unsafe fixed byte /* FlyerEscapeShotTableData[16] */ _posTable[96];
+        [FieldOffset(0x00)] public unsafe fixed byte /* FlyerEscapeShotTableData[16] */ _posTable[96];
 
         public unsafe FlyerEscapeShotTableData* posTable
         {
@@ -88,16 +88,16 @@ Library "MiniBossFlyerConfig"
             }
         }
 
-        [FieldOffset(96)]  public float interval;
-        [FieldOffset(100)] public float waitAfterLoop;
-        [FieldOffset(104)] public float readyDuration;
-        [FieldOffset(108)] public float shotAnimSpeed;
-        [FieldOffset(112)] public uint shotAnimNum;
-        [FieldOffset(116)] public float initSpeed;
-        [FieldOffset(120)] public float maxSpeed;
-        [FieldOffset(124)] public float acc;
-        [FieldOffset(128)] public float lifeTime;
-        [FieldOffset(132)] public float nearest;
+        [FieldOffset(0x60)] public float interval;
+        [FieldOffset(0x64)] public float waitAfterLoop;
+        [FieldOffset(0x68)] public float readyDuration;
+        [FieldOffset(0x6C)] public float shotAnimSpeed;
+        [FieldOffset(0x70)] public uint shotAnimNum;
+        [FieldOffset(0x74)] public float initSpeed;
+        [FieldOffset(0x78)] public float maxSpeed;
+        [FieldOffset(0x7C)] public float acc;
+        [FieldOffset(0x80)] public float lifeTime;
+        [FieldOffset(0x84)] public float nearest;
     }
 
     public enum PlayerOffsetType : sbyte
@@ -106,157 +106,157 @@ Library "MiniBossFlyerConfig"
         PLAYER_OFFSET_ABSOLUTE = 1
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 80)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x50)]
     public struct FlyerEscapeCameraParam
     {
-        [FieldOffset(0)]  public float fovy;
-        [FieldOffset(4)]  public float zRot;
-        [FieldOffset(8)]  public float distance;
-        [FieldOffset(12)] public float pathOffset;
-        [FieldOffset(16)] public bool usePathVerticalComponent;
-        [FieldOffset(17)] public bool usePathNormal;
-        [FieldOffset(20)] public float angleSensitivity;
-        [FieldOffset(24)] public float angleSensitivityBoost;
-        [FieldOffset(28)] public float azimuthOffsetDeg;
-        [FieldOffset(32)] public float elevationOffsetDeg;
-        [FieldOffset(36)] public float gravityOffset;
-        [FieldOffset(48)] public Vector3 playerOffset;
-        [FieldOffset(64)] public PlayerOffsetType playerOffsetType;
+        [FieldOffset(0x00)] public float fovy;
+        [FieldOffset(0x04)] public float zRot;
+        [FieldOffset(0x08)] public float distance;
+        [FieldOffset(0x0C)] public float pathOffset;
+        [FieldOffset(0x10)] public bool usePathVerticalComponent;
+        [FieldOffset(0x11)] public bool usePathNormal;
+        [FieldOffset(0x14)] public float angleSensitivity;
+        [FieldOffset(0x18)] public float angleSensitivityBoost;
+        [FieldOffset(0x1C)] public float azimuthOffsetDeg;
+        [FieldOffset(0x20)] public float elevationOffsetDeg;
+        [FieldOffset(0x24)] public float gravityOffset;
+        [FieldOffset(0x30)] public Vector3 playerOffset;
+        [FieldOffset(0x40)] public PlayerOffsetType playerOffsetType;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct FlyerEscapeQuickStepParam
     {
-        [FieldOffset(0)]  public bool enable;
-        [FieldOffset(4)]  public float speed;
-        [FieldOffset(8)]  public float boostSpeed;
-        [FieldOffset(12)] public float boostSpeedMax;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public float speed;
+        [FieldOffset(0x08)] public float boostSpeed;
+        [FieldOffset(0x0C)] public float boostSpeedMax;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 256)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x100)]
     public struct FlyerEscapeParam
     {
-        [FieldOffset(0)]   public float startSpeed;
-        [FieldOffset(4)]   public float decrease;
-        [FieldOffset(8)]   public float minSpeed;
-        [FieldOffset(12)]  public float targetDisableTime;
-        [FieldOffset(16)]  public float resetByFallTime;
-        [FieldOffset(20)]  public float resetByDistance;
-        [FieldOffset(24)]  public FlyerEscapeShotParam shot;
-        [FieldOffset(160)] public FlyerEscapeCameraParam camera;
-        [FieldOffset(240)] public FlyerEscapeQuickStepParam quickStep;
+        [FieldOffset(0x00)] public float startSpeed;
+        [FieldOffset(0x04)] public float decrease;
+        [FieldOffset(0x08)] public float minSpeed;
+        [FieldOffset(0x0C)] public float targetDisableTime;
+        [FieldOffset(0x10)] public float resetByFallTime;
+        [FieldOffset(0x14)] public float resetByDistance;
+        [FieldOffset(0x18)] public FlyerEscapeShotParam shot;
+        [FieldOffset(0xA0)] public FlyerEscapeCameraParam camera;
+        [FieldOffset(0xF0)] public FlyerEscapeQuickStepParam quickStep;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 48)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct FlyerNearStartCamParam
     {
-        [FieldOffset(0)]  public float duration;
-        [FieldOffset(16)] public Vector3 posOffset;
-        [FieldOffset(32)] public float fovy;
-        [FieldOffset(36)] public float interpolateTimePush;
-        [FieldOffset(40)] public float interpolateTimePop;
+        [FieldOffset(0x00)] public float duration;
+        [FieldOffset(0x10)] public Vector3 posOffset;
+        [FieldOffset(0x20)] public float fovy;
+        [FieldOffset(0x24)] public float interpolateTimePush;
+        [FieldOffset(0x28)] public float interpolateTimePop;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct FlyerIdlingNearParam
     {
-        [FieldOffset(0)] public float durationMin;
-        [FieldOffset(4)] public float durationMax;
-        [FieldOffset(8)] public unsafe fixed uint selectRatio[2];
+        [FieldOffset(0x00)] public float durationMin;
+        [FieldOffset(0x04)] public float durationMax;
+        [FieldOffset(0x08)] public unsafe fixed uint selectRatio[2];
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct FlyerGuardParam
     {
-        [FieldOffset(0)] public float duration;
+        [FieldOffset(0x00)] public float duration;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 28)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct FlyerAutoLockonParam
     {
-        [FieldOffset(0)]  public float lockonDistance;
-        [FieldOffset(4)]  public float unlockDistance;
-        [FieldOffset(8)]  public float distance;
-        [FieldOffset(12)] public float minElevation;
-        [FieldOffset(16)] public float maxElevation;
-        [FieldOffset(20)] public float panningSuspensionK;
-        [FieldOffset(24)] public float interiorPanningSuspensionK;
+        [FieldOffset(0x00)] public float lockonDistance;
+        [FieldOffset(0x04)] public float unlockDistance;
+        [FieldOffset(0x08)] public float distance;
+        [FieldOffset(0x0C)] public float minElevation;
+        [FieldOffset(0x10)] public float maxElevation;
+        [FieldOffset(0x14)] public float panningSuspensionK;
+        [FieldOffset(0x18)] public float interiorPanningSuspensionK;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct FlyerNearEndLaunchParam
     {
-        [FieldOffset(0)]  public float outStrength;
-        [FieldOffset(4)]  public float inStrength;
-        [FieldOffset(8)]  public float outElev;
-        [FieldOffset(12)] public float inElev;
-        [FieldOffset(16)] public float speedMin;
-        [FieldOffset(20)] public float speedMax;
-        [FieldOffset(24)] public float speedMinLength;
-        [FieldOffset(28)] public float speedMaxLength;
+        [FieldOffset(0x00)] public float outStrength;
+        [FieldOffset(0x04)] public float inStrength;
+        [FieldOffset(0x08)] public float outElev;
+        [FieldOffset(0x0C)] public float inElev;
+        [FieldOffset(0x10)] public float speedMin;
+        [FieldOffset(0x14)] public float speedMax;
+        [FieldOffset(0x18)] public float speedMinLength;
+        [FieldOffset(0x1C)] public float speedMaxLength;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 160)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
     public struct FlyerNearParam
     {
-        [FieldOffset(0)]   public float duration;
-        [FieldOffset(4)]   public float startHABounceUp;
-        [FieldOffset(8)]   public float startHABounceBack;
-        [FieldOffset(12)]  public float preliminaryMotionSpeed;
-        [FieldOffset(16)]  public float resetByDistance;
-        [FieldOffset(32)]  public FlyerNearStartCamParam startCam;
-        [FieldOffset(80)]  public FlyerIdlingNearParam idling;
-        [FieldOffset(96)]  public FlyerGuardParam guard;
-        [FieldOffset(100)] public FlyerAutoLockonParam lockon;
-        [FieldOffset(128)] public FlyerNearEndLaunchParam launch;
+        [FieldOffset(0x00)] public float duration;
+        [FieldOffset(0x04)] public float startHABounceUp;
+        [FieldOffset(0x08)] public float startHABounceBack;
+        [FieldOffset(0x0C)] public float preliminaryMotionSpeed;
+        [FieldOffset(0x10)] public float resetByDistance;
+        [FieldOffset(0x20)] public FlyerNearStartCamParam startCam;
+        [FieldOffset(0x50)] public FlyerIdlingNearParam idling;
+        [FieldOffset(0x60)] public FlyerGuardParam guard;
+        [FieldOffset(0x64)] public FlyerAutoLockonParam lockon;
+        [FieldOffset(0x80)] public FlyerNearEndLaunchParam launch;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 560)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x230)]
     public struct MiniBossFlyerCommonParam
     {
-        [FieldOffset(0)]   public MiniBossCommonConfig commonConfig;
-        [FieldOffset(64)]  public FlyerTrailParam trail;
-        [FieldOffset(88)]  public FlyerWanderParam wander;
-        [FieldOffset(92)]  public FlyerWatchParam watch;
-        [FieldOffset(128)] public FlyerEscapeParam escape;
-        [FieldOffset(384)] public FlyerNearParam nearRange;
-        [FieldOffset(544)] public float stunTime;
+        [FieldOffset(0x00)] public MiniBossCommonConfig commonConfig;
+        [FieldOffset(0x40)] public FlyerTrailParam trail;
+        [FieldOffset(0x58)] public FlyerWanderParam wander;
+        [FieldOffset(0x5C)] public FlyerWatchParam watch;
+        [FieldOffset(0x80)] public FlyerEscapeParam escape;
+        [FieldOffset(0x180)] public FlyerNearParam nearRange;
+        [FieldOffset(0x220)] public float stunTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 52)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x34)]
     public struct MiniBossLevelCommonConfig
     {
-        [FieldOffset(0)]  public int maxHealthPoint;
-        [FieldOffset(4)]  public unsafe fixed float maxStunPoint[3];
-        [FieldOffset(16)] public float stunDecreaseStartTime;
-        [FieldOffset(20)] public float stunDecreaseSpeed;
-        [FieldOffset(24)] public unsafe fixed float maxStaggerPoint[3];
-        [FieldOffset(36)] public float staggerDecreaseStartTime;
-        [FieldOffset(40)] public float staggerDecreaseSpeed;
-        [FieldOffset(44)] public float attackRate;
-        [FieldOffset(48)] public ushort expItemNum;
-        [FieldOffset(50)] public ushort exp;
+        [FieldOffset(0x00)] public int maxHealthPoint;
+        [FieldOffset(0x04)] public unsafe fixed float maxStunPoint[3];
+        [FieldOffset(0x10)] public float stunDecreaseStartTime;
+        [FieldOffset(0x14)] public float stunDecreaseSpeed;
+        [FieldOffset(0x18)] public unsafe fixed float maxStaggerPoint[3];
+        [FieldOffset(0x24)] public float staggerDecreaseStartTime;
+        [FieldOffset(0x28)] public float staggerDecreaseSpeed;
+        [FieldOffset(0x2C)] public float attackRate;
+        [FieldOffset(0x30)] public ushort expItemNum;
+        [FieldOffset(0x32)] public ushort exp;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 56)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public struct MiniBossFlyerLevelParam
     {
-        [FieldOffset(0)] public int level;
-        [FieldOffset(4)] public MiniBossLevelCommonConfig commonConfig;
+        [FieldOffset(0x00)] public int level;
+        [FieldOffset(0x04)] public MiniBossLevelCommonConfig commonConfig;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct FlayerEscapeShotSequenceTable
     {
-        [FieldOffset(0)] public int id;
-        [FieldOffset(4)] public float interval;
+        [FieldOffset(0x00)] public int id;
+        [FieldOffset(0x04)] public float interval;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 68)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x44)]
     public struct FlayerEscapeShotSequenceTableData
     {
-        [FieldOffset(0)] public bool isUse;
-        [FieldOffset(4)] public unsafe fixed byte /* FlayerEscapeShotSequenceTable[8] */ _table[64];
+        [FieldOffset(0x00)] public bool isUse;
+        [FieldOffset(0x04)] public unsafe fixed byte /* FlayerEscapeShotSequenceTable[8] */ _table[64];
 
         public unsafe FlayerEscapeShotSequenceTable* table
         {
@@ -268,11 +268,11 @@ Library "MiniBossFlyerConfig"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 1092)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x444)]
     public struct MiniBossFlyerLevelBand
     {
-        [FieldOffset(0)] public int level;
-        [FieldOffset(4)] public unsafe fixed byte /* FlayerEscapeShotSequenceTableData[16] */ _sequence[1088];
+        [FieldOffset(0x00)] public int level;
+        [FieldOffset(0x04)] public unsafe fixed byte /* FlayerEscapeShotSequenceTableData[16] */ _sequence[1088];
 
         public unsafe FlayerEscapeShotSequenceTableData* sequence
         {
@@ -284,11 +284,11 @@ Library "MiniBossFlyerConfig"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 6304)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18A0)]
     public struct MiniBossFlyerConfig
     {
-        [FieldOffset(0)]   public MiniBossFlyerCommonParam commonParam;
-        [FieldOffset(560)] public unsafe fixed byte /* MiniBossFlyerLevelParam[5] */ _levelParams[280];
+        [FieldOffset(0x00)] public MiniBossFlyerCommonParam commonParam;
+        [FieldOffset(0x230)] public unsafe fixed byte /* MiniBossFlyerLevelParam[5] */ _levelParams[280];
 
         public unsafe MiniBossFlyerLevelParam* levelParams
         {
@@ -299,7 +299,7 @@ Library "MiniBossFlyerConfig"
             }
         }
 
-        [FieldOffset(840)] public unsafe fixed byte /* MiniBossFlyerLevelBand[5] */ _levelBand[5460];
+        [FieldOffset(0x348)] public unsafe fixed byte /* MiniBossFlyerLevelBand[5] */ _levelBand[5460];
 
         public unsafe MiniBossFlyerLevelBand* levelBand
         {

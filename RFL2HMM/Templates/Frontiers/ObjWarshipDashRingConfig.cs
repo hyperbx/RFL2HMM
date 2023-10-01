@@ -3,10 +3,10 @@ using System.Runtime.InteropServices;
 
 public class ObjWarshipDashRingConfigClass
 {
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct ObjWarshipDashRingConfig
     {
-        [FieldOffset(0)] public float baseHeight;
+        [FieldOffset(0x00)] public float baseHeight;
     }
 
 }

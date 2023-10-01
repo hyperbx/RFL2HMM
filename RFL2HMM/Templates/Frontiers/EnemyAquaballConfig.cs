@@ -3,96 +3,96 @@ using System.Runtime.InteropServices;
 
 public class EnemyAquaballConfigClass
 {
-    [StructLayout(LayoutKind.Explicit, Size = 28)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct RingParameter
     {
-        [FieldOffset(0)]  public float suckedTime;
-        [FieldOffset(4)]  public float launchAngle;
-        [FieldOffset(8)]  public float launchMaxSpeed;
-        [FieldOffset(12)] public float launchMinSpeed;
-        [FieldOffset(16)] public float randomRangeMin;
-        [FieldOffset(20)] public float randomRangeMax;
-        [FieldOffset(24)] public float lifeTime;
+        [FieldOffset(0x00)] public float suckedTime;
+        [FieldOffset(0x04)] public float launchAngle;
+        [FieldOffset(0x08)] public float launchMaxSpeed;
+        [FieldOffset(0x0C)] public float launchMinSpeed;
+        [FieldOffset(0x10)] public float randomRangeMin;
+        [FieldOffset(0x14)] public float randomRangeMax;
+        [FieldOffset(0x18)] public float lifeTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 36)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x24)]
     public struct EnemyAquaballPatrolConfig
     {
-        [FieldOffset(0)]  public float rotateSpeedMin;
-        [FieldOffset(4)]  public float rotateSpeedMax;
-        [FieldOffset(8)]  public float speedMin;
-        [FieldOffset(12)] public float speedMax;
-        [FieldOffset(16)] public float moveSpeed;
-        [FieldOffset(20)] public float bounceHeight;
-        [FieldOffset(24)] public float bounceInterval;
-        [FieldOffset(28)] public float movePointUpdateInterval;
-        [FieldOffset(32)] public float addForceOfHA;
+        [FieldOffset(0x00)] public float rotateSpeedMin;
+        [FieldOffset(0x04)] public float rotateSpeedMax;
+        [FieldOffset(0x08)] public float speedMin;
+        [FieldOffset(0x0C)] public float speedMax;
+        [FieldOffset(0x10)] public float moveSpeed;
+        [FieldOffset(0x14)] public float bounceHeight;
+        [FieldOffset(0x18)] public float bounceInterval;
+        [FieldOffset(0x1C)] public float movePointUpdateInterval;
+        [FieldOffset(0x20)] public float addForceOfHA;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 44)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x2C)]
     public struct EnemyAquaballActionConfig
     {
-        [FieldOffset(0)]  public int maxSuccessCount;
-        [FieldOffset(4)]  public Vector2 bounceSuccessTiming__arr0;
-        [FieldOffset(20)] public Vector2 bounceSuccessTiming__arr1;
-        [FieldOffset(36)] public Vector2 bounceSuccessTiming__arr2;
-        [FieldOffset(28)] public float captureLimitTime;
-        [FieldOffset(32)] public float captureLimitHeight;
-        [FieldOffset(36)] public float failLimitTime;
-        [FieldOffset(40)] public float failNoticeTime;
+        [FieldOffset(0x00)] public int maxSuccessCount;
+        [FieldOffset(0x04)] public Vector2 bounceSuccessTiming__arr0;
+        [FieldOffset(0x14)] public Vector2 bounceSuccessTiming__arr1;
+        [FieldOffset(0x24)] public Vector2 bounceSuccessTiming__arr2;
+        [FieldOffset(0x1C)] public float captureLimitTime;
+        [FieldOffset(0x20)] public float captureLimitHeight;
+        [FieldOffset(0x24)] public float failLimitTime;
+        [FieldOffset(0x28)] public float failNoticeTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 136)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x88)]
     public struct EnemyAquaballCommonParam
     {
-        [FieldOffset(0)]  public float killWaitTime;
-        [FieldOffset(4)]  public float colliderRadius;
-        [FieldOffset(8)]  public float colliderHeight;
-        [FieldOffset(12)] public float damageColliderRadiusOffset;
-        [FieldOffset(16)] public float hitPlayerColliderRadiusOffset;
-        [FieldOffset(20)] public float checkBarrierDistance;
-        [FieldOffset(24)] public float battleDistance;
-        [FieldOffset(28)] public RingParameter ringParam;
-        [FieldOffset(56)] public EnemyAquaballPatrolConfig patrolConfig;
-        [FieldOffset(92)] public EnemyAquaballActionConfig actionConfig;
+        [FieldOffset(0x00)] public float killWaitTime;
+        [FieldOffset(0x04)] public float colliderRadius;
+        [FieldOffset(0x08)] public float colliderHeight;
+        [FieldOffset(0x0C)] public float damageColliderRadiusOffset;
+        [FieldOffset(0x10)] public float hitPlayerColliderRadiusOffset;
+        [FieldOffset(0x14)] public float checkBarrierDistance;
+        [FieldOffset(0x18)] public float battleDistance;
+        [FieldOffset(0x1C)] public RingParameter ringParam;
+        [FieldOffset(0x38)] public EnemyAquaballPatrolConfig patrolConfig;
+        [FieldOffset(0x5C)] public EnemyAquaballActionConfig actionConfig;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct EnemyAquaballCommonLevelParam
     {
-        [FieldOffset(0)]  public int maxHealthPoint;
-        [FieldOffset(4)]  public float attackRate;
-        [FieldOffset(8)]  public ushort expItemNum;
-        [FieldOffset(10)] public ushort exp;
+        [FieldOffset(0x00)] public int maxHealthPoint;
+        [FieldOffset(0x04)] public float attackRate;
+        [FieldOffset(0x08)] public ushort expItemNum;
+        [FieldOffset(0x0A)] public ushort exp;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct EnemyAquaballLevelParam
     {
-        [FieldOffset(0)] public int level;
-        [FieldOffset(4)] public EnemyAquaballCommonLevelParam common;
+        [FieldOffset(0x00)] public int level;
+        [FieldOffset(0x04)] public EnemyAquaballCommonLevelParam common;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct EnemyAquaballLevelBand
     {
-        [FieldOffset(0)] public int level;
+        [FieldOffset(0x00)] public int level;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 236)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xEC)]
     public struct EnemyAquaballConfig
     {
-        [FieldOffset(0)]   public EnemyAquaballCommonParam commonParam;
-        [FieldOffset(136)] public EnemyAquaballLevelParam levelParams__arr0;
-        [FieldOffset(152)] public EnemyAquaballLevelParam levelParams__arr1;
-        [FieldOffset(168)] public EnemyAquaballLevelParam levelParams__arr2;
-        [FieldOffset(184)] public EnemyAquaballLevelParam levelParams__arr3;
-        [FieldOffset(200)] public EnemyAquaballLevelParam levelParams__arr4;
-        [FieldOffset(216)] public EnemyAquaballLevelBand levelBand__arr0;
-        [FieldOffset(220)] public EnemyAquaballLevelBand levelBand__arr1;
-        [FieldOffset(224)] public EnemyAquaballLevelBand levelBand__arr2;
-        [FieldOffset(228)] public EnemyAquaballLevelBand levelBand__arr3;
-        [FieldOffset(232)] public EnemyAquaballLevelBand levelBand__arr4;
+        [FieldOffset(0x00)] public EnemyAquaballCommonParam commonParam;
+        [FieldOffset(0x88)] public EnemyAquaballLevelParam levelParams__arr0;
+        [FieldOffset(0x98)] public EnemyAquaballLevelParam levelParams__arr1;
+        [FieldOffset(0xA8)] public EnemyAquaballLevelParam levelParams__arr2;
+        [FieldOffset(0xB8)] public EnemyAquaballLevelParam levelParams__arr3;
+        [FieldOffset(0xC8)] public EnemyAquaballLevelParam levelParams__arr4;
+        [FieldOffset(0xD8)] public EnemyAquaballLevelBand levelBand__arr0;
+        [FieldOffset(0xDC)] public EnemyAquaballLevelBand levelBand__arr1;
+        [FieldOffset(0xE0)] public EnemyAquaballLevelBand levelBand__arr2;
+        [FieldOffset(0xE4)] public EnemyAquaballLevelBand levelBand__arr3;
+        [FieldOffset(0xE8)] public EnemyAquaballLevelBand levelBand__arr4;
     }
 
 }

@@ -3,192 +3,192 @@ using System.Runtime.InteropServices;
 
 public class EnemyBirdConfigClass
 {
-    [StructLayout(LayoutKind.Explicit, Size = 112)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public struct EnemyBirdCommonParam
     {
-        [FieldOffset(0)]   public Vector3 backColliderExtents;
-        [FieldOffset(16)]  public Vector3 backColliderOffset;
-        [FieldOffset(32)]  public Vector3 backDamageColliderExtents;
-        [FieldOffset(48)]  public Vector3 backDamageColliderOffset;
-        [FieldOffset(64)]  public Vector3 chargeColliderExtents;
-        [FieldOffset(80)]  public Vector3 chargeColliderOffset;
-        [FieldOffset(96)]  public float eyesightAngle;
-        [FieldOffset(100)] public float eyesightDistance;
+        [FieldOffset(0x00)] public Vector3 backColliderExtents;
+        [FieldOffset(0x10)] public Vector3 backColliderOffset;
+        [FieldOffset(0x20)] public Vector3 backDamageColliderExtents;
+        [FieldOffset(0x30)] public Vector3 backDamageColliderOffset;
+        [FieldOffset(0x40)] public Vector3 chargeColliderExtents;
+        [FieldOffset(0x50)] public Vector3 chargeColliderOffset;
+        [FieldOffset(0x60)] public float eyesightAngle;
+        [FieldOffset(0x64)] public float eyesightDistance;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct EnemyBirdCommonLevelParam
     {
-        [FieldOffset(0)]  public int maxHealthPoint;
-        [FieldOffset(4)]  public float attackRate;
-        [FieldOffset(8)]  public ushort expItemNum;
-        [FieldOffset(10)] public ushort exp;
+        [FieldOffset(0x00)] public int maxHealthPoint;
+        [FieldOffset(0x04)] public float attackRate;
+        [FieldOffset(0x08)] public ushort expItemNum;
+        [FieldOffset(0x0A)] public ushort exp;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct EnemyBirdLevelParam
     {
-        [FieldOffset(0)] public int level;
-        [FieldOffset(4)] public EnemyBirdCommonLevelParam common;
+        [FieldOffset(0x00)] public int level;
+        [FieldOffset(0x04)] public EnemyBirdCommonLevelParam common;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct EnemyBirdLevelBand
     {
-        [FieldOffset(0)] public int level;
+        [FieldOffset(0x00)] public int level;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct BirdWanderParam
     {
-        [FieldOffset(0)] public float speedOnPath;
-        [FieldOffset(4)] public float speedToPath;
-        [FieldOffset(8)] public float eyesightDelayAfterBarAction;
+        [FieldOffset(0x00)] public float speedOnPath;
+        [FieldOffset(0x04)] public float speedToPath;
+        [FieldOffset(0x08)] public float eyesightDelayAfterBarAction;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 48)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct BirdApproachParam
     {
-        [FieldOffset(0)]  public float speed;
-        [FieldOffset(4)]  public float maxSpeed;
-        [FieldOffset(8)]  public float acceleration;
-        [FieldOffset(12)] public float rotateDegreeToSonic;
-        [FieldOffset(16)] public float stopDistanceFromSonic;
-        [FieldOffset(32)] public Vector3 offsetFromSonic;
+        [FieldOffset(0x00)] public float speed;
+        [FieldOffset(0x04)] public float maxSpeed;
+        [FieldOffset(0x08)] public float acceleration;
+        [FieldOffset(0x0C)] public float rotateDegreeToSonic;
+        [FieldOffset(0x10)] public float stopDistanceFromSonic;
+        [FieldOffset(0x20)] public Vector3 offsetFromSonic;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct BirdLaserStateParam
     {
-        [FieldOffset(0)] public float laserInterval;
-        [FieldOffset(4)] public float rotateDegreeToSonic;
+        [FieldOffset(0x00)] public float laserInterval;
+        [FieldOffset(0x04)] public float rotateDegreeToSonic;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 64)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public struct BirdChargeParam
     {
-        [FieldOffset(0)]  public float waitTime;
-        [FieldOffset(4)]  public float speed;
-        [FieldOffset(8)]  public float maxSpeed;
-        [FieldOffset(12)] public float acceleration;
-        [FieldOffset(16)] public Vector3 offsetFromSonic;
-        [FieldOffset(32)] public float duration;
-        [FieldOffset(36)] public float distance;
-        [FieldOffset(40)] public float minElevation;
-        [FieldOffset(44)] public float maxElevation;
-        [FieldOffset(48)] public float panningSuspensionK;
-        [FieldOffset(52)] public float interiorPanningSuspensionK;
+        [FieldOffset(0x00)] public float waitTime;
+        [FieldOffset(0x04)] public float speed;
+        [FieldOffset(0x08)] public float maxSpeed;
+        [FieldOffset(0x0C)] public float acceleration;
+        [FieldOffset(0x10)] public Vector3 offsetFromSonic;
+        [FieldOffset(0x20)] public float duration;
+        [FieldOffset(0x24)] public float distance;
+        [FieldOffset(0x28)] public float minElevation;
+        [FieldOffset(0x2C)] public float maxElevation;
+        [FieldOffset(0x30)] public float panningSuspensionK;
+        [FieldOffset(0x34)] public float interiorPanningSuspensionK;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct BirdBackupParam
     {
-        [FieldOffset(0)]  public float speed;
-        [FieldOffset(4)]  public float maxSpeed;
-        [FieldOffset(8)]  public float acceleration;
-        [FieldOffset(12)] public float backupTime;
+        [FieldOffset(0x00)] public float speed;
+        [FieldOffset(0x04)] public float maxSpeed;
+        [FieldOffset(0x08)] public float acceleration;
+        [FieldOffset(0x0C)] public float backupTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 48)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct BirdBarParam
     {
-        [FieldOffset(0)]  public float haWaitTime;
-        [FieldOffset(4)]  public float degreeOnPath;
-        [FieldOffset(8)]  public float speedOnPath;
-        [FieldOffset(12)] public float speedToPath;
-        [FieldOffset(16)] public float splineTension;
-        [FieldOffset(20)] public float splineSpeed;
-        [FieldOffset(32)] public Vector3 velocityOnFail;
+        [FieldOffset(0x00)] public float haWaitTime;
+        [FieldOffset(0x04)] public float degreeOnPath;
+        [FieldOffset(0x08)] public float speedOnPath;
+        [FieldOffset(0x0C)] public float speedToPath;
+        [FieldOffset(0x10)] public float splineTension;
+        [FieldOffset(0x14)] public float splineSpeed;
+        [FieldOffset(0x20)] public Vector3 velocityOnFail;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 36)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x24)]
     public struct BirdGlidingParam
     {
-        [FieldOffset(0)]  public float moveSpeed;
-        [FieldOffset(4)]  public float gidingVelocityY;
-        [FieldOffset(8)]  public float limitTime;
-        [FieldOffset(12)] public float rotateSpeed;
-        [FieldOffset(16)] public float rotateSpeedMin;
-        [FieldOffset(20)] public float rotateSpeedMax;
-        [FieldOffset(24)] public float rotateSpeedMaxSpeedMin;
-        [FieldOffset(28)] public float rotateSpeedMinSpeedMax;
-        [FieldOffset(32)] public float heightOfChangeShake;
+        [FieldOffset(0x00)] public float moveSpeed;
+        [FieldOffset(0x04)] public float gidingVelocityY;
+        [FieldOffset(0x08)] public float limitTime;
+        [FieldOffset(0x0C)] public float rotateSpeed;
+        [FieldOffset(0x10)] public float rotateSpeedMin;
+        [FieldOffset(0x14)] public float rotateSpeedMax;
+        [FieldOffset(0x18)] public float rotateSpeedMaxSpeedMin;
+        [FieldOffset(0x1C)] public float rotateSpeedMinSpeedMax;
+        [FieldOffset(0x20)] public float heightOfChangeShake;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 24)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct BirdDeadParam
     {
-        [FieldOffset(0)]  public float minWaitTime;
-        [FieldOffset(4)]  public float maxWaitTime;
-        [FieldOffset(8)]  public float raycastDistance;
-        [FieldOffset(12)] public float fallSpeedOnStomp;
-        [FieldOffset(16)] public float maxFallSpeedOnStomp;
-        [FieldOffset(20)] public float fallAccelerationOnStomp;
+        [FieldOffset(0x00)] public float minWaitTime;
+        [FieldOffset(0x04)] public float maxWaitTime;
+        [FieldOffset(0x08)] public float raycastDistance;
+        [FieldOffset(0x0C)] public float fallSpeedOnStomp;
+        [FieldOffset(0x10)] public float maxFallSpeedOnStomp;
+        [FieldOffset(0x14)] public float fallAccelerationOnStomp;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct BirdRaycastParam
     {
-        [FieldOffset(0)] public float distanceFront;
-        [FieldOffset(4)] public float distanceBack;
-        [FieldOffset(8)] public float distanceDown;
+        [FieldOffset(0x00)] public float distanceFront;
+        [FieldOffset(0x04)] public float distanceBack;
+        [FieldOffset(0x08)] public float distanceDown;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct BirdOnBackCameraParam
     {
-        [FieldOffset(0)] public float distToConsiderSonicAsOnBird;
-        [FieldOffset(4)] public float distance;
+        [FieldOffset(0x00)] public float distToConsiderSonicAsOnBird;
+        [FieldOffset(0x04)] public float distance;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 48)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct BirdCameraParam
     {
-        [FieldOffset(0)]  public float azimuth;
-        [FieldOffset(4)]  public float elevation;
-        [FieldOffset(8)]  public float distance;
-        [FieldOffset(12)] public float zRoll;
-        [FieldOffset(16)] public float fovy;
-        [FieldOffset(32)] public Vector3 frameOffset;
+        [FieldOffset(0x00)] public float azimuth;
+        [FieldOffset(0x04)] public float elevation;
+        [FieldOffset(0x08)] public float distance;
+        [FieldOffset(0x0C)] public float zRoll;
+        [FieldOffset(0x10)] public float fovy;
+        [FieldOffset(0x20)] public Vector3 frameOffset;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 416)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1A0)]
     public struct EnemyBirdParam
     {
-        [FieldOffset(0)]   public Vector3 haColliderExtents;
-        [FieldOffset(16)]  public Vector3 haColliderOffset;
-        [FieldOffset(32)]  public Vector3 haTargetOffset;
-        [FieldOffset(48)]  public float haTargetRadius;
-        [FieldOffset(52)]  public float haTargetHeight;
-        [FieldOffset(56)]  public BirdWanderParam wanderParam;
-        [FieldOffset(80)]  public BirdApproachParam approachParam;
-        [FieldOffset(128)] public BirdLaserStateParam laserStateParam;
-        [FieldOffset(144)] public BirdChargeParam chargeParam;
-        [FieldOffset(208)] public BirdBackupParam backupParam;
-        [FieldOffset(224)] public BirdBarParam barParam;
-        [FieldOffset(272)] public BirdGlidingParam glidingParam;
-        [FieldOffset(308)] public BirdDeadParam deadParam;
-        [FieldOffset(332)] public BirdRaycastParam raycastParam;
-        [FieldOffset(344)] public bool useCamera;
-        [FieldOffset(348)] public BirdOnBackCameraParam onBackCameraParam;
-        [FieldOffset(368)] public BirdCameraParam cameraParam;
+        [FieldOffset(0x00)] public Vector3 haColliderExtents;
+        [FieldOffset(0x10)] public Vector3 haColliderOffset;
+        [FieldOffset(0x20)] public Vector3 haTargetOffset;
+        [FieldOffset(0x30)] public float haTargetRadius;
+        [FieldOffset(0x34)] public float haTargetHeight;
+        [FieldOffset(0x38)] public BirdWanderParam wanderParam;
+        [FieldOffset(0x50)] public BirdApproachParam approachParam;
+        [FieldOffset(0x80)] public BirdLaserStateParam laserStateParam;
+        [FieldOffset(0x90)] public BirdChargeParam chargeParam;
+        [FieldOffset(0xD0)] public BirdBackupParam backupParam;
+        [FieldOffset(0xE0)] public BirdBarParam barParam;
+        [FieldOffset(0x110)] public BirdGlidingParam glidingParam;
+        [FieldOffset(0x134)] public BirdDeadParam deadParam;
+        [FieldOffset(0x14C)] public BirdRaycastParam raycastParam;
+        [FieldOffset(0x158)] public bool useCamera;
+        [FieldOffset(0x15C)] public BirdOnBackCameraParam onBackCameraParam;
+        [FieldOffset(0x170)] public BirdCameraParam cameraParam;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 640)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x280)]
     public struct EnemyBirdConfig
     {
-        [FieldOffset(0)]   public EnemyBirdCommonParam commonParam;
-        [FieldOffset(112)] public EnemyBirdLevelParam levelParams__arr0;
-        [FieldOffset(128)] public EnemyBirdLevelParam levelParams__arr1;
-        [FieldOffset(144)] public EnemyBirdLevelParam levelParams__arr2;
-        [FieldOffset(160)] public EnemyBirdLevelParam levelParams__arr3;
-        [FieldOffset(176)] public EnemyBirdLevelParam levelParams__arr4;
-        [FieldOffset(192)] public EnemyBirdLevelBand levelBand__arr0;
-        [FieldOffset(196)] public EnemyBirdLevelBand levelBand__arr1;
-        [FieldOffset(200)] public EnemyBirdLevelBand levelBand__arr2;
-        [FieldOffset(204)] public EnemyBirdLevelBand levelBand__arr3;
-        [FieldOffset(208)] public EnemyBirdLevelBand levelBand__arr4;
-        [FieldOffset(224)] public EnemyBirdParam birdParam;
+        [FieldOffset(0x00)] public EnemyBirdCommonParam commonParam;
+        [FieldOffset(0x70)] public EnemyBirdLevelParam levelParams__arr0;
+        [FieldOffset(0x80)] public EnemyBirdLevelParam levelParams__arr1;
+        [FieldOffset(0x90)] public EnemyBirdLevelParam levelParams__arr2;
+        [FieldOffset(0xA0)] public EnemyBirdLevelParam levelParams__arr3;
+        [FieldOffset(0xB0)] public EnemyBirdLevelParam levelParams__arr4;
+        [FieldOffset(0xC0)] public EnemyBirdLevelBand levelBand__arr0;
+        [FieldOffset(0xC4)] public EnemyBirdLevelBand levelBand__arr1;
+        [FieldOffset(0xC8)] public EnemyBirdLevelBand levelBand__arr2;
+        [FieldOffset(0xCC)] public EnemyBirdLevelBand levelBand__arr3;
+        [FieldOffset(0xD0)] public EnemyBirdLevelBand levelBand__arr4;
+        [FieldOffset(0xE0)] public EnemyBirdParam birdParam;
     }
 
 }

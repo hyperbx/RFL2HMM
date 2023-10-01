@@ -2,7 +2,7 @@
   "profiles": {
     "RFL2HMM": {
       "commandName": "Project",
-      "commandLineArgs": "SonicParameters \"player_common.rfl\" \"modified_player_common.rfl\""
+      "commandLineArgs": "Frontiers SonicParameters \"original_player_common.rfl\" \"player_common.rfl\""
     }
   }
 }

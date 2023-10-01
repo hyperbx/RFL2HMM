@@ -3,80 +3,80 @@ using System.Runtime.InteropServices;
 
 public class EnemyDefenderConfigClass
 {
-    [StructLayout(LayoutKind.Explicit, Size = 28)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct RingParameter
     {
-        [FieldOffset(0)]  public float suckedTime;
-        [FieldOffset(4)]  public float launchAngle;
-        [FieldOffset(8)]  public float launchMaxSpeed;
-        [FieldOffset(12)] public float launchMinSpeed;
-        [FieldOffset(16)] public float randomRangeMin;
-        [FieldOffset(20)] public float randomRangeMax;
-        [FieldOffset(24)] public float lifeTime;
+        [FieldOffset(0x00)] public float suckedTime;
+        [FieldOffset(0x04)] public float launchAngle;
+        [FieldOffset(0x08)] public float launchMaxSpeed;
+        [FieldOffset(0x0C)] public float launchMinSpeed;
+        [FieldOffset(0x10)] public float randomRangeMin;
+        [FieldOffset(0x14)] public float randomRangeMax;
+        [FieldOffset(0x18)] public float lifeTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct EnemyDefenderPatrolConfig
     {
-        [FieldOffset(0)] public float changeTimeIdlePatrolMin;
-        [FieldOffset(4)] public float changeTimeIdlePatrolMax;
+        [FieldOffset(0x00)] public float changeTimeIdlePatrolMin;
+        [FieldOffset(0x04)] public float changeTimeIdlePatrolMax;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 128)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x80)]
     public struct EnemyDefenderCommonConfig
     {
-        [FieldOffset(0)]   public RingParameter ringParam;
-        [FieldOffset(28)]  public float mass;
-        [FieldOffset(32)]  public float slopeAngleMax;
-        [FieldOffset(36)]  public float checkBarrierDistance;
-        [FieldOffset(40)]  public float colliderRadius;
-        [FieldOffset(44)]  public float colliderHeight;
-        [FieldOffset(48)]  public float damageColliderRadiusOffset;
-        [FieldOffset(52)]  public float boomerangColliderRadius;
-        [FieldOffset(56)]  public float boomerangColliderHeight;
-        [FieldOffset(60)]  public float boomerangColliderOffset;
-        [FieldOffset(64)]  public float boomerangCameraKeepTimeMin;
-        [FieldOffset(68)]  public float eyesightDistance;
-        [FieldOffset(72)]  public float eyesightLostDelayTime;
-        [FieldOffset(76)]  public EnemyDefenderPatrolConfig patrolConfig;
-        [FieldOffset(84)]  public float shieldBlowUpTime;
-        [FieldOffset(88)]  public float shieldBlowUpHeight;
-        [FieldOffset(92)]  public float shieldBoomerangSpeed;
-        [FieldOffset(96)]  public float shieldBoomerangMinDistance;
-        [FieldOffset(100)] public float shieldBoomerangMaxDistance;
-        [FieldOffset(104)] public float killWaitTime;
-        [FieldOffset(108)] public float cameraDistance;
-        [FieldOffset(112)] public float cameraElevation;
-        [FieldOffset(116)] public int parryBoomerangRound;
-        [FieldOffset(120)] public float parryBoomerangOffset;
-        [FieldOffset(124)] public float parryBoomerangSpeed;
+        [FieldOffset(0x00)] public RingParameter ringParam;
+        [FieldOffset(0x1C)] public float mass;
+        [FieldOffset(0x20)] public float slopeAngleMax;
+        [FieldOffset(0x24)] public float checkBarrierDistance;
+        [FieldOffset(0x28)] public float colliderRadius;
+        [FieldOffset(0x2C)] public float colliderHeight;
+        [FieldOffset(0x30)] public float damageColliderRadiusOffset;
+        [FieldOffset(0x34)] public float boomerangColliderRadius;
+        [FieldOffset(0x38)] public float boomerangColliderHeight;
+        [FieldOffset(0x3C)] public float boomerangColliderOffset;
+        [FieldOffset(0x40)] public float boomerangCameraKeepTimeMin;
+        [FieldOffset(0x44)] public float eyesightDistance;
+        [FieldOffset(0x48)] public float eyesightLostDelayTime;
+        [FieldOffset(0x4C)] public EnemyDefenderPatrolConfig patrolConfig;
+        [FieldOffset(0x54)] public float shieldBlowUpTime;
+        [FieldOffset(0x58)] public float shieldBlowUpHeight;
+        [FieldOffset(0x5C)] public float shieldBoomerangSpeed;
+        [FieldOffset(0x60)] public float shieldBoomerangMinDistance;
+        [FieldOffset(0x64)] public float shieldBoomerangMaxDistance;
+        [FieldOffset(0x68)] public float killWaitTime;
+        [FieldOffset(0x6C)] public float cameraDistance;
+        [FieldOffset(0x70)] public float cameraElevation;
+        [FieldOffset(0x74)] public int parryBoomerangRound;
+        [FieldOffset(0x78)] public float parryBoomerangOffset;
+        [FieldOffset(0x7C)] public float parryBoomerangSpeed;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct DefenderCommonLevelConfig
     {
-        [FieldOffset(0)]  public int maxHealthPoint;
-        [FieldOffset(4)]  public float attackRate;
-        [FieldOffset(8)]  public ushort expItemNum;
-        [FieldOffset(10)] public ushort exp;
+        [FieldOffset(0x00)] public int maxHealthPoint;
+        [FieldOffset(0x04)] public float attackRate;
+        [FieldOffset(0x08)] public ushort expItemNum;
+        [FieldOffset(0x0A)] public ushort exp;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct EnemyDefenderLevelConfig
     {
-        [FieldOffset(0)] public int level;
-        [FieldOffset(4)] public DefenderCommonLevelConfig common;
+        [FieldOffset(0x00)] public int level;
+        [FieldOffset(0x04)] public DefenderCommonLevelConfig common;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 208)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xD0)]
     public struct EnemyDefenderConfig
     {
-        [FieldOffset(0)]   public EnemyDefenderCommonConfig commonParams;
-        [FieldOffset(128)] public EnemyDefenderLevelConfig levelParams__arr0;
-        [FieldOffset(144)] public EnemyDefenderLevelConfig levelParams__arr1;
-        [FieldOffset(160)] public EnemyDefenderLevelConfig levelParams__arr2;
-        [FieldOffset(176)] public EnemyDefenderLevelConfig levelParams__arr3;
-        [FieldOffset(192)] public EnemyDefenderLevelConfig levelParams__arr4;
+        [FieldOffset(0x00)] public EnemyDefenderCommonConfig commonParams;
+        [FieldOffset(0x80)] public EnemyDefenderLevelConfig levelParams__arr0;
+        [FieldOffset(0x90)] public EnemyDefenderLevelConfig levelParams__arr1;
+        [FieldOffset(0xA0)] public EnemyDefenderLevelConfig levelParams__arr2;
+        [FieldOffset(0xB0)] public EnemyDefenderLevelConfig levelParams__arr3;
+        [FieldOffset(0xC0)] public EnemyDefenderLevelConfig levelParams__arr4;
     }
 
 }

@@ -5,16 +5,16 @@ Library "TornadoRingParameter"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 28)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct TornadoRingParameter
     {
-        [FieldOffset(0)]  public float suckedTime;
-        [FieldOffset(4)]  public float launchAngle;
-        [FieldOffset(8)]  public float launchMaxSpeed;
-        [FieldOffset(12)] public float launchMinSpeed;
-        [FieldOffset(16)] public float randomRangeMin;
-        [FieldOffset(20)] public float randomRangeMax;
-        [FieldOffset(24)] public float lifeTime;
+        [FieldOffset(0x00)] public float suckedTime;
+        [FieldOffset(0x04)] public float launchAngle;
+        [FieldOffset(0x08)] public float launchMaxSpeed;
+        [FieldOffset(0x0C)] public float launchMinSpeed;
+        [FieldOffset(0x10)] public float randomRangeMin;
+        [FieldOffset(0x14)] public float randomRangeMax;
+        [FieldOffset(0x18)] public float lifeTime;
     }
 
 }

@@ -5,48 +5,48 @@ Library "ObjSumoPoleConfig"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 36)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x24)]
     public struct ObjSumoPoleColliderConfig
     {
-        [FieldOffset(0)]  public float baseHeight;
-        [FieldOffset(4)]  public float baseRadius;
-        [FieldOffset(8)]  public float baseOffset;
-        [FieldOffset(12)] public float poleHeight;
-        [FieldOffset(16)] public float poleRadius;
-        [FieldOffset(20)] public float rigidAdditionalHeight;
-        [FieldOffset(24)] public float ropeThicknessRigid;
-        [FieldOffset(28)] public float ropeThicknessDamage;
-        [FieldOffset(32)] public float ropeThicknessArea;
+        [FieldOffset(0x00)] public float baseHeight;
+        [FieldOffset(0x04)] public float baseRadius;
+        [FieldOffset(0x08)] public float baseOffset;
+        [FieldOffset(0x0C)] public float poleHeight;
+        [FieldOffset(0x10)] public float poleRadius;
+        [FieldOffset(0x14)] public float rigidAdditionalHeight;
+        [FieldOffset(0x18)] public float ropeThicknessRigid;
+        [FieldOffset(0x1C)] public float ropeThicknessDamage;
+        [FieldOffset(0x20)] public float ropeThicknessArea;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct ObjSumoPoleSlingShotLookDownCameraConfig
     {
-        [FieldOffset(0)] public float interpolationTime;
-        [FieldOffset(4)] public float height;
-        [FieldOffset(8)] public float fovy;
+        [FieldOffset(0x00)] public float interpolationTime;
+        [FieldOffset(0x04)] public float height;
+        [FieldOffset(0x08)] public float fovy;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 76)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x4C)]
     public struct ObjSumoPoleSlingShotConfig
     {
-        [FieldOffset(0)]  public float shotGuideMoveDistance;
-        [FieldOffset(4)]  public float shotRaycastLength;
-        [FieldOffset(8)]  public float sweepCapsuleHeight;
-        [FieldOffset(12)] public float shotMoveLengthMax;
-        [FieldOffset(16)] public int shotReflectCountMax;
-        [FieldOffset(20)] public int shotReflectOwnerCountMax;
-        [FieldOffset(24)] public float shotOffset;
-        [FieldOffset(28)] public float shotDirAngleLimit;
-        [FieldOffset(32)] public float shotDirAngleChangeSpeed;
-        [FieldOffset(36)] public float shotSpeedMin;
-        [FieldOffset(40)] public float shotSpeedMax;
-        [FieldOffset(44)] public float shotSpeedAdd;
-        [FieldOffset(48)] public float cancelSpeed;
-        [FieldOffset(52)] public float bendPullLength;
-        [FieldOffset(56)] public float aimTimeScale;
-        [FieldOffset(60)] public float aimLimitTime;
-        [FieldOffset(64)] public ObjSumoPoleSlingShotLookDownCameraConfig cameraLookDown;
+        [FieldOffset(0x00)] public float shotGuideMoveDistance;
+        [FieldOffset(0x04)] public float shotRaycastLength;
+        [FieldOffset(0x08)] public float sweepCapsuleHeight;
+        [FieldOffset(0x0C)] public float shotMoveLengthMax;
+        [FieldOffset(0x10)] public int shotReflectCountMax;
+        [FieldOffset(0x14)] public int shotReflectOwnerCountMax;
+        [FieldOffset(0x18)] public float shotOffset;
+        [FieldOffset(0x1C)] public float shotDirAngleLimit;
+        [FieldOffset(0x20)] public float shotDirAngleChangeSpeed;
+        [FieldOffset(0x24)] public float shotSpeedMin;
+        [FieldOffset(0x28)] public float shotSpeedMax;
+        [FieldOffset(0x2C)] public float shotSpeedAdd;
+        [FieldOffset(0x30)] public float cancelSpeed;
+        [FieldOffset(0x34)] public float bendPullLength;
+        [FieldOffset(0x38)] public float aimTimeScale;
+        [FieldOffset(0x3C)] public float aimLimitTime;
+        [FieldOffset(0x40)] public ObjSumoPoleSlingShotLookDownCameraConfig cameraLookDown;
     }
 
     public struct Color8
@@ -57,16 +57,16 @@ Library "ObjSumoPoleConfig"
         public byte B;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 52)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x34)]
     public struct ObjSumoPoleSlingshotLineConfig
     {
-        [FieldOffset(0)]  public float width;
-        [FieldOffset(4)]  public float maxDistance;
-        [FieldOffset(8)]  public float tilingDistance;
-        [FieldOffset(12)] public float uvScrollSpeedMin;
-        [FieldOffset(16)] public float uvScrollSpeedMax;
-        [FieldOffset(20)] public int reflectCountSpeedMax;
-        [FieldOffset(24)] public unsafe fixed byte /* Color8[5] */ _colors[1275];
+        [FieldOffset(0x00)] public float width;
+        [FieldOffset(0x04)] public float maxDistance;
+        [FieldOffset(0x08)] public float tilingDistance;
+        [FieldOffset(0x0C)] public float uvScrollSpeedMin;
+        [FieldOffset(0x10)] public float uvScrollSpeedMax;
+        [FieldOffset(0x14)] public int reflectCountSpeedMax;
+        [FieldOffset(0x18)] public unsafe fixed byte /* Color8[5] */ _colors[1275];
 
         public unsafe Color8* colors
         {
@@ -77,9 +77,9 @@ Library "ObjSumoPoleConfig"
             }
         }
 
-        [FieldOffset(44)] public float colorIntensity;
-        [FieldOffset(48)] public bool colorGradation;
-        [FieldOffset(49)] public bool colorChangeAll;
+        [FieldOffset(0x2C)] public float colorIntensity;
+        [FieldOffset(0x30)] public bool colorGradation;
+        [FieldOffset(0x31)] public bool colorChangeAll;
     }
 
     public struct ColorF
@@ -90,49 +90,49 @@ Library "ObjSumoPoleConfig"
         public float B;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 72)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x48)]
     public struct ObjSumoPoleRopeElectricConfig
     {
-        [FieldOffset(0)]  public float width;
-        [FieldOffset(4)]  public float tilingDistance;
-        [FieldOffset(8)]  public float fluctuationPeriod;
-        [FieldOffset(12)] public float fluctuationAmplitude;
-        [FieldOffset(16)] public float uvScrollSpeed;
-        [FieldOffset(20)] public ColorF colorPrimary;
-        [FieldOffset(36)] public Color8 colorVertexEdge;
-        [FieldOffset(40)] public Color8 colorVertexCenter;
-        [FieldOffset(44)] public float colorIntensityAnimTime;
-        [FieldOffset(48)] public float colorIntensityMin;
-        [FieldOffset(52)] public float colorIntensityMax;
-        [FieldOffset(56)] public float patternChangeIntervalTime;
-        [FieldOffset(60)] public float edgeWidthScale;
-        [FieldOffset(64)] public float edgeWidthScaleLength;
-        [FieldOffset(68)] public float roll;
+        [FieldOffset(0x00)] public float width;
+        [FieldOffset(0x04)] public float tilingDistance;
+        [FieldOffset(0x08)] public float fluctuationPeriod;
+        [FieldOffset(0x0C)] public float fluctuationAmplitude;
+        [FieldOffset(0x10)] public float uvScrollSpeed;
+        [FieldOffset(0x14)] public ColorF colorPrimary;
+        [FieldOffset(0x24)] public Color8 colorVertexEdge;
+        [FieldOffset(0x28)] public Color8 colorVertexCenter;
+        [FieldOffset(0x2C)] public float colorIntensityAnimTime;
+        [FieldOffset(0x30)] public float colorIntensityMin;
+        [FieldOffset(0x34)] public float colorIntensityMax;
+        [FieldOffset(0x38)] public float patternChangeIntervalTime;
+        [FieldOffset(0x3C)] public float edgeWidthScale;
+        [FieldOffset(0x40)] public float edgeWidthScaleLength;
+        [FieldOffset(0x44)] public float roll;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 108)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x6C)]
     public struct ObjSumoPoleRopeConfig
     {
-        [FieldOffset(0)]  public float timeAppear;
-        [FieldOffset(4)]  public float timeDisappear;
-        [FieldOffset(8)]  public int count;
-        [FieldOffset(12)] public float swingWidthMin;
-        [FieldOffset(16)] public float swingWidthMax;
-        [FieldOffset(20)] public float swingWidthReductionRate;
-        [FieldOffset(24)] public float swingTime;
-        [FieldOffset(28)] public float swingPeriod;
-        [FieldOffset(32)] public float swingReturnSlowTime;
-        [FieldOffset(36)] public ObjSumoPoleRopeElectricConfig electric;
+        [FieldOffset(0x00)] public float timeAppear;
+        [FieldOffset(0x04)] public float timeDisappear;
+        [FieldOffset(0x08)] public int count;
+        [FieldOffset(0x0C)] public float swingWidthMin;
+        [FieldOffset(0x10)] public float swingWidthMax;
+        [FieldOffset(0x14)] public float swingWidthReductionRate;
+        [FieldOffset(0x18)] public float swingTime;
+        [FieldOffset(0x1C)] public float swingPeriod;
+        [FieldOffset(0x20)] public float swingReturnSlowTime;
+        [FieldOffset(0x24)] public ObjSumoPoleRopeElectricConfig electric;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 276)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x114)]
     public struct ObjSumoPoleConfig
     {
-        [FieldOffset(0)]   public int electricDamageToEnemy;
-        [FieldOffset(4)]   public ObjSumoPoleColliderConfig collider;
-        [FieldOffset(40)]  public ObjSumoPoleSlingShotConfig slingShot;
-        [FieldOffset(116)] public ObjSumoPoleSlingshotLineConfig line;
-        [FieldOffset(168)] public ObjSumoPoleRopeConfig rope;
+        [FieldOffset(0x00)] public int electricDamageToEnemy;
+        [FieldOffset(0x04)] public ObjSumoPoleColliderConfig collider;
+        [FieldOffset(0x28)] public ObjSumoPoleSlingShotConfig slingShot;
+        [FieldOffset(0x74)] public ObjSumoPoleSlingshotLineConfig line;
+        [FieldOffset(0xA8)] public ObjSumoPoleRopeConfig rope;
     }
 
 }

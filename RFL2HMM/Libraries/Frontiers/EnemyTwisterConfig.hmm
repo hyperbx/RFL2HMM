@@ -5,61 +5,61 @@ Library "EnemyTwisterConfig"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 28)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct RingParameter
     {
-        [FieldOffset(0)]  public float suckedTime;
-        [FieldOffset(4)]  public float launchAngle;
-        [FieldOffset(8)]  public float launchMaxSpeed;
-        [FieldOffset(12)] public float launchMinSpeed;
-        [FieldOffset(16)] public float randomRangeMin;
-        [FieldOffset(20)] public float randomRangeMax;
-        [FieldOffset(24)] public float lifeTime;
+        [FieldOffset(0x00)] public float suckedTime;
+        [FieldOffset(0x04)] public float launchAngle;
+        [FieldOffset(0x08)] public float launchMaxSpeed;
+        [FieldOffset(0x0C)] public float launchMinSpeed;
+        [FieldOffset(0x10)] public float randomRangeMin;
+        [FieldOffset(0x14)] public float randomRangeMax;
+        [FieldOffset(0x18)] public float lifeTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct DebrisParameter
     {
-        [FieldOffset(0)]  public int m_maxNumPieces;
-        [FieldOffset(4)]  public float gravity;
-        [FieldOffset(8)]  public float lifeTime;
-        [FieldOffset(12)] public float force;
+        [FieldOffset(0x00)] public int m_maxNumPieces;
+        [FieldOffset(0x04)] public float gravity;
+        [FieldOffset(0x08)] public float lifeTime;
+        [FieldOffset(0x0C)] public float force;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 68)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x44)]
     public struct EnemyTwisterCommonConfig
     {
-        [FieldOffset(0)]  public RingParameter ringParam;
-        [FieldOffset(28)] public float rigidColliderRadius;
-        [FieldOffset(32)] public float damageColliderRadius;
-        [FieldOffset(36)] public float battleDistance;
-        [FieldOffset(40)] public float cyloopHeight;
-        [FieldOffset(44)] public float rotateSpeed;
-        [FieldOffset(48)] public bool useUniqueDebrisSetting;
-        [FieldOffset(52)] public DebrisParameter debris;
+        [FieldOffset(0x00)] public RingParameter ringParam;
+        [FieldOffset(0x1C)] public float rigidColliderRadius;
+        [FieldOffset(0x20)] public float damageColliderRadius;
+        [FieldOffset(0x24)] public float battleDistance;
+        [FieldOffset(0x28)] public float cyloopHeight;
+        [FieldOffset(0x2C)] public float rotateSpeed;
+        [FieldOffset(0x30)] public bool useUniqueDebrisSetting;
+        [FieldOffset(0x34)] public DebrisParameter debris;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct TwisterCommonLevelConfig
     {
-        [FieldOffset(0)]  public int maxHealthPoint;
-        [FieldOffset(4)]  public float attackRate;
-        [FieldOffset(8)]  public ushort expItemNum;
-        [FieldOffset(10)] public ushort exp;
+        [FieldOffset(0x00)] public int maxHealthPoint;
+        [FieldOffset(0x04)] public float attackRate;
+        [FieldOffset(0x08)] public ushort expItemNum;
+        [FieldOffset(0x0A)] public ushort exp;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct EnemyTwisterLevelConfig
     {
-        [FieldOffset(0)] public int level;
-        [FieldOffset(4)] public TwisterCommonLevelConfig common;
+        [FieldOffset(0x00)] public int level;
+        [FieldOffset(0x04)] public TwisterCommonLevelConfig common;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 148)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x94)]
     public struct EnemyTwisterConfig
     {
-        [FieldOffset(0)]  public EnemyTwisterCommonConfig commonParams;
-        [FieldOffset(68)] public unsafe fixed byte /* EnemyTwisterLevelConfig[5] */ _levelParams[80];
+        [FieldOffset(0x00)] public EnemyTwisterCommonConfig commonParams;
+        [FieldOffset(0x44)] public unsafe fixed byte /* EnemyTwisterLevelConfig[5] */ _levelParams[80];
 
         public unsafe EnemyTwisterLevelConfig* levelParams
         {

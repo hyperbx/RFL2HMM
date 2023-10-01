@@ -3,17 +3,17 @@ using System.Runtime.InteropServices;
 
 public class FxDensityWindParameterClass
 {
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct FxDensityWindParameter
     {
-        [FieldOffset(0)]  public float windDir;
-        [FieldOffset(4)]  public float windPower;
-        [FieldOffset(8)]  public float windLenght;
-        [FieldOffset(12)] public float windSpeed;
-        [FieldOffset(16)] public float windRalenght;
-        [FieldOffset(20)] public float windRaamp;
-        [FieldOffset(24)] public float windRalevel;
-        [FieldOffset(28)] public float windRtpower;
+        [FieldOffset(0x00)] public float windDir;
+        [FieldOffset(0x04)] public float windPower;
+        [FieldOffset(0x08)] public float windLenght;
+        [FieldOffset(0x0C)] public float windSpeed;
+        [FieldOffset(0x10)] public float windRalenght;
+        [FieldOffset(0x14)] public float windRaamp;
+        [FieldOffset(0x18)] public float windRalevel;
+        [FieldOffset(0x1C)] public float windRtpower;
     }
 
 }

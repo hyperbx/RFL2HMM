@@ -5,39 +5,84 @@ Library "MiniBossSumoConfig"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 64)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public struct MiniBossCommonConfig
     {
-        [FieldOffset(0)]  public float scoutDistance;
-        [FieldOffset(4)]  public float scoutDistanceOutside;
-        [FieldOffset(8)]  public float zoomDistance;
-        [FieldOffset(16)] public Vector3 zoomOffset;
-        [FieldOffset(32)] public Vector3 zoomAngle;
-        [FieldOffset(48)] public float zoomFov;
+        [FieldOffset(0x00)] public float scoutDistance;
+        [FieldOffset(0x04)] public float scoutDistanceOutside;
+        [FieldOffset(0x08)] public float zoomDistance;
+        [FieldOffset(0x10)] public Vector3 zoomOffset;
+        [FieldOffset(0x20)] public Vector3 zoomAngle;
+        [FieldOffset(0x30)] public float zoomFov;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 64)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public struct MiniBossSumoBaseConfig
     {
-        [FieldOffset(0)]  public float mass;
-        [FieldOffset(4)]  public float slopeAngleMax;
-        [FieldOffset(8)]  public float timeStun;
-        [FieldOffset(12)] public float timeExpend;
-        [FieldOffset(16)] public float timeGuardBreak;
-        [FieldOffset(20)] public float visualOffset;
-        [FieldOffset(32)] public Vector3 hpGaugeOffset;
-        [FieldOffset(48)] public float guardEffectCoolTime;
+        [FieldOffset(0x00)] public float mass;
+        [FieldOffset(0x04)] public float slopeAngleMax;
+        [FieldOffset(0x08)] public float timeStun;
+        [FieldOffset(0x0C)] public float timeExpend;
+        [FieldOffset(0x10)] public float timeGuardBreak;
+        [FieldOffset(0x14)] public float visualOffset;
+        [FieldOffset(0x20)] public Vector3 hpGaugeOffset;
+        [FieldOffset(0x30)] public float guardEffectCoolTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
-    public struct CString
+    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    public struct UnmanagedString
     {
         [FieldOffset(0)] public long pValue;
 
         public string Value
         {
-        	get => Marshal.PtrToStringAnsi((IntPtr)pValue);
-        	set => pValue = (long)Marshal.StringToHGlobalAnsi(value);
+            get
+            {
+                if (pValue == 0)
+                    return string.Empty;
+
+                return Marshal.PtrToStringAnsi((nint)pValue);
+            }
+
+            set => pValue = Marshal.StringToHGlobalAnsi(value);
+        }
+
+        public UnmanagedString(string in_value)
+        {
+            Value = in_value;
+        }
+
+        public static implicit operator UnmanagedString(string in_value)
+        {
+            return new UnmanagedString(in_value);
+        }
+
+        public static bool operator ==(UnmanagedString in_left, string in_right)
+        {
+            return in_left.Value == in_right;
+        }
+
+        public static bool operator !=(UnmanagedString in_left, string in_right)
+        {
+            return !(in_left == in_right);
+        }
+
+        public override bool Equals(object in_obj)
+        {
+            if (in_obj is string str)
+                return Value == str;
+
+            return base.Equals(in_obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Value;
         }
     }
 
@@ -64,17 +109,17 @@ Library "MiniBossSumoConfig"
         public byte B;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 96)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x60)]
     public struct MiniBossSumoColliderParam
     {
-        [FieldOffset(0)]  public bool enabled;
-        [FieldOffset(4)]  public float height;
-        [FieldOffset(8)]  public float radius;
-        [FieldOffset(16)] public CString attachNodeName;
-        [FieldOffset(32)] public Vector3 offset;
-        [FieldOffset(48)] public Vector3 rotation;
-        [FieldOffset(64)] public CString tag;
-        [FieldOffset(80)] public unsafe fixed byte /* ColliderProperty[2] */ _properties[8];
+        [FieldOffset(0x00)] public bool enabled;
+        [FieldOffset(0x04)] public float height;
+        [FieldOffset(0x08)] public float radius;
+        [FieldOffset(0x10)] public UnmanagedString attachNodeName;
+        [FieldOffset(0x20)] public Vector3 offset;
+        [FieldOffset(0x30)] public Vector3 rotation;
+        [FieldOffset(0x40)] public UnmanagedString tag;
+        [FieldOffset(0x50)] public unsafe fixed byte /* ColliderProperty[2] */ _properties[8];
 
         public unsafe ColliderProperty* properties
         {
@@ -85,14 +130,14 @@ Library "MiniBossSumoConfig"
             }
         }
 
-        [FieldOffset(88)] public bool debugDraw;
-        [FieldOffset(92)] public Color8 color;
+        [FieldOffset(0x58)] public bool debugDraw;
+        [FieldOffset(0x5C)] public Color8 color;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 1584)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x630)]
     public struct MiniBossSumoColliderConfig
     {
-        [FieldOffset(0)]    public unsafe fixed byte /* MiniBossSumoColliderParam[6] */ _damaged[576];
+        [FieldOffset(0x00)] public unsafe fixed byte /* MiniBossSumoColliderParam[6] */ _damaged[576];
 
         public unsafe MiniBossSumoColliderParam* damaged
         {
@@ -103,7 +148,7 @@ Library "MiniBossSumoConfig"
             }
         }
 
-        [FieldOffset(576)]  public unsafe fixed byte /* MiniBossSumoColliderParam[2] */ _damage[192];
+        [FieldOffset(0x240)] public unsafe fixed byte /* MiniBossSumoColliderParam[2] */ _damage[192];
 
         public unsafe MiniBossSumoColliderParam* damage
         {
@@ -114,9 +159,9 @@ Library "MiniBossSumoConfig"
             }
         }
 
-        [FieldOffset(768)]  public MiniBossSumoColliderParam detectPuck;
-        [FieldOffset(864)]  public MiniBossSumoColliderParam cyloop;
-        [FieldOffset(960)]  public unsafe fixed byte /* MiniBossSumoColliderParam[3] */ _pressBlow[288];
+        [FieldOffset(0x300)] public MiniBossSumoColliderParam detectPuck;
+        [FieldOffset(0x360)] public MiniBossSumoColliderParam cyloop;
+        [FieldOffset(0x3C0)] public unsafe fixed byte /* MiniBossSumoColliderParam[3] */ _pressBlow[288];
 
         public unsafe MiniBossSumoColliderParam* pressBlow
         {
@@ -127,7 +172,7 @@ Library "MiniBossSumoConfig"
             }
         }
 
-        [FieldOffset(1248)] public unsafe fixed byte /* MiniBossSumoColliderParam[2] */ _sensorArm[192];
+        [FieldOffset(0x4E0)] public unsafe fixed byte /* MiniBossSumoColliderParam[2] */ _sensorArm[192];
 
         public unsafe MiniBossSumoColliderParam* sensorArm
         {
@@ -138,112 +183,112 @@ Library "MiniBossSumoConfig"
             }
         }
 
-        [FieldOffset(1440)] public MiniBossSumoColliderParam simpleBody;
-        [FieldOffset(1536)] public float moveRadius;
-        [FieldOffset(1540)] public float moveHeight;
-        [FieldOffset(1552)] public Vector3 targetMarkerOffset;
-        [FieldOffset(1568)] public float comboRadiusMin;
-        [FieldOffset(1572)] public float comboRadiusMax;
-        [FieldOffset(1576)] public float comboHeight;
+        [FieldOffset(0x5A0)] public MiniBossSumoColliderParam simpleBody;
+        [FieldOffset(0x600)] public float moveRadius;
+        [FieldOffset(0x604)] public float moveHeight;
+        [FieldOffset(0x610)] public Vector3 targetMarkerOffset;
+        [FieldOffset(0x620)] public float comboRadiusMin;
+        [FieldOffset(0x624)] public float comboRadiusMax;
+        [FieldOffset(0x628)] public float comboHeight;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 64)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public struct MiniBossSumoRopeConfig
     {
-        [FieldOffset(0)]  public float coolDownTimeToChangeElectric;
-        [FieldOffset(4)]  public float timeToWaitChangeAfterDamage;
-        [FieldOffset(8)]  public float blowOffSpeedDamagedElectricRope;
-        [FieldOffset(12)] public float decelerationDamagedElectricRope;
-        [FieldOffset(16)] public float timeElectricReaction;
-        [FieldOffset(20)] public unsafe fixed int damageByReflectCount[5];
-        [FieldOffset(40)] public float bendLengthOnHit;
-        [FieldOffset(44)] public int expansionBoundCount;
-        [FieldOffset(48)] public float blowOffSpeedExpansionBoundRope;
-        [FieldOffset(52)] public float decelerationExpansionBoundRope;
-        [FieldOffset(56)] public float lockonPanningSuspensionKExpansionBoundRope;
-        [FieldOffset(60)] public float reflectAngleMaxExpansionBoundRope;
+        [FieldOffset(0x00)] public float coolDownTimeToChangeElectric;
+        [FieldOffset(0x04)] public float timeToWaitChangeAfterDamage;
+        [FieldOffset(0x08)] public float blowOffSpeedDamagedElectricRope;
+        [FieldOffset(0x0C)] public float decelerationDamagedElectricRope;
+        [FieldOffset(0x10)] public float timeElectricReaction;
+        [FieldOffset(0x14)] public unsafe fixed int damageByReflectCount[5];
+        [FieldOffset(0x28)] public float bendLengthOnHit;
+        [FieldOffset(0x2C)] public int expansionBoundCount;
+        [FieldOffset(0x30)] public float blowOffSpeedExpansionBoundRope;
+        [FieldOffset(0x34)] public float decelerationExpansionBoundRope;
+        [FieldOffset(0x38)] public float lockonPanningSuspensionKExpansionBoundRope;
+        [FieldOffset(0x3C)] public float reflectAngleMaxExpansionBoundRope;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct MiniBossSumoSlingShotConfig
     {
-        [FieldOffset(0)]  public unsafe fixed float backInitialSpeeds[5];
-        [FieldOffset(20)] public float backDeccelation;
-        [FieldOffset(24)] public float frontAngle;
-        [FieldOffset(28)] public float timeTurn;
+        [FieldOffset(0x00)] public unsafe fixed float backInitialSpeeds[5];
+        [FieldOffset(0x14)] public float backDeccelation;
+        [FieldOffset(0x18)] public float frontAngle;
+        [FieldOffset(0x1C)] public float timeTurn;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct MiniBossSumoMoveConfig
     {
-        [FieldOffset(0)] public float moveHorzLimitAngle;
-        [FieldOffset(4)] public float moveRotateDeceleration;
+        [FieldOffset(0x00)] public float moveHorzLimitAngle;
+        [FieldOffset(0x04)] public float moveRotateDeceleration;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 96)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x60)]
     public struct MiniBossSumoThrowPuckParam
     {
-        [FieldOffset(0)]  public float distanceThrow;
-        [FieldOffset(4)]  public float coolTime;
-        [FieldOffset(16)] public Vector3 attachOffset;
-        [FieldOffset(32)] public Vector3 attachRotateL;
-        [FieldOffset(48)] public Vector3 attachRotateR;
-        [FieldOffset(64)] public float throwAngleLimit;
-        [FieldOffset(80)] public Vector3 throwOffsetMulti;
+        [FieldOffset(0x00)] public float distanceThrow;
+        [FieldOffset(0x04)] public float coolTime;
+        [FieldOffset(0x10)] public Vector3 attachOffset;
+        [FieldOffset(0x20)] public Vector3 attachRotateL;
+        [FieldOffset(0x30)] public Vector3 attachRotateR;
+        [FieldOffset(0x40)] public float throwAngleLimit;
+        [FieldOffset(0x50)] public Vector3 throwOffsetMulti;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct MiniBossSumoSlingshotComboParam
     {
-        [FieldOffset(0)] public int count;
-        [FieldOffset(4)] public bool reflectBack;
-        [FieldOffset(8)] public float reflectRagWidth;
+        [FieldOffset(0x00)] public int count;
+        [FieldOffset(0x04)] public bool reflectBack;
+        [FieldOffset(0x08)] public float reflectRagWidth;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 160)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
     public struct MiniBossSumoIKFootParam
     {
-        [FieldOffset(0)]   public Vector3 kneeAxisLS;
-        [FieldOffset(16)]  public Vector3 footEndLS;
-        [FieldOffset(32)]  public float footPlantedAnkleHeightMS;
-        [FieldOffset(36)]  public float footRaisedAnkleHeightMS;
-        [FieldOffset(40)]  public float maxAnkleHeightMS;
-        [FieldOffset(44)]  public float minAnkleHeightMS;
-        [FieldOffset(48)]  public float maxKneeAngleDegrees;
-        [FieldOffset(52)]  public float minKneeAngleDegrees;
-        [FieldOffset(56)]  public float onOffGain;
-        [FieldOffset(60)]  public float groundAscendingGain;
-        [FieldOffset(64)]  public float groundDescendingGain;
-        [FieldOffset(68)]  public float footPlantedGain;
-        [FieldOffset(72)]  public float footRaisedGain;
-        [FieldOffset(76)]  public float footLockingGain;
-        [FieldOffset(80)]  public float ankleRotationGain;
-        [FieldOffset(88)]  public CString hipName;
-        [FieldOffset(104)] public CString kneeName;
-        [FieldOffset(120)] public CString ankleName;
-        [FieldOffset(136)] public CString toeName;
+        [FieldOffset(0x00)] public Vector3 kneeAxisLS;
+        [FieldOffset(0x10)] public Vector3 footEndLS;
+        [FieldOffset(0x20)] public float footPlantedAnkleHeightMS;
+        [FieldOffset(0x24)] public float footRaisedAnkleHeightMS;
+        [FieldOffset(0x28)] public float maxAnkleHeightMS;
+        [FieldOffset(0x2C)] public float minAnkleHeightMS;
+        [FieldOffset(0x30)] public float maxKneeAngleDegrees;
+        [FieldOffset(0x34)] public float minKneeAngleDegrees;
+        [FieldOffset(0x38)] public float onOffGain;
+        [FieldOffset(0x3C)] public float groundAscendingGain;
+        [FieldOffset(0x40)] public float groundDescendingGain;
+        [FieldOffset(0x44)] public float footPlantedGain;
+        [FieldOffset(0x48)] public float footRaisedGain;
+        [FieldOffset(0x4C)] public float footLockingGain;
+        [FieldOffset(0x50)] public float ankleRotationGain;
+        [FieldOffset(0x58)] public UnmanagedString hipName;
+        [FieldOffset(0x68)] public UnmanagedString kneeName;
+        [FieldOffset(0x78)] public UnmanagedString ankleName;
+        [FieldOffset(0x88)] public UnmanagedString toeName;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 112)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public struct MiniBossSumoIKHandParam
     {
-        [FieldOffset(0)]  public Vector3 elbowAxisLS;
-        [FieldOffset(16)] public Vector3 handOffsetLS;
-        [FieldOffset(32)] public Vector3 backHandNormalLS;
-        [FieldOffset(48)] public float maxElbowAngleDegrees;
-        [FieldOffset(52)] public float minElbowAngleDegrees;
-        [FieldOffset(56)] public bool enforceWristRotation;
-        [FieldOffset(64)] public CString shoulderName;
-        [FieldOffset(80)] public CString elbowName;
-        [FieldOffset(96)] public CString wristName;
+        [FieldOffset(0x00)] public Vector3 elbowAxisLS;
+        [FieldOffset(0x10)] public Vector3 handOffsetLS;
+        [FieldOffset(0x20)] public Vector3 backHandNormalLS;
+        [FieldOffset(0x30)] public float maxElbowAngleDegrees;
+        [FieldOffset(0x34)] public float minElbowAngleDegrees;
+        [FieldOffset(0x38)] public bool enforceWristRotation;
+        [FieldOffset(0x40)] public UnmanagedString shoulderName;
+        [FieldOffset(0x50)] public UnmanagedString elbowName;
+        [FieldOffset(0x60)] public UnmanagedString wristName;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 592)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x250)]
     public struct MiniBossSumoIKParam
     {
-        [FieldOffset(0)]   public float footRaycastDistanceUp;
-        [FieldOffset(4)]   public float footRaycastDistanceDown;
-        [FieldOffset(16)]  public unsafe fixed byte /* MiniBossSumoIKFootParam[2] */ _feet[320];
+        [FieldOffset(0x00)] public float footRaycastDistanceUp;
+        [FieldOffset(0x04)] public float footRaycastDistanceDown;
+        [FieldOffset(0x10)] public unsafe fixed byte /* MiniBossSumoIKFootParam[2] */ _feet[320];
 
         public unsafe MiniBossSumoIKFootParam* feet
         {
@@ -254,13 +299,13 @@ Library "MiniBossSumoConfig"
             }
         }
 
-        [FieldOffset(336)] public float handRaycastDistanceUp;
-        [FieldOffset(340)] public float handRaycastDistanceDown;
-        [FieldOffset(344)] public float handSweepRadius;
-        [FieldOffset(348)] public float handGain;
-        [FieldOffset(352)] public float easeInTimeHandIk;
-        [FieldOffset(356)] public float easeOutTimeHandIk;
-        [FieldOffset(368)] public unsafe fixed byte /* MiniBossSumoIKHandParam[2] */ _hands[224];
+        [FieldOffset(0x150)] public float handRaycastDistanceUp;
+        [FieldOffset(0x154)] public float handRaycastDistanceDown;
+        [FieldOffset(0x158)] public float handSweepRadius;
+        [FieldOffset(0x15C)] public float handGain;
+        [FieldOffset(0x160)] public float easeInTimeHandIk;
+        [FieldOffset(0x164)] public float easeOutTimeHandIk;
+        [FieldOffset(0x170)] public unsafe fixed byte /* MiniBossSumoIKHandParam[2] */ _hands[224];
 
         public unsafe MiniBossSumoIKHandParam* hands
         {
@@ -272,81 +317,81 @@ Library "MiniBossSumoConfig"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct MiniBossSumoCyloopConfig
     {
-        [FieldOffset(0)]  public float puckSpeed;
-        [FieldOffset(4)]  public float puckTimeStartDecelerate;
-        [FieldOffset(8)]  public float puckDeceleration;
-        [FieldOffset(12)] public float puckLifeTime;
+        [FieldOffset(0x00)] public float puckSpeed;
+        [FieldOffset(0x04)] public float puckTimeStartDecelerate;
+        [FieldOffset(0x08)] public float puckDeceleration;
+        [FieldOffset(0x0C)] public float puckLifeTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct MiniBossSumoLockonConfig
     {
-        [FieldOffset(0)]  public float distance;
-        [FieldOffset(4)]  public float minElevation;
-        [FieldOffset(8)]  public float maxElevation;
-        [FieldOffset(12)] public float elevationOffset;
+        [FieldOffset(0x00)] public float distance;
+        [FieldOffset(0x04)] public float minElevation;
+        [FieldOffset(0x08)] public float maxElevation;
+        [FieldOffset(0x0C)] public float elevationOffset;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 2560)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xA00)]
     public struct MiniBossSumoCommonParam
     {
-        [FieldOffset(0)]    public MiniBossCommonConfig common;
-        [FieldOffset(64)]   public MiniBossSumoBaseConfig _base;
-        [FieldOffset(128)]  public MiniBossSumoColliderConfig collider;
-        [FieldOffset(1712)] public MiniBossSumoRopeConfig rope;
-        [FieldOffset(1776)] public MiniBossSumoSlingShotConfig slingShot;
-        [FieldOffset(1808)] public MiniBossSumoMoveConfig move;
-        [FieldOffset(1824)] public MiniBossSumoThrowPuckParam throwPuck;
-        [FieldOffset(1920)] public MiniBossSumoSlingshotComboParam combo;
-        [FieldOffset(1936)] public MiniBossSumoIKParam ik;
-        [FieldOffset(2528)] public MiniBossSumoCyloopConfig cyloop;
-        [FieldOffset(2544)] public MiniBossSumoLockonConfig lockon;
+        [FieldOffset(0x00)] public MiniBossCommonConfig common;
+        [FieldOffset(0x40)] public MiniBossSumoBaseConfig _base;
+        [FieldOffset(0x80)] public MiniBossSumoColliderConfig collider;
+        [FieldOffset(0x6B0)] public MiniBossSumoRopeConfig rope;
+        [FieldOffset(0x6F0)] public MiniBossSumoSlingShotConfig slingShot;
+        [FieldOffset(0x710)] public MiniBossSumoMoveConfig move;
+        [FieldOffset(0x720)] public MiniBossSumoThrowPuckParam throwPuck;
+        [FieldOffset(0x780)] public MiniBossSumoSlingshotComboParam combo;
+        [FieldOffset(0x790)] public MiniBossSumoIKParam ik;
+        [FieldOffset(0x9E0)] public MiniBossSumoCyloopConfig cyloop;
+        [FieldOffset(0x9F0)] public MiniBossSumoLockonConfig lockon;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 52)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x34)]
     public struct MiniBossLevelCommonConfig
     {
-        [FieldOffset(0)]  public int maxHealthPoint;
-        [FieldOffset(4)]  public unsafe fixed float maxStunPoint[3];
-        [FieldOffset(16)] public float stunDecreaseStartTime;
-        [FieldOffset(20)] public float stunDecreaseSpeed;
-        [FieldOffset(24)] public unsafe fixed float maxStaggerPoint[3];
-        [FieldOffset(36)] public float staggerDecreaseStartTime;
-        [FieldOffset(40)] public float staggerDecreaseSpeed;
-        [FieldOffset(44)] public float attackRate;
-        [FieldOffset(48)] public ushort expItemNum;
-        [FieldOffset(50)] public ushort exp;
+        [FieldOffset(0x00)] public int maxHealthPoint;
+        [FieldOffset(0x04)] public unsafe fixed float maxStunPoint[3];
+        [FieldOffset(0x10)] public float stunDecreaseStartTime;
+        [FieldOffset(0x14)] public float stunDecreaseSpeed;
+        [FieldOffset(0x18)] public unsafe fixed float maxStaggerPoint[3];
+        [FieldOffset(0x24)] public float staggerDecreaseStartTime;
+        [FieldOffset(0x28)] public float staggerDecreaseSpeed;
+        [FieldOffset(0x2C)] public float attackRate;
+        [FieldOffset(0x30)] public ushort expItemNum;
+        [FieldOffset(0x32)] public ushort exp;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 56)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public struct MiniBossSumoLevelParam
     {
-        [FieldOffset(0)] public int level;
-        [FieldOffset(4)] public MiniBossLevelCommonConfig commonConfig;
+        [FieldOffset(0x00)] public int level;
+        [FieldOffset(0x04)] public MiniBossLevelCommonConfig commonConfig;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct MiniBossSumoPuckParam
     {
-        [FieldOffset(0)] public int puckCount;
-        [FieldOffset(4)] public float speed;
-        [FieldOffset(8)] public float lifeTime;
+        [FieldOffset(0x00)] public int puckCount;
+        [FieldOffset(0x04)] public float speed;
+        [FieldOffset(0x08)] public float lifeTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 9)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x09)]
     public struct MiniBossSumoElectricRopePattern
     {
-        [FieldOffset(0)] public bool enabled;
-        [FieldOffset(1)] public unsafe fixed bool electriced[8];
+        [FieldOffset(0x00)] public bool enabled;
+        [FieldOffset(0x01)] public unsafe fixed bool electriced[8];
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 90)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x5A)]
     public struct MiniBossSumoRotationElectricRopeParam
     {
-        [FieldOffset(0)] public unsafe fixed byte /* MiniBossSumoElectricRopePattern[10] */ _patterns[90];
+        [FieldOffset(0x00)] public unsafe fixed byte /* MiniBossSumoElectricRopePattern[10] */ _patterns[90];
 
         public unsafe MiniBossSumoElectricRopePattern* patterns
         {
@@ -358,23 +403,23 @@ Library "MiniBossSumoConfig"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 468)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1D4)]
     public struct MiniBossSumoBehaviorHPRateParam
     {
-        [FieldOffset(0)]   public int rateHp;
-        [FieldOffset(4)]   public MiniBossSumoPuckParam puck;
-        [FieldOffset(16)]  public MiniBossSumoRotationElectricRopeParam rotation8;
-        [FieldOffset(106)] public MiniBossSumoRotationElectricRopeParam rotation7;
-        [FieldOffset(196)] public MiniBossSumoRotationElectricRopeParam rotation6;
-        [FieldOffset(286)] public MiniBossSumoRotationElectricRopeParam rotation5;
-        [FieldOffset(376)] public MiniBossSumoRotationElectricRopeParam rotation4;
+        [FieldOffset(0x00)] public int rateHp;
+        [FieldOffset(0x04)] public MiniBossSumoPuckParam puck;
+        [FieldOffset(0x10)] public MiniBossSumoRotationElectricRopeParam rotation8;
+        [FieldOffset(0x6A)] public MiniBossSumoRotationElectricRopeParam rotation7;
+        [FieldOffset(0xC4)] public MiniBossSumoRotationElectricRopeParam rotation6;
+        [FieldOffset(0x11E)] public MiniBossSumoRotationElectricRopeParam rotation5;
+        [FieldOffset(0x178)] public MiniBossSumoRotationElectricRopeParam rotation4;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 1408)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x580)]
     public struct MiniBossSumoLevelBand
     {
-        [FieldOffset(0)] public int level;
-        [FieldOffset(4)] public unsafe fixed byte /* MiniBossSumoBehaviorHPRateParam[3] */ _hpRateParams[1404];
+        [FieldOffset(0x00)] public int level;
+        [FieldOffset(0x04)] public unsafe fixed byte /* MiniBossSumoBehaviorHPRateParam[3] */ _hpRateParams[1404];
 
         public unsafe MiniBossSumoBehaviorHPRateParam* hpRateParams
         {
@@ -386,11 +431,11 @@ Library "MiniBossSumoConfig"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 9888)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x26A0)]
     public struct MiniBossSumoConfig
     {
-        [FieldOffset(0)]    public MiniBossSumoCommonParam commonParam;
-        [FieldOffset(2560)] public unsafe fixed byte /* MiniBossSumoLevelParam[5] */ _levelParams[280];
+        [FieldOffset(0x00)] public MiniBossSumoCommonParam commonParam;
+        [FieldOffset(0xA00)] public unsafe fixed byte /* MiniBossSumoLevelParam[5] */ _levelParams[280];
 
         public unsafe MiniBossSumoLevelParam* levelParams
         {
@@ -401,7 +446,7 @@ Library "MiniBossSumoConfig"
             }
         }
 
-        [FieldOffset(2840)] public unsafe fixed byte /* MiniBossSumoLevelBand[5] */ _levelBand[7040];
+        [FieldOffset(0xB18)] public unsafe fixed byte /* MiniBossSumoLevelBand[5] */ _levelBand[7040];
 
         public unsafe MiniBossSumoLevelBand* levelBand
         {

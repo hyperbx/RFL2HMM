@@ -3,10 +3,10 @@ using System.Runtime.InteropServices;
 
 public class ScriptParameterClass
 {
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct ScriptParameter
     {
-        [FieldOffset(0)] public uint intervalMinuntes;
+        [FieldOffset(0x00)] public uint intervalMinuntes;
     }
 
 }

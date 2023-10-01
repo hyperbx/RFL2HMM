@@ -9,11 +9,11 @@ public class SequenceParameterClass
         ObjItem = 1
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct SequenceParameter
     {
-        [FieldOffset(0)] public float suckedTime;
-        [FieldOffset(4)] public SequenceType sequenceType;
+        [FieldOffset(0x00)] public float suckedTime;
+        [FieldOffset(0x04)] public SequenceType sequenceType;
     }
 
 }

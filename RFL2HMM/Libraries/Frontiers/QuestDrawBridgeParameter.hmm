@@ -5,27 +5,27 @@ Library "QuestDrawBridgeParameter"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct QuestDrawBridgeTimerParameter
     {
-        [FieldOffset(0)]  public float timeLimitSeconds;
-        [FieldOffset(4)]  public float cautionTime;
-        [FieldOffset(8)]  public float warningTime;
-        [FieldOffset(12)] public bool useCautionAnimation;
-        [FieldOffset(13)] public bool useWarningAnimation;
+        [FieldOffset(0x00)] public float timeLimitSeconds;
+        [FieldOffset(0x04)] public float cautionTime;
+        [FieldOffset(0x08)] public float warningTime;
+        [FieldOffset(0x0C)] public bool useCautionAnimation;
+        [FieldOffset(0x0D)] public bool useWarningAnimation;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 20)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
     public struct QuestDrawBridgeParameterElement
     {
-        [FieldOffset(0)] public int applicableFailedCount;
-        [FieldOffset(4)] public QuestDrawBridgeTimerParameter timerParam;
+        [FieldOffset(0x00)] public int applicableFailedCount;
+        [FieldOffset(0x04)] public QuestDrawBridgeTimerParameter timerParam;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 60)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x3C)]
     public struct QuestDrawBridgeParameter
     {
-        [FieldOffset(0)] public unsafe fixed byte /* QuestDrawBridgeParameterElement[3] */ _element[60];
+        [FieldOffset(0x00)] public unsafe fixed byte /* QuestDrawBridgeParameterElement[3] */ _element[60];
 
         public unsafe QuestDrawBridgeParameterElement* element
         {

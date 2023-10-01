@@ -5,87 +5,87 @@ Library "EnemySniperConfig"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 28)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct RingParameter
     {
-        [FieldOffset(0)]  public float suckedTime;
-        [FieldOffset(4)]  public float launchAngle;
-        [FieldOffset(8)]  public float launchMaxSpeed;
-        [FieldOffset(12)] public float launchMinSpeed;
-        [FieldOffset(16)] public float randomRangeMin;
-        [FieldOffset(20)] public float randomRangeMax;
-        [FieldOffset(24)] public float lifeTime;
+        [FieldOffset(0x00)] public float suckedTime;
+        [FieldOffset(0x04)] public float launchAngle;
+        [FieldOffset(0x08)] public float launchMaxSpeed;
+        [FieldOffset(0x0C)] public float launchMinSpeed;
+        [FieldOffset(0x10)] public float randomRangeMin;
+        [FieldOffset(0x14)] public float randomRangeMax;
+        [FieldOffset(0x18)] public float lifeTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 88)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x58)]
     public struct EnemySniperCommonConfig
     {
-        [FieldOffset(0)]  public RingParameter ringParam;
-        [FieldOffset(28)] public int codeDropNumMin;
-        [FieldOffset(32)] public int codeDropNumMax;
-        [FieldOffset(36)] public int codeXDropNumMin;
-        [FieldOffset(40)] public int codeXDropNumMax;
-        [FieldOffset(44)] public float eyesightDistancePatrol;
-        [FieldOffset(48)] public float eyesightDistanceBattle;
-        [FieldOffset(52)] public float hideCoreDistance;
-        [FieldOffset(56)] public float showCoreDistance;
-        [FieldOffset(60)] public float guardShotWaitTime;
-        [FieldOffset(64)] public float guardShotAngle;
-        [FieldOffset(68)] public float aimBendSpeed;
-        [FieldOffset(72)] public float muzzleShrinkStartDist;
-        [FieldOffset(76)] public float muzzleShrinkEndDist;
-        [FieldOffset(80)] public float snipeMaxAngle;
-        [FieldOffset(84)] public float guardMaxAngle;
+        [FieldOffset(0x00)] public RingParameter ringParam;
+        [FieldOffset(0x1C)] public int codeDropNumMin;
+        [FieldOffset(0x20)] public int codeDropNumMax;
+        [FieldOffset(0x24)] public int codeXDropNumMin;
+        [FieldOffset(0x28)] public int codeXDropNumMax;
+        [FieldOffset(0x2C)] public float eyesightDistancePatrol;
+        [FieldOffset(0x30)] public float eyesightDistanceBattle;
+        [FieldOffset(0x34)] public float hideCoreDistance;
+        [FieldOffset(0x38)] public float showCoreDistance;
+        [FieldOffset(0x3C)] public float guardShotWaitTime;
+        [FieldOffset(0x40)] public float guardShotAngle;
+        [FieldOffset(0x44)] public float aimBendSpeed;
+        [FieldOffset(0x48)] public float muzzleShrinkStartDist;
+        [FieldOffset(0x4C)] public float muzzleShrinkEndDist;
+        [FieldOffset(0x50)] public float snipeMaxAngle;
+        [FieldOffset(0x54)] public float guardMaxAngle;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 68)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x44)]
     public struct SniperCommonLevelConfig
     {
-        [FieldOffset(0)]  public int maxHealthPoint;
-        [FieldOffset(4)]  public int maxGuardPoint;
-        [FieldOffset(8)]  public float stunTime;
-        [FieldOffset(12)] public float attackRate;
-        [FieldOffset(16)] public ushort expItemNum;
-        [FieldOffset(18)] public ushort exp;
-        [FieldOffset(20)] public float snipeRotateSpeed;
-        [FieldOffset(24)] public float chargeRotateSpeed;
-        [FieldOffset(28)] public float predictRotateSpeed;
-        [FieldOffset(32)] public float snipeWaitTime;
-        [FieldOffset(36)] public float snipeShotSpeed;
-        [FieldOffset(40)] public float snipeIntervalTime;
-        [FieldOffset(44)] public float predictTime;
-        [FieldOffset(48)] public float predictAngleRange;
-        [FieldOffset(52)] public float guardShotSpeed;
-        [FieldOffset(56)] public float guardShotRotateSpeed;
-        [FieldOffset(60)] public float guardShotMotionSpeed;
-        [FieldOffset(64)] public float guardShotLifeTime;
+        [FieldOffset(0x00)] public int maxHealthPoint;
+        [FieldOffset(0x04)] public int maxGuardPoint;
+        [FieldOffset(0x08)] public float stunTime;
+        [FieldOffset(0x0C)] public float attackRate;
+        [FieldOffset(0x10)] public ushort expItemNum;
+        [FieldOffset(0x12)] public ushort exp;
+        [FieldOffset(0x14)] public float snipeRotateSpeed;
+        [FieldOffset(0x18)] public float chargeRotateSpeed;
+        [FieldOffset(0x1C)] public float predictRotateSpeed;
+        [FieldOffset(0x20)] public float snipeWaitTime;
+        [FieldOffset(0x24)] public float snipeShotSpeed;
+        [FieldOffset(0x28)] public float snipeIntervalTime;
+        [FieldOffset(0x2C)] public float predictTime;
+        [FieldOffset(0x30)] public float predictAngleRange;
+        [FieldOffset(0x34)] public float guardShotSpeed;
+        [FieldOffset(0x38)] public float guardShotRotateSpeed;
+        [FieldOffset(0x3C)] public float guardShotMotionSpeed;
+        [FieldOffset(0x40)] public float guardShotLifeTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 72)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x48)]
     public struct EnemySniperLevelConfig
     {
-        [FieldOffset(0)] public int level;
-        [FieldOffset(4)] public SniperCommonLevelConfig common;
+        [FieldOffset(0x00)] public int level;
+        [FieldOffset(0x04)] public SniperCommonLevelConfig common;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct SniperCommonActionConfig
     {
-        [FieldOffset(0)] public int dummy;
+        [FieldOffset(0x00)] public int dummy;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct EnemySniperLevelBandConfig
     {
-        [FieldOffset(0)] public int level;
-        [FieldOffset(4)] public SniperCommonActionConfig common;
+        [FieldOffset(0x00)] public int level;
+        [FieldOffset(0x04)] public SniperCommonActionConfig common;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 488)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1E8)]
     public struct EnemySniperConfig
     {
-        [FieldOffset(0)]   public EnemySniperCommonConfig commonParams;
-        [FieldOffset(88)]  public unsafe fixed byte /* EnemySniperLevelConfig[5] */ _levelParams[360];
+        [FieldOffset(0x00)] public EnemySniperCommonConfig commonParams;
+        [FieldOffset(0x58)] public unsafe fixed byte /* EnemySniperLevelConfig[5] */ _levelParams[360];
 
         public unsafe EnemySniperLevelConfig* levelParams
         {
@@ -96,7 +96,7 @@ Library "EnemySniperConfig"
             }
         }
 
-        [FieldOffset(448)] public unsafe fixed byte /* EnemySniperLevelBandConfig[5] */ _levelBands[40];
+        [FieldOffset(0x1C0)] public unsafe fixed byte /* EnemySniperLevelBandConfig[5] */ _levelBands[40];
 
         public unsafe EnemySniperLevelBandConfig* levelBands
         {

@@ -5,36 +5,36 @@ Library "FishingParameter"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 80)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x50)]
     public struct FishingCommonParam
     {
-        [FieldOffset(0)]  public float baseWaveThickness;
-        [FieldOffset(4)]  public float baseWaveSuccessRatioNormal;
-        [FieldOffset(8)]  public float baseWaveSuccessRatioHold;
-        [FieldOffset(12)] public float singleWaveThickness;
-        [FieldOffset(16)] public float baseWaveEdgeThickness;
-        [FieldOffset(20)] public float timingEdgeThickness;
-        [FieldOffset(24)] public uint fishShadowNum;
-        [FieldOffset(28)] public float fishApproachIntervalMin;
-        [FieldOffset(32)] public float fishApproachIntervalMax;
-        [FieldOffset(36)] public float fishEscapeDistance;
-        [FieldOffset(40)] public uint buoyTwitchNumMin;
-        [FieldOffset(44)] public uint buoyTwitchNumMax;
-        [FieldOffset(48)] public float buoyTwitchIntervalMin;
-        [FieldOffset(52)] public float buoyTwitchIntervalMax;
-        [FieldOffset(56)] public float inputValidTime;
-        [FieldOffset(60)] public float fishingCameraTransitDelay;
-        [FieldOffset(64)] public float cutinDelay;
-        [FieldOffset(68)] public float cutinDuration;
-        [FieldOffset(72)] public float successPullUpDelay;
-        [FieldOffset(76)] public uint goldenChestLimitNum;
+        [FieldOffset(0x00)] public float baseWaveThickness;
+        [FieldOffset(0x04)] public float baseWaveSuccessRatioNormal;
+        [FieldOffset(0x08)] public float baseWaveSuccessRatioHold;
+        [FieldOffset(0x0C)] public float singleWaveThickness;
+        [FieldOffset(0x10)] public float baseWaveEdgeThickness;
+        [FieldOffset(0x14)] public float timingEdgeThickness;
+        [FieldOffset(0x18)] public uint fishShadowNum;
+        [FieldOffset(0x1C)] public float fishApproachIntervalMin;
+        [FieldOffset(0x20)] public float fishApproachIntervalMax;
+        [FieldOffset(0x24)] public float fishEscapeDistance;
+        [FieldOffset(0x28)] public uint buoyTwitchNumMin;
+        [FieldOffset(0x2C)] public uint buoyTwitchNumMax;
+        [FieldOffset(0x30)] public float buoyTwitchIntervalMin;
+        [FieldOffset(0x34)] public float buoyTwitchIntervalMax;
+        [FieldOffset(0x38)] public float inputValidTime;
+        [FieldOffset(0x3C)] public float fishingCameraTransitDelay;
+        [FieldOffset(0x40)] public float cutinDelay;
+        [FieldOffset(0x44)] public float cutinDuration;
+        [FieldOffset(0x48)] public float successPullUpDelay;
+        [FieldOffset(0x4C)] public uint goldenChestLimitNum;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct FishingSuccessPatternParam
     {
-        [FieldOffset(0)] public uint successNum;
-        [FieldOffset(4)] public uint failureNum;
+        [FieldOffset(0x00)] public uint successNum;
+        [FieldOffset(0x04)] public uint failureNum;
     }
 
     public enum Type : sbyte
@@ -44,18 +44,18 @@ Library "FishingParameter"
         TYPE_HOLD = 2
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct FishingWaveParam
     {
-        [FieldOffset(0)] public Type type;
-        [FieldOffset(4)] public float radius;
-        [FieldOffset(8)] public float thickness;
+        [FieldOffset(0x00)] public Type type;
+        [FieldOffset(0x04)] public float radius;
+        [FieldOffset(0x08)] public float thickness;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 60)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x3C)]
     public struct FishingWaveGroupParam
     {
-        [FieldOffset(0)] public unsafe fixed byte /* FishingWaveParam[5] */ _waves[60];
+        [FieldOffset(0x00)] public unsafe fixed byte /* FishingWaveParam[5] */ _waves[60];
 
         public unsafe FishingWaveParam* waves
         {
@@ -67,18 +67,18 @@ Library "FishingParameter"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 632)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x278)]
     public struct FishingWavePatternParam
     {
-        [FieldOffset(0)]  public float speed;
-        [FieldOffset(4)]  public float intervalMinFirst;
-        [FieldOffset(8)]  public float intervalMaxFirst;
-        [FieldOffset(12)] public float intervalMin;
-        [FieldOffset(16)] public float intervalMax;
-        [FieldOffset(20)] public float addRadiusMin;
-        [FieldOffset(24)] public float addRadiusMax;
-        [FieldOffset(28)] public uint waveGroupNum;
-        [FieldOffset(32)] public unsafe fixed byte /* FishingWaveGroupParam[10] */ _waveGroups[600];
+        [FieldOffset(0x00)] public float speed;
+        [FieldOffset(0x04)] public float intervalMinFirst;
+        [FieldOffset(0x08)] public float intervalMaxFirst;
+        [FieldOffset(0x0C)] public float intervalMin;
+        [FieldOffset(0x10)] public float intervalMax;
+        [FieldOffset(0x14)] public float addRadiusMin;
+        [FieldOffset(0x18)] public float addRadiusMax;
+        [FieldOffset(0x1C)] public uint waveGroupNum;
+        [FieldOffset(0x20)] public unsafe fixed byte /* FishingWaveGroupParam[10] */ _waveGroups[600];
 
         public unsafe FishingWaveGroupParam* waveGroups
         {
@@ -90,10 +90,10 @@ Library "FishingParameter"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct FishingFishGroupParam
     {
-        [FieldOffset(0)] public float rate;
+        [FieldOffset(0x00)] public float rate;
     }
 
     public enum FishShadowType : sbyte
@@ -126,41 +126,41 @@ Library "FishingParameter"
         PATTERN_4 = 4
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 64)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public struct FishingFishParam
     {
-        [FieldOffset(0)]  public int fishGroupId;
-        [FieldOffset(4)]  public FishShadowType shadowType;
-        [FieldOffset(8)]  public uint successPatternId;
-        [FieldOffset(12)] public uint wavePatternId;
-        [FieldOffset(16)] public uint expPoint;
-        [FieldOffset(20)] public uint tokenNum;
-        [FieldOffset(24)] public bool isRare;
-        [FieldOffset(25)] public CatchUpMotionType catchUpMotionType;
-        [FieldOffset(26)] public ToastType toastType;
-        [FieldOffset(32)] public Vector3 catchUpOffsetPos;
-        [FieldOffset(48)] public Vector3 catchUpOffsetRot;
+        [FieldOffset(0x00)] public int fishGroupId;
+        [FieldOffset(0x04)] public FishShadowType shadowType;
+        [FieldOffset(0x08)] public uint successPatternId;
+        [FieldOffset(0x0C)] public uint wavePatternId;
+        [FieldOffset(0x10)] public uint expPoint;
+        [FieldOffset(0x14)] public uint tokenNum;
+        [FieldOffset(0x18)] public bool isRare;
+        [FieldOffset(0x19)] public CatchUpMotionType catchUpMotionType;
+        [FieldOffset(0x1A)] public ToastType toastType;
+        [FieldOffset(0x20)] public Vector3 catchUpOffsetPos;
+        [FieldOffset(0x30)] public Vector3 catchUpOffsetRot;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 80)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x50)]
     public struct FishingSpotSpawnFishParam
     {
-        [FieldOffset(0)] public unsafe fixed int spawnFishId[20];
+        [FieldOffset(0x00)] public unsafe fixed int spawnFishId[20];
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct FishingFixedResultParam
     {
-        [FieldOffset(0)] public int count;
-        [FieldOffset(4)] public int fishId;
+        [FieldOffset(0x00)] public int count;
+        [FieldOffset(0x04)] public int fishId;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 408)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x198)]
     public struct FishingSpotFixedResultParam
     {
-        [FieldOffset(0)] public uint tableSize;
-        [FieldOffset(4)] public uint achievementUnlockCount;
-        [FieldOffset(8)] public unsafe fixed byte /* FishingFixedResultParam[50] */ _fixedResultList[400];
+        [FieldOffset(0x00)] public uint tableSize;
+        [FieldOffset(0x04)] public uint achievementUnlockCount;
+        [FieldOffset(0x08)] public unsafe fixed byte /* FishingFixedResultParam[50] */ _fixedResultList[400];
 
         public unsafe FishingFixedResultParam* fixedResultList
         {
@@ -172,10 +172,10 @@ Library "FishingParameter"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 1984)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x7C0)]
     public struct FishingSpotParam
     {
-        [FieldOffset(0)]    public unsafe fixed byte /* FishingSpotSpawnFishParam[4] */ _spawnFish[320];
+        [FieldOffset(0x00)] public unsafe fixed byte /* FishingSpotSpawnFishParam[4] */ _spawnFish[320];
 
         public unsafe FishingSpotSpawnFishParam* spawnFish
         {
@@ -186,7 +186,7 @@ Library "FishingParameter"
             }
         }
 
-        [FieldOffset(320)]  public unsafe fixed byte /* FishingSpotFixedResultParam[4] */ _fixedResults[1632];
+        [FieldOffset(0x140)] public unsafe fixed byte /* FishingSpotFixedResultParam[4] */ _fixedResults[1632];
 
         public unsafe FishingSpotFixedResultParam* fixedResults
         {
@@ -197,29 +197,29 @@ Library "FishingParameter"
             }
         }
 
-        [FieldOffset(1952)] public unsafe fixed uint useFishCoinNum[4];
-        [FieldOffset(1968)] public unsafe fixed uint tokenRate[4];
+        [FieldOffset(0x7A0)] public unsafe fixed uint useFishCoinNum[4];
+        [FieldOffset(0x7B0)] public unsafe fixed uint tokenRate[4];
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 1272)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x4F8)]
     public struct FishingTutorialParam
     {
-        [FieldOffset(0)]   public uint singleWaveSuccessCount;
-        [FieldOffset(4)]   public uint holdWaveSuccessCount;
-        [FieldOffset(8)]   public FishingWavePatternParam singleWave;
-        [FieldOffset(640)] public FishingWavePatternParam holdWave;
+        [FieldOffset(0x00)] public uint singleWaveSuccessCount;
+        [FieldOffset(0x04)] public uint holdWaveSuccessCount;
+        [FieldOffset(0x08)] public FishingWavePatternParam singleWave;
+        [FieldOffset(0x280)] public FishingWavePatternParam holdWave;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 9)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x09)]
     public struct FishingTradeTableParma
     {
-        [FieldOffset(0)] public unsafe fixed byte sales[9];
+        [FieldOffset(0x00)] public unsafe fixed byte sales[9];
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 63)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x3F)]
     public struct FishingTradeParam
     {
-        [FieldOffset(0)]  public unsafe fixed byte /* FishingTradeTableParma[4] */ _spot[36];
+        [FieldOffset(0x00)] public unsafe fixed byte /* FishingTradeTableParma[4] */ _spot[36];
 
         public unsafe FishingTradeTableParma* spot
         {
@@ -230,16 +230,16 @@ Library "FishingParameter"
             }
         }
 
-        [FieldOffset(36)] public unsafe fixed byte prices[9];
-        [FieldOffset(45)] public unsafe fixed byte pricesVeryHard[9];
-        [FieldOffset(54)] public unsafe fixed byte counts[9];
+        [FieldOffset(0x24)] public unsafe fixed byte prices[9];
+        [FieldOffset(0x2D)] public unsafe fixed byte pricesVeryHard[9];
+        [FieldOffset(0x36)] public unsafe fixed byte counts[9];
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 18176)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x4700)]
     public struct FishingParameter
     {
-        [FieldOffset(0)]     public FishingCommonParam common;
-        [FieldOffset(80)]    public unsafe fixed byte /* FishingSuccessPatternParam[10] */ _successPattern[80];
+        [FieldOffset(0x00)] public FishingCommonParam common;
+        [FieldOffset(0x50)] public unsafe fixed byte /* FishingSuccessPatternParam[10] */ _successPattern[80];
 
         public unsafe FishingSuccessPatternParam* successPattern
         {
@@ -250,7 +250,7 @@ Library "FishingParameter"
             }
         }
 
-        [FieldOffset(160)]   public unsafe fixed byte /* FishingWavePatternParam[10] */ _wavePattern[6320];
+        [FieldOffset(0xA0)] public unsafe fixed byte /* FishingWavePatternParam[10] */ _wavePattern[6320];
 
         public unsafe FishingWavePatternParam* wavePattern
         {
@@ -261,7 +261,7 @@ Library "FishingParameter"
             }
         }
 
-        [FieldOffset(6480)]  public unsafe fixed byte /* FishingFishGroupParam[10] */ _fishGroup[40];
+        [FieldOffset(0x1950)] public unsafe fixed byte /* FishingFishGroupParam[10] */ _fishGroup[40];
 
         public unsafe FishingFishGroupParam* fishGroup
         {
@@ -272,7 +272,7 @@ Library "FishingParameter"
             }
         }
 
-        [FieldOffset(6528)]  public unsafe fixed byte /* FishingFishParam[130] */ _fish[8320];
+        [FieldOffset(0x1980)] public unsafe fixed byte /* FishingFishParam[130] */ _fish[8320];
 
         public unsafe FishingFishParam* fish
         {
@@ -283,9 +283,9 @@ Library "FishingParameter"
             }
         }
 
-        [FieldOffset(14848)] public FishingSpotParam spot;
-        [FieldOffset(16832)] public FishingTutorialParam tutorial;
-        [FieldOffset(18104)] public FishingTradeParam trade;
+        [FieldOffset(0x3A00)] public FishingSpotParam spot;
+        [FieldOffset(0x41C0)] public FishingTutorialParam tutorial;
+        [FieldOffset(0x46B8)] public FishingTradeParam trade;
     }
 
 }

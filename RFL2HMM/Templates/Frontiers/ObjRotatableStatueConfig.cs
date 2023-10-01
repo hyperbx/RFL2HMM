@@ -3,19 +3,19 @@ using System.Runtime.InteropServices;
 
 public class ObjRotatableStatueConfigClass
 {
-    [StructLayout(LayoutKind.Explicit, Size = 48)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct GimmickCameraParam
     {
-        [FieldOffset(0)]  public float interoplateTimeActivate;
-        [FieldOffset(4)]  public float interoplateTimeDeactivate;
-        [FieldOffset(16)] public Vector3 targetOffset;
-        [FieldOffset(32)] public Vector3 cameraPosOffset;
+        [FieldOffset(0x00)] public float interoplateTimeActivate;
+        [FieldOffset(0x04)] public float interoplateTimeDeactivate;
+        [FieldOffset(0x10)] public Vector3 targetOffset;
+        [FieldOffset(0x20)] public Vector3 cameraPosOffset;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 48)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct ObjRotatableStatueConfig
     {
-        [FieldOffset(0)] public GimmickCameraParam cameraParam;
+        [FieldOffset(0x00)] public GimmickCameraParam cameraParam;
     }
 
 }

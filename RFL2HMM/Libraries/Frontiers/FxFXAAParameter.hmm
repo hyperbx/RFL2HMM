@@ -13,10 +13,10 @@ Library "FxFXAAParameter"
         QUALITY_COUNT = 3
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 1)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x01)]
     public struct FxFXAAParameter
     {
-        [FieldOffset(0)] public QualityType qualityType;
+        [FieldOffset(0x00)] public QualityType qualityType;
     }
 
 }

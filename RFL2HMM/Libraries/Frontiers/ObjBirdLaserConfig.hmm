@@ -5,23 +5,23 @@ Library "ObjBirdLaserConfig"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct SpeedInfo
     {
-        [FieldOffset(0)] public float speed;
-        [FieldOffset(4)] public float maxSpeed;
-        [FieldOffset(8)] public float acceleration;
+        [FieldOffset(0x00)] public float speed;
+        [FieldOffset(0x04)] public float maxSpeed;
+        [FieldOffset(0x08)] public float acceleration;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 64)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public struct ObjBirdLaserConfig
     {
-        [FieldOffset(0)]  public SpeedInfo speedInfoToSonic;
-        [FieldOffset(12)] public SpeedInfo speedInfoToBird;
-        [FieldOffset(24)] public float colliderLength;
-        [FieldOffset(28)] public float colliderRadius;
-        [FieldOffset(32)] public float lifeTime;
-        [FieldOffset(48)] public Vector3 laserScale;
+        [FieldOffset(0x00)] public SpeedInfo speedInfoToSonic;
+        [FieldOffset(0x0C)] public SpeedInfo speedInfoToBird;
+        [FieldOffset(0x18)] public float colliderLength;
+        [FieldOffset(0x1C)] public float colliderRadius;
+        [FieldOffset(0x20)] public float lifeTime;
+        [FieldOffset(0x30)] public Vector3 laserScale;
     }
 
 }

@@ -5,15 +5,15 @@ Library "MiniBossChargerConfig"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 64)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public struct MiniBossCommonConfig
     {
-        [FieldOffset(0)]  public float scoutDistance;
-        [FieldOffset(4)]  public float scoutDistanceOutside;
-        [FieldOffset(8)]  public float zoomDistance;
-        [FieldOffset(16)] public Vector3 zoomOffset;
-        [FieldOffset(32)] public Vector3 zoomAngle;
-        [FieldOffset(48)] public float zoomFov;
+        [FieldOffset(0x00)] public float scoutDistance;
+        [FieldOffset(0x04)] public float scoutDistanceOutside;
+        [FieldOffset(0x08)] public float zoomDistance;
+        [FieldOffset(0x10)] public Vector3 zoomOffset;
+        [FieldOffset(0x20)] public Vector3 zoomAngle;
+        [FieldOffset(0x30)] public float zoomFov;
     }
 
     public enum BarrageType : sbyte
@@ -25,282 +25,327 @@ Library "MiniBossChargerConfig"
         TYPE_AIR_DROP = 4
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
-    public struct CString
+    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    public struct UnmanagedString
     {
         [FieldOffset(0)] public long pValue;
 
         public string Value
         {
-        	get => Marshal.PtrToStringAnsi((IntPtr)pValue);
-        	set => pValue = (long)Marshal.StringToHGlobalAnsi(value);
+            get
+            {
+                if (pValue == 0)
+                    return string.Empty;
+
+                return Marshal.PtrToStringAnsi((nint)pValue);
+            }
+
+            set => pValue = Marshal.StringToHGlobalAnsi(value);
+        }
+
+        public UnmanagedString(string in_value)
+        {
+            Value = in_value;
+        }
+
+        public static implicit operator UnmanagedString(string in_value)
+        {
+            return new UnmanagedString(in_value);
+        }
+
+        public static bool operator ==(UnmanagedString in_left, string in_right)
+        {
+            return in_left.Value == in_right;
+        }
+
+        public static bool operator !=(UnmanagedString in_left, string in_right)
+        {
+            return !(in_left == in_right);
+        }
+
+        public override bool Equals(object in_obj)
+        {
+            if (in_obj is string str)
+                return Value == str;
+
+            return base.Equals(in_obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Value;
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 88)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x58)]
     public struct MiniBossChagerBarrageParam
     {
-        [FieldOffset(0)]  public BarrageType type;
-        [FieldOffset(8)]  public CString damageTag;
-        [FieldOffset(24)] public float startSpeed;
-        [FieldOffset(28)] public float decelePower;
-        [FieldOffset(32)] public float minSpeed;
-        [FieldOffset(36)] public float lifeTime;
-        [FieldOffset(40)] public float waitTime;
-        [FieldOffset(44)] public float lineTime;
-        [FieldOffset(48)] public float scale;
-        [FieldOffset(52)] public float hitVelocity;
-        [FieldOffset(56)] public float parriedSpeed;
-        [FieldOffset(60)] public int parriedDamage;
-        [FieldOffset(64)] public float parriedStaggerValue;
-        [FieldOffset(68)] public float parriedStunValue;
-        [FieldOffset(72)] public CString hitEffName;
+        [FieldOffset(0x00)] public BarrageType type;
+        [FieldOffset(0x08)] public UnmanagedString damageTag;
+        [FieldOffset(0x18)] public float startSpeed;
+        [FieldOffset(0x1C)] public float decelePower;
+        [FieldOffset(0x20)] public float minSpeed;
+        [FieldOffset(0x24)] public float lifeTime;
+        [FieldOffset(0x28)] public float waitTime;
+        [FieldOffset(0x2C)] public float lineTime;
+        [FieldOffset(0x30)] public float scale;
+        [FieldOffset(0x34)] public float hitVelocity;
+        [FieldOffset(0x38)] public float parriedSpeed;
+        [FieldOffset(0x3C)] public int parriedDamage;
+        [FieldOffset(0x40)] public float parriedStaggerValue;
+        [FieldOffset(0x44)] public float parriedStunValue;
+        [FieldOffset(0x48)] public UnmanagedString hitEffName;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 44)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x2C)]
     public struct MiniBossChagerSimpleRotateBullet
     {
-        [FieldOffset(0)]  public int barrageIndex;
-        [FieldOffset(4)]  public float startWaitTime;
-        [FieldOffset(8)]  public int muzzleNum;
-        [FieldOffset(12)] public float yOffset;
-        [FieldOffset(16)] public float zOffset;
-        [FieldOffset(20)] public float heightLength;
-        [FieldOffset(24)] public float rotSpeed;
-        [FieldOffset(28)] public float shakeSpeed;
-        [FieldOffset(32)] public float intervalTime;
-        [FieldOffset(36)] public float activeTime;
-        [FieldOffset(40)] public float endWaitTime;
+        [FieldOffset(0x00)] public int barrageIndex;
+        [FieldOffset(0x04)] public float startWaitTime;
+        [FieldOffset(0x08)] public int muzzleNum;
+        [FieldOffset(0x0C)] public float yOffset;
+        [FieldOffset(0x10)] public float zOffset;
+        [FieldOffset(0x14)] public float heightLength;
+        [FieldOffset(0x18)] public float rotSpeed;
+        [FieldOffset(0x1C)] public float shakeSpeed;
+        [FieldOffset(0x20)] public float intervalTime;
+        [FieldOffset(0x24)] public float activeTime;
+        [FieldOffset(0x28)] public float endWaitTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 36)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x24)]
     public struct MiniBossChagerFollowLaser
     {
-        [FieldOffset(0)]  public float startWaitTime;
-        [FieldOffset(4)]  public float yOffset;
-        [FieldOffset(8)]  public float zOffset;
-        [FieldOffset(12)] public float moveSpeed;
-        [FieldOffset(16)] public float followDeg;
-        [FieldOffset(20)] public int shotNum;
-        [FieldOffset(24)] public float intervalTime;
-        [FieldOffset(28)] public float lifeTime;
-        [FieldOffset(32)] public float endWaitTime;
+        [FieldOffset(0x00)] public float startWaitTime;
+        [FieldOffset(0x04)] public float yOffset;
+        [FieldOffset(0x08)] public float zOffset;
+        [FieldOffset(0x0C)] public float moveSpeed;
+        [FieldOffset(0x10)] public float followDeg;
+        [FieldOffset(0x14)] public int shotNum;
+        [FieldOffset(0x18)] public float intervalTime;
+        [FieldOffset(0x1C)] public float lifeTime;
+        [FieldOffset(0x20)] public float endWaitTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct MiniBossChagerVortexLaser
     {
-        [FieldOffset(0)]  public float startWaitTime;
-        [FieldOffset(4)]  public int muzzleNum;
-        [FieldOffset(8)]  public float yOffset;
-        [FieldOffset(12)] public float zOffset;
-        [FieldOffset(16)] public float rotSpeed;
-        [FieldOffset(20)] public float moveSpeed;
-        [FieldOffset(24)] public float activeTime;
-        [FieldOffset(28)] public float endWaitTime;
+        [FieldOffset(0x00)] public float startWaitTime;
+        [FieldOffset(0x04)] public int muzzleNum;
+        [FieldOffset(0x08)] public float yOffset;
+        [FieldOffset(0x0C)] public float zOffset;
+        [FieldOffset(0x10)] public float rotSpeed;
+        [FieldOffset(0x14)] public float moveSpeed;
+        [FieldOffset(0x18)] public float activeTime;
+        [FieldOffset(0x1C)] public float endWaitTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 20)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
     public struct MiniBossChagerCrossLaser
     {
-        [FieldOffset(0)]  public float startWaitTime;
-        [FieldOffset(4)]  public float moveSpeed;
-        [FieldOffset(8)]  public float setDeg;
-        [FieldOffset(12)] public float lifeTime;
-        [FieldOffset(16)] public float endWaitTime;
+        [FieldOffset(0x00)] public float startWaitTime;
+        [FieldOffset(0x04)] public float moveSpeed;
+        [FieldOffset(0x08)] public float setDeg;
+        [FieldOffset(0x0C)] public float lifeTime;
+        [FieldOffset(0x10)] public float endWaitTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 40)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct MiniBossChagerCrossBullet
     {
-        [FieldOffset(0)]  public int barrageIndex;
-        [FieldOffset(4)]  public float yOffset;
-        [FieldOffset(8)]  public float zOffset;
-        [FieldOffset(12)] public bool isFollowPlayer;
-        [FieldOffset(16)] public float startWaitTime;
-        [FieldOffset(20)] public float shotIntarval;
-        [FieldOffset(24)] public float maxAngle;
-        [FieldOffset(28)] public float rotateSpeed;
-        [FieldOffset(32)] public float rotateAngle;
-        [FieldOffset(36)] public float endWaitTime;
+        [FieldOffset(0x00)] public int barrageIndex;
+        [FieldOffset(0x04)] public float yOffset;
+        [FieldOffset(0x08)] public float zOffset;
+        [FieldOffset(0x0C)] public bool isFollowPlayer;
+        [FieldOffset(0x10)] public float startWaitTime;
+        [FieldOffset(0x14)] public float shotIntarval;
+        [FieldOffset(0x18)] public float maxAngle;
+        [FieldOffset(0x1C)] public float rotateSpeed;
+        [FieldOffset(0x20)] public float rotateAngle;
+        [FieldOffset(0x24)] public float endWaitTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 20)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
     public struct MiniBossChagerMassLaser
     {
-        [FieldOffset(0)]  public float startWaitTime;
-        [FieldOffset(4)]  public float yOffset;
-        [FieldOffset(8)]  public float scale;
-        [FieldOffset(12)] public float lifeTime;
-        [FieldOffset(16)] public float endWaitTime;
+        [FieldOffset(0x00)] public float startWaitTime;
+        [FieldOffset(0x04)] public float yOffset;
+        [FieldOffset(0x08)] public float scale;
+        [FieldOffset(0x0C)] public float lifeTime;
+        [FieldOffset(0x10)] public float endWaitTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct MiniBossChagerVerticalRoundBullet
     {
-        [FieldOffset(0)]  public int barrageIndex;
-        [FieldOffset(4)]  public float startWaitTime;
-        [FieldOffset(8)]  public int muzzleNum;
-        [FieldOffset(12)] public int verticalNum;
-        [FieldOffset(16)] public float radius;
-        [FieldOffset(20)] public float spaceRate;
-        [FieldOffset(24)] public float verticalWaitTime;
-        [FieldOffset(28)] public float endWaitTime;
+        [FieldOffset(0x00)] public int barrageIndex;
+        [FieldOffset(0x04)] public float startWaitTime;
+        [FieldOffset(0x08)] public int muzzleNum;
+        [FieldOffset(0x0C)] public int verticalNum;
+        [FieldOffset(0x10)] public float radius;
+        [FieldOffset(0x14)] public float spaceRate;
+        [FieldOffset(0x18)] public float verticalWaitTime;
+        [FieldOffset(0x1C)] public float endWaitTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 48)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct MiniBossPyramidRoundBullet
     {
-        [FieldOffset(0)]  public int barrageIndex;
-        [FieldOffset(4)]  public float startWaitTime;
-        [FieldOffset(8)]  public int muzzleNum;
-        [FieldOffset(12)] public float radius;
-        [FieldOffset(16)] public float height;
-        [FieldOffset(20)] public float scale;
-        [FieldOffset(24)] public int sideNum;
-        [FieldOffset(28)] public int attackNum;
-        [FieldOffset(32)] public float intervalTime;
-        [FieldOffset(36)] public float nextDeg;
-        [FieldOffset(40)] public float shotWaitTime;
-        [FieldOffset(44)] public float endWaitTime;
+        [FieldOffset(0x00)] public int barrageIndex;
+        [FieldOffset(0x04)] public float startWaitTime;
+        [FieldOffset(0x08)] public int muzzleNum;
+        [FieldOffset(0x0C)] public float radius;
+        [FieldOffset(0x10)] public float height;
+        [FieldOffset(0x14)] public float scale;
+        [FieldOffset(0x18)] public int sideNum;
+        [FieldOffset(0x1C)] public int attackNum;
+        [FieldOffset(0x20)] public float intervalTime;
+        [FieldOffset(0x24)] public float nextDeg;
+        [FieldOffset(0x28)] public float shotWaitTime;
+        [FieldOffset(0x2C)] public float endWaitTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 48)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct MiniBossPlaneUpDownBullet
     {
-        [FieldOffset(0)]  public int barrageIndex;
-        [FieldOffset(4)]  public float startWaitTime;
-        [FieldOffset(8)]  public float yOffset;
-        [FieldOffset(12)] public float scale;
-        [FieldOffset(16)] public float step;
-        [FieldOffset(20)] public int allNum;
-        [FieldOffset(24)] public float upRate;
-        [FieldOffset(28)] public float downRate;
-        [FieldOffset(32)] public float frontRate;
-        [FieldOffset(36)] public float shotWaitTimeMin;
-        [FieldOffset(40)] public float shotWaitTimeMax;
-        [FieldOffset(44)] public float endWaitTime;
+        [FieldOffset(0x00)] public int barrageIndex;
+        [FieldOffset(0x04)] public float startWaitTime;
+        [FieldOffset(0x08)] public float yOffset;
+        [FieldOffset(0x0C)] public float scale;
+        [FieldOffset(0x10)] public float step;
+        [FieldOffset(0x14)] public int allNum;
+        [FieldOffset(0x18)] public float upRate;
+        [FieldOffset(0x1C)] public float downRate;
+        [FieldOffset(0x20)] public float frontRate;
+        [FieldOffset(0x24)] public float shotWaitTimeMin;
+        [FieldOffset(0x28)] public float shotWaitTimeMax;
+        [FieldOffset(0x2C)] public float endWaitTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 28)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct MiniBossTriangleBatteryBullet
     {
-        [FieldOffset(0)]  public int barrageIndex;
-        [FieldOffset(4)]  public float startWaitTime;
-        [FieldOffset(8)]  public float yOffset;
-        [FieldOffset(12)] public float edgeLength;
-        [FieldOffset(16)] public float activeTime;
-        [FieldOffset(20)] public float intervalTime;
-        [FieldOffset(24)] public float endWaitTime;
+        [FieldOffset(0x00)] public int barrageIndex;
+        [FieldOffset(0x04)] public float startWaitTime;
+        [FieldOffset(0x08)] public float yOffset;
+        [FieldOffset(0x0C)] public float edgeLength;
+        [FieldOffset(0x10)] public float activeTime;
+        [FieldOffset(0x14)] public float intervalTime;
+        [FieldOffset(0x18)] public float endWaitTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 40)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct MiniBossPlayerFallBullet
     {
-        [FieldOffset(0)]  public int barrageIndex;
-        [FieldOffset(4)]  public float startWaitTime;
-        [FieldOffset(8)]  public float yOffset;
-        [FieldOffset(12)] public float scale;
-        [FieldOffset(16)] public float lengthMin;
-        [FieldOffset(20)] public float lengthMax;
-        [FieldOffset(24)] public float intervalTime;
-        [FieldOffset(28)] public float shotWaitTime;
-        [FieldOffset(32)] public float activeTime;
-        [FieldOffset(36)] public float endWaitTime;
+        [FieldOffset(0x00)] public int barrageIndex;
+        [FieldOffset(0x04)] public float startWaitTime;
+        [FieldOffset(0x08)] public float yOffset;
+        [FieldOffset(0x0C)] public float scale;
+        [FieldOffset(0x10)] public float lengthMin;
+        [FieldOffset(0x14)] public float lengthMax;
+        [FieldOffset(0x18)] public float intervalTime;
+        [FieldOffset(0x1C)] public float shotWaitTime;
+        [FieldOffset(0x20)] public float activeTime;
+        [FieldOffset(0x24)] public float endWaitTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 40)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct MiniBossGatlingRevolverBullet
     {
-        [FieldOffset(0)]  public int barrageIndex;
-        [FieldOffset(4)]  public float startWaitTime;
-        [FieldOffset(8)]  public float yOffset;
-        [FieldOffset(12)] public float zOffset;
-        [FieldOffset(16)] public float scale;
-        [FieldOffset(20)] public int muzzleNum;
-        [FieldOffset(24)] public float bulletRad;
-        [FieldOffset(28)] public float intervalTime;
-        [FieldOffset(32)] public float activeTime;
-        [FieldOffset(36)] public float endWaitTime;
+        [FieldOffset(0x00)] public int barrageIndex;
+        [FieldOffset(0x04)] public float startWaitTime;
+        [FieldOffset(0x08)] public float yOffset;
+        [FieldOffset(0x0C)] public float zOffset;
+        [FieldOffset(0x10)] public float scale;
+        [FieldOffset(0x14)] public int muzzleNum;
+        [FieldOffset(0x18)] public float bulletRad;
+        [FieldOffset(0x1C)] public float intervalTime;
+        [FieldOffset(0x20)] public float activeTime;
+        [FieldOffset(0x24)] public float endWaitTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 44)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x2C)]
     public struct MiniBossWinderBullet
     {
-        [FieldOffset(0)]  public int barrageIndex;
-        [FieldOffset(4)]  public float yOffset;
-        [FieldOffset(8)]  public float zOffset;
-        [FieldOffset(12)] public bool isFollowPlayer;
-        [FieldOffset(16)] public float shotIntarval;
-        [FieldOffset(20)] public float maxAngle;
-        [FieldOffset(24)] public float rotateSpeed;
-        [FieldOffset(28)] public float rotateAngle;
-        [FieldOffset(32)] public float barrageAngleDiff;
-        [FieldOffset(36)] public float startWaitTime;
-        [FieldOffset(40)] public float endWaitTime;
+        [FieldOffset(0x00)] public int barrageIndex;
+        [FieldOffset(0x04)] public float yOffset;
+        [FieldOffset(0x08)] public float zOffset;
+        [FieldOffset(0x0C)] public bool isFollowPlayer;
+        [FieldOffset(0x10)] public float shotIntarval;
+        [FieldOffset(0x14)] public float maxAngle;
+        [FieldOffset(0x18)] public float rotateSpeed;
+        [FieldOffset(0x1C)] public float rotateAngle;
+        [FieldOffset(0x20)] public float barrageAngleDiff;
+        [FieldOffset(0x24)] public float startWaitTime;
+        [FieldOffset(0x28)] public float endWaitTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 44)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x2C)]
     public struct MiniBossShotgunBullet
     {
-        [FieldOffset(0)]  public int barrageIndex;
-        [FieldOffset(4)]  public float yOffset;
-        [FieldOffset(8)]  public float zOffset;
-        [FieldOffset(12)] public bool isFollowPlayer;
-        [FieldOffset(16)] public float shotIntarval;
-        [FieldOffset(20)] public float maxAngle;
-        [FieldOffset(24)] public float yAngleOffset;
-        [FieldOffset(28)] public float shotTime;
-        [FieldOffset(32)] public float addSpeedMax;
-        [FieldOffset(36)] public float startWaitTime;
-        [FieldOffset(40)] public float endWaitTime;
+        [FieldOffset(0x00)] public int barrageIndex;
+        [FieldOffset(0x04)] public float yOffset;
+        [FieldOffset(0x08)] public float zOffset;
+        [FieldOffset(0x0C)] public bool isFollowPlayer;
+        [FieldOffset(0x10)] public float shotIntarval;
+        [FieldOffset(0x14)] public float maxAngle;
+        [FieldOffset(0x18)] public float yAngleOffset;
+        [FieldOffset(0x1C)] public float shotTime;
+        [FieldOffset(0x20)] public float addSpeedMax;
+        [FieldOffset(0x24)] public float startWaitTime;
+        [FieldOffset(0x28)] public float endWaitTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 48)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct MiniBossChagerAirDrop
     {
-        [FieldOffset(0)]  public int barrageIndex;
-        [FieldOffset(4)]  public float yOffset;
-        [FieldOffset(8)]  public float zOffset;
-        [FieldOffset(12)] public float upRotOffset;
-        [FieldOffset(16)] public float yAngleOffset;
-        [FieldOffset(20)] public float maxAngle;
-        [FieldOffset(24)] public float shotTime;
-        [FieldOffset(28)] public float addSpeedMax;
-        [FieldOffset(32)] public float lineTime;
-        [FieldOffset(36)] public float fallPower;
-        [FieldOffset(40)] public float startWaitTime;
-        [FieldOffset(44)] public float endWaitTime;
+        [FieldOffset(0x00)] public int barrageIndex;
+        [FieldOffset(0x04)] public float yOffset;
+        [FieldOffset(0x08)] public float zOffset;
+        [FieldOffset(0x0C)] public float upRotOffset;
+        [FieldOffset(0x10)] public float yAngleOffset;
+        [FieldOffset(0x14)] public float maxAngle;
+        [FieldOffset(0x18)] public float shotTime;
+        [FieldOffset(0x1C)] public float addSpeedMax;
+        [FieldOffset(0x20)] public float lineTime;
+        [FieldOffset(0x24)] public float fallPower;
+        [FieldOffset(0x28)] public float startWaitTime;
+        [FieldOffset(0x2C)] public float endWaitTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 60)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x3C)]
     public struct MiniBossChagerGroundObj
     {
-        [FieldOffset(0)]  public int bulletDamage;
-        [FieldOffset(4)]  public float bulletStaggerPoint;
-        [FieldOffset(8)]  public float bulletSpeed;
-        [FieldOffset(12)] public float bulletFallSpeed;
-        [FieldOffset(16)] public float bulletCyloopSpeed;
-        [FieldOffset(20)] public float bulletGroundTime;
-        [FieldOffset(24)] public float bulletFallTime;
-        [FieldOffset(28)] public float yOffset;
-        [FieldOffset(32)] public float zOffset;
-        [FieldOffset(36)] public float upRotOffset;
-        [FieldOffset(40)] public float yAngleOffset;
-        [FieldOffset(44)] public float maxAngle;
-        [FieldOffset(48)] public float shotTime;
-        [FieldOffset(52)] public float startWaitTime;
-        [FieldOffset(56)] public float endWaitTime;
+        [FieldOffset(0x00)] public int bulletDamage;
+        [FieldOffset(0x04)] public float bulletStaggerPoint;
+        [FieldOffset(0x08)] public float bulletSpeed;
+        [FieldOffset(0x0C)] public float bulletFallSpeed;
+        [FieldOffset(0x10)] public float bulletCyloopSpeed;
+        [FieldOffset(0x14)] public float bulletGroundTime;
+        [FieldOffset(0x18)] public float bulletFallTime;
+        [FieldOffset(0x1C)] public float yOffset;
+        [FieldOffset(0x20)] public float zOffset;
+        [FieldOffset(0x24)] public float upRotOffset;
+        [FieldOffset(0x28)] public float yAngleOffset;
+        [FieldOffset(0x2C)] public float maxAngle;
+        [FieldOffset(0x30)] public float shotTime;
+        [FieldOffset(0x34)] public float startWaitTime;
+        [FieldOffset(0x38)] public float endWaitTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 336)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x150)]
     public struct MiniBossChagerDiffuseLaser
     {
-        [FieldOffset(0)]   public float startWaitTime;
-        [FieldOffset(4)]   public float yOffset;
-        [FieldOffset(8)]   public float scale;
-        [FieldOffset(12)]  public int muzzleNum;
-        [FieldOffset(16)]  public unsafe fixed byte /* Vector3[10] */ _muzzlePosOffset[160];
+        [FieldOffset(0x00)] public float startWaitTime;
+        [FieldOffset(0x04)] public float yOffset;
+        [FieldOffset(0x08)] public float scale;
+        [FieldOffset(0x0C)] public int muzzleNum;
+        [FieldOffset(0x10)] public unsafe fixed byte /* Vector3[10] */ _muzzlePosOffset[160];
 
         public unsafe Vector3* muzzlePosOffset
         {
@@ -311,24 +356,24 @@ Library "MiniBossChargerConfig"
             }
         }
 
-        [FieldOffset(176)] public unsafe fixed float muzzleRotOffset[10];
-        [FieldOffset(216)] public unsafe fixed float muzzleTimeOffset[10];
-        [FieldOffset(256)] public unsafe fixed float muzzleLaserStartOffset[10];
-        [FieldOffset(296)] public int laserNum;
-        [FieldOffset(300)] public int attackNum;
-        [FieldOffset(304)] public float laserRandomRange;
-        [FieldOffset(308)] public float laserTime;
-        [FieldOffset(312)] public float laserEndTime;
-        [FieldOffset(316)] public float laserNextTime;
-        [FieldOffset(320)] public float endWaitTime;
+        [FieldOffset(0xB0)] public unsafe fixed float muzzleRotOffset[10];
+        [FieldOffset(0xD8)] public unsafe fixed float muzzleTimeOffset[10];
+        [FieldOffset(0x100)] public unsafe fixed float muzzleLaserStartOffset[10];
+        [FieldOffset(0x128)] public int laserNum;
+        [FieldOffset(0x12C)] public int attackNum;
+        [FieldOffset(0x130)] public float laserRandomRange;
+        [FieldOffset(0x134)] public float laserTime;
+        [FieldOffset(0x138)] public float laserEndTime;
+        [FieldOffset(0x13C)] public float laserNextTime;
+        [FieldOffset(0x140)] public float endWaitTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 384)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x180)]
     public struct MiniBossChagerChaseShot
     {
-        [FieldOffset(0)]   public float startWaitTime;
-        [FieldOffset(4)]   public int muzzleNum;
-        [FieldOffset(16)]  public unsafe fixed byte /* Vector3[10] */ _muzzlePosOffset[160];
+        [FieldOffset(0x00)] public float startWaitTime;
+        [FieldOffset(0x04)] public int muzzleNum;
+        [FieldOffset(0x10)] public unsafe fixed byte /* Vector3[10] */ _muzzlePosOffset[160];
 
         public unsafe Vector3* muzzlePosOffset
         {
@@ -339,39 +384,39 @@ Library "MiniBossChargerConfig"
             }
         }
 
-        [FieldOffset(176)] public unsafe fixed float muzzleRotOffsetX[10];
-        [FieldOffset(216)] public unsafe fixed float muzzleRotOffsetY[10];
-        [FieldOffset(256)] public unsafe fixed float muzzleTimeOffset[10];
-        [FieldOffset(296)] public unsafe fixed float muzzleLaserStartOffset[10];
-        [FieldOffset(336)] public float laserShotTimeMin;
-        [FieldOffset(340)] public float laserShotTimeMax;
-        [FieldOffset(344)] public int laserNum;
-        [FieldOffset(348)] public float laserRange;
-        [FieldOffset(352)] public float laserEndTime;
-        [FieldOffset(356)] public float laserSpeed;
-        [FieldOffset(360)] public float laserRandomRangeMin;
-        [FieldOffset(364)] public float laserRandomRangeMax;
-        [FieldOffset(368)] public float laserHomingTime;
-        [FieldOffset(372)] public float endWaitTime;
+        [FieldOffset(0xB0)] public unsafe fixed float muzzleRotOffsetX[10];
+        [FieldOffset(0xD8)] public unsafe fixed float muzzleRotOffsetY[10];
+        [FieldOffset(0x100)] public unsafe fixed float muzzleTimeOffset[10];
+        [FieldOffset(0x128)] public unsafe fixed float muzzleLaserStartOffset[10];
+        [FieldOffset(0x150)] public float laserShotTimeMin;
+        [FieldOffset(0x154)] public float laserShotTimeMax;
+        [FieldOffset(0x158)] public int laserNum;
+        [FieldOffset(0x15C)] public float laserRange;
+        [FieldOffset(0x160)] public float laserEndTime;
+        [FieldOffset(0x164)] public float laserSpeed;
+        [FieldOffset(0x168)] public float laserRandomRangeMin;
+        [FieldOffset(0x16C)] public float laserRandomRangeMax;
+        [FieldOffset(0x170)] public float laserHomingTime;
+        [FieldOffset(0x174)] public float endWaitTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 64)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public struct MiniBossChargerCatchParam
     {
-        [FieldOffset(0)]  public float hitDistance;
-        [FieldOffset(4)]  public float durationBind;
-        [FieldOffset(8)]  public float distanceStartBlackOut;
-        [FieldOffset(12)] public float timeEaseBlackOut;
-        [FieldOffset(16)] public float timeDelayEndtBlackOut;
-        [FieldOffset(32)] public Vector3 tangentFrom;
-        [FieldOffset(48)] public Vector3 tangentTo;
+        [FieldOffset(0x00)] public float hitDistance;
+        [FieldOffset(0x04)] public float durationBind;
+        [FieldOffset(0x08)] public float distanceStartBlackOut;
+        [FieldOffset(0x0C)] public float timeEaseBlackOut;
+        [FieldOffset(0x10)] public float timeDelayEndtBlackOut;
+        [FieldOffset(0x20)] public Vector3 tangentFrom;
+        [FieldOffset(0x30)] public Vector3 tangentTo;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 5568)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x15C0)]
     public struct MiniBossChargerCommonParam
     {
-        [FieldOffset(0)]    public MiniBossCommonConfig commonConfig;
-        [FieldOffset(64)]   public unsafe fixed byte /* MiniBossChagerBarrageParam[16] */ _barrage[1408];
+        [FieldOffset(0x00)] public MiniBossCommonConfig commonConfig;
+        [FieldOffset(0x40)] public unsafe fixed byte /* MiniBossChagerBarrageParam[16] */ _barrage[1408];
 
         public unsafe MiniBossChagerBarrageParam* barrage
         {
@@ -382,7 +427,7 @@ Library "MiniBossChargerConfig"
             }
         }
 
-        [FieldOffset(1472)] public unsafe fixed byte /* MiniBossChagerSimpleRotateBullet[3] */ _simpleRotateBullet[132];
+        [FieldOffset(0x5C0)] public unsafe fixed byte /* MiniBossChagerSimpleRotateBullet[3] */ _simpleRotateBullet[132];
 
         public unsafe MiniBossChagerSimpleRotateBullet* simpleRotateBullet
         {
@@ -393,7 +438,7 @@ Library "MiniBossChargerConfig"
             }
         }
 
-        [FieldOffset(1604)] public unsafe fixed byte /* MiniBossChagerFollowLaser[3] */ _followLaser[108];
+        [FieldOffset(0x644)] public unsafe fixed byte /* MiniBossChagerFollowLaser[3] */ _followLaser[108];
 
         public unsafe MiniBossChagerFollowLaser* followLaser
         {
@@ -404,7 +449,7 @@ Library "MiniBossChargerConfig"
             }
         }
 
-        [FieldOffset(1712)] public unsafe fixed byte /* MiniBossChagerVortexLaser[3] */ _vortexLaser[96];
+        [FieldOffset(0x6B0)] public unsafe fixed byte /* MiniBossChagerVortexLaser[3] */ _vortexLaser[96];
 
         public unsafe MiniBossChagerVortexLaser* vortexLaser
         {
@@ -415,7 +460,7 @@ Library "MiniBossChargerConfig"
             }
         }
 
-        [FieldOffset(1808)] public unsafe fixed byte /* MiniBossChagerCrossLaser[3] */ _crossLaser[60];
+        [FieldOffset(0x710)] public unsafe fixed byte /* MiniBossChagerCrossLaser[3] */ _crossLaser[60];
 
         public unsafe MiniBossChagerCrossLaser* crossLaser
         {
@@ -426,7 +471,7 @@ Library "MiniBossChargerConfig"
             }
         }
 
-        [FieldOffset(1868)] public unsafe fixed byte /* MiniBossChagerCrossBullet[3] */ _crossBullet[120];
+        [FieldOffset(0x74C)] public unsafe fixed byte /* MiniBossChagerCrossBullet[3] */ _crossBullet[120];
 
         public unsafe MiniBossChagerCrossBullet* crossBullet
         {
@@ -437,7 +482,7 @@ Library "MiniBossChargerConfig"
             }
         }
 
-        [FieldOffset(1988)] public unsafe fixed byte /* MiniBossChagerMassLaser[3] */ _massLaser[60];
+        [FieldOffset(0x7C4)] public unsafe fixed byte /* MiniBossChagerMassLaser[3] */ _massLaser[60];
 
         public unsafe MiniBossChagerMassLaser* massLaser
         {
@@ -448,7 +493,7 @@ Library "MiniBossChargerConfig"
             }
         }
 
-        [FieldOffset(2048)] public unsafe fixed byte /* MiniBossChagerVerticalRoundBullet[3] */ _verticalRoundBullet[96];
+        [FieldOffset(0x800)] public unsafe fixed byte /* MiniBossChagerVerticalRoundBullet[3] */ _verticalRoundBullet[96];
 
         public unsafe MiniBossChagerVerticalRoundBullet* verticalRoundBullet
         {
@@ -459,7 +504,7 @@ Library "MiniBossChargerConfig"
             }
         }
 
-        [FieldOffset(2144)] public unsafe fixed byte /* MiniBossPyramidRoundBullet[3] */ _pyramidRoundBullet[144];
+        [FieldOffset(0x860)] public unsafe fixed byte /* MiniBossPyramidRoundBullet[3] */ _pyramidRoundBullet[144];
 
         public unsafe MiniBossPyramidRoundBullet* pyramidRoundBullet
         {
@@ -470,7 +515,7 @@ Library "MiniBossChargerConfig"
             }
         }
 
-        [FieldOffset(2288)] public unsafe fixed byte /* MiniBossPlaneUpDownBullet[3] */ _planeUpDownBullet[144];
+        [FieldOffset(0x8F0)] public unsafe fixed byte /* MiniBossPlaneUpDownBullet[3] */ _planeUpDownBullet[144];
 
         public unsafe MiniBossPlaneUpDownBullet* planeUpDownBullet
         {
@@ -481,7 +526,7 @@ Library "MiniBossChargerConfig"
             }
         }
 
-        [FieldOffset(2432)] public unsafe fixed byte /* MiniBossTriangleBatteryBullet[3] */ _triangleBatteryBullet[84];
+        [FieldOffset(0x980)] public unsafe fixed byte /* MiniBossTriangleBatteryBullet[3] */ _triangleBatteryBullet[84];
 
         public unsafe MiniBossTriangleBatteryBullet* triangleBatteryBullet
         {
@@ -492,7 +537,7 @@ Library "MiniBossChargerConfig"
             }
         }
 
-        [FieldOffset(2516)] public unsafe fixed byte /* MiniBossPlayerFallBullet[3] */ _playerFallBullet[120];
+        [FieldOffset(0x9D4)] public unsafe fixed byte /* MiniBossPlayerFallBullet[3] */ _playerFallBullet[120];
 
         public unsafe MiniBossPlayerFallBullet* playerFallBullet
         {
@@ -503,7 +548,7 @@ Library "MiniBossChargerConfig"
             }
         }
 
-        [FieldOffset(2636)] public unsafe fixed byte /* MiniBossGatlingRevolverBullet[3] */ _gatlingRevolverBullet[120];
+        [FieldOffset(0xA4C)] public unsafe fixed byte /* MiniBossGatlingRevolverBullet[3] */ _gatlingRevolverBullet[120];
 
         public unsafe MiniBossGatlingRevolverBullet* gatlingRevolverBullet
         {
@@ -514,7 +559,7 @@ Library "MiniBossChargerConfig"
             }
         }
 
-        [FieldOffset(2756)] public unsafe fixed byte /* MiniBossWinderBullet[3] */ _winderBullet[132];
+        [FieldOffset(0xAC4)] public unsafe fixed byte /* MiniBossWinderBullet[3] */ _winderBullet[132];
 
         public unsafe MiniBossWinderBullet* winderBullet
         {
@@ -525,7 +570,7 @@ Library "MiniBossChargerConfig"
             }
         }
 
-        [FieldOffset(2888)] public unsafe fixed byte /* MiniBossShotgunBullet[3] */ _shotgunBullet[132];
+        [FieldOffset(0xB48)] public unsafe fixed byte /* MiniBossShotgunBullet[3] */ _shotgunBullet[132];
 
         public unsafe MiniBossShotgunBullet* shotgunBullet
         {
@@ -536,7 +581,7 @@ Library "MiniBossChargerConfig"
             }
         }
 
-        [FieldOffset(3020)] public unsafe fixed byte /* MiniBossChagerAirDrop[3] */ _airDrop[144];
+        [FieldOffset(0xBCC)] public unsafe fixed byte /* MiniBossChagerAirDrop[3] */ _airDrop[144];
 
         public unsafe MiniBossChagerAirDrop* airDrop
         {
@@ -547,7 +592,7 @@ Library "MiniBossChargerConfig"
             }
         }
 
-        [FieldOffset(3164)] public unsafe fixed byte /* MiniBossChagerGroundObj[3] */ _groundObj[180];
+        [FieldOffset(0xC5C)] public unsafe fixed byte /* MiniBossChagerGroundObj[3] */ _groundObj[180];
 
         public unsafe MiniBossChagerGroundObj* groundObj
         {
@@ -558,7 +603,7 @@ Library "MiniBossChargerConfig"
             }
         }
 
-        [FieldOffset(3344)] public unsafe fixed byte /* MiniBossChagerDiffuseLaser[3] */ _diffuseLaser[1008];
+        [FieldOffset(0xD10)] public unsafe fixed byte /* MiniBossChagerDiffuseLaser[3] */ _diffuseLaser[1008];
 
         public unsafe MiniBossChagerDiffuseLaser* diffuseLaser
         {
@@ -569,7 +614,7 @@ Library "MiniBossChargerConfig"
             }
         }
 
-        [FieldOffset(4352)] public unsafe fixed byte /* MiniBossChagerChaseShot[3] */ _chaseShot[1152];
+        [FieldOffset(0x1100)] public unsafe fixed byte /* MiniBossChagerChaseShot[3] */ _chaseShot[1152];
 
         public unsafe MiniBossChagerChaseShot* chaseShot
         {
@@ -580,30 +625,30 @@ Library "MiniBossChargerConfig"
             }
         }
 
-        [FieldOffset(5504)] public MiniBossChargerCatchParam atkCatch;
+        [FieldOffset(0x1580)] public MiniBossChargerCatchParam atkCatch;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 52)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x34)]
     public struct MiniBossLevelCommonConfig
     {
-        [FieldOffset(0)]  public int maxHealthPoint;
-        [FieldOffset(4)]  public unsafe fixed float maxStunPoint[3];
-        [FieldOffset(16)] public float stunDecreaseStartTime;
-        [FieldOffset(20)] public float stunDecreaseSpeed;
-        [FieldOffset(24)] public unsafe fixed float maxStaggerPoint[3];
-        [FieldOffset(36)] public float staggerDecreaseStartTime;
-        [FieldOffset(40)] public float staggerDecreaseSpeed;
-        [FieldOffset(44)] public float attackRate;
-        [FieldOffset(48)] public ushort expItemNum;
-        [FieldOffset(50)] public ushort exp;
+        [FieldOffset(0x00)] public int maxHealthPoint;
+        [FieldOffset(0x04)] public unsafe fixed float maxStunPoint[3];
+        [FieldOffset(0x10)] public float stunDecreaseStartTime;
+        [FieldOffset(0x14)] public float stunDecreaseSpeed;
+        [FieldOffset(0x18)] public unsafe fixed float maxStaggerPoint[3];
+        [FieldOffset(0x24)] public float staggerDecreaseStartTime;
+        [FieldOffset(0x28)] public float staggerDecreaseSpeed;
+        [FieldOffset(0x2C)] public float attackRate;
+        [FieldOffset(0x30)] public ushort expItemNum;
+        [FieldOffset(0x32)] public ushort exp;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 60)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x3C)]
     public struct MiniBossChargerLevelParam
     {
-        [FieldOffset(0)]  public int level;
-        [FieldOffset(4)]  public MiniBossLevelCommonConfig commonConfig;
-        [FieldOffset(56)] public float stunTime;
+        [FieldOffset(0x00)] public int level;
+        [FieldOffset(0x04)] public MiniBossLevelCommonConfig commonConfig;
+        [FieldOffset(0x38)] public float stunTime;
     }
 
     public enum AttackType : int
@@ -630,25 +675,25 @@ Library "MiniBossChargerConfig"
         AttackTypeNum = 19
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 24)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct MiniBossChargerHPRateParam
     {
-        [FieldOffset(0)] public int rateHp;
-        [FieldOffset(8)] public CString grindSetName;
+        [FieldOffset(0x00)] public int rateHp;
+        [FieldOffset(0x08)] public UnmanagedString grindSetName;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 184)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xB8)]
     public struct MiniBossChargerLevelBand
     {
-        [FieldOffset(0)]   public int level;
-        [FieldOffset(4)]   public float rate;
-        [FieldOffset(8)]   public float chanceTime;
-        [FieldOffset(12)]  public float chanceTimeMoveSpeed;
-        [FieldOffset(16)]  public float chanceTimeDecSpeed;
-        [FieldOffset(20)]  public float chanceTimeSpeedMin;
-        [FieldOffset(24)]  public float damageTime;
-        [FieldOffset(28)]  public float chanceTimeAddSpeed;
-        [FieldOffset(32)]  public unsafe fixed byte /* AttackType[10] */ _attackTable[40];
+        [FieldOffset(0x00)] public int level;
+        [FieldOffset(0x04)] public float rate;
+        [FieldOffset(0x08)] public float chanceTime;
+        [FieldOffset(0x0C)] public float chanceTimeMoveSpeed;
+        [FieldOffset(0x10)] public float chanceTimeDecSpeed;
+        [FieldOffset(0x14)] public float chanceTimeSpeedMin;
+        [FieldOffset(0x18)] public float damageTime;
+        [FieldOffset(0x1C)] public float chanceTimeAddSpeed;
+        [FieldOffset(0x20)] public unsafe fixed byte /* AttackType[10] */ _attackTable[40];
 
         public unsafe AttackType* attackTable
         {
@@ -659,8 +704,8 @@ Library "MiniBossChargerConfig"
             }
         }
 
-        [FieldOffset(72)]  public unsafe fixed int attackIndexTable[10];
-        [FieldOffset(112)] public unsafe fixed byte /* MiniBossChargerHPRateParam[3] */ _hpRateParams[72];
+        [FieldOffset(0x48)] public unsafe fixed int attackIndexTable[10];
+        [FieldOffset(0x70)] public unsafe fixed byte /* MiniBossChargerHPRateParam[3] */ _hpRateParams[72];
 
         public unsafe MiniBossChargerHPRateParam* hpRateParams
         {
@@ -696,11 +741,11 @@ Library "MiniBossChargerConfig"
         MiniBossChargerLevel1_AttackType_AttackTypeNum = 19
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 20)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
     public struct MiniBossChargerLevel1
     {
-        [FieldOffset(0)]  public float range;
-        [FieldOffset(4)]  public unsafe fixed byte /* MiniBossChargerLevel1_AttackType[2] */ _attackTable[8];
+        [FieldOffset(0x00)] public float range;
+        [FieldOffset(0x04)] public unsafe fixed byte /* MiniBossChargerLevel1_AttackType[2] */ _attackTable[8];
 
         public unsafe MiniBossChargerLevel1_AttackType* attackTable
         {
@@ -711,14 +756,14 @@ Library "MiniBossChargerConfig"
             }
         }
 
-        [FieldOffset(12)] public unsafe fixed int attackIndexTable[2];
+        [FieldOffset(0x0C)] public unsafe fixed int attackIndexTable[2];
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 6832)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1AB0)]
     public struct MiniBossChargerConfig
     {
-        [FieldOffset(0)]    public MiniBossChargerCommonParam commonParam;
-        [FieldOffset(5568)] public unsafe fixed byte /* MiniBossChargerLevelParam[5] */ _levelParams[300];
+        [FieldOffset(0x00)] public MiniBossChargerCommonParam commonParam;
+        [FieldOffset(0x15C0)] public unsafe fixed byte /* MiniBossChargerLevelParam[5] */ _levelParams[300];
 
         public unsafe MiniBossChargerLevelParam* levelParams
         {
@@ -729,7 +774,7 @@ Library "MiniBossChargerConfig"
             }
         }
 
-        [FieldOffset(5872)] public unsafe fixed byte /* MiniBossChargerLevelBand[5] */ _levelBands[920];
+        [FieldOffset(0x16F0)] public unsafe fixed byte /* MiniBossChargerLevelBand[5] */ _levelBands[920];
 
         public unsafe MiniBossChargerLevelBand* levelBands
         {
@@ -740,7 +785,7 @@ Library "MiniBossChargerConfig"
             }
         }
 
-        [FieldOffset(6792)] public unsafe fixed byte /* MiniBossChargerLevel1[2] */ _level1Params[40];
+        [FieldOffset(0x1A88)] public unsafe fixed byte /* MiniBossChargerLevel1[2] */ _level1Params[40];
 
         public unsafe MiniBossChargerLevel1* level1Params
         {

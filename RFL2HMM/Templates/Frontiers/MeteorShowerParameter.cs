@@ -3,28 +3,28 @@ using System.Runtime.InteropServices;
 
 public class MeteorShowerParameterClass
 {
-    [StructLayout(LayoutKind.Explicit, Size = 96)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x60)]
     public struct MeteorShowerEffectParameter
     {
-        [FieldOffset(0)]  public float spawnIntervalMax;
-        [FieldOffset(4)]  public float spawnIntervalMin;
-        [FieldOffset(8)]  public float spawnHeightMax;
-        [FieldOffset(12)] public float spawnHeightMin;
-        [FieldOffset(16)] public float spawnHorizonMax;
-        [FieldOffset(20)] public float spawnHorizonMin;
-        [FieldOffset(24)] public float speedMax;
-        [FieldOffset(28)] public float speedMin;
-        [FieldOffset(32)] public float lengthMax;
-        [FieldOffset(36)] public float lengthMin;
-        [FieldOffset(40)] public float width;
-        [FieldOffset(44)] public float angleMax;
-        [FieldOffset(48)] public float angleMin;
-        [FieldOffset(52)] public float moveTimeMax;
-        [FieldOffset(56)] public float moveTimeMin;
-        [FieldOffset(60)] public float fadeTimeMax;
-        [FieldOffset(64)] public float fadeTimeMin;
-        [FieldOffset(68)] public float spawnAngle;
-        [FieldOffset(80)] public Vector3 color;
+        [FieldOffset(0x00)] public float spawnIntervalMax;
+        [FieldOffset(0x04)] public float spawnIntervalMin;
+        [FieldOffset(0x08)] public float spawnHeightMax;
+        [FieldOffset(0x0C)] public float spawnHeightMin;
+        [FieldOffset(0x10)] public float spawnHorizonMax;
+        [FieldOffset(0x14)] public float spawnHorizonMin;
+        [FieldOffset(0x18)] public float speedMax;
+        [FieldOffset(0x1C)] public float speedMin;
+        [FieldOffset(0x20)] public float lengthMax;
+        [FieldOffset(0x24)] public float lengthMin;
+        [FieldOffset(0x28)] public float width;
+        [FieldOffset(0x2C)] public float angleMax;
+        [FieldOffset(0x30)] public float angleMin;
+        [FieldOffset(0x34)] public float moveTimeMax;
+        [FieldOffset(0x38)] public float moveTimeMin;
+        [FieldOffset(0x3C)] public float fadeTimeMax;
+        [FieldOffset(0x40)] public float fadeTimeMin;
+        [FieldOffset(0x44)] public float spawnAngle;
+        [FieldOffset(0x50)] public Vector3 color;
     }
 
     public enum Symbol : sbyte
@@ -37,29 +37,29 @@ public class MeteorShowerParameterClass
         NumSymbols = 4
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct ReelParam
     {
-        [FieldOffset(0)]  public Symbol symbols__arr0;
-        [FieldOffset(1)] public Symbol symbols__arr1;
-        [FieldOffset(2)] public Symbol symbols__arr2;
-        [FieldOffset(3)] public Symbol symbols__arr3;
-        [FieldOffset(4)] public Symbol symbols__arr4;
-        [FieldOffset(5)] public Symbol symbols__arr5;
-        [FieldOffset(6)] public Symbol symbols__arr6;
-        [FieldOffset(7)] public Symbol symbols__arr7;
-        [FieldOffset(8)] public Symbol symbols__arr8;
-        [FieldOffset(9)] public Symbol symbols__arr9;
-        [FieldOffset(10)] public Symbol symbols__arr10;
-        [FieldOffset(11)] public Symbol symbols__arr11;
-        [FieldOffset(12)] public Symbol symbols__arr12;
-        [FieldOffset(13)] public Symbol symbols__arr13;
-        [FieldOffset(14)] public Symbol symbols__arr14;
-        [FieldOffset(15)] public Symbol symbols__arr15;
-        [FieldOffset(16)] public float spinSpeedMin;
-        [FieldOffset(20)] public float spinSpeedMax;
-        [FieldOffset(24)] public float autoStopTimeMin;
-        [FieldOffset(28)] public float autoStopTimeMax;
+        [FieldOffset(0x00)] public Symbol symbols__arr0;
+        [FieldOffset(0x01)] public Symbol symbols__arr1;
+        [FieldOffset(0x02)] public Symbol symbols__arr2;
+        [FieldOffset(0x03)] public Symbol symbols__arr3;
+        [FieldOffset(0x04)] public Symbol symbols__arr4;
+        [FieldOffset(0x05)] public Symbol symbols__arr5;
+        [FieldOffset(0x06)] public Symbol symbols__arr6;
+        [FieldOffset(0x07)] public Symbol symbols__arr7;
+        [FieldOffset(0x08)] public Symbol symbols__arr8;
+        [FieldOffset(0x09)] public Symbol symbols__arr9;
+        [FieldOffset(0x0A)] public Symbol symbols__arr10;
+        [FieldOffset(0x0B)] public Symbol symbols__arr11;
+        [FieldOffset(0x0C)] public Symbol symbols__arr12;
+        [FieldOffset(0x0D)] public Symbol symbols__arr13;
+        [FieldOffset(0x0E)] public Symbol symbols__arr14;
+        [FieldOffset(0x0F)] public Symbol symbols__arr15;
+        [FieldOffset(0x10)] public float spinSpeedMin;
+        [FieldOffset(0x14)] public float spinSpeedMax;
+        [FieldOffset(0x18)] public float autoStopTimeMin;
+        [FieldOffset(0x1C)] public float autoStopTimeMax;
     }
 
     public enum RateInfo_Symbol : sbyte
@@ -72,13 +72,13 @@ public class MeteorShowerParameterClass
         RateInfo_Symbol_NumSymbols = 4
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct RateInfo
     {
-        [FieldOffset(0)] public RateInfo_Symbol symbols__arr0;
-        [FieldOffset(1)] public RateInfo_Symbol symbols__arr1;
-        [FieldOffset(2)] public RateInfo_Symbol symbols__arr2;
-        [FieldOffset(4)] public float rate;
+        [FieldOffset(0x00)] public RateInfo_Symbol symbols__arr0;
+        [FieldOffset(0x01)] public RateInfo_Symbol symbols__arr1;
+        [FieldOffset(0x02)] public RateInfo_Symbol symbols__arr2;
+        [FieldOffset(0x04)] public float rate;
     }
 
     public enum CeilingInfo_Symbol : sbyte
@@ -91,13 +91,13 @@ public class MeteorShowerParameterClass
         CeilingInfo_Symbol_NumSymbols = 4
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct CeilingInfo
     {
-        [FieldOffset(0)] public CeilingInfo_Symbol symbols__arr0;
-        [FieldOffset(1)] public CeilingInfo_Symbol symbols__arr1;
-        [FieldOffset(2)] public CeilingInfo_Symbol symbols__arr2;
-        [FieldOffset(4)] public uint rollCount;
+        [FieldOffset(0x00)] public CeilingInfo_Symbol symbols__arr0;
+        [FieldOffset(0x01)] public CeilingInfo_Symbol symbols__arr1;
+        [FieldOffset(0x02)] public CeilingInfo_Symbol symbols__arr2;
+        [FieldOffset(0x04)] public uint rollCount;
     }
 
     public enum PayoutInfo_Symbol : sbyte
@@ -110,52 +110,55 @@ public class MeteorShowerParameterClass
         PayoutInfo_Symbol_NumSymbols = 4
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct PayoutInfo
     {
-        [FieldOffset(0)] public PayoutInfo_Symbol symbols__arr0;
-        [FieldOffset(1)] public PayoutInfo_Symbol symbols__arr1;
-        [FieldOffset(2)] public PayoutInfo_Symbol symbols__arr2;
-        [FieldOffset(4)] public uint payout;
+        [FieldOffset(0x00)] public PayoutInfo_Symbol symbols__arr0;
+        [FieldOffset(0x01)] public PayoutInfo_Symbol symbols__arr1;
+        [FieldOffset(0x02)] public PayoutInfo_Symbol symbols__arr2;
+        [FieldOffset(0x04)] public uint payout;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 216)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xD8)]
     public struct ObjBonusSlotConfig
     {
-        [FieldOffset(0)]   public ReelParam reelParams__arr0;
-        [FieldOffset(32)] public ReelParam reelParams__arr1;
-        [FieldOffset(64)] public ReelParam reelParams__arr2;
-        [FieldOffset(96)]  public float spinInterval;
-        [FieldOffset(100)] public RateInfo rateInfos__arr0;
-        [FieldOffset(108)] public RateInfo rateInfos__arr1;
-        [FieldOffset(116)] public RateInfo rateInfos__arr2;
-        [FieldOffset(124)] public RateInfo rateInfos__arr3;
-        [FieldOffset(132)] public CeilingInfo ceilingInfos__arr0;
-        [FieldOffset(140)] public CeilingInfo ceilingInfos__arr1;
-        [FieldOffset(148)] public CeilingInfo ceilingInfos__arr2;
-        [FieldOffset(156)] public CeilingInfo ceilingInfos__arr3;
-        [FieldOffset(164)] public PayoutInfo payoutInfos__arr0;
-        [FieldOffset(172)] public PayoutInfo payoutInfos__arr1;
-        [FieldOffset(180)] public PayoutInfo payoutInfos__arr2;
-        [FieldOffset(188)] public PayoutInfo payoutInfos__arr3;
-        [FieldOffset(196)] public uint payoutOnBlank;
-        [FieldOffset(200)] public bool WinEvenWithPush;
-        [FieldOffset(204)] public float retrySpeed;
-        [FieldOffset(208)] public float backSpeed;
-        [FieldOffset(212)] public float stepSpeed;
+        [FieldOffset(0x00)] public ReelParam reelParams__arr0;
+        [FieldOffset(0x20)] public ReelParam reelParams__arr1;
+        [FieldOffset(0x40)] public ReelParam reelParams__arr2;
+        [FieldOffset(0x60)] public float spinInterval;
+        [FieldOffset(0x64)] public RateInfo rateInfos__arr0;
+        [FieldOffset(0x6C)] public RateInfo rateInfos__arr1;
+        [FieldOffset(0x74)] public RateInfo rateInfos__arr2;
+        [FieldOffset(0x7C)] public RateInfo rateInfos__arr3;
+        [FieldOffset(0x84)] public CeilingInfo ceilingInfos__arr0;
+        [FieldOffset(0x8C)] public CeilingInfo ceilingInfos__arr1;
+        [FieldOffset(0x94)] public CeilingInfo ceilingInfos__arr2;
+        [FieldOffset(0x9C)] public CeilingInfo ceilingInfos__arr3;
+        [FieldOffset(0xA4)] public PayoutInfo payoutInfos__arr0;
+        [FieldOffset(0xAC)] public PayoutInfo payoutInfos__arr1;
+        [FieldOffset(0xB4)] public PayoutInfo payoutInfos__arr2;
+        [FieldOffset(0xBC)] public PayoutInfo payoutInfos__arr3;
+        [FieldOffset(0xC4)] public uint payoutOnBlank;
+        [FieldOffset(0xC8)] public bool WinEvenWithPush;
+        [FieldOffset(0xCC)] public float retrySpeed;
+        [FieldOffset(0xD0)] public float backSpeed;
+        [FieldOffset(0xD4)] public float stepSpeed;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 352)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x170)]
     public struct MeteorShowerParameter
     {
-        [FieldOffset(0)]   public float rangeFromSonicObjectsDontRespawn;
-        [FieldOffset(4)]   public uint intervalDay;
-        [FieldOffset(8)]   public uint startHour;
-        [FieldOffset(12)]  public uint startMinute;
-        [FieldOffset(16)]  public uint durationHour;
-        [FieldOffset(20)]  public uint durationMinute;
-        [FieldOffset(32)]  public MeteorShowerEffectParameter effect;
-        [FieldOffset(128)] public ObjBonusSlotConfig bonusSlotConfig;
+        [FieldOffset(0x00)] public float rangeFromSonicObjectsDontRespawn;
+        [FieldOffset(0x04)] public uint intervalDay;
+        [FieldOffset(0x08)] public uint startHour;
+        [FieldOffset(0x0C)] public uint startMinute;
+        [FieldOffset(0x10)] public uint durationHour;
+        [FieldOffset(0x14)] public uint durationMinute;
+        [FieldOffset(0x18)] public uint extraIslandSeedRate;
+        [FieldOffset(0x1C)] public uint extraIslandKodamaRate;
+        [FieldOffset(0x20)] public uint extraIntervalDay;
+        [FieldOffset(0x30)] public MeteorShowerEffectParameter effect;
+        [FieldOffset(0x90)] public ObjBonusSlotConfig bonusSlotConfig;
     }
 
 }

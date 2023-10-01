@@ -3,10 +3,10 @@ using System.Runtime.InteropServices;
 
 public class DLCParameterClass
 {
-    [StructLayout(LayoutKind.Explicit, Size = 1)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x01)]
     public struct DLCParameter
     {
-        [FieldOffset(0)] public byte dummy;
+        [FieldOffset(0x00)] public byte dummy;
     }
 
 }

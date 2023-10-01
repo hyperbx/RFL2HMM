@@ -5,18 +5,18 @@ Library "ObjNormalFloorConfig"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct NormalFloorSize
     {
-        [FieldOffset(0)] public float length;
-        [FieldOffset(4)] public float width;
-        [FieldOffset(8)] public float height;
+        [FieldOffset(0x00)] public float length;
+        [FieldOffset(0x04)] public float width;
+        [FieldOffset(0x08)] public float height;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 120)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x78)]
     public struct ObjNormalFloorConfig
     {
-        [FieldOffset(0)] public unsafe fixed byte /* NormalFloorSize[10] */ _sizeInfo[120];
+        [FieldOffset(0x00)] public unsafe fixed byte /* NormalFloorSize[10] */ _sizeInfo[120];
 
         public unsafe NormalFloorSize* sizeInfo
         {

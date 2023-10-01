@@ -12,24 +12,24 @@ public class StatsDataContainerClass
         TYPE_FLOAT = 4
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct StatsDataValue
     {
-        [FieldOffset(0)] public StatsType type;
-        [FieldOffset(8)] public ulong value;
+        [FieldOffset(0x00)] public StatsType type;
+        [FieldOffset(0x08)] public ulong value;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 32)]
     public struct StatsDataValueArray
     {
-        [FieldOffset(0)] public ulong pData;
-        [FieldOffset(8)] public ulong Size;
+        [FieldOffset(0)] public long pData;
+        [FieldOffset(8)] public long Size;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct StatsDataContainer
     {
-        [FieldOffset(0)] public StatsDataValueArray data;
+        [FieldOffset(0x00)] public StatsDataValueArray data;
     }
 
 }

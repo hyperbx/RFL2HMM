@@ -1,0 +1,59 @@
+Library "BossRushParameter"
+{
+    #load "System.Numerics.dll"
+
+    using System.Numerics;
+    using System.Runtime.InteropServices;
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
+    public struct BossRushStageParameter
+    {
+        [FieldOffset(0x00)] public uint hour;
+        [FieldOffset(0x04)] public uint minute;
+        [FieldOffset(0x08)] public uint healthPoint;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
+    public struct BossRushParameterElement
+    {
+        [FieldOffset(0x00)] public int applicableFailedCount;
+        [FieldOffset(0x04)] public unsafe fixed byte /* BossRushStageParameter[3] */ _stages[36];
+
+        public unsafe BossRushStageParameter* stages
+        {
+            get
+            {
+                fixed (byte* p_stages = _stages)
+                    return (BossRushStageParameter*)p_stages;
+            }
+        }
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0xA4)]
+    public struct BossRushParameter
+    {
+        [FieldOffset(0x00)] public unsafe fixed byte /* BossRushParameterElement[3] */ _element[120];
+
+        public unsafe BossRushParameterElement* element
+        {
+            get
+            {
+                fixed (byte* p_element = _element)
+                    return (BossRushParameterElement*)p_element;
+            }
+        }
+
+        [FieldOffset(0x78)] public uint defaultRing;
+        [FieldOffset(0x7C)] public float defaultCyloopGauge;
+        [FieldOffset(0x80)] public float readyTime;
+        [FieldOffset(0x84)] public float clearTime;
+        [FieldOffset(0x88)] public float failedTime;
+        [FieldOffset(0x8C)] public float clearWaitTime;
+        [FieldOffset(0x90)] public float failedWaitTime;
+        [FieldOffset(0x94)] public float kodamaOrdinaryTextTime;
+        [FieldOffset(0x98)] public float kodamaFightDelayTime;
+        [FieldOffset(0x9C)] public float kodamaFightTextTime;
+        [FieldOffset(0xA0)] public float kodamaSplendidTextTime;
+    }
+
+}

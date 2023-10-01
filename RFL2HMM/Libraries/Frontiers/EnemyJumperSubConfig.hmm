@@ -5,43 +5,43 @@ Library "EnemyJumperSubConfig"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 20)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
     public struct EnemyJumperSubCommonParam
     {
-        [FieldOffset(0)]  public float killWaitTime;
-        [FieldOffset(4)]  public float colliderRadius;
-        [FieldOffset(8)]  public float colliderHeight;
-        [FieldOffset(12)] public float damageColliderRadiusOffset;
-        [FieldOffset(16)] public float eyesightDistance;
+        [FieldOffset(0x00)] public float killWaitTime;
+        [FieldOffset(0x04)] public float colliderRadius;
+        [FieldOffset(0x08)] public float colliderHeight;
+        [FieldOffset(0x0C)] public float damageColliderRadiusOffset;
+        [FieldOffset(0x10)] public float eyesightDistance;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct EnemyJumperSubCommonLevelParam
     {
-        [FieldOffset(0)]  public int maxHealthPoint;
-        [FieldOffset(4)]  public float attackRate;
-        [FieldOffset(8)]  public ushort expItemNum;
-        [FieldOffset(10)] public ushort exp;
+        [FieldOffset(0x00)] public int maxHealthPoint;
+        [FieldOffset(0x04)] public float attackRate;
+        [FieldOffset(0x08)] public ushort expItemNum;
+        [FieldOffset(0x0A)] public ushort exp;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct EnemyJumperSubLevelParam
     {
-        [FieldOffset(0)] public int level;
-        [FieldOffset(4)] public EnemyJumperSubCommonLevelParam common;
+        [FieldOffset(0x00)] public int level;
+        [FieldOffset(0x04)] public EnemyJumperSubCommonLevelParam common;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct EnemyJumperSubLevelBand
     {
-        [FieldOffset(0)] public int level;
+        [FieldOffset(0x00)] public int level;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 120)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x78)]
     public struct EnemyJumperSubConfig
     {
-        [FieldOffset(0)]   public EnemyJumperSubCommonParam commonParam;
-        [FieldOffset(20)]  public unsafe fixed byte /* EnemyJumperSubLevelParam[5] */ _levelParams[80];
+        [FieldOffset(0x00)] public EnemyJumperSubCommonParam commonParam;
+        [FieldOffset(0x14)] public unsafe fixed byte /* EnemyJumperSubLevelParam[5] */ _levelParams[80];
 
         public unsafe EnemyJumperSubLevelParam* levelParams
         {
@@ -52,7 +52,7 @@ Library "EnemyJumperSubConfig"
             }
         }
 
-        [FieldOffset(100)] public unsafe fixed byte /* EnemyJumperSubLevelBand[5] */ _levelBand[20];
+        [FieldOffset(0x64)] public unsafe fixed byte /* EnemyJumperSubLevelBand[5] */ _levelBand[20];
 
         public unsafe EnemyJumperSubLevelBand* levelBand
         {

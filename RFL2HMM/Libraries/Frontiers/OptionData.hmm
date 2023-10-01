@@ -30,7 +30,8 @@ Library "OptionData"
         IconIsland3 = 3,
         IconIsland4 = 4,
         IconIsland5 = 5,
-        IconLastBoss = 6
+        IconLastBoss = 6,
+        IconExtra = 7
     }
 
     public enum AppVersion : byte
@@ -41,22 +42,22 @@ Library "OptionData"
         AppVersion_1_40 = 3
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 40)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct HeaderData
     {
-        [FieldOffset(0)]  public uint signature;
-        [FieldOffset(4)]  public byte version;
-        [FieldOffset(5)]  public Status status;
-        [FieldOffset(6)]  public byte config;
-        [FieldOffset(7)]  public Sequence sequence;
-        [FieldOffset(8)]  public uint playTime;
-        [FieldOffset(12)] public SaveDataIcon icon;
-        [FieldOffset(13)] public AppVersion appVersion;
-        [FieldOffset(14)] public byte config2;
-        [FieldOffset(15)] public byte reserved1;
-        [FieldOffset(16)] public uint saveDate;
-        [FieldOffset(20)] public byte index;
-        [FieldOffset(24)] public unsafe fixed uint reserved[4];
+        [FieldOffset(0x00)] public uint signature;
+        [FieldOffset(0x04)] public byte version;
+        [FieldOffset(0x05)] public Status status;
+        [FieldOffset(0x06)] public byte config;
+        [FieldOffset(0x07)] public Sequence sequence;
+        [FieldOffset(0x08)] public uint playTime;
+        [FieldOffset(0x0C)] public SaveDataIcon icon;
+        [FieldOffset(0x0D)] public AppVersion appVersion;
+        [FieldOffset(0x0E)] public byte config2;
+        [FieldOffset(0x0F)] public byte reserved1;
+        [FieldOffset(0x10)] public uint saveDate;
+        [FieldOffset(0x14)] public byte index;
+        [FieldOffset(0x18)] public unsafe fixed uint reserved[4];
     }
 
     public enum VoiceLanguageType : sbyte
@@ -105,35 +106,35 @@ Library "OptionData"
         NumInVeryHard = 4
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct OptionGamePlayData
     {
-        [FieldOffset(0)]  public byte initialSpeedRate;
-        [FieldOffset(1)]  public byte boostInitialSpeedRate;
-        [FieldOffset(2)]  public byte acceleRate;
-        [FieldOffset(3)]  public byte maxSpeedRate;
-        [FieldOffset(4)]  public byte minTurnSpeedRate;
-        [FieldOffset(5)]  public byte boostMinTurnSpeedRate;
-        [FieldOffset(6)]  public byte rotateForceRate;
-        [FieldOffset(7)]  public byte bumpJumpGravityRate;
-        [FieldOffset(8)]  public VoiceLanguageType speech;
-        [FieldOffset(9)]  public LanguageType text;
-        [FieldOffset(10)] public VibrationLevel vibrationLevel;
-        [FieldOffset(11)] public Value diffculty;
-        [FieldOffset(12)] public byte config;
-        [FieldOffset(13)] public byte padSensibilityRate;
-        [FieldOffset(14)] public byte mouseSensibilityRate;
-        [FieldOffset(15)] public byte neutralDecelerationRate;
-        [FieldOffset(16)] public byte dlcSonicCostume;
-        [FieldOffset(17)] public byte dlcKodamaModel;
-        [FieldOffset(18)] public byte dlcRingSE;
-        [FieldOffset(19)] public byte dlcConfig;
-        [FieldOffset(20)] public byte config2;
-        [FieldOffset(21)] public byte islandVisual;
-        [FieldOffset(22)] public byte npcVisual;
-        [FieldOffset(23)] public byte baseAirDragScaleRate;
-        [FieldOffset(24)] public uint status;
-        [FieldOffset(28)] public uint reserved2;
+        [FieldOffset(0x00)] public byte initialSpeedRate;
+        [FieldOffset(0x01)] public byte boostInitialSpeedRate;
+        [FieldOffset(0x02)] public byte acceleRate;
+        [FieldOffset(0x03)] public byte maxSpeedRate;
+        [FieldOffset(0x04)] public byte minTurnSpeedRate;
+        [FieldOffset(0x05)] public byte boostMinTurnSpeedRate;
+        [FieldOffset(0x06)] public byte rotateForceRate;
+        [FieldOffset(0x07)] public byte bumpJumpGravityRate;
+        [FieldOffset(0x08)] public VoiceLanguageType speech;
+        [FieldOffset(0x09)] public LanguageType text;
+        [FieldOffset(0x0A)] public VibrationLevel vibrationLevel;
+        [FieldOffset(0x0B)] public Value diffculty;
+        [FieldOffset(0x0C)] public byte config;
+        [FieldOffset(0x0D)] public byte padSensibilityRate;
+        [FieldOffset(0x0E)] public byte mouseSensibilityRate;
+        [FieldOffset(0x0F)] public byte neutralDecelerationRate;
+        [FieldOffset(0x10)] public byte dlcSonicCostume;
+        [FieldOffset(0x11)] public byte dlcKodamaModel;
+        [FieldOffset(0x12)] public byte dlcRingSE;
+        [FieldOffset(0x13)] public byte dlcConfig;
+        [FieldOffset(0x14)] public byte config2;
+        [FieldOffset(0x15)] public byte islandVisual;
+        [FieldOffset(0x16)] public byte npcVisual;
+        [FieldOffset(0x17)] public byte baseAirDragScaleRate;
+        [FieldOffset(0x18)] public uint status;
+        [FieldOffset(0x1C)] public uint reserved2;
     }
 
     public enum InputKey : int
@@ -292,10 +293,10 @@ Library "OptionData"
         NumAppKeys = 150
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 744)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x2E8)]
     public struct OptionControlsData
     {
-        [FieldOffset(0)]   public unsafe fixed byte /* InputKey[62] */ _padMappings[248];
+        [FieldOffset(0x00)] public unsafe fixed byte /* InputKey[62] */ _padMappings[248];
 
         public unsafe InputKey* padMappings
         {
@@ -306,7 +307,7 @@ Library "OptionData"
             }
         }
 
-        [FieldOffset(248)] public unsafe fixed byte /* InputKey[62] */ _mainMappings[248];
+        [FieldOffset(0xF8)] public unsafe fixed byte /* InputKey[62] */ _mainMappings[248];
 
         public unsafe InputKey* mainMappings
         {
@@ -317,7 +318,7 @@ Library "OptionData"
             }
         }
 
-        [FieldOffset(496)] public unsafe fixed byte /* InputKey[62] */ _subMappings[248];
+        [FieldOffset(0x1F0)] public unsafe fixed byte /* InputKey[62] */ _subMappings[248];
 
         public unsafe InputKey* subMappings
         {
@@ -335,21 +336,21 @@ Library "OptionData"
         Aiming = 1
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 48)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct OptionCameraData
     {
-        [FieldOffset(0)]  public float rotateSpeedPad;
-        [FieldOffset(4)]  public float rotateSpeedVertMouse;
-        [FieldOffset(8)]  public float rotateSpeedHorzMouse;
-        [FieldOffset(12)] public float reticleSpeedPad;
-        [FieldOffset(16)] public float reticleSpeedVertMouse;
-        [FieldOffset(20)] public float reticleSpeedHorzMouse;
-        [FieldOffset(24)] public byte rotateSpeedRate;
-        [FieldOffset(25)] public byte distanceRate;
-        [FieldOffset(26)] public byte fovyRate;
-        [FieldOffset(27)] public MovementStyle movementStyle;
-        [FieldOffset(28)] public byte config;
-        [FieldOffset(32)] public unsafe fixed uint reserved[4];
+        [FieldOffset(0x00)] public float rotateSpeedPad;
+        [FieldOffset(0x04)] public float rotateSpeedVertMouse;
+        [FieldOffset(0x08)] public float rotateSpeedHorzMouse;
+        [FieldOffset(0x0C)] public float reticleSpeedPad;
+        [FieldOffset(0x10)] public float reticleSpeedVertMouse;
+        [FieldOffset(0x14)] public float reticleSpeedHorzMouse;
+        [FieldOffset(0x18)] public byte rotateSpeedRate;
+        [FieldOffset(0x19)] public byte distanceRate;
+        [FieldOffset(0x1A)] public byte fovyRate;
+        [FieldOffset(0x1B)] public MovementStyle movementStyle;
+        [FieldOffset(0x1C)] public byte config;
+        [FieldOffset(0x20)] public unsafe fixed uint reserved[4];
     }
 
     public enum MusicSelect : sbyte
@@ -365,18 +366,18 @@ Library "OptionData"
         MUSIC_SELECT_LOOP = 2
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 20)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
     public struct OptionAudioData
     {
-        [FieldOffset(0)] public byte masterVolume;
-        [FieldOffset(1)] public byte sfxVolume;
-        [FieldOffset(2)] public byte musicVolume;
-        [FieldOffset(3)] public byte voiceVolume;
-        [FieldOffset(4)] public MusicSelect musicSelectEnable;
-        [FieldOffset(5)] public MusicSelectType musicSelectType;
-        [FieldOffset(6)] public byte flags;
-        [FieldOffset(7)] public byte padding;
-        [FieldOffset(8)] public unsafe fixed uint reserved[3];
+        [FieldOffset(0x00)] public byte masterVolume;
+        [FieldOffset(0x01)] public byte sfxVolume;
+        [FieldOffset(0x02)] public byte musicVolume;
+        [FieldOffset(0x03)] public byte voiceVolume;
+        [FieldOffset(0x04)] public MusicSelect musicSelectEnable;
+        [FieldOffset(0x05)] public MusicSelectType musicSelectType;
+        [FieldOffset(0x06)] public byte flags;
+        [FieldOffset(0x07)] public byte padding;
+        [FieldOffset(0x08)] public unsafe fixed uint reserved[3];
     }
 
     public enum Resolution : sbyte
@@ -449,38 +450,38 @@ Library "OptionData"
         RederingScale_Low = 2
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 28)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct OptionGraphicsData
     {
-        [FieldOffset(0)]  public Resolution resolution;
-        [FieldOffset(1)]  public GraphicQuality graphicQuality;
-        [FieldOffset(2)]  public FrameRate frameRate;
-        [FieldOffset(3)]  public byte brightness;
-        [FieldOffset(4)]  public AntiAliasing antiAliasing;
-        [FieldOffset(5)]  public AnisotropicFiltering anisotropicFiltering;
-        [FieldOffset(6)]  public DOF depthOfField;
-        [FieldOffset(7)]  public Bloom bloom;
-        [FieldOffset(8)]  public byte config;
-        [FieldOffset(9)]  public byte hudVisible;
-        [FieldOffset(10)] public Shadow shadow;
-        [FieldOffset(11)] public VolumetricLight volumetricLight;
-        [FieldOffset(12)] public RederingScale renderingScale;
-        [FieldOffset(13)] public byte reserved1;
-        [FieldOffset(14)] public ushort width;
-        [FieldOffset(16)] public ushort height;
-        [FieldOffset(18)] public ushort padding0;
-        [FieldOffset(20)] public unsafe fixed uint reserved[2];
+        [FieldOffset(0x00)] public Resolution resolution;
+        [FieldOffset(0x01)] public GraphicQuality graphicQuality;
+        [FieldOffset(0x02)] public FrameRate frameRate;
+        [FieldOffset(0x03)] public byte brightness;
+        [FieldOffset(0x04)] public AntiAliasing antiAliasing;
+        [FieldOffset(0x05)] public AnisotropicFiltering anisotropicFiltering;
+        [FieldOffset(0x06)] public DOF depthOfField;
+        [FieldOffset(0x07)] public Bloom bloom;
+        [FieldOffset(0x08)] public byte config;
+        [FieldOffset(0x09)] public byte hudVisible;
+        [FieldOffset(0x0A)] public Shadow shadow;
+        [FieldOffset(0x0B)] public VolumetricLight volumetricLight;
+        [FieldOffset(0x0C)] public RederingScale renderingScale;
+        [FieldOffset(0x0D)] public byte reserved1;
+        [FieldOffset(0x0E)] public ushort width;
+        [FieldOffset(0x10)] public ushort height;
+        [FieldOffset(0x12)] public ushort padding0;
+        [FieldOffset(0x14)] public unsafe fixed uint reserved[2];
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 912)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x390)]
     public struct OptionData
     {
-        [FieldOffset(0)]   public HeaderData header;
-        [FieldOffset(40)]  public OptionGamePlayData gameplay;
-        [FieldOffset(72)]  public OptionControlsData controls;
-        [FieldOffset(816)] public OptionCameraData camera;
-        [FieldOffset(864)] public OptionAudioData audio;
-        [FieldOffset(884)] public OptionGraphicsData graphics;
+        [FieldOffset(0x00)] public HeaderData header;
+        [FieldOffset(0x28)] public OptionGamePlayData gameplay;
+        [FieldOffset(0x48)] public OptionControlsData controls;
+        [FieldOffset(0x330)] public OptionCameraData camera;
+        [FieldOffset(0x360)] public OptionAudioData audio;
+        [FieldOffset(0x374)] public OptionGraphicsData graphics;
     }
 
 }

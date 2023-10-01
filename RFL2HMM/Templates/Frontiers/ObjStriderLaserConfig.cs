@@ -19,37 +19,37 @@ public class ObjStriderLaserConfigClass
         public byte B;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 68)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x44)]
     public struct ArcLaserConfig
     {
-        [FieldOffset(0)]  public float arrivalTime;
-        [FieldOffset(4)]  public byte numPatterns;
-        [FieldOffset(8)]  public float radius;
-        [FieldOffset(12)] public float tilingDistance;
-        [FieldOffset(16)] public float fluctuationPeriod;
-        [FieldOffset(20)] public float fluctuationAmplitude;
-        [FieldOffset(24)] public float uvScrollSpeed;
-        [FieldOffset(28)] public ColorF colorPrimary;
-        [FieldOffset(44)] public Color8 colorVertexEdge;
-        [FieldOffset(48)] public Color8 colorVertexCenter;
-        [FieldOffset(52)] public float colorIntensity;
-        [FieldOffset(56)] public float patternChangeIntervalTime;
-        [FieldOffset(60)] public float edgeWidthScale;
-        [FieldOffset(64)] public float edgeWidthScaleLength;
+        [FieldOffset(0x00)] public float arrivalTime;
+        [FieldOffset(0x04)] public byte numPatterns;
+        [FieldOffset(0x08)] public float radius;
+        [FieldOffset(0x0C)] public float tilingDistance;
+        [FieldOffset(0x10)] public float fluctuationPeriod;
+        [FieldOffset(0x14)] public float fluctuationAmplitude;
+        [FieldOffset(0x18)] public float uvScrollSpeed;
+        [FieldOffset(0x1C)] public ColorF colorPrimary;
+        [FieldOffset(0x2C)] public Color8 colorVertexEdge;
+        [FieldOffset(0x30)] public Color8 colorVertexCenter;
+        [FieldOffset(0x34)] public float colorIntensity;
+        [FieldOffset(0x38)] public float patternChangeIntervalTime;
+        [FieldOffset(0x3C)] public float edgeWidthScale;
+        [FieldOffset(0x40)] public float edgeWidthScaleLength;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 100)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x64)]
     public struct ObjStriderLaserConfig
     {
-        [FieldOffset(0)]  public float lifeTime;
-        [FieldOffset(4)]  public float degreeVelocityPrePostLaser;
-        [FieldOffset(8)]  public float degreeVelocity;
-        [FieldOffset(12)] public float degreeToRotate;
-        [FieldOffset(16)] public float radius;
-        [FieldOffset(20)] public float collisionRadius;
-        [FieldOffset(24)] public float minStartingPointOffset;
-        [FieldOffset(28)] public float maxStartingPointOffset;
-        [FieldOffset(32)] public ArcLaserConfig arcLaserConfig;
+        [FieldOffset(0x00)] public float lifeTime;
+        [FieldOffset(0x04)] public float degreeVelocityPrePostLaser;
+        [FieldOffset(0x08)] public float degreeVelocity;
+        [FieldOffset(0x0C)] public float degreeToRotate;
+        [FieldOffset(0x10)] public float radius;
+        [FieldOffset(0x14)] public float collisionRadius;
+        [FieldOffset(0x18)] public float minStartingPointOffset;
+        [FieldOffset(0x1C)] public float maxStartingPointOffset;
+        [FieldOffset(0x20)] public ArcLaserConfig arcLaserConfig;
     }
 
 }

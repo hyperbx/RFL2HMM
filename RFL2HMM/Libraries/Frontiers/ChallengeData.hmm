@@ -30,7 +30,8 @@ Library "ChallengeData"
         IconIsland3 = 3,
         IconIsland4 = 4,
         IconIsland5 = 5,
-        IconLastBoss = 6
+        IconLastBoss = 6,
+        IconExtra = 7
     }
 
     public enum AppVersion : byte
@@ -41,22 +42,22 @@ Library "ChallengeData"
         AppVersion_1_40 = 3
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 40)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct HeaderData
     {
-        [FieldOffset(0)]  public uint signature;
-        [FieldOffset(4)]  public byte version;
-        [FieldOffset(5)]  public Status status;
-        [FieldOffset(6)]  public byte config;
-        [FieldOffset(7)]  public Sequence sequence;
-        [FieldOffset(8)]  public uint playTime;
-        [FieldOffset(12)] public SaveDataIcon icon;
-        [FieldOffset(13)] public AppVersion appVersion;
-        [FieldOffset(14)] public byte config2;
-        [FieldOffset(15)] public byte reserved1;
-        [FieldOffset(16)] public uint saveDate;
-        [FieldOffset(20)] public byte index;
-        [FieldOffset(24)] public unsafe fixed uint reserved[4];
+        [FieldOffset(0x00)] public uint signature;
+        [FieldOffset(0x04)] public byte version;
+        [FieldOffset(0x05)] public Status status;
+        [FieldOffset(0x06)] public byte config;
+        [FieldOffset(0x07)] public Sequence sequence;
+        [FieldOffset(0x08)] public uint playTime;
+        [FieldOffset(0x0C)] public SaveDataIcon icon;
+        [FieldOffset(0x0D)] public AppVersion appVersion;
+        [FieldOffset(0x0E)] public byte config2;
+        [FieldOffset(0x0F)] public byte reserved1;
+        [FieldOffset(0x10)] public uint saveDate;
+        [FieldOffset(0x14)] public byte index;
+        [FieldOffset(0x18)] public unsafe fixed uint reserved[4];
     }
 
     public enum Value : sbyte
@@ -69,18 +70,19 @@ Library "ChallengeData"
         Num = 5
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 24)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct CyberStageData
     {
-        [FieldOffset(0)] public ushort flags;
-        [FieldOffset(4)] public uint bestTime;
-        [FieldOffset(8)] public unsafe fixed uint reserved[4];
+        [FieldOffset(0x00)] public ushort flags;
+        [FieldOffset(0x04)] public uint bestTime;
+        [FieldOffset(0x08)] public uint flags2;
+        [FieldOffset(0x0C)] public unsafe fixed uint reserved[3];
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 768)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x300)]
     public struct CyberStageContainerData
     {
-        [FieldOffset(0)] public unsafe fixed byte /* CyberStageData[32] */ _actStages[768];
+        [FieldOffset(0x00)] public unsafe fixed byte /* CyberStageData[32] */ _actStages[768];
 
         public unsafe CyberStageData* actStages
         {
@@ -92,20 +94,20 @@ Library "ChallengeData"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 908)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x38C)]
     public struct ChallengeCyberStageData
     {
-        [FieldOffset(0)]   public uint status;
-        [FieldOffset(4)]   public uint totalBestTime;
-        [FieldOffset(8)]   public Value totalBestRank;
-        [FieldOffset(12)]  public CyberStageContainerData stages;
-        [FieldOffset(780)] public unsafe fixed int stageNos[32];
+        [FieldOffset(0x00)] public uint status;
+        [FieldOffset(0x04)] public uint totalBestTime;
+        [FieldOffset(0x08)] public Value totalBestRank;
+        [FieldOffset(0x0C)] public CyberStageContainerData stages;
+        [FieldOffset(0x30C)] public unsafe fixed int stageNos[32];
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 4540)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x11BC)]
     public struct ChallengeCyberStageContainerData
     {
-        [FieldOffset(0)] public unsafe fixed byte /* ChallengeCyberStageData[5] */ _stages[4540];
+        [FieldOffset(0x00)] public unsafe fixed byte /* ChallengeCyberStageData[5] */ _stages[4540];
 
         public unsafe ChallengeCyberStageData* stages
         {
@@ -117,21 +119,21 @@ Library "ChallengeData"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 20)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
     public struct ChallengeBattleRushScoreData
     {
-        [FieldOffset(0)]  public uint bestTime;
-        [FieldOffset(4)]  public uint reserved0;
-        [FieldOffset(8)]  public uint reserved1;
-        [FieldOffset(12)] public uint reserved2;
-        [FieldOffset(16)] public uint reserved3;
+        [FieldOffset(0x00)] public uint bestTime;
+        [FieldOffset(0x04)] public uint reserved0;
+        [FieldOffset(0x08)] public uint reserved1;
+        [FieldOffset(0x0C)] public uint reserved2;
+        [FieldOffset(0x10)] public uint reserved3;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 324)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x144)]
     public struct ChallengeBattleRushData
     {
-        [FieldOffset(0)] public uint status;
-        [FieldOffset(4)] public unsafe fixed byte /* ChallengeBattleRushScoreData[16] */ _scores[320];
+        [FieldOffset(0x00)] public uint status;
+        [FieldOffset(0x04)] public unsafe fixed byte /* ChallengeBattleRushScoreData[16] */ _scores[320];
 
         public unsafe ChallengeBattleRushScoreData* scores
         {
@@ -143,10 +145,10 @@ Library "ChallengeData"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 1296)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x510)]
     public struct ChallengeBattleRushContainerData
     {
-        [FieldOffset(0)] public unsafe fixed byte /* ChallengeBattleRushData[4] */ _stages[1296];
+        [FieldOffset(0x00)] public unsafe fixed byte /* ChallengeBattleRushData[4] */ _stages[1296];
 
         public unsafe ChallengeBattleRushData* stages
         {
@@ -158,18 +160,18 @@ Library "ChallengeData"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 7192)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C18)]
     public struct ChallengeData
     {
-        [FieldOffset(0)]    public HeaderData header;
-        [FieldOffset(40)]   public uint status;
-        [FieldOffset(44)]   public ChallengeCyberStageContainerData cyberStage;
-        [FieldOffset(4584)] public ChallengeBattleRushContainerData battleRush;
-        [FieldOffset(5880)] public ChallengeBattleRushContainerData battleRushAll;
-        [FieldOffset(7176)] public uint reserved0;
-        [FieldOffset(7180)] public uint reserved1;
-        [FieldOffset(7184)] public uint reserved2;
-        [FieldOffset(7188)] public uint reserved3;
+        [FieldOffset(0x00)] public HeaderData header;
+        [FieldOffset(0x28)] public uint status;
+        [FieldOffset(0x2C)] public ChallengeCyberStageContainerData cyberStage;
+        [FieldOffset(0x11E8)] public ChallengeBattleRushContainerData battleRush;
+        [FieldOffset(0x16F8)] public ChallengeBattleRushContainerData battleRushAll;
+        [FieldOffset(0x1C08)] public uint reserved0;
+        [FieldOffset(0x1C0C)] public uint reserved1;
+        [FieldOffset(0x1C10)] public uint reserved2;
+        [FieldOffset(0x1C14)] public uint reserved3;
     }
 
 }

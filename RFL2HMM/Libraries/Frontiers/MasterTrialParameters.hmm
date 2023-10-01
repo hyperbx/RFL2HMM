@@ -5,22 +5,25 @@ Library "MasterTrialParameters"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 24)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x24)]
     public struct MasterTrialStageParameter
     {
-        [FieldOffset(0)]  public byte prerequisite;
-        [FieldOffset(4)]  public float limitTime;
-        [FieldOffset(8)]  public float speedUpScale;
-        [FieldOffset(12)] public float recoveryHpTime;
-        [FieldOffset(16)] public uint recoveryHpPoint;
-        [FieldOffset(20)] public uint limitMistake;
+        [FieldOffset(0x00)] public byte prerequisite;
+        [FieldOffset(0x04)] public float limitTime;
+        [FieldOffset(0x08)] public float defeatedWaitTime;
+        [FieldOffset(0x0C)] public float speedUpScale;
+        [FieldOffset(0x10)] public float attackRate;
+        [FieldOffset(0x14)] public float recoveryHpTime;
+        [FieldOffset(0x18)] public uint recoveryHpPoint;
+        [FieldOffset(0x1C)] public uint limitMistake;
+        [FieldOffset(0x20)] public int damagePoint;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 100)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x94)]
     public struct MasterTrialParameterElement
     {
-        [FieldOffset(0)] public int applicableFailedCount;
-        [FieldOffset(4)] public unsafe fixed byte /* MasterTrialStageParameter[4] */ _stages[96];
+        [FieldOffset(0x00)] public int applicableFailedCount;
+        [FieldOffset(0x04)] public unsafe fixed byte /* MasterTrialStageParameter[4] */ _stages[144];
 
         public unsafe MasterTrialStageParameter* stages
         {
@@ -32,16 +35,20 @@ Library "MasterTrialParameters"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 324)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1E4)]
     public struct MasterTrialParameters
     {
-        [FieldOffset(0)]  public float subjectViewTime;
-        [FieldOffset(4)]  public float readyTime;
-        [FieldOffset(8)]  public float clearTime;
-        [FieldOffset(12)] public float failedTime;
-        [FieldOffset(16)] public float clearWaitTime;
-        [FieldOffset(20)] public float failedWaitTime;
-        [FieldOffset(24)] public unsafe fixed byte /* MasterTrialParameterElement[3] */ _element[300];
+        [FieldOffset(0x00)] public float subjectViewTime;
+        [FieldOffset(0x04)] public float readyTime;
+        [FieldOffset(0x08)] public float clearTime;
+        [FieldOffset(0x0C)] public float failedTime;
+        [FieldOffset(0x10)] public float clearWaitTime;
+        [FieldOffset(0x14)] public float failedWaitTime;
+        [FieldOffset(0x18)] public float kodamaOrdinaryTextTime;
+        [FieldOffset(0x1C)] public float kodamaFightDelayTime;
+        [FieldOffset(0x20)] public float kodamaFightTextTime;
+        [FieldOffset(0x24)] public float kodamaSplendidTextTime;
+        [FieldOffset(0x28)] public unsafe fixed byte /* MasterTrialParameterElement[3] */ _element[444];
 
         public unsafe MasterTrialParameterElement* element
         {

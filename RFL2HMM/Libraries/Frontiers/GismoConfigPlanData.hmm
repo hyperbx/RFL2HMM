@@ -13,13 +13,13 @@ Library "GismoConfigPlanData"
         CONTACT_DAMAGE_HIGH_SPEED = 3
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct GismoConfigPlanData
     {
-        [FieldOffset(0)] public ContactDamageType contactDamageType;
-        [FieldOffset(1)] public bool noneDamageSpin;
-        [FieldOffset(2)] public bool rideOnDamage;
-        [FieldOffset(3)] public bool aerialBounce;
+        [FieldOffset(0x00)] public ContactDamageType contactDamageType;
+        [FieldOffset(0x01)] public bool noneDamageSpin;
+        [FieldOffset(0x02)] public bool rideOnDamage;
+        [FieldOffset(0x03)] public bool aerialBounce;
     }
 
 }

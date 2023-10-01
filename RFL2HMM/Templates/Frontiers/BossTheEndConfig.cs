@@ -11,45 +11,90 @@ public class BossTheEndConfigClass
     [StructLayout(LayoutKind.Explicit, Size = 32)]
     public struct CSetObjectIDArray
     {
-        [FieldOffset(0)] public ulong pData;
-        [FieldOffset(8)] public ulong Size;
+        [FieldOffset(0)] public long pData;
+        [FieldOffset(8)] public long Size;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
-    public struct CString
+    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    public struct UnmanagedString
     {
         [FieldOffset(0)] public long pValue;
 
         public string Value
         {
-        	get => Marshal.PtrToStringAnsi((IntPtr)pValue);
-        	set => pValue = (long)Marshal.StringToHGlobalAnsi(value);
+            get
+            {
+                if (pValue == 0)
+                    return string.Empty;
+
+                return Marshal.PtrToStringAnsi((nint)pValue);
+            }
+
+            set => pValue = Marshal.StringToHGlobalAnsi(value);
+        }
+
+        public UnmanagedString(string in_value)
+        {
+            Value = in_value;
+        }
+
+        public static implicit operator UnmanagedString(string in_value)
+        {
+            return new UnmanagedString(in_value);
+        }
+
+        public static bool operator ==(UnmanagedString in_left, string in_right)
+        {
+            return in_left.Value == in_right;
+        }
+
+        public static bool operator !=(UnmanagedString in_left, string in_right)
+        {
+            return !(in_left == in_right);
+        }
+
+        public override bool Equals(object in_obj)
+        {
+            if (in_obj is string str)
+                return Value == str;
+
+            return base.Equals(in_obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Value;
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 88)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x58)]
     public struct PlayerMoveableRangeParam
     {
-        [FieldOffset(0)]  public CSetObjectIDArray initPositions;
-        [FieldOffset(32)] public CString heightTargetNodeName;
-        [FieldOffset(48)] public float heightMoveSpeed;
-        [FieldOffset(52)] public float bossToPlayerDistanceMin;
-        [FieldOffset(56)] public float bossToPlayerDistanceMax;
-        [FieldOffset(60)] public float offsetHeightMin;
-        [FieldOffset(64)] public float offsetHeightMax;
-        [FieldOffset(68)] public float areaDistanceMin;
-        [FieldOffset(72)] public float areaDistanceMax;
-        [FieldOffset(76)] public float playerSpawnDistance;
-        [FieldOffset(80)] public float playerRespawnDistance;
-        [FieldOffset(84)] public float playerRespawnDistance2;
+        [FieldOffset(0x00)] public CSetObjectIDArray initPositions;
+        [FieldOffset(0x20)] public UnmanagedString heightTargetNodeName;
+        [FieldOffset(0x30)] public float heightMoveSpeed;
+        [FieldOffset(0x34)] public float bossToPlayerDistanceMin;
+        [FieldOffset(0x38)] public float bossToPlayerDistanceMax;
+        [FieldOffset(0x3C)] public float offsetHeightMin;
+        [FieldOffset(0x40)] public float offsetHeightMax;
+        [FieldOffset(0x44)] public float areaDistanceMin;
+        [FieldOffset(0x48)] public float areaDistanceMax;
+        [FieldOffset(0x4C)] public float playerSpawnDistance;
+        [FieldOffset(0x50)] public float playerRespawnDistance;
+        [FieldOffset(0x54)] public float playerRespawnDistance2;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct BossPhaseParam
     {
-        [FieldOffset(0)] public bool isUse;
-        [FieldOffset(1)] public bool isUsePillar;
-        [FieldOffset(4)] public float phaseChangeHpRatio;
+        [FieldOffset(0x00)] public bool isUse;
+        [FieldOffset(0x01)] public bool isUsePillar;
+        [FieldOffset(0x04)] public float phaseChangeHpRatio;
     }
 
     public enum EaseType : sbyte
@@ -59,46 +104,46 @@ public class BossTheEndConfigClass
         ET_Quadratic = 2
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 112)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public struct BossLockOnCameraParam
     {
-        [FieldOffset(0)]  public float easeTime;
-        [FieldOffset(4)]  public EaseType easeType;
-        [FieldOffset(8)]  public CString mainLookAtNodeName;
-        [FieldOffset(32)] public Vector3 mainLookOffsetPos;
-        [FieldOffset(48)] public CString subLookAtNodeName;
-        [FieldOffset(64)] public Vector3 subLookOffsetPos;
-        [FieldOffset(80)] public float distance;
-        [FieldOffset(96)] public Vector3 playerOffsetPos;
+        [FieldOffset(0x00)] public float easeTime;
+        [FieldOffset(0x04)] public EaseType easeType;
+        [FieldOffset(0x08)] public UnmanagedString mainLookAtNodeName;
+        [FieldOffset(0x20)] public Vector3 mainLookOffsetPos;
+        [FieldOffset(0x30)] public UnmanagedString subLookAtNodeName;
+        [FieldOffset(0x40)] public Vector3 subLookOffsetPos;
+        [FieldOffset(0x50)] public float distance;
+        [FieldOffset(0x60)] public Vector3 playerOffsetPos;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 416)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1A0)]
     public struct BossStatusConfig
     {
-        [FieldOffset(0)]   public uint healthPoint;
-        [FieldOffset(4)]   public float stunTime;
-        [FieldOffset(8)]   public float maxStunPoint__arr0;
-        [FieldOffset(12)] public float maxStunPoint__arr1;
-        [FieldOffset(16)] public float maxStunPoint__arr2;
-        [FieldOffset(20)]  public float maxStaggerPoint__arr0;
-        [FieldOffset(24)] public float maxStaggerPoint__arr1;
-        [FieldOffset(28)] public float maxStaggerPoint__arr2;
-        [FieldOffset(32)] public float maxStaggerPoint__arr3;
-        [FieldOffset(36)] public float maxStaggerPoint__arr4;
-        [FieldOffset(40)]  public ushort exp;
-        [FieldOffset(48)]  public PlayerMoveableRangeParam moveRangeParam;
-        [FieldOffset(136)] public PlayerMoveableRangeParam cyloopDamageMoveRangeParam;
-        [FieldOffset(224)] public BossPhaseParam phaseParams__arr0;
-        [FieldOffset(232)] public BossPhaseParam phaseParams__arr1;
-        [FieldOffset(240)] public BossPhaseParam phaseParams__arr2;
-        [FieldOffset(248)] public BossPhaseParam phaseParams__arr3;
-        [FieldOffset(256)] public BossPhaseParam phaseParams__arr4;
-        [FieldOffset(264)] public BossPhaseParam phaseParams__arr5;
-        [FieldOffset(272)] public BossPhaseParam phaseParams__arr6;
-        [FieldOffset(280)] public BossPhaseParam phaseParams__arr7;
-        [FieldOffset(288)] public BossLockOnCameraParam cameraParam;
-        [FieldOffset(400)] public bool isDebugDraw;
-        [FieldOffset(404)] public uint debugDrawPhaseIndex;
+        [FieldOffset(0x00)] public uint healthPoint;
+        [FieldOffset(0x04)] public float stunTime;
+        [FieldOffset(0x08)] public float maxStunPoint__arr0;
+        [FieldOffset(0x0C)] public float maxStunPoint__arr1;
+        [FieldOffset(0x10)] public float maxStunPoint__arr2;
+        [FieldOffset(0x14)] public float maxStaggerPoint__arr0;
+        [FieldOffset(0x18)] public float maxStaggerPoint__arr1;
+        [FieldOffset(0x1C)] public float maxStaggerPoint__arr2;
+        [FieldOffset(0x20)] public float maxStaggerPoint__arr3;
+        [FieldOffset(0x24)] public float maxStaggerPoint__arr4;
+        [FieldOffset(0x28)] public ushort exp;
+        [FieldOffset(0x30)] public PlayerMoveableRangeParam moveRangeParam;
+        [FieldOffset(0x88)] public PlayerMoveableRangeParam cyloopDamageMoveRangeParam;
+        [FieldOffset(0xE0)] public BossPhaseParam phaseParams__arr0;
+        [FieldOffset(0xE8)] public BossPhaseParam phaseParams__arr1;
+        [FieldOffset(0xF0)] public BossPhaseParam phaseParams__arr2;
+        [FieldOffset(0xF8)] public BossPhaseParam phaseParams__arr3;
+        [FieldOffset(0x100)] public BossPhaseParam phaseParams__arr4;
+        [FieldOffset(0x108)] public BossPhaseParam phaseParams__arr5;
+        [FieldOffset(0x110)] public BossPhaseParam phaseParams__arr6;
+        [FieldOffset(0x118)] public BossPhaseParam phaseParams__arr7;
+        [FieldOffset(0x120)] public BossLockOnCameraParam cameraParam;
+        [FieldOffset(0x190)] public bool isDebugDraw;
+        [FieldOffset(0x194)] public uint debugDrawPhaseIndex;
     }
 
     public enum GimmickType : sbyte
@@ -141,64 +186,64 @@ public class BossTheEndConfigClass
         BossPillarParam_AttackType_NUM_ATTACK_TYPE = 5
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 28)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct BossPillarParam
     {
-        [FieldOffset(0)]  public bool isUse;
-        [FieldOffset(4)]  public float gimmickPhaseTime;
-        [FieldOffset(8)]  public float attackPhaseTime;
-        [FieldOffset(12)] public bool isUnique;
-        [FieldOffset(13)] public BossPillarParam_GimmickType gimmickType;
-        [FieldOffset(16)] public float gimmickIntervalTime;
-        [FieldOffset(20)] public BossPillarParam_AttackType attackType;
-        [FieldOffset(24)] public float attackIntervalTime;
+        [FieldOffset(0x00)] public bool isUse;
+        [FieldOffset(0x04)] public float gimmickPhaseTime;
+        [FieldOffset(0x08)] public float attackPhaseTime;
+        [FieldOffset(0x0C)] public bool isUnique;
+        [FieldOffset(0x0D)] public BossPillarParam_GimmickType gimmickType;
+        [FieldOffset(0x10)] public float gimmickIntervalTime;
+        [FieldOffset(0x14)] public BossPillarParam_AttackType attackType;
+        [FieldOffset(0x18)] public float attackIntervalTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 952)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x3B8)]
     public struct BossPillarConfig
     {
-        [FieldOffset(0)]   public GimmickType gimmickTypeAll;
-        [FieldOffset(4)]   public float gimmickIntervalTimeAll;
-        [FieldOffset(8)]   public AttackType attackTypeAll;
-        [FieldOffset(12)]  public float attackIntervalTimeAll;
-        [FieldOffset(16)]  public BossPillarParam pillars__arr0;
-        [FieldOffset(44)] public BossPillarParam pillars__arr1;
-        [FieldOffset(72)] public BossPillarParam pillars__arr2;
-        [FieldOffset(100)] public BossPillarParam pillars__arr3;
-        [FieldOffset(128)] public BossPillarParam pillars__arr4;
-        [FieldOffset(156)] public BossPillarParam pillars__arr5;
-        [FieldOffset(184)] public BossPillarParam pillars__arr6;
-        [FieldOffset(212)] public BossPillarParam pillars__arr7;
-        [FieldOffset(240)] public BossPillarParam pillars__arr8;
-        [FieldOffset(268)] public BossPillarParam pillars__arr9;
-        [FieldOffset(296)] public BossPillarParam pillars__arr10;
-        [FieldOffset(324)] public BossPillarParam pillars__arr11;
-        [FieldOffset(352)] public BossPillarParam pillars__arr12;
-        [FieldOffset(380)] public BossPillarParam pillars__arr13;
-        [FieldOffset(408)] public BossPillarParam pillars__arr14;
-        [FieldOffset(436)] public BossPillarParam pillars__arr15;
-        [FieldOffset(464)] public BossPillarParam pillars__arr16;
-        [FieldOffset(492)] public BossPillarParam pillars__arr17;
-        [FieldOffset(520)] public BossPillarParam pillars__arr18;
-        [FieldOffset(548)] public BossPillarParam pillars__arr19;
-        [FieldOffset(576)] public BossPillarParam pillars__arr20;
-        [FieldOffset(604)] public BossPillarParam pillars__arr21;
-        [FieldOffset(632)] public BossPillarParam pillars__arr22;
-        [FieldOffset(660)] public BossPillarParam pillars__arr23;
-        [FieldOffset(688)] public BossPillarParam pillars__arr24;
-        [FieldOffset(716)] public BossPillarParam pillars__arr25;
-        [FieldOffset(744)] public BossPillarParam pillars__arr26;
-        [FieldOffset(772)] public BossPillarParam pillars__arr27;
-        [FieldOffset(800)] public BossPillarParam pillars__arr28;
-        [FieldOffset(828)] public BossPillarParam pillars__arr29;
-        [FieldOffset(856)] public BossPillarParam pillars__arr30;
-        [FieldOffset(884)] public BossPillarParam pillars__arr31;
-        [FieldOffset(912)] public CString spawnPositionName;
-        [FieldOffset(928)] public uint pillarHealthPoint;
-        [FieldOffset(932)] public uint pillarBreakDamage;
-        [FieldOffset(936)] public float pillarBreakStun;
-        [FieldOffset(940)] public bool isDebugDraw;
-        [FieldOffset(944)] public uint DebugDrawType;
+        [FieldOffset(0x00)] public GimmickType gimmickTypeAll;
+        [FieldOffset(0x04)] public float gimmickIntervalTimeAll;
+        [FieldOffset(0x08)] public AttackType attackTypeAll;
+        [FieldOffset(0x0C)] public float attackIntervalTimeAll;
+        [FieldOffset(0x10)] public BossPillarParam pillars__arr0;
+        [FieldOffset(0x2C)] public BossPillarParam pillars__arr1;
+        [FieldOffset(0x48)] public BossPillarParam pillars__arr2;
+        [FieldOffset(0x64)] public BossPillarParam pillars__arr3;
+        [FieldOffset(0x80)] public BossPillarParam pillars__arr4;
+        [FieldOffset(0x9C)] public BossPillarParam pillars__arr5;
+        [FieldOffset(0xB8)] public BossPillarParam pillars__arr6;
+        [FieldOffset(0xD4)] public BossPillarParam pillars__arr7;
+        [FieldOffset(0xF0)] public BossPillarParam pillars__arr8;
+        [FieldOffset(0x10C)] public BossPillarParam pillars__arr9;
+        [FieldOffset(0x128)] public BossPillarParam pillars__arr10;
+        [FieldOffset(0x144)] public BossPillarParam pillars__arr11;
+        [FieldOffset(0x160)] public BossPillarParam pillars__arr12;
+        [FieldOffset(0x17C)] public BossPillarParam pillars__arr13;
+        [FieldOffset(0x198)] public BossPillarParam pillars__arr14;
+        [FieldOffset(0x1B4)] public BossPillarParam pillars__arr15;
+        [FieldOffset(0x1D0)] public BossPillarParam pillars__arr16;
+        [FieldOffset(0x1EC)] public BossPillarParam pillars__arr17;
+        [FieldOffset(0x208)] public BossPillarParam pillars__arr18;
+        [FieldOffset(0x224)] public BossPillarParam pillars__arr19;
+        [FieldOffset(0x240)] public BossPillarParam pillars__arr20;
+        [FieldOffset(0x25C)] public BossPillarParam pillars__arr21;
+        [FieldOffset(0x278)] public BossPillarParam pillars__arr22;
+        [FieldOffset(0x294)] public BossPillarParam pillars__arr23;
+        [FieldOffset(0x2B0)] public BossPillarParam pillars__arr24;
+        [FieldOffset(0x2CC)] public BossPillarParam pillars__arr25;
+        [FieldOffset(0x2E8)] public BossPillarParam pillars__arr26;
+        [FieldOffset(0x304)] public BossPillarParam pillars__arr27;
+        [FieldOffset(0x320)] public BossPillarParam pillars__arr28;
+        [FieldOffset(0x33C)] public BossPillarParam pillars__arr29;
+        [FieldOffset(0x358)] public BossPillarParam pillars__arr30;
+        [FieldOffset(0x374)] public BossPillarParam pillars__arr31;
+        [FieldOffset(0x390)] public UnmanagedString spawnPositionName;
+        [FieldOffset(0x3A0)] public uint pillarHealthPoint;
+        [FieldOffset(0x3A4)] public uint pillarBreakDamage;
+        [FieldOffset(0x3A8)] public float pillarBreakStun;
+        [FieldOffset(0x3AC)] public bool isDebugDraw;
+        [FieldOffset(0x3B0)] public uint DebugDrawType;
     }
 
     public enum CollisionType : sbyte
@@ -248,102 +293,104 @@ public class BossTheEndConfigClass
         CpPointD = 22,
         CpCyloopDownUnuse = 23,
         CpDummyDamage = 24,
-        NUM_COLLIDER_PROPERTY = 25
+        CpCable = 25,
+        CpTackleHand = 26,
+        NUM_COLLIDER_PROPERTY = 27
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct BossColliderStatus
     {
-        [FieldOffset(0)]  public ColliderActiveType type;
-        [FieldOffset(2)]  public ColliderProperty propertys__arr0;
-        [FieldOffset(4)] public ColliderProperty propertys__arr1;
-        [FieldOffset(6)] public ColliderProperty propertys__arr2;
-        [FieldOffset(8)] public ColliderProperty propertys__arr3;
-        [FieldOffset(16)] public CString text;
+        [FieldOffset(0x00)] public ColliderActiveType type;
+        [FieldOffset(0x02)] public ColliderProperty propertys__arr0;
+        [FieldOffset(0x04)] public ColliderProperty propertys__arr1;
+        [FieldOffset(0x06)] public ColliderProperty propertys__arr2;
+        [FieldOffset(0x08)] public ColliderProperty propertys__arr3;
+        [FieldOffset(0x10)] public UnmanagedString text;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 128)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x80)]
     public struct BossPerceiveCollisionParam
     {
-        [FieldOffset(0)]   public bool isUse;
-        [FieldOffset(2)]   public short priority;
-        [FieldOffset(4)]   public CollisionType type;
-        [FieldOffset(8)]   public CString attachNodeName;
-        [FieldOffset(24)]  public CString name;
-        [FieldOffset(40)]  public BossColliderStatus status;
-        [FieldOffset(80)]  public Vector3 size;
-        [FieldOffset(96)]  public Vector3 offset;
-        [FieldOffset(112)] public Vector3 rotation;
+        [FieldOffset(0x00)] public bool isUse;
+        [FieldOffset(0x02)] public short priority;
+        [FieldOffset(0x04)] public CollisionType type;
+        [FieldOffset(0x08)] public UnmanagedString attachNodeName;
+        [FieldOffset(0x18)] public UnmanagedString name;
+        [FieldOffset(0x28)] public BossColliderStatus status;
+        [FieldOffset(0x50)] public Vector3 size;
+        [FieldOffset(0x60)] public Vector3 offset;
+        [FieldOffset(0x70)] public Vector3 rotation;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8208)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x2010)]
     public struct BossPerceivePartsWithCollisionConfig
     {
-        [FieldOffset(0)]    public BossPerceiveCollisionParam perceiveCollisions__arr0;
-        [FieldOffset(128)] public BossPerceiveCollisionParam perceiveCollisions__arr1;
-        [FieldOffset(256)] public BossPerceiveCollisionParam perceiveCollisions__arr2;
-        [FieldOffset(384)] public BossPerceiveCollisionParam perceiveCollisions__arr3;
-        [FieldOffset(512)] public BossPerceiveCollisionParam perceiveCollisions__arr4;
-        [FieldOffset(640)] public BossPerceiveCollisionParam perceiveCollisions__arr5;
-        [FieldOffset(768)] public BossPerceiveCollisionParam perceiveCollisions__arr6;
-        [FieldOffset(896)] public BossPerceiveCollisionParam perceiveCollisions__arr7;
-        [FieldOffset(1024)] public BossPerceiveCollisionParam perceiveCollisions__arr8;
-        [FieldOffset(1152)] public BossPerceiveCollisionParam perceiveCollisions__arr9;
-        [FieldOffset(1280)] public BossPerceiveCollisionParam perceiveCollisions__arr10;
-        [FieldOffset(1408)] public BossPerceiveCollisionParam perceiveCollisions__arr11;
-        [FieldOffset(1536)] public BossPerceiveCollisionParam perceiveCollisions__arr12;
-        [FieldOffset(1664)] public BossPerceiveCollisionParam perceiveCollisions__arr13;
-        [FieldOffset(1792)] public BossPerceiveCollisionParam perceiveCollisions__arr14;
-        [FieldOffset(1920)] public BossPerceiveCollisionParam perceiveCollisions__arr15;
-        [FieldOffset(2048)] public BossPerceiveCollisionParam perceiveCollisions__arr16;
-        [FieldOffset(2176)] public BossPerceiveCollisionParam perceiveCollisions__arr17;
-        [FieldOffset(2304)] public BossPerceiveCollisionParam perceiveCollisions__arr18;
-        [FieldOffset(2432)] public BossPerceiveCollisionParam perceiveCollisions__arr19;
-        [FieldOffset(2560)] public BossPerceiveCollisionParam perceiveCollisions__arr20;
-        [FieldOffset(2688)] public BossPerceiveCollisionParam perceiveCollisions__arr21;
-        [FieldOffset(2816)] public BossPerceiveCollisionParam perceiveCollisions__arr22;
-        [FieldOffset(2944)] public BossPerceiveCollisionParam perceiveCollisions__arr23;
-        [FieldOffset(3072)] public BossPerceiveCollisionParam perceiveCollisions__arr24;
-        [FieldOffset(3200)] public BossPerceiveCollisionParam perceiveCollisions__arr25;
-        [FieldOffset(3328)] public BossPerceiveCollisionParam perceiveCollisions__arr26;
-        [FieldOffset(3456)] public BossPerceiveCollisionParam perceiveCollisions__arr27;
-        [FieldOffset(3584)] public BossPerceiveCollisionParam perceiveCollisions__arr28;
-        [FieldOffset(3712)] public BossPerceiveCollisionParam perceiveCollisions__arr29;
-        [FieldOffset(3840)] public BossPerceiveCollisionParam perceiveCollisions__arr30;
-        [FieldOffset(3968)] public BossPerceiveCollisionParam perceiveCollisions__arr31;
-        [FieldOffset(4096)] public BossPerceiveCollisionParam perceiveCollisions__arr32;
-        [FieldOffset(4224)] public BossPerceiveCollisionParam perceiveCollisions__arr33;
-        [FieldOffset(4352)] public BossPerceiveCollisionParam perceiveCollisions__arr34;
-        [FieldOffset(4480)] public BossPerceiveCollisionParam perceiveCollisions__arr35;
-        [FieldOffset(4608)] public BossPerceiveCollisionParam perceiveCollisions__arr36;
-        [FieldOffset(4736)] public BossPerceiveCollisionParam perceiveCollisions__arr37;
-        [FieldOffset(4864)] public BossPerceiveCollisionParam perceiveCollisions__arr38;
-        [FieldOffset(4992)] public BossPerceiveCollisionParam perceiveCollisions__arr39;
-        [FieldOffset(5120)] public BossPerceiveCollisionParam perceiveCollisions__arr40;
-        [FieldOffset(5248)] public BossPerceiveCollisionParam perceiveCollisions__arr41;
-        [FieldOffset(5376)] public BossPerceiveCollisionParam perceiveCollisions__arr42;
-        [FieldOffset(5504)] public BossPerceiveCollisionParam perceiveCollisions__arr43;
-        [FieldOffset(5632)] public BossPerceiveCollisionParam perceiveCollisions__arr44;
-        [FieldOffset(5760)] public BossPerceiveCollisionParam perceiveCollisions__arr45;
-        [FieldOffset(5888)] public BossPerceiveCollisionParam perceiveCollisions__arr46;
-        [FieldOffset(6016)] public BossPerceiveCollisionParam perceiveCollisions__arr47;
-        [FieldOffset(6144)] public BossPerceiveCollisionParam perceiveCollisions__arr48;
-        [FieldOffset(6272)] public BossPerceiveCollisionParam perceiveCollisions__arr49;
-        [FieldOffset(6400)] public BossPerceiveCollisionParam perceiveCollisions__arr50;
-        [FieldOffset(6528)] public BossPerceiveCollisionParam perceiveCollisions__arr51;
-        [FieldOffset(6656)] public BossPerceiveCollisionParam perceiveCollisions__arr52;
-        [FieldOffset(6784)] public BossPerceiveCollisionParam perceiveCollisions__arr53;
-        [FieldOffset(6912)] public BossPerceiveCollisionParam perceiveCollisions__arr54;
-        [FieldOffset(7040)] public BossPerceiveCollisionParam perceiveCollisions__arr55;
-        [FieldOffset(7168)] public BossPerceiveCollisionParam perceiveCollisions__arr56;
-        [FieldOffset(7296)] public BossPerceiveCollisionParam perceiveCollisions__arr57;
-        [FieldOffset(7424)] public BossPerceiveCollisionParam perceiveCollisions__arr58;
-        [FieldOffset(7552)] public BossPerceiveCollisionParam perceiveCollisions__arr59;
-        [FieldOffset(7680)] public BossPerceiveCollisionParam perceiveCollisions__arr60;
-        [FieldOffset(7808)] public BossPerceiveCollisionParam perceiveCollisions__arr61;
-        [FieldOffset(7936)] public BossPerceiveCollisionParam perceiveCollisions__arr62;
-        [FieldOffset(8064)] public BossPerceiveCollisionParam perceiveCollisions__arr63;
-        [FieldOffset(8192)] public bool isDebugDraw;
+        [FieldOffset(0x00)] public BossPerceiveCollisionParam perceiveCollisions__arr0;
+        [FieldOffset(0x80)] public BossPerceiveCollisionParam perceiveCollisions__arr1;
+        [FieldOffset(0x100)] public BossPerceiveCollisionParam perceiveCollisions__arr2;
+        [FieldOffset(0x180)] public BossPerceiveCollisionParam perceiveCollisions__arr3;
+        [FieldOffset(0x200)] public BossPerceiveCollisionParam perceiveCollisions__arr4;
+        [FieldOffset(0x280)] public BossPerceiveCollisionParam perceiveCollisions__arr5;
+        [FieldOffset(0x300)] public BossPerceiveCollisionParam perceiveCollisions__arr6;
+        [FieldOffset(0x380)] public BossPerceiveCollisionParam perceiveCollisions__arr7;
+        [FieldOffset(0x400)] public BossPerceiveCollisionParam perceiveCollisions__arr8;
+        [FieldOffset(0x480)] public BossPerceiveCollisionParam perceiveCollisions__arr9;
+        [FieldOffset(0x500)] public BossPerceiveCollisionParam perceiveCollisions__arr10;
+        [FieldOffset(0x580)] public BossPerceiveCollisionParam perceiveCollisions__arr11;
+        [FieldOffset(0x600)] public BossPerceiveCollisionParam perceiveCollisions__arr12;
+        [FieldOffset(0x680)] public BossPerceiveCollisionParam perceiveCollisions__arr13;
+        [FieldOffset(0x700)] public BossPerceiveCollisionParam perceiveCollisions__arr14;
+        [FieldOffset(0x780)] public BossPerceiveCollisionParam perceiveCollisions__arr15;
+        [FieldOffset(0x800)] public BossPerceiveCollisionParam perceiveCollisions__arr16;
+        [FieldOffset(0x880)] public BossPerceiveCollisionParam perceiveCollisions__arr17;
+        [FieldOffset(0x900)] public BossPerceiveCollisionParam perceiveCollisions__arr18;
+        [FieldOffset(0x980)] public BossPerceiveCollisionParam perceiveCollisions__arr19;
+        [FieldOffset(0xA00)] public BossPerceiveCollisionParam perceiveCollisions__arr20;
+        [FieldOffset(0xA80)] public BossPerceiveCollisionParam perceiveCollisions__arr21;
+        [FieldOffset(0xB00)] public BossPerceiveCollisionParam perceiveCollisions__arr22;
+        [FieldOffset(0xB80)] public BossPerceiveCollisionParam perceiveCollisions__arr23;
+        [FieldOffset(0xC00)] public BossPerceiveCollisionParam perceiveCollisions__arr24;
+        [FieldOffset(0xC80)] public BossPerceiveCollisionParam perceiveCollisions__arr25;
+        [FieldOffset(0xD00)] public BossPerceiveCollisionParam perceiveCollisions__arr26;
+        [FieldOffset(0xD80)] public BossPerceiveCollisionParam perceiveCollisions__arr27;
+        [FieldOffset(0xE00)] public BossPerceiveCollisionParam perceiveCollisions__arr28;
+        [FieldOffset(0xE80)] public BossPerceiveCollisionParam perceiveCollisions__arr29;
+        [FieldOffset(0xF00)] public BossPerceiveCollisionParam perceiveCollisions__arr30;
+        [FieldOffset(0xF80)] public BossPerceiveCollisionParam perceiveCollisions__arr31;
+        [FieldOffset(0x1000)] public BossPerceiveCollisionParam perceiveCollisions__arr32;
+        [FieldOffset(0x1080)] public BossPerceiveCollisionParam perceiveCollisions__arr33;
+        [FieldOffset(0x1100)] public BossPerceiveCollisionParam perceiveCollisions__arr34;
+        [FieldOffset(0x1180)] public BossPerceiveCollisionParam perceiveCollisions__arr35;
+        [FieldOffset(0x1200)] public BossPerceiveCollisionParam perceiveCollisions__arr36;
+        [FieldOffset(0x1280)] public BossPerceiveCollisionParam perceiveCollisions__arr37;
+        [FieldOffset(0x1300)] public BossPerceiveCollisionParam perceiveCollisions__arr38;
+        [FieldOffset(0x1380)] public BossPerceiveCollisionParam perceiveCollisions__arr39;
+        [FieldOffset(0x1400)] public BossPerceiveCollisionParam perceiveCollisions__arr40;
+        [FieldOffset(0x1480)] public BossPerceiveCollisionParam perceiveCollisions__arr41;
+        [FieldOffset(0x1500)] public BossPerceiveCollisionParam perceiveCollisions__arr42;
+        [FieldOffset(0x1580)] public BossPerceiveCollisionParam perceiveCollisions__arr43;
+        [FieldOffset(0x1600)] public BossPerceiveCollisionParam perceiveCollisions__arr44;
+        [FieldOffset(0x1680)] public BossPerceiveCollisionParam perceiveCollisions__arr45;
+        [FieldOffset(0x1700)] public BossPerceiveCollisionParam perceiveCollisions__arr46;
+        [FieldOffset(0x1780)] public BossPerceiveCollisionParam perceiveCollisions__arr47;
+        [FieldOffset(0x1800)] public BossPerceiveCollisionParam perceiveCollisions__arr48;
+        [FieldOffset(0x1880)] public BossPerceiveCollisionParam perceiveCollisions__arr49;
+        [FieldOffset(0x1900)] public BossPerceiveCollisionParam perceiveCollisions__arr50;
+        [FieldOffset(0x1980)] public BossPerceiveCollisionParam perceiveCollisions__arr51;
+        [FieldOffset(0x1A00)] public BossPerceiveCollisionParam perceiveCollisions__arr52;
+        [FieldOffset(0x1A80)] public BossPerceiveCollisionParam perceiveCollisions__arr53;
+        [FieldOffset(0x1B00)] public BossPerceiveCollisionParam perceiveCollisions__arr54;
+        [FieldOffset(0x1B80)] public BossPerceiveCollisionParam perceiveCollisions__arr55;
+        [FieldOffset(0x1C00)] public BossPerceiveCollisionParam perceiveCollisions__arr56;
+        [FieldOffset(0x1C80)] public BossPerceiveCollisionParam perceiveCollisions__arr57;
+        [FieldOffset(0x1D00)] public BossPerceiveCollisionParam perceiveCollisions__arr58;
+        [FieldOffset(0x1D80)] public BossPerceiveCollisionParam perceiveCollisions__arr59;
+        [FieldOffset(0x1E00)] public BossPerceiveCollisionParam perceiveCollisions__arr60;
+        [FieldOffset(0x1E80)] public BossPerceiveCollisionParam perceiveCollisions__arr61;
+        [FieldOffset(0x1F00)] public BossPerceiveCollisionParam perceiveCollisions__arr62;
+        [FieldOffset(0x1F80)] public BossPerceiveCollisionParam perceiveCollisions__arr63;
+        [FieldOffset(0x2000)] public bool isDebugDraw;
     }
 
     public enum PointType : sbyte
@@ -360,21 +407,21 @@ public class BossTheEndConfigClass
         NUM_POINT_TYPE = 9
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 40)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct BossHomingPointParam
     {
-        [FieldOffset(0)]  public BossColliderStatus status;
-        [FieldOffset(32)] public float distance;
-        [FieldOffset(36)] public float nextSearchDistance;
+        [FieldOffset(0x00)] public BossColliderStatus status;
+        [FieldOffset(0x20)] public float distance;
+        [FieldOffset(0x24)] public float nextSearchDistance;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct BossMinionParam
     {
-        [FieldOffset(0)]  public uint num;
-        [FieldOffset(4)]  public float interval;
-        [FieldOffset(8)]  public float liveTime;
-        [FieldOffset(12)] public float waitTime;
+        [FieldOffset(0x00)] public uint num;
+        [FieldOffset(0x04)] public float interval;
+        [FieldOffset(0x08)] public float liveTime;
+        [FieldOffset(0x0C)] public float waitTime;
     }
 
     public enum Shape : sbyte
@@ -385,330 +432,330 @@ public class BossTheEndConfigClass
         SHAPE_CAPSULE = 3
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct BossTrigerParam
     {
-        [FieldOffset(0)]  public Shape ShapeType;
-        [FieldOffset(4)]  public float CollisionWidth;
-        [FieldOffset(8)]  public float CollisionHeight;
-        [FieldOffset(12)] public float CollisionDepth;
+        [FieldOffset(0x00)] public Shape ShapeType;
+        [FieldOffset(0x04)] public float CollisionWidth;
+        [FieldOffset(0x08)] public float CollisionHeight;
+        [FieldOffset(0x0C)] public float CollisionDepth;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct BossStickParam
     {
-        [FieldOffset(0)] public float phaseTime;
+        [FieldOffset(0x00)] public float phaseTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 24)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct BossDamagePointParam
     {
-        [FieldOffset(0)] public bool isCyloopDownUnuse;
-        [FieldOffset(8)] public CString text;
+        [FieldOffset(0x00)] public bool isCyloopDownUnuse;
+        [FieldOffset(0x08)] public UnmanagedString text;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 40)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct BossDashCirclPointParam
     {
-        [FieldOffset(0)]  public int focusGeometryIndex;
-        [FieldOffset(4)]  public int focusTriangleIndex;
-        [FieldOffset(8)]  public float sizeScale;
-        [FieldOffset(12)] public float impulseSpeed;
-        [FieldOffset(16)] public float ocTime;
-        [FieldOffset(20)] public float slowRateBoss;
-        [FieldOffset(24)] public float slowRatePlayer;
-        [FieldOffset(28)] public float slowTime;
-        [FieldOffset(32)] public float slowEaseInTime;
-        [FieldOffset(36)] public float slowEaseOutTime;
+        [FieldOffset(0x00)] public int focusGeometryIndex;
+        [FieldOffset(0x04)] public int focusTriangleIndex;
+        [FieldOffset(0x08)] public float sizeScale;
+        [FieldOffset(0x0C)] public float impulseSpeed;
+        [FieldOffset(0x10)] public float ocTime;
+        [FieldOffset(0x14)] public float slowRateBoss;
+        [FieldOffset(0x18)] public float slowRatePlayer;
+        [FieldOffset(0x1C)] public float slowTime;
+        [FieldOffset(0x20)] public float slowEaseInTime;
+        [FieldOffset(0x24)] public float slowEaseOutTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 224)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
     public struct BossMeshFrameParam
     {
-        [FieldOffset(0)]   public bool isUse;
-        [FieldOffset(4)]   public uint geometryIndex;
-        [FieldOffset(8)]   public uint triangleIndex;
-        [FieldOffset(12)]  public PointType type;
-        [FieldOffset(16)]  public BossHomingPointParam homingPoint;
-        [FieldOffset(56)]  public BossMinionParam minionParam;
-        [FieldOffset(72)]  public BossTrigerParam trigger;
-        [FieldOffset(88)]  public BossStickParam stickParam;
-        [FieldOffset(96)]  public BossDamagePointParam damagePoint;
-        [FieldOffset(120)] public BossDashCirclPointParam dashCirclPoint;
-        [FieldOffset(160)] public int linkNums__arr0;
-        [FieldOffset(164)] public int linkNums__arr1;
-        [FieldOffset(168)] public int linkNums__arr2;
-        [FieldOffset(172)] public int linkNums__arr3;
-        [FieldOffset(176)] public int linkNums__arr4;
-        [FieldOffset(192)] public Vector3 offsetPos;
-        [FieldOffset(208)] public Vector3 offsetRot;
+        [FieldOffset(0x00)] public bool isUse;
+        [FieldOffset(0x04)] public uint geometryIndex;
+        [FieldOffset(0x08)] public uint triangleIndex;
+        [FieldOffset(0x0C)] public PointType type;
+        [FieldOffset(0x10)] public BossHomingPointParam homingPoint;
+        [FieldOffset(0x38)] public BossMinionParam minionParam;
+        [FieldOffset(0x48)] public BossTrigerParam trigger;
+        [FieldOffset(0x58)] public BossStickParam stickParam;
+        [FieldOffset(0x60)] public BossDamagePointParam damagePoint;
+        [FieldOffset(0x78)] public BossDashCirclPointParam dashCirclPoint;
+        [FieldOffset(0xA0)] public int linkNums__arr0;
+        [FieldOffset(0xA4)] public int linkNums__arr1;
+        [FieldOffset(0xA8)] public int linkNums__arr2;
+        [FieldOffset(0xAC)] public int linkNums__arr3;
+        [FieldOffset(0xB0)] public int linkNums__arr4;
+        [FieldOffset(0xC0)] public Vector3 offsetPos;
+        [FieldOffset(0xD0)] public Vector3 offsetRot;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 57360)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xE010)]
     public struct BossMeshFrameConfig
     {
-        [FieldOffset(0)]     public BossMeshFrameParam meshShapeKeyFrames__arr0;
-        [FieldOffset(224)] public BossMeshFrameParam meshShapeKeyFrames__arr1;
-        [FieldOffset(448)] public BossMeshFrameParam meshShapeKeyFrames__arr2;
-        [FieldOffset(672)] public BossMeshFrameParam meshShapeKeyFrames__arr3;
-        [FieldOffset(896)] public BossMeshFrameParam meshShapeKeyFrames__arr4;
-        [FieldOffset(1120)] public BossMeshFrameParam meshShapeKeyFrames__arr5;
-        [FieldOffset(1344)] public BossMeshFrameParam meshShapeKeyFrames__arr6;
-        [FieldOffset(1568)] public BossMeshFrameParam meshShapeKeyFrames__arr7;
-        [FieldOffset(1792)] public BossMeshFrameParam meshShapeKeyFrames__arr8;
-        [FieldOffset(2016)] public BossMeshFrameParam meshShapeKeyFrames__arr9;
-        [FieldOffset(2240)] public BossMeshFrameParam meshShapeKeyFrames__arr10;
-        [FieldOffset(2464)] public BossMeshFrameParam meshShapeKeyFrames__arr11;
-        [FieldOffset(2688)] public BossMeshFrameParam meshShapeKeyFrames__arr12;
-        [FieldOffset(2912)] public BossMeshFrameParam meshShapeKeyFrames__arr13;
-        [FieldOffset(3136)] public BossMeshFrameParam meshShapeKeyFrames__arr14;
-        [FieldOffset(3360)] public BossMeshFrameParam meshShapeKeyFrames__arr15;
-        [FieldOffset(3584)] public BossMeshFrameParam meshShapeKeyFrames__arr16;
-        [FieldOffset(3808)] public BossMeshFrameParam meshShapeKeyFrames__arr17;
-        [FieldOffset(4032)] public BossMeshFrameParam meshShapeKeyFrames__arr18;
-        [FieldOffset(4256)] public BossMeshFrameParam meshShapeKeyFrames__arr19;
-        [FieldOffset(4480)] public BossMeshFrameParam meshShapeKeyFrames__arr20;
-        [FieldOffset(4704)] public BossMeshFrameParam meshShapeKeyFrames__arr21;
-        [FieldOffset(4928)] public BossMeshFrameParam meshShapeKeyFrames__arr22;
-        [FieldOffset(5152)] public BossMeshFrameParam meshShapeKeyFrames__arr23;
-        [FieldOffset(5376)] public BossMeshFrameParam meshShapeKeyFrames__arr24;
-        [FieldOffset(5600)] public BossMeshFrameParam meshShapeKeyFrames__arr25;
-        [FieldOffset(5824)] public BossMeshFrameParam meshShapeKeyFrames__arr26;
-        [FieldOffset(6048)] public BossMeshFrameParam meshShapeKeyFrames__arr27;
-        [FieldOffset(6272)] public BossMeshFrameParam meshShapeKeyFrames__arr28;
-        [FieldOffset(6496)] public BossMeshFrameParam meshShapeKeyFrames__arr29;
-        [FieldOffset(6720)] public BossMeshFrameParam meshShapeKeyFrames__arr30;
-        [FieldOffset(6944)] public BossMeshFrameParam meshShapeKeyFrames__arr31;
-        [FieldOffset(7168)] public BossMeshFrameParam meshShapeKeyFrames__arr32;
-        [FieldOffset(7392)] public BossMeshFrameParam meshShapeKeyFrames__arr33;
-        [FieldOffset(7616)] public BossMeshFrameParam meshShapeKeyFrames__arr34;
-        [FieldOffset(7840)] public BossMeshFrameParam meshShapeKeyFrames__arr35;
-        [FieldOffset(8064)] public BossMeshFrameParam meshShapeKeyFrames__arr36;
-        [FieldOffset(8288)] public BossMeshFrameParam meshShapeKeyFrames__arr37;
-        [FieldOffset(8512)] public BossMeshFrameParam meshShapeKeyFrames__arr38;
-        [FieldOffset(8736)] public BossMeshFrameParam meshShapeKeyFrames__arr39;
-        [FieldOffset(8960)] public BossMeshFrameParam meshShapeKeyFrames__arr40;
-        [FieldOffset(9184)] public BossMeshFrameParam meshShapeKeyFrames__arr41;
-        [FieldOffset(9408)] public BossMeshFrameParam meshShapeKeyFrames__arr42;
-        [FieldOffset(9632)] public BossMeshFrameParam meshShapeKeyFrames__arr43;
-        [FieldOffset(9856)] public BossMeshFrameParam meshShapeKeyFrames__arr44;
-        [FieldOffset(10080)] public BossMeshFrameParam meshShapeKeyFrames__arr45;
-        [FieldOffset(10304)] public BossMeshFrameParam meshShapeKeyFrames__arr46;
-        [FieldOffset(10528)] public BossMeshFrameParam meshShapeKeyFrames__arr47;
-        [FieldOffset(10752)] public BossMeshFrameParam meshShapeKeyFrames__arr48;
-        [FieldOffset(10976)] public BossMeshFrameParam meshShapeKeyFrames__arr49;
-        [FieldOffset(11200)] public BossMeshFrameParam meshShapeKeyFrames__arr50;
-        [FieldOffset(11424)] public BossMeshFrameParam meshShapeKeyFrames__arr51;
-        [FieldOffset(11648)] public BossMeshFrameParam meshShapeKeyFrames__arr52;
-        [FieldOffset(11872)] public BossMeshFrameParam meshShapeKeyFrames__arr53;
-        [FieldOffset(12096)] public BossMeshFrameParam meshShapeKeyFrames__arr54;
-        [FieldOffset(12320)] public BossMeshFrameParam meshShapeKeyFrames__arr55;
-        [FieldOffset(12544)] public BossMeshFrameParam meshShapeKeyFrames__arr56;
-        [FieldOffset(12768)] public BossMeshFrameParam meshShapeKeyFrames__arr57;
-        [FieldOffset(12992)] public BossMeshFrameParam meshShapeKeyFrames__arr58;
-        [FieldOffset(13216)] public BossMeshFrameParam meshShapeKeyFrames__arr59;
-        [FieldOffset(13440)] public BossMeshFrameParam meshShapeKeyFrames__arr60;
-        [FieldOffset(13664)] public BossMeshFrameParam meshShapeKeyFrames__arr61;
-        [FieldOffset(13888)] public BossMeshFrameParam meshShapeKeyFrames__arr62;
-        [FieldOffset(14112)] public BossMeshFrameParam meshShapeKeyFrames__arr63;
-        [FieldOffset(14336)] public BossMeshFrameParam meshShapeKeyFrames__arr64;
-        [FieldOffset(14560)] public BossMeshFrameParam meshShapeKeyFrames__arr65;
-        [FieldOffset(14784)] public BossMeshFrameParam meshShapeKeyFrames__arr66;
-        [FieldOffset(15008)] public BossMeshFrameParam meshShapeKeyFrames__arr67;
-        [FieldOffset(15232)] public BossMeshFrameParam meshShapeKeyFrames__arr68;
-        [FieldOffset(15456)] public BossMeshFrameParam meshShapeKeyFrames__arr69;
-        [FieldOffset(15680)] public BossMeshFrameParam meshShapeKeyFrames__arr70;
-        [FieldOffset(15904)] public BossMeshFrameParam meshShapeKeyFrames__arr71;
-        [FieldOffset(16128)] public BossMeshFrameParam meshShapeKeyFrames__arr72;
-        [FieldOffset(16352)] public BossMeshFrameParam meshShapeKeyFrames__arr73;
-        [FieldOffset(16576)] public BossMeshFrameParam meshShapeKeyFrames__arr74;
-        [FieldOffset(16800)] public BossMeshFrameParam meshShapeKeyFrames__arr75;
-        [FieldOffset(17024)] public BossMeshFrameParam meshShapeKeyFrames__arr76;
-        [FieldOffset(17248)] public BossMeshFrameParam meshShapeKeyFrames__arr77;
-        [FieldOffset(17472)] public BossMeshFrameParam meshShapeKeyFrames__arr78;
-        [FieldOffset(17696)] public BossMeshFrameParam meshShapeKeyFrames__arr79;
-        [FieldOffset(17920)] public BossMeshFrameParam meshShapeKeyFrames__arr80;
-        [FieldOffset(18144)] public BossMeshFrameParam meshShapeKeyFrames__arr81;
-        [FieldOffset(18368)] public BossMeshFrameParam meshShapeKeyFrames__arr82;
-        [FieldOffset(18592)] public BossMeshFrameParam meshShapeKeyFrames__arr83;
-        [FieldOffset(18816)] public BossMeshFrameParam meshShapeKeyFrames__arr84;
-        [FieldOffset(19040)] public BossMeshFrameParam meshShapeKeyFrames__arr85;
-        [FieldOffset(19264)] public BossMeshFrameParam meshShapeKeyFrames__arr86;
-        [FieldOffset(19488)] public BossMeshFrameParam meshShapeKeyFrames__arr87;
-        [FieldOffset(19712)] public BossMeshFrameParam meshShapeKeyFrames__arr88;
-        [FieldOffset(19936)] public BossMeshFrameParam meshShapeKeyFrames__arr89;
-        [FieldOffset(20160)] public BossMeshFrameParam meshShapeKeyFrames__arr90;
-        [FieldOffset(20384)] public BossMeshFrameParam meshShapeKeyFrames__arr91;
-        [FieldOffset(20608)] public BossMeshFrameParam meshShapeKeyFrames__arr92;
-        [FieldOffset(20832)] public BossMeshFrameParam meshShapeKeyFrames__arr93;
-        [FieldOffset(21056)] public BossMeshFrameParam meshShapeKeyFrames__arr94;
-        [FieldOffset(21280)] public BossMeshFrameParam meshShapeKeyFrames__arr95;
-        [FieldOffset(21504)] public BossMeshFrameParam meshShapeKeyFrames__arr96;
-        [FieldOffset(21728)] public BossMeshFrameParam meshShapeKeyFrames__arr97;
-        [FieldOffset(21952)] public BossMeshFrameParam meshShapeKeyFrames__arr98;
-        [FieldOffset(22176)] public BossMeshFrameParam meshShapeKeyFrames__arr99;
-        [FieldOffset(22400)] public BossMeshFrameParam meshShapeKeyFrames__arr100;
-        [FieldOffset(22624)] public BossMeshFrameParam meshShapeKeyFrames__arr101;
-        [FieldOffset(22848)] public BossMeshFrameParam meshShapeKeyFrames__arr102;
-        [FieldOffset(23072)] public BossMeshFrameParam meshShapeKeyFrames__arr103;
-        [FieldOffset(23296)] public BossMeshFrameParam meshShapeKeyFrames__arr104;
-        [FieldOffset(23520)] public BossMeshFrameParam meshShapeKeyFrames__arr105;
-        [FieldOffset(23744)] public BossMeshFrameParam meshShapeKeyFrames__arr106;
-        [FieldOffset(23968)] public BossMeshFrameParam meshShapeKeyFrames__arr107;
-        [FieldOffset(24192)] public BossMeshFrameParam meshShapeKeyFrames__arr108;
-        [FieldOffset(24416)] public BossMeshFrameParam meshShapeKeyFrames__arr109;
-        [FieldOffset(24640)] public BossMeshFrameParam meshShapeKeyFrames__arr110;
-        [FieldOffset(24864)] public BossMeshFrameParam meshShapeKeyFrames__arr111;
-        [FieldOffset(25088)] public BossMeshFrameParam meshShapeKeyFrames__arr112;
-        [FieldOffset(25312)] public BossMeshFrameParam meshShapeKeyFrames__arr113;
-        [FieldOffset(25536)] public BossMeshFrameParam meshShapeKeyFrames__arr114;
-        [FieldOffset(25760)] public BossMeshFrameParam meshShapeKeyFrames__arr115;
-        [FieldOffset(25984)] public BossMeshFrameParam meshShapeKeyFrames__arr116;
-        [FieldOffset(26208)] public BossMeshFrameParam meshShapeKeyFrames__arr117;
-        [FieldOffset(26432)] public BossMeshFrameParam meshShapeKeyFrames__arr118;
-        [FieldOffset(26656)] public BossMeshFrameParam meshShapeKeyFrames__arr119;
-        [FieldOffset(26880)] public BossMeshFrameParam meshShapeKeyFrames__arr120;
-        [FieldOffset(27104)] public BossMeshFrameParam meshShapeKeyFrames__arr121;
-        [FieldOffset(27328)] public BossMeshFrameParam meshShapeKeyFrames__arr122;
-        [FieldOffset(27552)] public BossMeshFrameParam meshShapeKeyFrames__arr123;
-        [FieldOffset(27776)] public BossMeshFrameParam meshShapeKeyFrames__arr124;
-        [FieldOffset(28000)] public BossMeshFrameParam meshShapeKeyFrames__arr125;
-        [FieldOffset(28224)] public BossMeshFrameParam meshShapeKeyFrames__arr126;
-        [FieldOffset(28448)] public BossMeshFrameParam meshShapeKeyFrames__arr127;
-        [FieldOffset(28672)] public BossMeshFrameParam meshShapeKeyFrames__arr128;
-        [FieldOffset(28896)] public BossMeshFrameParam meshShapeKeyFrames__arr129;
-        [FieldOffset(29120)] public BossMeshFrameParam meshShapeKeyFrames__arr130;
-        [FieldOffset(29344)] public BossMeshFrameParam meshShapeKeyFrames__arr131;
-        [FieldOffset(29568)] public BossMeshFrameParam meshShapeKeyFrames__arr132;
-        [FieldOffset(29792)] public BossMeshFrameParam meshShapeKeyFrames__arr133;
-        [FieldOffset(30016)] public BossMeshFrameParam meshShapeKeyFrames__arr134;
-        [FieldOffset(30240)] public BossMeshFrameParam meshShapeKeyFrames__arr135;
-        [FieldOffset(30464)] public BossMeshFrameParam meshShapeKeyFrames__arr136;
-        [FieldOffset(30688)] public BossMeshFrameParam meshShapeKeyFrames__arr137;
-        [FieldOffset(30912)] public BossMeshFrameParam meshShapeKeyFrames__arr138;
-        [FieldOffset(31136)] public BossMeshFrameParam meshShapeKeyFrames__arr139;
-        [FieldOffset(31360)] public BossMeshFrameParam meshShapeKeyFrames__arr140;
-        [FieldOffset(31584)] public BossMeshFrameParam meshShapeKeyFrames__arr141;
-        [FieldOffset(31808)] public BossMeshFrameParam meshShapeKeyFrames__arr142;
-        [FieldOffset(32032)] public BossMeshFrameParam meshShapeKeyFrames__arr143;
-        [FieldOffset(32256)] public BossMeshFrameParam meshShapeKeyFrames__arr144;
-        [FieldOffset(32480)] public BossMeshFrameParam meshShapeKeyFrames__arr145;
-        [FieldOffset(32704)] public BossMeshFrameParam meshShapeKeyFrames__arr146;
-        [FieldOffset(32928)] public BossMeshFrameParam meshShapeKeyFrames__arr147;
-        [FieldOffset(33152)] public BossMeshFrameParam meshShapeKeyFrames__arr148;
-        [FieldOffset(33376)] public BossMeshFrameParam meshShapeKeyFrames__arr149;
-        [FieldOffset(33600)] public BossMeshFrameParam meshShapeKeyFrames__arr150;
-        [FieldOffset(33824)] public BossMeshFrameParam meshShapeKeyFrames__arr151;
-        [FieldOffset(34048)] public BossMeshFrameParam meshShapeKeyFrames__arr152;
-        [FieldOffset(34272)] public BossMeshFrameParam meshShapeKeyFrames__arr153;
-        [FieldOffset(34496)] public BossMeshFrameParam meshShapeKeyFrames__arr154;
-        [FieldOffset(34720)] public BossMeshFrameParam meshShapeKeyFrames__arr155;
-        [FieldOffset(34944)] public BossMeshFrameParam meshShapeKeyFrames__arr156;
-        [FieldOffset(35168)] public BossMeshFrameParam meshShapeKeyFrames__arr157;
-        [FieldOffset(35392)] public BossMeshFrameParam meshShapeKeyFrames__arr158;
-        [FieldOffset(35616)] public BossMeshFrameParam meshShapeKeyFrames__arr159;
-        [FieldOffset(35840)] public BossMeshFrameParam meshShapeKeyFrames__arr160;
-        [FieldOffset(36064)] public BossMeshFrameParam meshShapeKeyFrames__arr161;
-        [FieldOffset(36288)] public BossMeshFrameParam meshShapeKeyFrames__arr162;
-        [FieldOffset(36512)] public BossMeshFrameParam meshShapeKeyFrames__arr163;
-        [FieldOffset(36736)] public BossMeshFrameParam meshShapeKeyFrames__arr164;
-        [FieldOffset(36960)] public BossMeshFrameParam meshShapeKeyFrames__arr165;
-        [FieldOffset(37184)] public BossMeshFrameParam meshShapeKeyFrames__arr166;
-        [FieldOffset(37408)] public BossMeshFrameParam meshShapeKeyFrames__arr167;
-        [FieldOffset(37632)] public BossMeshFrameParam meshShapeKeyFrames__arr168;
-        [FieldOffset(37856)] public BossMeshFrameParam meshShapeKeyFrames__arr169;
-        [FieldOffset(38080)] public BossMeshFrameParam meshShapeKeyFrames__arr170;
-        [FieldOffset(38304)] public BossMeshFrameParam meshShapeKeyFrames__arr171;
-        [FieldOffset(38528)] public BossMeshFrameParam meshShapeKeyFrames__arr172;
-        [FieldOffset(38752)] public BossMeshFrameParam meshShapeKeyFrames__arr173;
-        [FieldOffset(38976)] public BossMeshFrameParam meshShapeKeyFrames__arr174;
-        [FieldOffset(39200)] public BossMeshFrameParam meshShapeKeyFrames__arr175;
-        [FieldOffset(39424)] public BossMeshFrameParam meshShapeKeyFrames__arr176;
-        [FieldOffset(39648)] public BossMeshFrameParam meshShapeKeyFrames__arr177;
-        [FieldOffset(39872)] public BossMeshFrameParam meshShapeKeyFrames__arr178;
-        [FieldOffset(40096)] public BossMeshFrameParam meshShapeKeyFrames__arr179;
-        [FieldOffset(40320)] public BossMeshFrameParam meshShapeKeyFrames__arr180;
-        [FieldOffset(40544)] public BossMeshFrameParam meshShapeKeyFrames__arr181;
-        [FieldOffset(40768)] public BossMeshFrameParam meshShapeKeyFrames__arr182;
-        [FieldOffset(40992)] public BossMeshFrameParam meshShapeKeyFrames__arr183;
-        [FieldOffset(41216)] public BossMeshFrameParam meshShapeKeyFrames__arr184;
-        [FieldOffset(41440)] public BossMeshFrameParam meshShapeKeyFrames__arr185;
-        [FieldOffset(41664)] public BossMeshFrameParam meshShapeKeyFrames__arr186;
-        [FieldOffset(41888)] public BossMeshFrameParam meshShapeKeyFrames__arr187;
-        [FieldOffset(42112)] public BossMeshFrameParam meshShapeKeyFrames__arr188;
-        [FieldOffset(42336)] public BossMeshFrameParam meshShapeKeyFrames__arr189;
-        [FieldOffset(42560)] public BossMeshFrameParam meshShapeKeyFrames__arr190;
-        [FieldOffset(42784)] public BossMeshFrameParam meshShapeKeyFrames__arr191;
-        [FieldOffset(43008)] public BossMeshFrameParam meshShapeKeyFrames__arr192;
-        [FieldOffset(43232)] public BossMeshFrameParam meshShapeKeyFrames__arr193;
-        [FieldOffset(43456)] public BossMeshFrameParam meshShapeKeyFrames__arr194;
-        [FieldOffset(43680)] public BossMeshFrameParam meshShapeKeyFrames__arr195;
-        [FieldOffset(43904)] public BossMeshFrameParam meshShapeKeyFrames__arr196;
-        [FieldOffset(44128)] public BossMeshFrameParam meshShapeKeyFrames__arr197;
-        [FieldOffset(44352)] public BossMeshFrameParam meshShapeKeyFrames__arr198;
-        [FieldOffset(44576)] public BossMeshFrameParam meshShapeKeyFrames__arr199;
-        [FieldOffset(44800)] public BossMeshFrameParam meshShapeKeyFrames__arr200;
-        [FieldOffset(45024)] public BossMeshFrameParam meshShapeKeyFrames__arr201;
-        [FieldOffset(45248)] public BossMeshFrameParam meshShapeKeyFrames__arr202;
-        [FieldOffset(45472)] public BossMeshFrameParam meshShapeKeyFrames__arr203;
-        [FieldOffset(45696)] public BossMeshFrameParam meshShapeKeyFrames__arr204;
-        [FieldOffset(45920)] public BossMeshFrameParam meshShapeKeyFrames__arr205;
-        [FieldOffset(46144)] public BossMeshFrameParam meshShapeKeyFrames__arr206;
-        [FieldOffset(46368)] public BossMeshFrameParam meshShapeKeyFrames__arr207;
-        [FieldOffset(46592)] public BossMeshFrameParam meshShapeKeyFrames__arr208;
-        [FieldOffset(46816)] public BossMeshFrameParam meshShapeKeyFrames__arr209;
-        [FieldOffset(47040)] public BossMeshFrameParam meshShapeKeyFrames__arr210;
-        [FieldOffset(47264)] public BossMeshFrameParam meshShapeKeyFrames__arr211;
-        [FieldOffset(47488)] public BossMeshFrameParam meshShapeKeyFrames__arr212;
-        [FieldOffset(47712)] public BossMeshFrameParam meshShapeKeyFrames__arr213;
-        [FieldOffset(47936)] public BossMeshFrameParam meshShapeKeyFrames__arr214;
-        [FieldOffset(48160)] public BossMeshFrameParam meshShapeKeyFrames__arr215;
-        [FieldOffset(48384)] public BossMeshFrameParam meshShapeKeyFrames__arr216;
-        [FieldOffset(48608)] public BossMeshFrameParam meshShapeKeyFrames__arr217;
-        [FieldOffset(48832)] public BossMeshFrameParam meshShapeKeyFrames__arr218;
-        [FieldOffset(49056)] public BossMeshFrameParam meshShapeKeyFrames__arr219;
-        [FieldOffset(49280)] public BossMeshFrameParam meshShapeKeyFrames__arr220;
-        [FieldOffset(49504)] public BossMeshFrameParam meshShapeKeyFrames__arr221;
-        [FieldOffset(49728)] public BossMeshFrameParam meshShapeKeyFrames__arr222;
-        [FieldOffset(49952)] public BossMeshFrameParam meshShapeKeyFrames__arr223;
-        [FieldOffset(50176)] public BossMeshFrameParam meshShapeKeyFrames__arr224;
-        [FieldOffset(50400)] public BossMeshFrameParam meshShapeKeyFrames__arr225;
-        [FieldOffset(50624)] public BossMeshFrameParam meshShapeKeyFrames__arr226;
-        [FieldOffset(50848)] public BossMeshFrameParam meshShapeKeyFrames__arr227;
-        [FieldOffset(51072)] public BossMeshFrameParam meshShapeKeyFrames__arr228;
-        [FieldOffset(51296)] public BossMeshFrameParam meshShapeKeyFrames__arr229;
-        [FieldOffset(51520)] public BossMeshFrameParam meshShapeKeyFrames__arr230;
-        [FieldOffset(51744)] public BossMeshFrameParam meshShapeKeyFrames__arr231;
-        [FieldOffset(51968)] public BossMeshFrameParam meshShapeKeyFrames__arr232;
-        [FieldOffset(52192)] public BossMeshFrameParam meshShapeKeyFrames__arr233;
-        [FieldOffset(52416)] public BossMeshFrameParam meshShapeKeyFrames__arr234;
-        [FieldOffset(52640)] public BossMeshFrameParam meshShapeKeyFrames__arr235;
-        [FieldOffset(52864)] public BossMeshFrameParam meshShapeKeyFrames__arr236;
-        [FieldOffset(53088)] public BossMeshFrameParam meshShapeKeyFrames__arr237;
-        [FieldOffset(53312)] public BossMeshFrameParam meshShapeKeyFrames__arr238;
-        [FieldOffset(53536)] public BossMeshFrameParam meshShapeKeyFrames__arr239;
-        [FieldOffset(53760)] public BossMeshFrameParam meshShapeKeyFrames__arr240;
-        [FieldOffset(53984)] public BossMeshFrameParam meshShapeKeyFrames__arr241;
-        [FieldOffset(54208)] public BossMeshFrameParam meshShapeKeyFrames__arr242;
-        [FieldOffset(54432)] public BossMeshFrameParam meshShapeKeyFrames__arr243;
-        [FieldOffset(54656)] public BossMeshFrameParam meshShapeKeyFrames__arr244;
-        [FieldOffset(54880)] public BossMeshFrameParam meshShapeKeyFrames__arr245;
-        [FieldOffset(55104)] public BossMeshFrameParam meshShapeKeyFrames__arr246;
-        [FieldOffset(55328)] public BossMeshFrameParam meshShapeKeyFrames__arr247;
-        [FieldOffset(55552)] public BossMeshFrameParam meshShapeKeyFrames__arr248;
-        [FieldOffset(55776)] public BossMeshFrameParam meshShapeKeyFrames__arr249;
-        [FieldOffset(56000)] public BossMeshFrameParam meshShapeKeyFrames__arr250;
-        [FieldOffset(56224)] public BossMeshFrameParam meshShapeKeyFrames__arr251;
-        [FieldOffset(56448)] public BossMeshFrameParam meshShapeKeyFrames__arr252;
-        [FieldOffset(56672)] public BossMeshFrameParam meshShapeKeyFrames__arr253;
-        [FieldOffset(56896)] public BossMeshFrameParam meshShapeKeyFrames__arr254;
-        [FieldOffset(57120)] public BossMeshFrameParam meshShapeKeyFrames__arr255;
-        [FieldOffset(57344)] public bool isDebugDraw;
-        [FieldOffset(57345)] public bool isDebugDrawPoint;
-        [FieldOffset(57346)] public bool isDebugDrawMesh;
-        [FieldOffset(57347)] public bool isDebugDrawMeshIndivid;
-        [FieldOffset(57348)] public float debugDrawMeshTriangleDistance;
-        [FieldOffset(57352)] public uint debugDrawMeshTriangleNum;
+        [FieldOffset(0x00)] public BossMeshFrameParam meshShapeKeyFrames__arr0;
+        [FieldOffset(0xE0)] public BossMeshFrameParam meshShapeKeyFrames__arr1;
+        [FieldOffset(0x1C0)] public BossMeshFrameParam meshShapeKeyFrames__arr2;
+        [FieldOffset(0x2A0)] public BossMeshFrameParam meshShapeKeyFrames__arr3;
+        [FieldOffset(0x380)] public BossMeshFrameParam meshShapeKeyFrames__arr4;
+        [FieldOffset(0x460)] public BossMeshFrameParam meshShapeKeyFrames__arr5;
+        [FieldOffset(0x540)] public BossMeshFrameParam meshShapeKeyFrames__arr6;
+        [FieldOffset(0x620)] public BossMeshFrameParam meshShapeKeyFrames__arr7;
+        [FieldOffset(0x700)] public BossMeshFrameParam meshShapeKeyFrames__arr8;
+        [FieldOffset(0x7E0)] public BossMeshFrameParam meshShapeKeyFrames__arr9;
+        [FieldOffset(0x8C0)] public BossMeshFrameParam meshShapeKeyFrames__arr10;
+        [FieldOffset(0x9A0)] public BossMeshFrameParam meshShapeKeyFrames__arr11;
+        [FieldOffset(0xA80)] public BossMeshFrameParam meshShapeKeyFrames__arr12;
+        [FieldOffset(0xB60)] public BossMeshFrameParam meshShapeKeyFrames__arr13;
+        [FieldOffset(0xC40)] public BossMeshFrameParam meshShapeKeyFrames__arr14;
+        [FieldOffset(0xD20)] public BossMeshFrameParam meshShapeKeyFrames__arr15;
+        [FieldOffset(0xE00)] public BossMeshFrameParam meshShapeKeyFrames__arr16;
+        [FieldOffset(0xEE0)] public BossMeshFrameParam meshShapeKeyFrames__arr17;
+        [FieldOffset(0xFC0)] public BossMeshFrameParam meshShapeKeyFrames__arr18;
+        [FieldOffset(0x10A0)] public BossMeshFrameParam meshShapeKeyFrames__arr19;
+        [FieldOffset(0x1180)] public BossMeshFrameParam meshShapeKeyFrames__arr20;
+        [FieldOffset(0x1260)] public BossMeshFrameParam meshShapeKeyFrames__arr21;
+        [FieldOffset(0x1340)] public BossMeshFrameParam meshShapeKeyFrames__arr22;
+        [FieldOffset(0x1420)] public BossMeshFrameParam meshShapeKeyFrames__arr23;
+        [FieldOffset(0x1500)] public BossMeshFrameParam meshShapeKeyFrames__arr24;
+        [FieldOffset(0x15E0)] public BossMeshFrameParam meshShapeKeyFrames__arr25;
+        [FieldOffset(0x16C0)] public BossMeshFrameParam meshShapeKeyFrames__arr26;
+        [FieldOffset(0x17A0)] public BossMeshFrameParam meshShapeKeyFrames__arr27;
+        [FieldOffset(0x1880)] public BossMeshFrameParam meshShapeKeyFrames__arr28;
+        [FieldOffset(0x1960)] public BossMeshFrameParam meshShapeKeyFrames__arr29;
+        [FieldOffset(0x1A40)] public BossMeshFrameParam meshShapeKeyFrames__arr30;
+        [FieldOffset(0x1B20)] public BossMeshFrameParam meshShapeKeyFrames__arr31;
+        [FieldOffset(0x1C00)] public BossMeshFrameParam meshShapeKeyFrames__arr32;
+        [FieldOffset(0x1CE0)] public BossMeshFrameParam meshShapeKeyFrames__arr33;
+        [FieldOffset(0x1DC0)] public BossMeshFrameParam meshShapeKeyFrames__arr34;
+        [FieldOffset(0x1EA0)] public BossMeshFrameParam meshShapeKeyFrames__arr35;
+        [FieldOffset(0x1F80)] public BossMeshFrameParam meshShapeKeyFrames__arr36;
+        [FieldOffset(0x2060)] public BossMeshFrameParam meshShapeKeyFrames__arr37;
+        [FieldOffset(0x2140)] public BossMeshFrameParam meshShapeKeyFrames__arr38;
+        [FieldOffset(0x2220)] public BossMeshFrameParam meshShapeKeyFrames__arr39;
+        [FieldOffset(0x2300)] public BossMeshFrameParam meshShapeKeyFrames__arr40;
+        [FieldOffset(0x23E0)] public BossMeshFrameParam meshShapeKeyFrames__arr41;
+        [FieldOffset(0x24C0)] public BossMeshFrameParam meshShapeKeyFrames__arr42;
+        [FieldOffset(0x25A0)] public BossMeshFrameParam meshShapeKeyFrames__arr43;
+        [FieldOffset(0x2680)] public BossMeshFrameParam meshShapeKeyFrames__arr44;
+        [FieldOffset(0x2760)] public BossMeshFrameParam meshShapeKeyFrames__arr45;
+        [FieldOffset(0x2840)] public BossMeshFrameParam meshShapeKeyFrames__arr46;
+        [FieldOffset(0x2920)] public BossMeshFrameParam meshShapeKeyFrames__arr47;
+        [FieldOffset(0x2A00)] public BossMeshFrameParam meshShapeKeyFrames__arr48;
+        [FieldOffset(0x2AE0)] public BossMeshFrameParam meshShapeKeyFrames__arr49;
+        [FieldOffset(0x2BC0)] public BossMeshFrameParam meshShapeKeyFrames__arr50;
+        [FieldOffset(0x2CA0)] public BossMeshFrameParam meshShapeKeyFrames__arr51;
+        [FieldOffset(0x2D80)] public BossMeshFrameParam meshShapeKeyFrames__arr52;
+        [FieldOffset(0x2E60)] public BossMeshFrameParam meshShapeKeyFrames__arr53;
+        [FieldOffset(0x2F40)] public BossMeshFrameParam meshShapeKeyFrames__arr54;
+        [FieldOffset(0x3020)] public BossMeshFrameParam meshShapeKeyFrames__arr55;
+        [FieldOffset(0x3100)] public BossMeshFrameParam meshShapeKeyFrames__arr56;
+        [FieldOffset(0x31E0)] public BossMeshFrameParam meshShapeKeyFrames__arr57;
+        [FieldOffset(0x32C0)] public BossMeshFrameParam meshShapeKeyFrames__arr58;
+        [FieldOffset(0x33A0)] public BossMeshFrameParam meshShapeKeyFrames__arr59;
+        [FieldOffset(0x3480)] public BossMeshFrameParam meshShapeKeyFrames__arr60;
+        [FieldOffset(0x3560)] public BossMeshFrameParam meshShapeKeyFrames__arr61;
+        [FieldOffset(0x3640)] public BossMeshFrameParam meshShapeKeyFrames__arr62;
+        [FieldOffset(0x3720)] public BossMeshFrameParam meshShapeKeyFrames__arr63;
+        [FieldOffset(0x3800)] public BossMeshFrameParam meshShapeKeyFrames__arr64;
+        [FieldOffset(0x38E0)] public BossMeshFrameParam meshShapeKeyFrames__arr65;
+        [FieldOffset(0x39C0)] public BossMeshFrameParam meshShapeKeyFrames__arr66;
+        [FieldOffset(0x3AA0)] public BossMeshFrameParam meshShapeKeyFrames__arr67;
+        [FieldOffset(0x3B80)] public BossMeshFrameParam meshShapeKeyFrames__arr68;
+        [FieldOffset(0x3C60)] public BossMeshFrameParam meshShapeKeyFrames__arr69;
+        [FieldOffset(0x3D40)] public BossMeshFrameParam meshShapeKeyFrames__arr70;
+        [FieldOffset(0x3E20)] public BossMeshFrameParam meshShapeKeyFrames__arr71;
+        [FieldOffset(0x3F00)] public BossMeshFrameParam meshShapeKeyFrames__arr72;
+        [FieldOffset(0x3FE0)] public BossMeshFrameParam meshShapeKeyFrames__arr73;
+        [FieldOffset(0x40C0)] public BossMeshFrameParam meshShapeKeyFrames__arr74;
+        [FieldOffset(0x41A0)] public BossMeshFrameParam meshShapeKeyFrames__arr75;
+        [FieldOffset(0x4280)] public BossMeshFrameParam meshShapeKeyFrames__arr76;
+        [FieldOffset(0x4360)] public BossMeshFrameParam meshShapeKeyFrames__arr77;
+        [FieldOffset(0x4440)] public BossMeshFrameParam meshShapeKeyFrames__arr78;
+        [FieldOffset(0x4520)] public BossMeshFrameParam meshShapeKeyFrames__arr79;
+        [FieldOffset(0x4600)] public BossMeshFrameParam meshShapeKeyFrames__arr80;
+        [FieldOffset(0x46E0)] public BossMeshFrameParam meshShapeKeyFrames__arr81;
+        [FieldOffset(0x47C0)] public BossMeshFrameParam meshShapeKeyFrames__arr82;
+        [FieldOffset(0x48A0)] public BossMeshFrameParam meshShapeKeyFrames__arr83;
+        [FieldOffset(0x4980)] public BossMeshFrameParam meshShapeKeyFrames__arr84;
+        [FieldOffset(0x4A60)] public BossMeshFrameParam meshShapeKeyFrames__arr85;
+        [FieldOffset(0x4B40)] public BossMeshFrameParam meshShapeKeyFrames__arr86;
+        [FieldOffset(0x4C20)] public BossMeshFrameParam meshShapeKeyFrames__arr87;
+        [FieldOffset(0x4D00)] public BossMeshFrameParam meshShapeKeyFrames__arr88;
+        [FieldOffset(0x4DE0)] public BossMeshFrameParam meshShapeKeyFrames__arr89;
+        [FieldOffset(0x4EC0)] public BossMeshFrameParam meshShapeKeyFrames__arr90;
+        [FieldOffset(0x4FA0)] public BossMeshFrameParam meshShapeKeyFrames__arr91;
+        [FieldOffset(0x5080)] public BossMeshFrameParam meshShapeKeyFrames__arr92;
+        [FieldOffset(0x5160)] public BossMeshFrameParam meshShapeKeyFrames__arr93;
+        [FieldOffset(0x5240)] public BossMeshFrameParam meshShapeKeyFrames__arr94;
+        [FieldOffset(0x5320)] public BossMeshFrameParam meshShapeKeyFrames__arr95;
+        [FieldOffset(0x5400)] public BossMeshFrameParam meshShapeKeyFrames__arr96;
+        [FieldOffset(0x54E0)] public BossMeshFrameParam meshShapeKeyFrames__arr97;
+        [FieldOffset(0x55C0)] public BossMeshFrameParam meshShapeKeyFrames__arr98;
+        [FieldOffset(0x56A0)] public BossMeshFrameParam meshShapeKeyFrames__arr99;
+        [FieldOffset(0x5780)] public BossMeshFrameParam meshShapeKeyFrames__arr100;
+        [FieldOffset(0x5860)] public BossMeshFrameParam meshShapeKeyFrames__arr101;
+        [FieldOffset(0x5940)] public BossMeshFrameParam meshShapeKeyFrames__arr102;
+        [FieldOffset(0x5A20)] public BossMeshFrameParam meshShapeKeyFrames__arr103;
+        [FieldOffset(0x5B00)] public BossMeshFrameParam meshShapeKeyFrames__arr104;
+        [FieldOffset(0x5BE0)] public BossMeshFrameParam meshShapeKeyFrames__arr105;
+        [FieldOffset(0x5CC0)] public BossMeshFrameParam meshShapeKeyFrames__arr106;
+        [FieldOffset(0x5DA0)] public BossMeshFrameParam meshShapeKeyFrames__arr107;
+        [FieldOffset(0x5E80)] public BossMeshFrameParam meshShapeKeyFrames__arr108;
+        [FieldOffset(0x5F60)] public BossMeshFrameParam meshShapeKeyFrames__arr109;
+        [FieldOffset(0x6040)] public BossMeshFrameParam meshShapeKeyFrames__arr110;
+        [FieldOffset(0x6120)] public BossMeshFrameParam meshShapeKeyFrames__arr111;
+        [FieldOffset(0x6200)] public BossMeshFrameParam meshShapeKeyFrames__arr112;
+        [FieldOffset(0x62E0)] public BossMeshFrameParam meshShapeKeyFrames__arr113;
+        [FieldOffset(0x63C0)] public BossMeshFrameParam meshShapeKeyFrames__arr114;
+        [FieldOffset(0x64A0)] public BossMeshFrameParam meshShapeKeyFrames__arr115;
+        [FieldOffset(0x6580)] public BossMeshFrameParam meshShapeKeyFrames__arr116;
+        [FieldOffset(0x6660)] public BossMeshFrameParam meshShapeKeyFrames__arr117;
+        [FieldOffset(0x6740)] public BossMeshFrameParam meshShapeKeyFrames__arr118;
+        [FieldOffset(0x6820)] public BossMeshFrameParam meshShapeKeyFrames__arr119;
+        [FieldOffset(0x6900)] public BossMeshFrameParam meshShapeKeyFrames__arr120;
+        [FieldOffset(0x69E0)] public BossMeshFrameParam meshShapeKeyFrames__arr121;
+        [FieldOffset(0x6AC0)] public BossMeshFrameParam meshShapeKeyFrames__arr122;
+        [FieldOffset(0x6BA0)] public BossMeshFrameParam meshShapeKeyFrames__arr123;
+        [FieldOffset(0x6C80)] public BossMeshFrameParam meshShapeKeyFrames__arr124;
+        [FieldOffset(0x6D60)] public BossMeshFrameParam meshShapeKeyFrames__arr125;
+        [FieldOffset(0x6E40)] public BossMeshFrameParam meshShapeKeyFrames__arr126;
+        [FieldOffset(0x6F20)] public BossMeshFrameParam meshShapeKeyFrames__arr127;
+        [FieldOffset(0x7000)] public BossMeshFrameParam meshShapeKeyFrames__arr128;
+        [FieldOffset(0x70E0)] public BossMeshFrameParam meshShapeKeyFrames__arr129;
+        [FieldOffset(0x71C0)] public BossMeshFrameParam meshShapeKeyFrames__arr130;
+        [FieldOffset(0x72A0)] public BossMeshFrameParam meshShapeKeyFrames__arr131;
+        [FieldOffset(0x7380)] public BossMeshFrameParam meshShapeKeyFrames__arr132;
+        [FieldOffset(0x7460)] public BossMeshFrameParam meshShapeKeyFrames__arr133;
+        [FieldOffset(0x7540)] public BossMeshFrameParam meshShapeKeyFrames__arr134;
+        [FieldOffset(0x7620)] public BossMeshFrameParam meshShapeKeyFrames__arr135;
+        [FieldOffset(0x7700)] public BossMeshFrameParam meshShapeKeyFrames__arr136;
+        [FieldOffset(0x77E0)] public BossMeshFrameParam meshShapeKeyFrames__arr137;
+        [FieldOffset(0x78C0)] public BossMeshFrameParam meshShapeKeyFrames__arr138;
+        [FieldOffset(0x79A0)] public BossMeshFrameParam meshShapeKeyFrames__arr139;
+        [FieldOffset(0x7A80)] public BossMeshFrameParam meshShapeKeyFrames__arr140;
+        [FieldOffset(0x7B60)] public BossMeshFrameParam meshShapeKeyFrames__arr141;
+        [FieldOffset(0x7C40)] public BossMeshFrameParam meshShapeKeyFrames__arr142;
+        [FieldOffset(0x7D20)] public BossMeshFrameParam meshShapeKeyFrames__arr143;
+        [FieldOffset(0x7E00)] public BossMeshFrameParam meshShapeKeyFrames__arr144;
+        [FieldOffset(0x7EE0)] public BossMeshFrameParam meshShapeKeyFrames__arr145;
+        [FieldOffset(0x7FC0)] public BossMeshFrameParam meshShapeKeyFrames__arr146;
+        [FieldOffset(0x80A0)] public BossMeshFrameParam meshShapeKeyFrames__arr147;
+        [FieldOffset(0x8180)] public BossMeshFrameParam meshShapeKeyFrames__arr148;
+        [FieldOffset(0x8260)] public BossMeshFrameParam meshShapeKeyFrames__arr149;
+        [FieldOffset(0x8340)] public BossMeshFrameParam meshShapeKeyFrames__arr150;
+        [FieldOffset(0x8420)] public BossMeshFrameParam meshShapeKeyFrames__arr151;
+        [FieldOffset(0x8500)] public BossMeshFrameParam meshShapeKeyFrames__arr152;
+        [FieldOffset(0x85E0)] public BossMeshFrameParam meshShapeKeyFrames__arr153;
+        [FieldOffset(0x86C0)] public BossMeshFrameParam meshShapeKeyFrames__arr154;
+        [FieldOffset(0x87A0)] public BossMeshFrameParam meshShapeKeyFrames__arr155;
+        [FieldOffset(0x8880)] public BossMeshFrameParam meshShapeKeyFrames__arr156;
+        [FieldOffset(0x8960)] public BossMeshFrameParam meshShapeKeyFrames__arr157;
+        [FieldOffset(0x8A40)] public BossMeshFrameParam meshShapeKeyFrames__arr158;
+        [FieldOffset(0x8B20)] public BossMeshFrameParam meshShapeKeyFrames__arr159;
+        [FieldOffset(0x8C00)] public BossMeshFrameParam meshShapeKeyFrames__arr160;
+        [FieldOffset(0x8CE0)] public BossMeshFrameParam meshShapeKeyFrames__arr161;
+        [FieldOffset(0x8DC0)] public BossMeshFrameParam meshShapeKeyFrames__arr162;
+        [FieldOffset(0x8EA0)] public BossMeshFrameParam meshShapeKeyFrames__arr163;
+        [FieldOffset(0x8F80)] public BossMeshFrameParam meshShapeKeyFrames__arr164;
+        [FieldOffset(0x9060)] public BossMeshFrameParam meshShapeKeyFrames__arr165;
+        [FieldOffset(0x9140)] public BossMeshFrameParam meshShapeKeyFrames__arr166;
+        [FieldOffset(0x9220)] public BossMeshFrameParam meshShapeKeyFrames__arr167;
+        [FieldOffset(0x9300)] public BossMeshFrameParam meshShapeKeyFrames__arr168;
+        [FieldOffset(0x93E0)] public BossMeshFrameParam meshShapeKeyFrames__arr169;
+        [FieldOffset(0x94C0)] public BossMeshFrameParam meshShapeKeyFrames__arr170;
+        [FieldOffset(0x95A0)] public BossMeshFrameParam meshShapeKeyFrames__arr171;
+        [FieldOffset(0x9680)] public BossMeshFrameParam meshShapeKeyFrames__arr172;
+        [FieldOffset(0x9760)] public BossMeshFrameParam meshShapeKeyFrames__arr173;
+        [FieldOffset(0x9840)] public BossMeshFrameParam meshShapeKeyFrames__arr174;
+        [FieldOffset(0x9920)] public BossMeshFrameParam meshShapeKeyFrames__arr175;
+        [FieldOffset(0x9A00)] public BossMeshFrameParam meshShapeKeyFrames__arr176;
+        [FieldOffset(0x9AE0)] public BossMeshFrameParam meshShapeKeyFrames__arr177;
+        [FieldOffset(0x9BC0)] public BossMeshFrameParam meshShapeKeyFrames__arr178;
+        [FieldOffset(0x9CA0)] public BossMeshFrameParam meshShapeKeyFrames__arr179;
+        [FieldOffset(0x9D80)] public BossMeshFrameParam meshShapeKeyFrames__arr180;
+        [FieldOffset(0x9E60)] public BossMeshFrameParam meshShapeKeyFrames__arr181;
+        [FieldOffset(0x9F40)] public BossMeshFrameParam meshShapeKeyFrames__arr182;
+        [FieldOffset(0xA020)] public BossMeshFrameParam meshShapeKeyFrames__arr183;
+        [FieldOffset(0xA100)] public BossMeshFrameParam meshShapeKeyFrames__arr184;
+        [FieldOffset(0xA1E0)] public BossMeshFrameParam meshShapeKeyFrames__arr185;
+        [FieldOffset(0xA2C0)] public BossMeshFrameParam meshShapeKeyFrames__arr186;
+        [FieldOffset(0xA3A0)] public BossMeshFrameParam meshShapeKeyFrames__arr187;
+        [FieldOffset(0xA480)] public BossMeshFrameParam meshShapeKeyFrames__arr188;
+        [FieldOffset(0xA560)] public BossMeshFrameParam meshShapeKeyFrames__arr189;
+        [FieldOffset(0xA640)] public BossMeshFrameParam meshShapeKeyFrames__arr190;
+        [FieldOffset(0xA720)] public BossMeshFrameParam meshShapeKeyFrames__arr191;
+        [FieldOffset(0xA800)] public BossMeshFrameParam meshShapeKeyFrames__arr192;
+        [FieldOffset(0xA8E0)] public BossMeshFrameParam meshShapeKeyFrames__arr193;
+        [FieldOffset(0xA9C0)] public BossMeshFrameParam meshShapeKeyFrames__arr194;
+        [FieldOffset(0xAAA0)] public BossMeshFrameParam meshShapeKeyFrames__arr195;
+        [FieldOffset(0xAB80)] public BossMeshFrameParam meshShapeKeyFrames__arr196;
+        [FieldOffset(0xAC60)] public BossMeshFrameParam meshShapeKeyFrames__arr197;
+        [FieldOffset(0xAD40)] public BossMeshFrameParam meshShapeKeyFrames__arr198;
+        [FieldOffset(0xAE20)] public BossMeshFrameParam meshShapeKeyFrames__arr199;
+        [FieldOffset(0xAF00)] public BossMeshFrameParam meshShapeKeyFrames__arr200;
+        [FieldOffset(0xAFE0)] public BossMeshFrameParam meshShapeKeyFrames__arr201;
+        [FieldOffset(0xB0C0)] public BossMeshFrameParam meshShapeKeyFrames__arr202;
+        [FieldOffset(0xB1A0)] public BossMeshFrameParam meshShapeKeyFrames__arr203;
+        [FieldOffset(0xB280)] public BossMeshFrameParam meshShapeKeyFrames__arr204;
+        [FieldOffset(0xB360)] public BossMeshFrameParam meshShapeKeyFrames__arr205;
+        [FieldOffset(0xB440)] public BossMeshFrameParam meshShapeKeyFrames__arr206;
+        [FieldOffset(0xB520)] public BossMeshFrameParam meshShapeKeyFrames__arr207;
+        [FieldOffset(0xB600)] public BossMeshFrameParam meshShapeKeyFrames__arr208;
+        [FieldOffset(0xB6E0)] public BossMeshFrameParam meshShapeKeyFrames__arr209;
+        [FieldOffset(0xB7C0)] public BossMeshFrameParam meshShapeKeyFrames__arr210;
+        [FieldOffset(0xB8A0)] public BossMeshFrameParam meshShapeKeyFrames__arr211;
+        [FieldOffset(0xB980)] public BossMeshFrameParam meshShapeKeyFrames__arr212;
+        [FieldOffset(0xBA60)] public BossMeshFrameParam meshShapeKeyFrames__arr213;
+        [FieldOffset(0xBB40)] public BossMeshFrameParam meshShapeKeyFrames__arr214;
+        [FieldOffset(0xBC20)] public BossMeshFrameParam meshShapeKeyFrames__arr215;
+        [FieldOffset(0xBD00)] public BossMeshFrameParam meshShapeKeyFrames__arr216;
+        [FieldOffset(0xBDE0)] public BossMeshFrameParam meshShapeKeyFrames__arr217;
+        [FieldOffset(0xBEC0)] public BossMeshFrameParam meshShapeKeyFrames__arr218;
+        [FieldOffset(0xBFA0)] public BossMeshFrameParam meshShapeKeyFrames__arr219;
+        [FieldOffset(0xC080)] public BossMeshFrameParam meshShapeKeyFrames__arr220;
+        [FieldOffset(0xC160)] public BossMeshFrameParam meshShapeKeyFrames__arr221;
+        [FieldOffset(0xC240)] public BossMeshFrameParam meshShapeKeyFrames__arr222;
+        [FieldOffset(0xC320)] public BossMeshFrameParam meshShapeKeyFrames__arr223;
+        [FieldOffset(0xC400)] public BossMeshFrameParam meshShapeKeyFrames__arr224;
+        [FieldOffset(0xC4E0)] public BossMeshFrameParam meshShapeKeyFrames__arr225;
+        [FieldOffset(0xC5C0)] public BossMeshFrameParam meshShapeKeyFrames__arr226;
+        [FieldOffset(0xC6A0)] public BossMeshFrameParam meshShapeKeyFrames__arr227;
+        [FieldOffset(0xC780)] public BossMeshFrameParam meshShapeKeyFrames__arr228;
+        [FieldOffset(0xC860)] public BossMeshFrameParam meshShapeKeyFrames__arr229;
+        [FieldOffset(0xC940)] public BossMeshFrameParam meshShapeKeyFrames__arr230;
+        [FieldOffset(0xCA20)] public BossMeshFrameParam meshShapeKeyFrames__arr231;
+        [FieldOffset(0xCB00)] public BossMeshFrameParam meshShapeKeyFrames__arr232;
+        [FieldOffset(0xCBE0)] public BossMeshFrameParam meshShapeKeyFrames__arr233;
+        [FieldOffset(0xCCC0)] public BossMeshFrameParam meshShapeKeyFrames__arr234;
+        [FieldOffset(0xCDA0)] public BossMeshFrameParam meshShapeKeyFrames__arr235;
+        [FieldOffset(0xCE80)] public BossMeshFrameParam meshShapeKeyFrames__arr236;
+        [FieldOffset(0xCF60)] public BossMeshFrameParam meshShapeKeyFrames__arr237;
+        [FieldOffset(0xD040)] public BossMeshFrameParam meshShapeKeyFrames__arr238;
+        [FieldOffset(0xD120)] public BossMeshFrameParam meshShapeKeyFrames__arr239;
+        [FieldOffset(0xD200)] public BossMeshFrameParam meshShapeKeyFrames__arr240;
+        [FieldOffset(0xD2E0)] public BossMeshFrameParam meshShapeKeyFrames__arr241;
+        [FieldOffset(0xD3C0)] public BossMeshFrameParam meshShapeKeyFrames__arr242;
+        [FieldOffset(0xD4A0)] public BossMeshFrameParam meshShapeKeyFrames__arr243;
+        [FieldOffset(0xD580)] public BossMeshFrameParam meshShapeKeyFrames__arr244;
+        [FieldOffset(0xD660)] public BossMeshFrameParam meshShapeKeyFrames__arr245;
+        [FieldOffset(0xD740)] public BossMeshFrameParam meshShapeKeyFrames__arr246;
+        [FieldOffset(0xD820)] public BossMeshFrameParam meshShapeKeyFrames__arr247;
+        [FieldOffset(0xD900)] public BossMeshFrameParam meshShapeKeyFrames__arr248;
+        [FieldOffset(0xD9E0)] public BossMeshFrameParam meshShapeKeyFrames__arr249;
+        [FieldOffset(0xDAC0)] public BossMeshFrameParam meshShapeKeyFrames__arr250;
+        [FieldOffset(0xDBA0)] public BossMeshFrameParam meshShapeKeyFrames__arr251;
+        [FieldOffset(0xDC80)] public BossMeshFrameParam meshShapeKeyFrames__arr252;
+        [FieldOffset(0xDD60)] public BossMeshFrameParam meshShapeKeyFrames__arr253;
+        [FieldOffset(0xDE40)] public BossMeshFrameParam meshShapeKeyFrames__arr254;
+        [FieldOffset(0xDF20)] public BossMeshFrameParam meshShapeKeyFrames__arr255;
+        [FieldOffset(0xE000)] public bool isDebugDraw;
+        [FieldOffset(0xE001)] public bool isDebugDrawPoint;
+        [FieldOffset(0xE002)] public bool isDebugDrawMesh;
+        [FieldOffset(0xE003)] public bool isDebugDrawMeshIndivid;
+        [FieldOffset(0xE004)] public float debugDrawMeshTriangleDistance;
+        [FieldOffset(0xE008)] public uint debugDrawMeshTriangleNum;
     }
 
     public enum BossAttackCollisionParam_AttackType : sbyte
@@ -719,226 +766,227 @@ public class BossTheEndConfigClass
         AT_KILLING = 3,
         AT_NOTPARRY = 4,
         AT_NOTDAMAGE = 5,
-        BossAttackCollisionParam_AttackType_NUM_ATTACK_TYPE = 6
+        AT_NOTDAMAGETRIGGER = 6,
+        BossAttackCollisionParam_AttackType_NUM_ATTACK_TYPE = 7
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 112)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public struct BossAttackCollisionParam
     {
-        [FieldOffset(0)]  public bool isUse;
-        [FieldOffset(8)]  public CString attachNodeName;
-        [FieldOffset(24)] public float damageVelocityRaito;
-        [FieldOffset(28)] public BossAttackCollisionParam_AttackType types__arr0;
-        [FieldOffset(29)] public BossAttackCollisionParam_AttackType types__arr1;
-        [FieldOffset(30)] public BossAttackCollisionParam_AttackType types__arr2;
-        [FieldOffset(31)] public BossAttackCollisionParam_AttackType types__arr3;
-        [FieldOffset(32)] public BossColliderStatus status;
-        [FieldOffset(64)] public float size;
-        [FieldOffset(80)] public Vector3 offset;
-        [FieldOffset(96)] public CString parryCounterTargetCollisionName;
+        [FieldOffset(0x00)] public bool isUse;
+        [FieldOffset(0x08)] public UnmanagedString attachNodeName;
+        [FieldOffset(0x18)] public float damageVelocityRaito;
+        [FieldOffset(0x1C)] public BossAttackCollisionParam_AttackType types__arr0;
+        [FieldOffset(0x1D)] public BossAttackCollisionParam_AttackType types__arr1;
+        [FieldOffset(0x1E)] public BossAttackCollisionParam_AttackType types__arr2;
+        [FieldOffset(0x1F)] public BossAttackCollisionParam_AttackType types__arr3;
+        [FieldOffset(0x20)] public BossColliderStatus status;
+        [FieldOffset(0x40)] public float size;
+        [FieldOffset(0x50)] public Vector3 offset;
+        [FieldOffset(0x60)] public UnmanagedString parryCounterTargetCollisionName;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 7184)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C10)]
     public struct BossAttackCollisionConfig
     {
-        [FieldOffset(0)]    public BossAttackCollisionParam attackCollisions__arr0;
-        [FieldOffset(112)] public BossAttackCollisionParam attackCollisions__arr1;
-        [FieldOffset(224)] public BossAttackCollisionParam attackCollisions__arr2;
-        [FieldOffset(336)] public BossAttackCollisionParam attackCollisions__arr3;
-        [FieldOffset(448)] public BossAttackCollisionParam attackCollisions__arr4;
-        [FieldOffset(560)] public BossAttackCollisionParam attackCollisions__arr5;
-        [FieldOffset(672)] public BossAttackCollisionParam attackCollisions__arr6;
-        [FieldOffset(784)] public BossAttackCollisionParam attackCollisions__arr7;
-        [FieldOffset(896)] public BossAttackCollisionParam attackCollisions__arr8;
-        [FieldOffset(1008)] public BossAttackCollisionParam attackCollisions__arr9;
-        [FieldOffset(1120)] public BossAttackCollisionParam attackCollisions__arr10;
-        [FieldOffset(1232)] public BossAttackCollisionParam attackCollisions__arr11;
-        [FieldOffset(1344)] public BossAttackCollisionParam attackCollisions__arr12;
-        [FieldOffset(1456)] public BossAttackCollisionParam attackCollisions__arr13;
-        [FieldOffset(1568)] public BossAttackCollisionParam attackCollisions__arr14;
-        [FieldOffset(1680)] public BossAttackCollisionParam attackCollisions__arr15;
-        [FieldOffset(1792)] public BossAttackCollisionParam attackCollisions__arr16;
-        [FieldOffset(1904)] public BossAttackCollisionParam attackCollisions__arr17;
-        [FieldOffset(2016)] public BossAttackCollisionParam attackCollisions__arr18;
-        [FieldOffset(2128)] public BossAttackCollisionParam attackCollisions__arr19;
-        [FieldOffset(2240)] public BossAttackCollisionParam attackCollisions__arr20;
-        [FieldOffset(2352)] public BossAttackCollisionParam attackCollisions__arr21;
-        [FieldOffset(2464)] public BossAttackCollisionParam attackCollisions__arr22;
-        [FieldOffset(2576)] public BossAttackCollisionParam attackCollisions__arr23;
-        [FieldOffset(2688)] public BossAttackCollisionParam attackCollisions__arr24;
-        [FieldOffset(2800)] public BossAttackCollisionParam attackCollisions__arr25;
-        [FieldOffset(2912)] public BossAttackCollisionParam attackCollisions__arr26;
-        [FieldOffset(3024)] public BossAttackCollisionParam attackCollisions__arr27;
-        [FieldOffset(3136)] public BossAttackCollisionParam attackCollisions__arr28;
-        [FieldOffset(3248)] public BossAttackCollisionParam attackCollisions__arr29;
-        [FieldOffset(3360)] public BossAttackCollisionParam attackCollisions__arr30;
-        [FieldOffset(3472)] public BossAttackCollisionParam attackCollisions__arr31;
-        [FieldOffset(3584)] public BossAttackCollisionParam attackCollisions__arr32;
-        [FieldOffset(3696)] public BossAttackCollisionParam attackCollisions__arr33;
-        [FieldOffset(3808)] public BossAttackCollisionParam attackCollisions__arr34;
-        [FieldOffset(3920)] public BossAttackCollisionParam attackCollisions__arr35;
-        [FieldOffset(4032)] public BossAttackCollisionParam attackCollisions__arr36;
-        [FieldOffset(4144)] public BossAttackCollisionParam attackCollisions__arr37;
-        [FieldOffset(4256)] public BossAttackCollisionParam attackCollisions__arr38;
-        [FieldOffset(4368)] public BossAttackCollisionParam attackCollisions__arr39;
-        [FieldOffset(4480)] public BossAttackCollisionParam attackCollisions__arr40;
-        [FieldOffset(4592)] public BossAttackCollisionParam attackCollisions__arr41;
-        [FieldOffset(4704)] public BossAttackCollisionParam attackCollisions__arr42;
-        [FieldOffset(4816)] public BossAttackCollisionParam attackCollisions__arr43;
-        [FieldOffset(4928)] public BossAttackCollisionParam attackCollisions__arr44;
-        [FieldOffset(5040)] public BossAttackCollisionParam attackCollisions__arr45;
-        [FieldOffset(5152)] public BossAttackCollisionParam attackCollisions__arr46;
-        [FieldOffset(5264)] public BossAttackCollisionParam attackCollisions__arr47;
-        [FieldOffset(5376)] public BossAttackCollisionParam attackCollisions__arr48;
-        [FieldOffset(5488)] public BossAttackCollisionParam attackCollisions__arr49;
-        [FieldOffset(5600)] public BossAttackCollisionParam attackCollisions__arr50;
-        [FieldOffset(5712)] public BossAttackCollisionParam attackCollisions__arr51;
-        [FieldOffset(5824)] public BossAttackCollisionParam attackCollisions__arr52;
-        [FieldOffset(5936)] public BossAttackCollisionParam attackCollisions__arr53;
-        [FieldOffset(6048)] public BossAttackCollisionParam attackCollisions__arr54;
-        [FieldOffset(6160)] public BossAttackCollisionParam attackCollisions__arr55;
-        [FieldOffset(6272)] public BossAttackCollisionParam attackCollisions__arr56;
-        [FieldOffset(6384)] public BossAttackCollisionParam attackCollisions__arr57;
-        [FieldOffset(6496)] public BossAttackCollisionParam attackCollisions__arr58;
-        [FieldOffset(6608)] public BossAttackCollisionParam attackCollisions__arr59;
-        [FieldOffset(6720)] public BossAttackCollisionParam attackCollisions__arr60;
-        [FieldOffset(6832)] public BossAttackCollisionParam attackCollisions__arr61;
-        [FieldOffset(6944)] public BossAttackCollisionParam attackCollisions__arr62;
-        [FieldOffset(7056)] public BossAttackCollisionParam attackCollisions__arr63;
-        [FieldOffset(7168)] public bool isDebugDraw;
+        [FieldOffset(0x00)] public BossAttackCollisionParam attackCollisions__arr0;
+        [FieldOffset(0x70)] public BossAttackCollisionParam attackCollisions__arr1;
+        [FieldOffset(0xE0)] public BossAttackCollisionParam attackCollisions__arr2;
+        [FieldOffset(0x150)] public BossAttackCollisionParam attackCollisions__arr3;
+        [FieldOffset(0x1C0)] public BossAttackCollisionParam attackCollisions__arr4;
+        [FieldOffset(0x230)] public BossAttackCollisionParam attackCollisions__arr5;
+        [FieldOffset(0x2A0)] public BossAttackCollisionParam attackCollisions__arr6;
+        [FieldOffset(0x310)] public BossAttackCollisionParam attackCollisions__arr7;
+        [FieldOffset(0x380)] public BossAttackCollisionParam attackCollisions__arr8;
+        [FieldOffset(0x3F0)] public BossAttackCollisionParam attackCollisions__arr9;
+        [FieldOffset(0x460)] public BossAttackCollisionParam attackCollisions__arr10;
+        [FieldOffset(0x4D0)] public BossAttackCollisionParam attackCollisions__arr11;
+        [FieldOffset(0x540)] public BossAttackCollisionParam attackCollisions__arr12;
+        [FieldOffset(0x5B0)] public BossAttackCollisionParam attackCollisions__arr13;
+        [FieldOffset(0x620)] public BossAttackCollisionParam attackCollisions__arr14;
+        [FieldOffset(0x690)] public BossAttackCollisionParam attackCollisions__arr15;
+        [FieldOffset(0x700)] public BossAttackCollisionParam attackCollisions__arr16;
+        [FieldOffset(0x770)] public BossAttackCollisionParam attackCollisions__arr17;
+        [FieldOffset(0x7E0)] public BossAttackCollisionParam attackCollisions__arr18;
+        [FieldOffset(0x850)] public BossAttackCollisionParam attackCollisions__arr19;
+        [FieldOffset(0x8C0)] public BossAttackCollisionParam attackCollisions__arr20;
+        [FieldOffset(0x930)] public BossAttackCollisionParam attackCollisions__arr21;
+        [FieldOffset(0x9A0)] public BossAttackCollisionParam attackCollisions__arr22;
+        [FieldOffset(0xA10)] public BossAttackCollisionParam attackCollisions__arr23;
+        [FieldOffset(0xA80)] public BossAttackCollisionParam attackCollisions__arr24;
+        [FieldOffset(0xAF0)] public BossAttackCollisionParam attackCollisions__arr25;
+        [FieldOffset(0xB60)] public BossAttackCollisionParam attackCollisions__arr26;
+        [FieldOffset(0xBD0)] public BossAttackCollisionParam attackCollisions__arr27;
+        [FieldOffset(0xC40)] public BossAttackCollisionParam attackCollisions__arr28;
+        [FieldOffset(0xCB0)] public BossAttackCollisionParam attackCollisions__arr29;
+        [FieldOffset(0xD20)] public BossAttackCollisionParam attackCollisions__arr30;
+        [FieldOffset(0xD90)] public BossAttackCollisionParam attackCollisions__arr31;
+        [FieldOffset(0xE00)] public BossAttackCollisionParam attackCollisions__arr32;
+        [FieldOffset(0xE70)] public BossAttackCollisionParam attackCollisions__arr33;
+        [FieldOffset(0xEE0)] public BossAttackCollisionParam attackCollisions__arr34;
+        [FieldOffset(0xF50)] public BossAttackCollisionParam attackCollisions__arr35;
+        [FieldOffset(0xFC0)] public BossAttackCollisionParam attackCollisions__arr36;
+        [FieldOffset(0x1030)] public BossAttackCollisionParam attackCollisions__arr37;
+        [FieldOffset(0x10A0)] public BossAttackCollisionParam attackCollisions__arr38;
+        [FieldOffset(0x1110)] public BossAttackCollisionParam attackCollisions__arr39;
+        [FieldOffset(0x1180)] public BossAttackCollisionParam attackCollisions__arr40;
+        [FieldOffset(0x11F0)] public BossAttackCollisionParam attackCollisions__arr41;
+        [FieldOffset(0x1260)] public BossAttackCollisionParam attackCollisions__arr42;
+        [FieldOffset(0x12D0)] public BossAttackCollisionParam attackCollisions__arr43;
+        [FieldOffset(0x1340)] public BossAttackCollisionParam attackCollisions__arr44;
+        [FieldOffset(0x13B0)] public BossAttackCollisionParam attackCollisions__arr45;
+        [FieldOffset(0x1420)] public BossAttackCollisionParam attackCollisions__arr46;
+        [FieldOffset(0x1490)] public BossAttackCollisionParam attackCollisions__arr47;
+        [FieldOffset(0x1500)] public BossAttackCollisionParam attackCollisions__arr48;
+        [FieldOffset(0x1570)] public BossAttackCollisionParam attackCollisions__arr49;
+        [FieldOffset(0x15E0)] public BossAttackCollisionParam attackCollisions__arr50;
+        [FieldOffset(0x1650)] public BossAttackCollisionParam attackCollisions__arr51;
+        [FieldOffset(0x16C0)] public BossAttackCollisionParam attackCollisions__arr52;
+        [FieldOffset(0x1730)] public BossAttackCollisionParam attackCollisions__arr53;
+        [FieldOffset(0x17A0)] public BossAttackCollisionParam attackCollisions__arr54;
+        [FieldOffset(0x1810)] public BossAttackCollisionParam attackCollisions__arr55;
+        [FieldOffset(0x1880)] public BossAttackCollisionParam attackCollisions__arr56;
+        [FieldOffset(0x18F0)] public BossAttackCollisionParam attackCollisions__arr57;
+        [FieldOffset(0x1960)] public BossAttackCollisionParam attackCollisions__arr58;
+        [FieldOffset(0x19D0)] public BossAttackCollisionParam attackCollisions__arr59;
+        [FieldOffset(0x1A40)] public BossAttackCollisionParam attackCollisions__arr60;
+        [FieldOffset(0x1AB0)] public BossAttackCollisionParam attackCollisions__arr61;
+        [FieldOffset(0x1B20)] public BossAttackCollisionParam attackCollisions__arr62;
+        [FieldOffset(0x1B90)] public BossAttackCollisionParam attackCollisions__arr63;
+        [FieldOffset(0x1C00)] public bool isDebugDraw;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 96)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x60)]
     public struct BossBattlePhaseCollisionParam
     {
-        [FieldOffset(0)]  public bool isUse;
-        [FieldOffset(8)]  public CString attachNodeName;
-        [FieldOffset(24)] public CString name;
-        [FieldOffset(40)] public float size;
-        [FieldOffset(48)] public Vector3 offset;
-        [FieldOffset(64)] public Vector3 rotation;
-        [FieldOffset(80)] public bool isParryActive;
-        [FieldOffset(84)] public float cyloopRadius;
-        [FieldOffset(88)] public bool onlyRigidBody;
+        [FieldOffset(0x00)] public bool isUse;
+        [FieldOffset(0x08)] public UnmanagedString attachNodeName;
+        [FieldOffset(0x18)] public UnmanagedString name;
+        [FieldOffset(0x28)] public float size;
+        [FieldOffset(0x30)] public Vector3 offset;
+        [FieldOffset(0x40)] public Vector3 rotation;
+        [FieldOffset(0x50)] public bool isParryActive;
+        [FieldOffset(0x54)] public float cyloopRadius;
+        [FieldOffset(0x58)] public bool onlyRigidBody;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 1552)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x610)]
     public struct BossBattlePhaseCollisionConfig
     {
-        [FieldOffset(0)]    public BossBattlePhaseCollisionParam battleCollisions__arr0;
-        [FieldOffset(96)] public BossBattlePhaseCollisionParam battleCollisions__arr1;
-        [FieldOffset(192)] public BossBattlePhaseCollisionParam battleCollisions__arr2;
-        [FieldOffset(288)] public BossBattlePhaseCollisionParam battleCollisions__arr3;
-        [FieldOffset(384)] public BossBattlePhaseCollisionParam battleCollisions__arr4;
-        [FieldOffset(480)] public BossBattlePhaseCollisionParam battleCollisions__arr5;
-        [FieldOffset(576)] public BossBattlePhaseCollisionParam battleCollisions__arr6;
-        [FieldOffset(672)] public BossBattlePhaseCollisionParam battleCollisions__arr7;
-        [FieldOffset(768)] public BossBattlePhaseCollisionParam battleCollisions__arr8;
-        [FieldOffset(864)] public BossBattlePhaseCollisionParam battleCollisions__arr9;
-        [FieldOffset(960)] public BossBattlePhaseCollisionParam battleCollisions__arr10;
-        [FieldOffset(1056)] public BossBattlePhaseCollisionParam battleCollisions__arr11;
-        [FieldOffset(1152)] public BossBattlePhaseCollisionParam battleCollisions__arr12;
-        [FieldOffset(1248)] public BossBattlePhaseCollisionParam battleCollisions__arr13;
-        [FieldOffset(1344)] public BossBattlePhaseCollisionParam battleCollisions__arr14;
-        [FieldOffset(1440)] public BossBattlePhaseCollisionParam battleCollisions__arr15;
-        [FieldOffset(1536)] public bool isDebugDraw;
+        [FieldOffset(0x00)] public BossBattlePhaseCollisionParam battleCollisions__arr0;
+        [FieldOffset(0x60)] public BossBattlePhaseCollisionParam battleCollisions__arr1;
+        [FieldOffset(0xC0)] public BossBattlePhaseCollisionParam battleCollisions__arr2;
+        [FieldOffset(0x120)] public BossBattlePhaseCollisionParam battleCollisions__arr3;
+        [FieldOffset(0x180)] public BossBattlePhaseCollisionParam battleCollisions__arr4;
+        [FieldOffset(0x1E0)] public BossBattlePhaseCollisionParam battleCollisions__arr5;
+        [FieldOffset(0x240)] public BossBattlePhaseCollisionParam battleCollisions__arr6;
+        [FieldOffset(0x2A0)] public BossBattlePhaseCollisionParam battleCollisions__arr7;
+        [FieldOffset(0x300)] public BossBattlePhaseCollisionParam battleCollisions__arr8;
+        [FieldOffset(0x360)] public BossBattlePhaseCollisionParam battleCollisions__arr9;
+        [FieldOffset(0x3C0)] public BossBattlePhaseCollisionParam battleCollisions__arr10;
+        [FieldOffset(0x420)] public BossBattlePhaseCollisionParam battleCollisions__arr11;
+        [FieldOffset(0x480)] public BossBattlePhaseCollisionParam battleCollisions__arr12;
+        [FieldOffset(0x4E0)] public BossBattlePhaseCollisionParam battleCollisions__arr13;
+        [FieldOffset(0x540)] public BossBattlePhaseCollisionParam battleCollisions__arr14;
+        [FieldOffset(0x5A0)] public BossBattlePhaseCollisionParam battleCollisions__arr15;
+        [FieldOffset(0x600)] public bool isDebugDraw;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 20)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
     public struct BossDropRingConfig
     {
-        [FieldOffset(0)]  public uint ringNumQuickCyloopUp;
-        [FieldOffset(4)]  public uint ringNumQuickCyloopDown;
-        [FieldOffset(8)]  public uint ringNumSonicSpecial;
-        [FieldOffset(12)] public float ringSpawnDistance;
-        [FieldOffset(16)] public float ringSuckedVelocity;
+        [FieldOffset(0x00)] public uint ringNumQuickCyloopUp;
+        [FieldOffset(0x04)] public uint ringNumQuickCyloopDown;
+        [FieldOffset(0x08)] public uint ringNumSonicSpecial;
+        [FieldOffset(0x0C)] public float ringSpawnDistance;
+        [FieldOffset(0x10)] public float ringSuckedVelocity;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 75712)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x127C0)]
     public struct BossBaseConfig
     {
-        [FieldOffset(0)]     public BossStatusConfig status;
-        [FieldOffset(416)]   public BossPillarConfig pillar;
-        [FieldOffset(1376)]  public BossPerceivePartsWithCollisionConfig perceivPartsWithCollision;
-        [FieldOffset(9584)]  public BossMeshFrameConfig meshShapeKeyFrame;
-        [FieldOffset(66944)] public BossAttackCollisionConfig attackCollision;
-        [FieldOffset(74128)] public BossBattlePhaseCollisionConfig battleCollision;
-        [FieldOffset(75680)] public BossDropRingConfig dropRing;
+        [FieldOffset(0x00)] public BossStatusConfig status;
+        [FieldOffset(0x1A0)] public BossPillarConfig pillar;
+        [FieldOffset(0x560)] public BossPerceivePartsWithCollisionConfig perceivPartsWithCollision;
+        [FieldOffset(0x2570)] public BossMeshFrameConfig meshShapeKeyFrame;
+        [FieldOffset(0x10580)] public BossAttackCollisionConfig attackCollision;
+        [FieldOffset(0x12190)] public BossBattlePhaseCollisionConfig battleCollision;
+        [FieldOffset(0x127A0)] public BossDropRingConfig dropRing;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct LaserTargetConfig
     {
-        [FieldOffset(0)] public float scale;
+        [FieldOffset(0x00)] public float scale;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct SerifConfig
     {
-        [FieldOffset(0)]  public bool useHpBorder;
-        [FieldOffset(4)]  public float hpBorder;
-        [FieldOffset(8)]  public bool useWaveId;
-        [FieldOffset(9)]  public byte waveId;
-        [FieldOffset(12)] public float delayTime;
-        [FieldOffset(16)] public CString voice;
+        [FieldOffset(0x00)] public bool useHpBorder;
+        [FieldOffset(0x04)] public float hpBorder;
+        [FieldOffset(0x08)] public bool useWaveId;
+        [FieldOffset(0x09)] public byte waveId;
+        [FieldOffset(0x0C)] public float delayTime;
+        [FieldOffset(0x10)] public UnmanagedString voice;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 3)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x03)]
     public struct EnemyPracticeNotifierConfig
     {
-        [FieldOffset(0)] public bool usePracticeNotifier;
-        [FieldOffset(1)] public sbyte practiceNo;
-        [FieldOffset(2)] public sbyte tipsNo;
+        [FieldOffset(0x00)] public bool usePracticeNotifier;
+        [FieldOffset(0x01)] public sbyte practiceNo;
+        [FieldOffset(0x02)] public sbyte tipsNo;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct NotifierConfig
     {
-        [FieldOffset(0)] public byte waveId;
-        [FieldOffset(1)] public EnemyPracticeNotifierConfig practiceNotifierConfig;
+        [FieldOffset(0x00)] public byte waveId;
+        [FieldOffset(0x01)] public EnemyPracticeNotifierConfig practiceNotifierConfig;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct UIConfig
     {
-        [FieldOffset(0)] public float borderLifeRatio;
-        [FieldOffset(4)] public float sonicDamageRatio;
+        [FieldOffset(0x00)] public float borderLifeRatio;
+        [FieldOffset(0x04)] public float sonicDamageRatio;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 76576)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x12B20)]
     public struct BossTheEndConfig
     {
         [FieldOffset(0)]     public BossBaseConfig bossBaseConfig;
-        [FieldOffset(75712)] public LaserTargetConfig target;
-        [FieldOffset(75720)] public SerifConfig serifConfigs__arr0;
-        [FieldOffset(75752)] public SerifConfig serifConfigs__arr1;
-        [FieldOffset(75784)] public SerifConfig serifConfigs__arr2;
-        [FieldOffset(75816)] public SerifConfig serifConfigs__arr3;
-        [FieldOffset(75848)] public SerifConfig serifConfigs__arr4;
-        [FieldOffset(75880)] public SerifConfig serifConfigs__arr5;
-        [FieldOffset(75912)] public SerifConfig serifConfigs__arr6;
-        [FieldOffset(75944)] public SerifConfig serifConfigs__arr7;
-        [FieldOffset(75976)] public SerifConfig serifConfigs__arr8;
-        [FieldOffset(76008)] public SerifConfig serifConfigs__arr9;
-        [FieldOffset(76040)] public SerifConfig serifConfigs__arr10;
-        [FieldOffset(76072)] public SerifConfig serifConfigs__arr11;
-        [FieldOffset(76104)] public SerifConfig serifConfigs__arr12;
-        [FieldOffset(76136)] public SerifConfig serifConfigs__arr13;
-        [FieldOffset(76168)] public SerifConfig serifConfigs__arr14;
-        [FieldOffset(76200)] public SerifConfig serifConfigs__arr15;
-        [FieldOffset(76232)] public SerifConfig serifConfigs__arr16;
-        [FieldOffset(76264)] public SerifConfig serifConfigs__arr17;
-        [FieldOffset(76296)] public SerifConfig serifConfigs__arr18;
-        [FieldOffset(76328)] public SerifConfig serifConfigs__arr19;
-        [FieldOffset(76360)] public SerifConfig serifConfigs__arr20;
-        [FieldOffset(76392)] public SerifConfig serifConfigs__arr21;
-        [FieldOffset(76424)] public SerifConfig serifConfigs__arr22;
-        [FieldOffset(76456)] public SerifConfig serifConfigs__arr23;
-        [FieldOffset(76488)] public SerifConfig serifConfigs__arr24;
-        [FieldOffset(76520)] public SerifConfig serifConfigs__arr25;
-        [FieldOffset(76552)] public NotifierConfig notifierConfigStart;
-        [FieldOffset(76556)] public NotifierConfig notifierConfigLaser;
-        [FieldOffset(76560)] public UIConfig uiConfig;
+        [FieldOffset(0x127C0)] public LaserTargetConfig target;
+        [FieldOffset(0x127C8)] public SerifConfig serifConfigs__arr0;
+        [FieldOffset(0x127E8)] public SerifConfig serifConfigs__arr1;
+        [FieldOffset(0x12808)] public SerifConfig serifConfigs__arr2;
+        [FieldOffset(0x12828)] public SerifConfig serifConfigs__arr3;
+        [FieldOffset(0x12848)] public SerifConfig serifConfigs__arr4;
+        [FieldOffset(0x12868)] public SerifConfig serifConfigs__arr5;
+        [FieldOffset(0x12888)] public SerifConfig serifConfigs__arr6;
+        [FieldOffset(0x128A8)] public SerifConfig serifConfigs__arr7;
+        [FieldOffset(0x128C8)] public SerifConfig serifConfigs__arr8;
+        [FieldOffset(0x128E8)] public SerifConfig serifConfigs__arr9;
+        [FieldOffset(0x12908)] public SerifConfig serifConfigs__arr10;
+        [FieldOffset(0x12928)] public SerifConfig serifConfigs__arr11;
+        [FieldOffset(0x12948)] public SerifConfig serifConfigs__arr12;
+        [FieldOffset(0x12968)] public SerifConfig serifConfigs__arr13;
+        [FieldOffset(0x12988)] public SerifConfig serifConfigs__arr14;
+        [FieldOffset(0x129A8)] public SerifConfig serifConfigs__arr15;
+        [FieldOffset(0x129C8)] public SerifConfig serifConfigs__arr16;
+        [FieldOffset(0x129E8)] public SerifConfig serifConfigs__arr17;
+        [FieldOffset(0x12A08)] public SerifConfig serifConfigs__arr18;
+        [FieldOffset(0x12A28)] public SerifConfig serifConfigs__arr19;
+        [FieldOffset(0x12A48)] public SerifConfig serifConfigs__arr20;
+        [FieldOffset(0x12A68)] public SerifConfig serifConfigs__arr21;
+        [FieldOffset(0x12A88)] public SerifConfig serifConfigs__arr22;
+        [FieldOffset(0x12AA8)] public SerifConfig serifConfigs__arr23;
+        [FieldOffset(0x12AC8)] public SerifConfig serifConfigs__arr24;
+        [FieldOffset(0x12AE8)] public SerifConfig serifConfigs__arr25;
+        [FieldOffset(0x12B08)] public NotifierConfig notifierConfigStart;
+        [FieldOffset(0x12B0C)] public NotifierConfig notifierConfigLaser;
+        [FieldOffset(0x12B10)] public UIConfig uiConfig;
     }
 
 }

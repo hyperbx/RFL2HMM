@@ -3,169 +3,214 @@ using System.Runtime.InteropServices;
 
 public class BossCommonParametersClass
 {
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
-    public struct CString
+    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    public struct UnmanagedString
     {
         [FieldOffset(0)] public long pValue;
 
         public string Value
         {
-        	get => Marshal.PtrToStringAnsi((IntPtr)pValue);
-        	set => pValue = (long)Marshal.StringToHGlobalAnsi(value);
+            get
+            {
+                if (pValue == 0)
+                    return string.Empty;
+
+                return Marshal.PtrToStringAnsi((nint)pValue);
+            }
+
+            set => pValue = Marshal.StringToHGlobalAnsi(value);
+        }
+
+        public UnmanagedString(string in_value)
+        {
+            Value = in_value;
+        }
+
+        public static implicit operator UnmanagedString(string in_value)
+        {
+            return new UnmanagedString(in_value);
+        }
+
+        public static bool operator ==(UnmanagedString in_left, string in_right)
+        {
+            return in_left.Value == in_right;
+        }
+
+        public static bool operator !=(UnmanagedString in_left, string in_right)
+        {
+            return !(in_left == in_right);
+        }
+
+        public override bool Equals(object in_obj)
+        {
+            if (in_obj is string str)
+                return Value == str;
+
+            return base.Equals(in_obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Value;
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 80)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x50)]
     public struct BossResourceInfo
     {
-        [FieldOffset(0)]  public CString modelName;
-        [FieldOffset(16)] public CString animName;
-        [FieldOffset(32)] public Vector3 scale;
-        [FieldOffset(48)] public CString stageName;
-        [FieldOffset(64)] public Vector3 stagePos;
+        [FieldOffset(0x00)] public UnmanagedString modelName;
+        [FieldOffset(0x10)] public UnmanagedString animName;
+        [FieldOffset(0x20)] public Vector3 scale;
+        [FieldOffset(0x30)] public UnmanagedString stageName;
+        [FieldOffset(0x40)] public Vector3 stagePos;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 80)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x50)]
     public struct HoldPoint
     {
-        [FieldOffset(0)]  public CString nodeName;
-        [FieldOffset(16)] public Vector3 offset;
-        [FieldOffset(32)] public Vector3 rot;
-        [FieldOffset(48)] public CString tagName;
-        [FieldOffset(64)] public int nextPointId;
+        [FieldOffset(0x00)] public UnmanagedString nodeName;
+        [FieldOffset(0x10)] public Vector3 offset;
+        [FieldOffset(0x20)] public Vector3 rot;
+        [FieldOffset(0x30)] public UnmanagedString tagName;
+        [FieldOffset(0x40)] public int nextPointId;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 10240)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x2800)]
     public struct HoldPointParameter
     {
-        [FieldOffset(0)] public HoldPoint holdPoints__arr0;
-        [FieldOffset(80)] public HoldPoint holdPoints__arr1;
-        [FieldOffset(160)] public HoldPoint holdPoints__arr2;
-        [FieldOffset(240)] public HoldPoint holdPoints__arr3;
-        [FieldOffset(320)] public HoldPoint holdPoints__arr4;
-        [FieldOffset(400)] public HoldPoint holdPoints__arr5;
-        [FieldOffset(480)] public HoldPoint holdPoints__arr6;
-        [FieldOffset(560)] public HoldPoint holdPoints__arr7;
-        [FieldOffset(640)] public HoldPoint holdPoints__arr8;
-        [FieldOffset(720)] public HoldPoint holdPoints__arr9;
-        [FieldOffset(800)] public HoldPoint holdPoints__arr10;
-        [FieldOffset(880)] public HoldPoint holdPoints__arr11;
-        [FieldOffset(960)] public HoldPoint holdPoints__arr12;
-        [FieldOffset(1040)] public HoldPoint holdPoints__arr13;
-        [FieldOffset(1120)] public HoldPoint holdPoints__arr14;
-        [FieldOffset(1200)] public HoldPoint holdPoints__arr15;
-        [FieldOffset(1280)] public HoldPoint holdPoints__arr16;
-        [FieldOffset(1360)] public HoldPoint holdPoints__arr17;
-        [FieldOffset(1440)] public HoldPoint holdPoints__arr18;
-        [FieldOffset(1520)] public HoldPoint holdPoints__arr19;
-        [FieldOffset(1600)] public HoldPoint holdPoints__arr20;
-        [FieldOffset(1680)] public HoldPoint holdPoints__arr21;
-        [FieldOffset(1760)] public HoldPoint holdPoints__arr22;
-        [FieldOffset(1840)] public HoldPoint holdPoints__arr23;
-        [FieldOffset(1920)] public HoldPoint holdPoints__arr24;
-        [FieldOffset(2000)] public HoldPoint holdPoints__arr25;
-        [FieldOffset(2080)] public HoldPoint holdPoints__arr26;
-        [FieldOffset(2160)] public HoldPoint holdPoints__arr27;
-        [FieldOffset(2240)] public HoldPoint holdPoints__arr28;
-        [FieldOffset(2320)] public HoldPoint holdPoints__arr29;
-        [FieldOffset(2400)] public HoldPoint holdPoints__arr30;
-        [FieldOffset(2480)] public HoldPoint holdPoints__arr31;
-        [FieldOffset(2560)] public HoldPoint holdPoints__arr32;
-        [FieldOffset(2640)] public HoldPoint holdPoints__arr33;
-        [FieldOffset(2720)] public HoldPoint holdPoints__arr34;
-        [FieldOffset(2800)] public HoldPoint holdPoints__arr35;
-        [FieldOffset(2880)] public HoldPoint holdPoints__arr36;
-        [FieldOffset(2960)] public HoldPoint holdPoints__arr37;
-        [FieldOffset(3040)] public HoldPoint holdPoints__arr38;
-        [FieldOffset(3120)] public HoldPoint holdPoints__arr39;
-        [FieldOffset(3200)] public HoldPoint holdPoints__arr40;
-        [FieldOffset(3280)] public HoldPoint holdPoints__arr41;
-        [FieldOffset(3360)] public HoldPoint holdPoints__arr42;
-        [FieldOffset(3440)] public HoldPoint holdPoints__arr43;
-        [FieldOffset(3520)] public HoldPoint holdPoints__arr44;
-        [FieldOffset(3600)] public HoldPoint holdPoints__arr45;
-        [FieldOffset(3680)] public HoldPoint holdPoints__arr46;
-        [FieldOffset(3760)] public HoldPoint holdPoints__arr47;
-        [FieldOffset(3840)] public HoldPoint holdPoints__arr48;
-        [FieldOffset(3920)] public HoldPoint holdPoints__arr49;
-        [FieldOffset(4000)] public HoldPoint holdPoints__arr50;
-        [FieldOffset(4080)] public HoldPoint holdPoints__arr51;
-        [FieldOffset(4160)] public HoldPoint holdPoints__arr52;
-        [FieldOffset(4240)] public HoldPoint holdPoints__arr53;
-        [FieldOffset(4320)] public HoldPoint holdPoints__arr54;
-        [FieldOffset(4400)] public HoldPoint holdPoints__arr55;
-        [FieldOffset(4480)] public HoldPoint holdPoints__arr56;
-        [FieldOffset(4560)] public HoldPoint holdPoints__arr57;
-        [FieldOffset(4640)] public HoldPoint holdPoints__arr58;
-        [FieldOffset(4720)] public HoldPoint holdPoints__arr59;
-        [FieldOffset(4800)] public HoldPoint holdPoints__arr60;
-        [FieldOffset(4880)] public HoldPoint holdPoints__arr61;
-        [FieldOffset(4960)] public HoldPoint holdPoints__arr62;
-        [FieldOffset(5040)] public HoldPoint holdPoints__arr63;
-        [FieldOffset(5120)] public HoldPoint holdPoints__arr64;
-        [FieldOffset(5200)] public HoldPoint holdPoints__arr65;
-        [FieldOffset(5280)] public HoldPoint holdPoints__arr66;
-        [FieldOffset(5360)] public HoldPoint holdPoints__arr67;
-        [FieldOffset(5440)] public HoldPoint holdPoints__arr68;
-        [FieldOffset(5520)] public HoldPoint holdPoints__arr69;
-        [FieldOffset(5600)] public HoldPoint holdPoints__arr70;
-        [FieldOffset(5680)] public HoldPoint holdPoints__arr71;
-        [FieldOffset(5760)] public HoldPoint holdPoints__arr72;
-        [FieldOffset(5840)] public HoldPoint holdPoints__arr73;
-        [FieldOffset(5920)] public HoldPoint holdPoints__arr74;
-        [FieldOffset(6000)] public HoldPoint holdPoints__arr75;
-        [FieldOffset(6080)] public HoldPoint holdPoints__arr76;
-        [FieldOffset(6160)] public HoldPoint holdPoints__arr77;
-        [FieldOffset(6240)] public HoldPoint holdPoints__arr78;
-        [FieldOffset(6320)] public HoldPoint holdPoints__arr79;
-        [FieldOffset(6400)] public HoldPoint holdPoints__arr80;
-        [FieldOffset(6480)] public HoldPoint holdPoints__arr81;
-        [FieldOffset(6560)] public HoldPoint holdPoints__arr82;
-        [FieldOffset(6640)] public HoldPoint holdPoints__arr83;
-        [FieldOffset(6720)] public HoldPoint holdPoints__arr84;
-        [FieldOffset(6800)] public HoldPoint holdPoints__arr85;
-        [FieldOffset(6880)] public HoldPoint holdPoints__arr86;
-        [FieldOffset(6960)] public HoldPoint holdPoints__arr87;
-        [FieldOffset(7040)] public HoldPoint holdPoints__arr88;
-        [FieldOffset(7120)] public HoldPoint holdPoints__arr89;
-        [FieldOffset(7200)] public HoldPoint holdPoints__arr90;
-        [FieldOffset(7280)] public HoldPoint holdPoints__arr91;
-        [FieldOffset(7360)] public HoldPoint holdPoints__arr92;
-        [FieldOffset(7440)] public HoldPoint holdPoints__arr93;
-        [FieldOffset(7520)] public HoldPoint holdPoints__arr94;
-        [FieldOffset(7600)] public HoldPoint holdPoints__arr95;
-        [FieldOffset(7680)] public HoldPoint holdPoints__arr96;
-        [FieldOffset(7760)] public HoldPoint holdPoints__arr97;
-        [FieldOffset(7840)] public HoldPoint holdPoints__arr98;
-        [FieldOffset(7920)] public HoldPoint holdPoints__arr99;
-        [FieldOffset(8000)] public HoldPoint holdPoints__arr100;
-        [FieldOffset(8080)] public HoldPoint holdPoints__arr101;
-        [FieldOffset(8160)] public HoldPoint holdPoints__arr102;
-        [FieldOffset(8240)] public HoldPoint holdPoints__arr103;
-        [FieldOffset(8320)] public HoldPoint holdPoints__arr104;
-        [FieldOffset(8400)] public HoldPoint holdPoints__arr105;
-        [FieldOffset(8480)] public HoldPoint holdPoints__arr106;
-        [FieldOffset(8560)] public HoldPoint holdPoints__arr107;
-        [FieldOffset(8640)] public HoldPoint holdPoints__arr108;
-        [FieldOffset(8720)] public HoldPoint holdPoints__arr109;
-        [FieldOffset(8800)] public HoldPoint holdPoints__arr110;
-        [FieldOffset(8880)] public HoldPoint holdPoints__arr111;
-        [FieldOffset(8960)] public HoldPoint holdPoints__arr112;
-        [FieldOffset(9040)] public HoldPoint holdPoints__arr113;
-        [FieldOffset(9120)] public HoldPoint holdPoints__arr114;
-        [FieldOffset(9200)] public HoldPoint holdPoints__arr115;
-        [FieldOffset(9280)] public HoldPoint holdPoints__arr116;
-        [FieldOffset(9360)] public HoldPoint holdPoints__arr117;
-        [FieldOffset(9440)] public HoldPoint holdPoints__arr118;
-        [FieldOffset(9520)] public HoldPoint holdPoints__arr119;
-        [FieldOffset(9600)] public HoldPoint holdPoints__arr120;
-        [FieldOffset(9680)] public HoldPoint holdPoints__arr121;
-        [FieldOffset(9760)] public HoldPoint holdPoints__arr122;
-        [FieldOffset(9840)] public HoldPoint holdPoints__arr123;
-        [FieldOffset(9920)] public HoldPoint holdPoints__arr124;
-        [FieldOffset(10000)] public HoldPoint holdPoints__arr125;
-        [FieldOffset(10080)] public HoldPoint holdPoints__arr126;
-        [FieldOffset(10160)] public HoldPoint holdPoints__arr127;
+        [FieldOffset(0x00)] public HoldPoint holdPoints__arr0;
+        [FieldOffset(0x50)] public HoldPoint holdPoints__arr1;
+        [FieldOffset(0xA0)] public HoldPoint holdPoints__arr2;
+        [FieldOffset(0xF0)] public HoldPoint holdPoints__arr3;
+        [FieldOffset(0x140)] public HoldPoint holdPoints__arr4;
+        [FieldOffset(0x190)] public HoldPoint holdPoints__arr5;
+        [FieldOffset(0x1E0)] public HoldPoint holdPoints__arr6;
+        [FieldOffset(0x230)] public HoldPoint holdPoints__arr7;
+        [FieldOffset(0x280)] public HoldPoint holdPoints__arr8;
+        [FieldOffset(0x2D0)] public HoldPoint holdPoints__arr9;
+        [FieldOffset(0x320)] public HoldPoint holdPoints__arr10;
+        [FieldOffset(0x370)] public HoldPoint holdPoints__arr11;
+        [FieldOffset(0x3C0)] public HoldPoint holdPoints__arr12;
+        [FieldOffset(0x410)] public HoldPoint holdPoints__arr13;
+        [FieldOffset(0x460)] public HoldPoint holdPoints__arr14;
+        [FieldOffset(0x4B0)] public HoldPoint holdPoints__arr15;
+        [FieldOffset(0x500)] public HoldPoint holdPoints__arr16;
+        [FieldOffset(0x550)] public HoldPoint holdPoints__arr17;
+        [FieldOffset(0x5A0)] public HoldPoint holdPoints__arr18;
+        [FieldOffset(0x5F0)] public HoldPoint holdPoints__arr19;
+        [FieldOffset(0x640)] public HoldPoint holdPoints__arr20;
+        [FieldOffset(0x690)] public HoldPoint holdPoints__arr21;
+        [FieldOffset(0x6E0)] public HoldPoint holdPoints__arr22;
+        [FieldOffset(0x730)] public HoldPoint holdPoints__arr23;
+        [FieldOffset(0x780)] public HoldPoint holdPoints__arr24;
+        [FieldOffset(0x7D0)] public HoldPoint holdPoints__arr25;
+        [FieldOffset(0x820)] public HoldPoint holdPoints__arr26;
+        [FieldOffset(0x870)] public HoldPoint holdPoints__arr27;
+        [FieldOffset(0x8C0)] public HoldPoint holdPoints__arr28;
+        [FieldOffset(0x910)] public HoldPoint holdPoints__arr29;
+        [FieldOffset(0x960)] public HoldPoint holdPoints__arr30;
+        [FieldOffset(0x9B0)] public HoldPoint holdPoints__arr31;
+        [FieldOffset(0xA00)] public HoldPoint holdPoints__arr32;
+        [FieldOffset(0xA50)] public HoldPoint holdPoints__arr33;
+        [FieldOffset(0xAA0)] public HoldPoint holdPoints__arr34;
+        [FieldOffset(0xAF0)] public HoldPoint holdPoints__arr35;
+        [FieldOffset(0xB40)] public HoldPoint holdPoints__arr36;
+        [FieldOffset(0xB90)] public HoldPoint holdPoints__arr37;
+        [FieldOffset(0xBE0)] public HoldPoint holdPoints__arr38;
+        [FieldOffset(0xC30)] public HoldPoint holdPoints__arr39;
+        [FieldOffset(0xC80)] public HoldPoint holdPoints__arr40;
+        [FieldOffset(0xCD0)] public HoldPoint holdPoints__arr41;
+        [FieldOffset(0xD20)] public HoldPoint holdPoints__arr42;
+        [FieldOffset(0xD70)] public HoldPoint holdPoints__arr43;
+        [FieldOffset(0xDC0)] public HoldPoint holdPoints__arr44;
+        [FieldOffset(0xE10)] public HoldPoint holdPoints__arr45;
+        [FieldOffset(0xE60)] public HoldPoint holdPoints__arr46;
+        [FieldOffset(0xEB0)] public HoldPoint holdPoints__arr47;
+        [FieldOffset(0xF00)] public HoldPoint holdPoints__arr48;
+        [FieldOffset(0xF50)] public HoldPoint holdPoints__arr49;
+        [FieldOffset(0xFA0)] public HoldPoint holdPoints__arr50;
+        [FieldOffset(0xFF0)] public HoldPoint holdPoints__arr51;
+        [FieldOffset(0x1040)] public HoldPoint holdPoints__arr52;
+        [FieldOffset(0x1090)] public HoldPoint holdPoints__arr53;
+        [FieldOffset(0x10E0)] public HoldPoint holdPoints__arr54;
+        [FieldOffset(0x1130)] public HoldPoint holdPoints__arr55;
+        [FieldOffset(0x1180)] public HoldPoint holdPoints__arr56;
+        [FieldOffset(0x11D0)] public HoldPoint holdPoints__arr57;
+        [FieldOffset(0x1220)] public HoldPoint holdPoints__arr58;
+        [FieldOffset(0x1270)] public HoldPoint holdPoints__arr59;
+        [FieldOffset(0x12C0)] public HoldPoint holdPoints__arr60;
+        [FieldOffset(0x1310)] public HoldPoint holdPoints__arr61;
+        [FieldOffset(0x1360)] public HoldPoint holdPoints__arr62;
+        [FieldOffset(0x13B0)] public HoldPoint holdPoints__arr63;
+        [FieldOffset(0x1400)] public HoldPoint holdPoints__arr64;
+        [FieldOffset(0x1450)] public HoldPoint holdPoints__arr65;
+        [FieldOffset(0x14A0)] public HoldPoint holdPoints__arr66;
+        [FieldOffset(0x14F0)] public HoldPoint holdPoints__arr67;
+        [FieldOffset(0x1540)] public HoldPoint holdPoints__arr68;
+        [FieldOffset(0x1590)] public HoldPoint holdPoints__arr69;
+        [FieldOffset(0x15E0)] public HoldPoint holdPoints__arr70;
+        [FieldOffset(0x1630)] public HoldPoint holdPoints__arr71;
+        [FieldOffset(0x1680)] public HoldPoint holdPoints__arr72;
+        [FieldOffset(0x16D0)] public HoldPoint holdPoints__arr73;
+        [FieldOffset(0x1720)] public HoldPoint holdPoints__arr74;
+        [FieldOffset(0x1770)] public HoldPoint holdPoints__arr75;
+        [FieldOffset(0x17C0)] public HoldPoint holdPoints__arr76;
+        [FieldOffset(0x1810)] public HoldPoint holdPoints__arr77;
+        [FieldOffset(0x1860)] public HoldPoint holdPoints__arr78;
+        [FieldOffset(0x18B0)] public HoldPoint holdPoints__arr79;
+        [FieldOffset(0x1900)] public HoldPoint holdPoints__arr80;
+        [FieldOffset(0x1950)] public HoldPoint holdPoints__arr81;
+        [FieldOffset(0x19A0)] public HoldPoint holdPoints__arr82;
+        [FieldOffset(0x19F0)] public HoldPoint holdPoints__arr83;
+        [FieldOffset(0x1A40)] public HoldPoint holdPoints__arr84;
+        [FieldOffset(0x1A90)] public HoldPoint holdPoints__arr85;
+        [FieldOffset(0x1AE0)] public HoldPoint holdPoints__arr86;
+        [FieldOffset(0x1B30)] public HoldPoint holdPoints__arr87;
+        [FieldOffset(0x1B80)] public HoldPoint holdPoints__arr88;
+        [FieldOffset(0x1BD0)] public HoldPoint holdPoints__arr89;
+        [FieldOffset(0x1C20)] public HoldPoint holdPoints__arr90;
+        [FieldOffset(0x1C70)] public HoldPoint holdPoints__arr91;
+        [FieldOffset(0x1CC0)] public HoldPoint holdPoints__arr92;
+        [FieldOffset(0x1D10)] public HoldPoint holdPoints__arr93;
+        [FieldOffset(0x1D60)] public HoldPoint holdPoints__arr94;
+        [FieldOffset(0x1DB0)] public HoldPoint holdPoints__arr95;
+        [FieldOffset(0x1E00)] public HoldPoint holdPoints__arr96;
+        [FieldOffset(0x1E50)] public HoldPoint holdPoints__arr97;
+        [FieldOffset(0x1EA0)] public HoldPoint holdPoints__arr98;
+        [FieldOffset(0x1EF0)] public HoldPoint holdPoints__arr99;
+        [FieldOffset(0x1F40)] public HoldPoint holdPoints__arr100;
+        [FieldOffset(0x1F90)] public HoldPoint holdPoints__arr101;
+        [FieldOffset(0x1FE0)] public HoldPoint holdPoints__arr102;
+        [FieldOffset(0x2030)] public HoldPoint holdPoints__arr103;
+        [FieldOffset(0x2080)] public HoldPoint holdPoints__arr104;
+        [FieldOffset(0x20D0)] public HoldPoint holdPoints__arr105;
+        [FieldOffset(0x2120)] public HoldPoint holdPoints__arr106;
+        [FieldOffset(0x2170)] public HoldPoint holdPoints__arr107;
+        [FieldOffset(0x21C0)] public HoldPoint holdPoints__arr108;
+        [FieldOffset(0x2210)] public HoldPoint holdPoints__arr109;
+        [FieldOffset(0x2260)] public HoldPoint holdPoints__arr110;
+        [FieldOffset(0x22B0)] public HoldPoint holdPoints__arr111;
+        [FieldOffset(0x2300)] public HoldPoint holdPoints__arr112;
+        [FieldOffset(0x2350)] public HoldPoint holdPoints__arr113;
+        [FieldOffset(0x23A0)] public HoldPoint holdPoints__arr114;
+        [FieldOffset(0x23F0)] public HoldPoint holdPoints__arr115;
+        [FieldOffset(0x2440)] public HoldPoint holdPoints__arr116;
+        [FieldOffset(0x2490)] public HoldPoint holdPoints__arr117;
+        [FieldOffset(0x24E0)] public HoldPoint holdPoints__arr118;
+        [FieldOffset(0x2530)] public HoldPoint holdPoints__arr119;
+        [FieldOffset(0x2580)] public HoldPoint holdPoints__arr120;
+        [FieldOffset(0x25D0)] public HoldPoint holdPoints__arr121;
+        [FieldOffset(0x2620)] public HoldPoint holdPoints__arr122;
+        [FieldOffset(0x2670)] public HoldPoint holdPoints__arr123;
+        [FieldOffset(0x26C0)] public HoldPoint holdPoints__arr124;
+        [FieldOffset(0x2710)] public HoldPoint holdPoints__arr125;
+        [FieldOffset(0x2760)] public HoldPoint holdPoints__arr126;
+        [FieldOffset(0x27B0)] public HoldPoint holdPoints__arr127;
     }
 
     public enum Shape : sbyte
@@ -176,61 +221,61 @@ public class BossCommonParametersClass
         SHAPE_CAPCULE = 3
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 96)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x60)]
     public struct CollisionPart
     {
-        [FieldOffset(0)]  public CString nodeName;
-        [FieldOffset(16)] public Shape shape;
-        [FieldOffset(17)] public bool isPhysics;
-        [FieldOffset(32)] public Vector3 size;
-        [FieldOffset(48)] public Vector3 offset;
-        [FieldOffset(64)] public Vector3 rot;
-        [FieldOffset(80)] public CString tagName;
+        [FieldOffset(0x00)] public UnmanagedString nodeName;
+        [FieldOffset(0x10)] public Shape shape;
+        [FieldOffset(0x11)] public bool isPhysics;
+        [FieldOffset(0x20)] public Vector3 size;
+        [FieldOffset(0x30)] public Vector3 offset;
+        [FieldOffset(0x40)] public Vector3 rot;
+        [FieldOffset(0x50)] public UnmanagedString tagName;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 3072)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xC00)]
     public struct CollisionPartParameter
     {
-        [FieldOffset(0)] public CollisionPart colParts__arr0;
-        [FieldOffset(96)] public CollisionPart colParts__arr1;
-        [FieldOffset(192)] public CollisionPart colParts__arr2;
-        [FieldOffset(288)] public CollisionPart colParts__arr3;
-        [FieldOffset(384)] public CollisionPart colParts__arr4;
-        [FieldOffset(480)] public CollisionPart colParts__arr5;
-        [FieldOffset(576)] public CollisionPart colParts__arr6;
-        [FieldOffset(672)] public CollisionPart colParts__arr7;
-        [FieldOffset(768)] public CollisionPart colParts__arr8;
-        [FieldOffset(864)] public CollisionPart colParts__arr9;
-        [FieldOffset(960)] public CollisionPart colParts__arr10;
-        [FieldOffset(1056)] public CollisionPart colParts__arr11;
-        [FieldOffset(1152)] public CollisionPart colParts__arr12;
-        [FieldOffset(1248)] public CollisionPart colParts__arr13;
-        [FieldOffset(1344)] public CollisionPart colParts__arr14;
-        [FieldOffset(1440)] public CollisionPart colParts__arr15;
-        [FieldOffset(1536)] public CollisionPart colParts__arr16;
-        [FieldOffset(1632)] public CollisionPart colParts__arr17;
-        [FieldOffset(1728)] public CollisionPart colParts__arr18;
-        [FieldOffset(1824)] public CollisionPart colParts__arr19;
-        [FieldOffset(1920)] public CollisionPart colParts__arr20;
-        [FieldOffset(2016)] public CollisionPart colParts__arr21;
-        [FieldOffset(2112)] public CollisionPart colParts__arr22;
-        [FieldOffset(2208)] public CollisionPart colParts__arr23;
-        [FieldOffset(2304)] public CollisionPart colParts__arr24;
-        [FieldOffset(2400)] public CollisionPart colParts__arr25;
-        [FieldOffset(2496)] public CollisionPart colParts__arr26;
-        [FieldOffset(2592)] public CollisionPart colParts__arr27;
-        [FieldOffset(2688)] public CollisionPart colParts__arr28;
-        [FieldOffset(2784)] public CollisionPart colParts__arr29;
-        [FieldOffset(2880)] public CollisionPart colParts__arr30;
-        [FieldOffset(2976)] public CollisionPart colParts__arr31;
+        [FieldOffset(0x00)] public CollisionPart colParts__arr0;
+        [FieldOffset(0x60)] public CollisionPart colParts__arr1;
+        [FieldOffset(0xC0)] public CollisionPart colParts__arr2;
+        [FieldOffset(0x120)] public CollisionPart colParts__arr3;
+        [FieldOffset(0x180)] public CollisionPart colParts__arr4;
+        [FieldOffset(0x1E0)] public CollisionPart colParts__arr5;
+        [FieldOffset(0x240)] public CollisionPart colParts__arr6;
+        [FieldOffset(0x2A0)] public CollisionPart colParts__arr7;
+        [FieldOffset(0x300)] public CollisionPart colParts__arr8;
+        [FieldOffset(0x360)] public CollisionPart colParts__arr9;
+        [FieldOffset(0x3C0)] public CollisionPart colParts__arr10;
+        [FieldOffset(0x420)] public CollisionPart colParts__arr11;
+        [FieldOffset(0x480)] public CollisionPart colParts__arr12;
+        [FieldOffset(0x4E0)] public CollisionPart colParts__arr13;
+        [FieldOffset(0x540)] public CollisionPart colParts__arr14;
+        [FieldOffset(0x5A0)] public CollisionPart colParts__arr15;
+        [FieldOffset(0x600)] public CollisionPart colParts__arr16;
+        [FieldOffset(0x660)] public CollisionPart colParts__arr17;
+        [FieldOffset(0x6C0)] public CollisionPart colParts__arr18;
+        [FieldOffset(0x720)] public CollisionPart colParts__arr19;
+        [FieldOffset(0x780)] public CollisionPart colParts__arr20;
+        [FieldOffset(0x7E0)] public CollisionPart colParts__arr21;
+        [FieldOffset(0x840)] public CollisionPart colParts__arr22;
+        [FieldOffset(0x8A0)] public CollisionPart colParts__arr23;
+        [FieldOffset(0x900)] public CollisionPart colParts__arr24;
+        [FieldOffset(0x960)] public CollisionPart colParts__arr25;
+        [FieldOffset(0x9C0)] public CollisionPart colParts__arr26;
+        [FieldOffset(0xA20)] public CollisionPart colParts__arr27;
+        [FieldOffset(0xA80)] public CollisionPart colParts__arr28;
+        [FieldOffset(0xAE0)] public CollisionPart colParts__arr29;
+        [FieldOffset(0xB40)] public CollisionPart colParts__arr30;
+        [FieldOffset(0xBA0)] public CollisionPart colParts__arr31;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 13392)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x3450)]
     public struct BossCommonParameters
     {
-        [FieldOffset(0)]     public BossResourceInfo resource;
-        [FieldOffset(80)]    public HoldPointParameter holdParam;
-        [FieldOffset(10320)] public CollisionPartParameter colParam;
+        [FieldOffset(0x00)] public BossResourceInfo resource;
+        [FieldOffset(0x50)] public HoldPointParameter holdParam;
+        [FieldOffset(0x2850)] public CollisionPartParameter colParam;
     }
 
 }

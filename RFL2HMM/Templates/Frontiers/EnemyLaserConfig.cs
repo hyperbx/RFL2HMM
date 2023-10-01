@@ -3,13 +3,13 @@ using System.Runtime.InteropServices;
 
 public class EnemyLaserConfigClass
 {
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct EnemyLaserConfig
     {
-        [FieldOffset(0)]  public float rotLaserVanishTime;
-        [FieldOffset(4)]  public float rotLaserOmenTime;
-        [FieldOffset(8)]  public float bigLaserVanishTime;
-        [FieldOffset(12)] public float bigLaserOmenTime;
+        [FieldOffset(0x00)] public float rotLaserVanishTime;
+        [FieldOffset(0x04)] public float rotLaserOmenTime;
+        [FieldOffset(0x08)] public float bigLaserVanishTime;
+        [FieldOffset(0x0C)] public float bigLaserOmenTime;
     }
 
 }

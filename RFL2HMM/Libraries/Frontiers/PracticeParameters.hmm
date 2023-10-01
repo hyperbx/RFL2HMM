@@ -13,10 +13,11 @@ Library "PracticeParameters"
         CountControlCamera = 2,
         CountInfinityCombo = 3,
         CountFiveCombo = 4,
-        NumCheckers = 5
+        CountDefeatEnemies = 5,
+        NumCheckers = 6
     }
 
-    public enum Type : byte
+    public enum Type : ushort
     {
         None = 0,
         ControlCamera = 1,
@@ -57,7 +58,39 @@ Library "PracticeParameters"
         SpinBoostCharge = 36,
         SpinBoost = 37,
         RunToSpinBoost = 38,
-        Num = 39
+        SpinBoostAny = 39,
+        AmyPropellerJump = 40,
+        AmyTarotBoost = 41,
+        AmyTarotAttack = 42,
+        AmyTarotAttack2 = 43,
+        AmyTarotRolling = 44,
+        AmyCharmAttack = 45,
+        AmyStomp = 46,
+        AmyHighJump = 47,
+        AmyCyHammer = 48,
+        AmyTarotRollingInfinity = 49,
+        AmyParryDebuff = 50,
+        KnucklesGliding = 51,
+        KnucklesDrillBoost = 52,
+        KnucklesComboAttack1 = 53,
+        KnucklesComboAttack2 = 54,
+        KnucklesComboAttack3 = 55,
+        KnucklesMaximumHeatKnuckle = 56,
+        KnucklesStomp = 57,
+        KnucklesCyKnuckle = 58,
+        KnucklesGlidingInfinity = 59,
+        KnucklesParryDebuff = 60,
+        TailsFly = 61,
+        TailsCycloneBoost = 62,
+        TailsSpannerAttack = 63,
+        TailsChargeSpanner = 64,
+        TailsChargeSpannerJump = 65,
+        TailsStomp = 66,
+        TailsCyBlaster = 67,
+        TailsCycloneCannon = 68,
+        TailsParryDebuff = 69,
+        DefeatEnemy = 70,
+        Num = 71
     }
 
     public enum Judge : sbyte
@@ -70,43 +103,101 @@ Library "PracticeParameters"
         NumJudges = 5
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
-    public struct CString
+    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    public struct UnmanagedString
     {
         [FieldOffset(0)] public long pValue;
 
         public string Value
         {
-        	get => Marshal.PtrToStringAnsi((IntPtr)pValue);
-        	set => pValue = (long)Marshal.StringToHGlobalAnsi(value);
+            get
+            {
+                if (pValue == 0)
+                    return string.Empty;
+
+                return Marshal.PtrToStringAnsi((nint)pValue);
+            }
+
+            set => pValue = Marshal.StringToHGlobalAnsi(value);
+        }
+
+        public UnmanagedString(string in_value)
+        {
+            Value = in_value;
+        }
+
+        public static implicit operator UnmanagedString(string in_value)
+        {
+            return new UnmanagedString(in_value);
+        }
+
+        public static bool operator ==(UnmanagedString in_left, string in_right)
+        {
+            return in_left.Value == in_right;
+        }
+
+        public static bool operator !=(UnmanagedString in_left, string in_right)
+        {
+            return !(in_left == in_right);
+        }
+
+        public override bool Equals(object in_obj)
+        {
+            if (in_obj is string str)
+                return Value == str;
+
+            return base.Equals(in_obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Value;
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct PracticeAction
     {
-        [FieldOffset(0)]  public Type action;
-        [FieldOffset(1)]  public Judge dummy;
-        [FieldOffset(8)]  public ulong skipableActions;
-        [FieldOffset(16)] public CString label;
+        [FieldOffset(0x00)] public Type action;
+        [FieldOffset(0x02)] public Judge dummy;
+        [FieldOffset(0x08)] public ulong skipableActions;
+        [FieldOffset(0x10)] public ulong skipableActions2;
+        [FieldOffset(0x18)] public UnmanagedString label;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 48)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public struct PracticePrerequisite
     {
-        [FieldOffset(0)]  public uint skill;
-        [FieldOffset(8)]  public ulong clearedSubject;
-        [FieldOffset(16)] public ulong clearedSubject2;
-        [FieldOffset(24)] public ulong clearedSubject3;
-        [FieldOffset(32)] public ulong clearedSubject4;
-        [FieldOffset(40)] public bool unlockSpinBoost;
+        [FieldOffset(0x00)] public ulong skill;
+        [FieldOffset(0x08)] public ulong skill2;
+        [FieldOffset(0x10)] public ulong clearedSubject;
+        [FieldOffset(0x18)] public ulong clearedSubject2;
+        [FieldOffset(0x20)] public ulong clearedSubject3;
+        [FieldOffset(0x28)] public ulong clearedSubject4;
+        [FieldOffset(0x30)] public bool unlockSpinBoost;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 264)]
+    public enum Value : sbyte
+    {
+        Invalid = -1,
+        Sonic = 0,
+        Amy = 1,
+        Knuckles = 2,
+        Tails = 3,
+        Value_Num = 4,
+        Default = 0
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x140)]
     public struct PracticeSubject
     {
-        [FieldOffset(0)]   public Checker checker;
-        [FieldOffset(8)]   public unsafe fixed byte /* PracticeAction[6] */ _actions[192];
+        [FieldOffset(0x00)] public Checker checker;
+        [FieldOffset(0x08)] public unsafe fixed byte /* PracticeAction[6] */ _actions[240];
 
         public unsafe PracticeAction* actions
         {
@@ -117,67 +208,70 @@ Library "PracticeParameters"
             }
         }
 
-        [FieldOffset(200)] public int count;
-        [FieldOffset(208)] public PracticePrerequisite prerequisite;
-        [FieldOffset(256)] public byte options;
+        [FieldOffset(0xF8)] public int count;
+        [FieldOffset(0x100)] public PracticePrerequisite prerequisite;
+        [FieldOffset(0x138)] public byte options;
+        [FieldOffset(0x139)] public Value character;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 160)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
     public struct PracticeText
     {
-        [FieldOffset(0)] public unsafe fixed byte /* CString[10] */ _labels[2550];
+        [FieldOffset(0x00)] public unsafe fixed byte /* UnmanagedString[10] */ _labels[2550];
 
-        public unsafe CString* labels
+        public unsafe UnmanagedString* labels
         {
             get
             {
                 fixed (byte* p_labels = _labels)
-                    return (CString*)p_labels;
+                    return (UnmanagedString*)p_labels;
             }
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 28)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct PracticeTime
     {
-        [FieldOffset(0)]  public float readyTime;
-        [FieldOffset(4)]  public float countTime;
-        [FieldOffset(8)]  public float subjectViewTime;
-        [FieldOffset(12)] public float clearedPostTime;
-        [FieldOffset(16)] public float fadeoutWaitTime;
-        [FieldOffset(20)] public float rebuildWaitTime1;
-        [FieldOffset(24)] public float rebuildWaitTime2;
+        [FieldOffset(0x00)] public float readyTime;
+        [FieldOffset(0x04)] public float countTime;
+        [FieldOffset(0x08)] public float subjectViewTime;
+        [FieldOffset(0x0C)] public float clearedPostTime;
+        [FieldOffset(0x10)] public float fadeoutWaitTime;
+        [FieldOffset(0x14)] public float rebuildWaitTime1;
+        [FieldOffset(0x18)] public float rebuildWaitTime2;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct PracticeTipsPrerequisite
     {
-        [FieldOffset(0)] public uint skill;
-        [FieldOffset(4)] public bool tutorialCleared;
-        [FieldOffset(5)] public bool unlockArcadeMode;
-        [FieldOffset(6)] public bool unlockCyberPowerBoost;
-        [FieldOffset(7)] public bool unlockVeryHardMode;
-        [FieldOffset(8)] public bool unlockStrongNewGame;
-        [FieldOffset(9)] public bool unlockSpinBoost;
+        [FieldOffset(0x00)] public ulong skill;
+        [FieldOffset(0x08)] public ulong skill2;
+        [FieldOffset(0x10)] public bool tutorialCleared;
+        [FieldOffset(0x11)] public bool unlockArcadeMode;
+        [FieldOffset(0x12)] public bool unlockCyberPowerBoost;
+        [FieldOffset(0x13)] public bool unlockVeryHardMode;
+        [FieldOffset(0x14)] public bool unlockStrongNewGame;
+        [FieldOffset(0x15)] public bool unlockSpinBoost;
+        [FieldOffset(0x16)] public bool masterKodamaCleared;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct PracticeTips
     {
-        [FieldOffset(0)] public PracticeTipsPrerequisite prerequisite;
+        [FieldOffset(0x00)] public PracticeTipsPrerequisite prerequisite;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 220)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xF0)]
     public struct PracticeSet
     {
-        [FieldOffset(0)]  public unsafe fixed sbyte subjects[20];
-        [FieldOffset(20)] public unsafe fixed short tips[100];
+        [FieldOffset(0x00)] public unsafe fixed short subjects[20];
+        [FieldOffset(0x28)] public unsafe fixed short tips[100];
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 73888)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1BC78)]
     public struct PracticeParameters
     {
-        [FieldOffset(0)]     public unsafe fixed byte /* PracticeSubject[200] */ _subjects[52800];
+        [FieldOffset(0x00)] public unsafe fixed byte /* PracticeSubject[200] */ _subjects[64000];
 
         public unsafe PracticeSubject* subjects
         {
@@ -188,10 +282,10 @@ Library "PracticeParameters"
             }
         }
 
-        [FieldOffset(52800)] public PracticeText text;
-        [FieldOffset(52960)] public PracticeTime time;
-        [FieldOffset(52988)] public float notifyTime;
-        [FieldOffset(52992)] public unsafe fixed byte /* PracticeTips[256] */ _tips[3072];
+        [FieldOffset(0xFA00)] public PracticeText text;
+        [FieldOffset(0xFAA0)] public PracticeTime time;
+        [FieldOffset(0xFABC)] public float notifyTime;
+        [FieldOffset(0xFAC0)] public unsafe fixed byte /* PracticeTips[256] */ _tips[6144];
 
         public unsafe PracticeTips* tips
         {
@@ -202,8 +296,8 @@ Library "PracticeParameters"
             }
         }
 
-        [FieldOffset(56064)] public float tipsMinViewTime;
-        [FieldOffset(56068)] public unsafe fixed byte /* PracticeSet[81] */ _sets[17820];
+        [FieldOffset(0x112C0)] public float tipsMinViewTime;
+        [FieldOffset(0x112C4)] public unsafe fixed byte /* PracticeSet[181] */ _sets[43440];
 
         public unsafe PracticeSet* sets
         {

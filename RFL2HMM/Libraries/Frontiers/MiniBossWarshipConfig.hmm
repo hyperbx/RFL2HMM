@@ -5,191 +5,236 @@ Library "MiniBossWarshipConfig"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 64)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public struct MiniBossCommonConfig
     {
-        [FieldOffset(0)]  public float scoutDistance;
-        [FieldOffset(4)]  public float scoutDistanceOutside;
-        [FieldOffset(8)]  public float zoomDistance;
-        [FieldOffset(16)] public Vector3 zoomOffset;
-        [FieldOffset(32)] public Vector3 zoomAngle;
-        [FieldOffset(48)] public float zoomFov;
+        [FieldOffset(0x00)] public float scoutDistance;
+        [FieldOffset(0x04)] public float scoutDistanceOutside;
+        [FieldOffset(0x08)] public float zoomDistance;
+        [FieldOffset(0x10)] public Vector3 zoomOffset;
+        [FieldOffset(0x20)] public Vector3 zoomAngle;
+        [FieldOffset(0x30)] public float zoomFov;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 28)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct MiniBossWarshipSpeedParam
     {
-        [FieldOffset(0)]  public float highSpeed;
-        [FieldOffset(4)]  public float lowSpeed;
-        [FieldOffset(8)]  public float changeLowSpeedDistance;
-        [FieldOffset(12)] public float disableDistanceMaxSpeed;
-        [FieldOffset(16)] public float relativeSpeedDisableDistance;
-        [FieldOffset(20)] public float speedOnJump;
-        [FieldOffset(24)] public float speedDownOnJumpDistance;
+        [FieldOffset(0x00)] public float highSpeed;
+        [FieldOffset(0x04)] public float lowSpeed;
+        [FieldOffset(0x08)] public float changeLowSpeedDistance;
+        [FieldOffset(0x0C)] public float disableDistanceMaxSpeed;
+        [FieldOffset(0x10)] public float relativeSpeedDisableDistance;
+        [FieldOffset(0x14)] public float speedOnJump;
+        [FieldOffset(0x18)] public float speedDownOnJumpDistance;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct MiniBossWarshipAccelSpeed
     {
-        [FieldOffset(0)] public float min;
-        [FieldOffset(4)] public float max;
+        [FieldOffset(0x00)] public float min;
+        [FieldOffset(0x04)] public float max;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 64)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public struct MiniBossWarshipWarpCameraParam
     {
-        [FieldOffset(0)]  public float zoomDistance;
-        [FieldOffset(16)] public Vector3 zoomOffset;
-        [FieldOffset(32)] public Vector3 zoomAngle;
-        [FieldOffset(48)] public float zoomFov;
+        [FieldOffset(0x00)] public float zoomDistance;
+        [FieldOffset(0x10)] public Vector3 zoomOffset;
+        [FieldOffset(0x20)] public Vector3 zoomAngle;
+        [FieldOffset(0x30)] public float zoomFov;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 64)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public struct MiniBossWarshipEscapeCameraParam
     {
-        [FieldOffset(0)]  public float fovy;
-        [FieldOffset(4)]  public float zRot;
-        [FieldOffset(8)]  public float distance;
-        [FieldOffset(12)] public float pathOffset;
-        [FieldOffset(16)] public bool usePathVerticalComponent;
-        [FieldOffset(17)] public bool usePathNormal;
-        [FieldOffset(20)] public float angleSensitivity;
-        [FieldOffset(24)] public float angleSensitivityBoost;
-        [FieldOffset(28)] public float azimuthOffsetDeg;
-        [FieldOffset(32)] public float elevationOffsetDeg;
-        [FieldOffset(36)] public float gravityOffset;
-        [FieldOffset(48)] public Vector3 playerOffset;
+        [FieldOffset(0x00)] public float fovy;
+        [FieldOffset(0x04)] public float zRot;
+        [FieldOffset(0x08)] public float distance;
+        [FieldOffset(0x0C)] public float pathOffset;
+        [FieldOffset(0x10)] public bool usePathVerticalComponent;
+        [FieldOffset(0x11)] public bool usePathNormal;
+        [FieldOffset(0x14)] public float angleSensitivity;
+        [FieldOffset(0x18)] public float angleSensitivityBoost;
+        [FieldOffset(0x1C)] public float azimuthOffsetDeg;
+        [FieldOffset(0x20)] public float elevationOffsetDeg;
+        [FieldOffset(0x24)] public float gravityOffset;
+        [FieldOffset(0x30)] public Vector3 playerOffset;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 24)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct MiniBossWarshipObjectParam
     {
-        [FieldOffset(0)]  public float dashRingAppearDistance;
-        [FieldOffset(4)]  public float dashRingDisappearDistance;
-        [FieldOffset(8)]  public float birdAppearDistance;
-        [FieldOffset(12)] public float birdDisappearDistance;
-        [FieldOffset(16)] public float bulletAppearDistance;
-        [FieldOffset(20)] public float bulletDisappearDistance;
+        [FieldOffset(0x00)] public float dashRingAppearDistance;
+        [FieldOffset(0x04)] public float dashRingDisappearDistance;
+        [FieldOffset(0x08)] public float birdAppearDistance;
+        [FieldOffset(0x0C)] public float birdDisappearDistance;
+        [FieldOffset(0x10)] public float bulletAppearDistance;
+        [FieldOffset(0x14)] public float bulletDisappearDistance;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct WarshipNearLaunchParam
     {
-        [FieldOffset(0)]  public float outStrength;
-        [FieldOffset(4)]  public float inStrength;
-        [FieldOffset(8)]  public float outElev;
-        [FieldOffset(12)] public float inElev;
-        [FieldOffset(16)] public float speedMin;
-        [FieldOffset(20)] public float speedMax;
-        [FieldOffset(24)] public float speedMinLength;
-        [FieldOffset(28)] public float speedMaxLength;
+        [FieldOffset(0x00)] public float outStrength;
+        [FieldOffset(0x04)] public float inStrength;
+        [FieldOffset(0x08)] public float outElev;
+        [FieldOffset(0x0C)] public float inElev;
+        [FieldOffset(0x10)] public float speedMin;
+        [FieldOffset(0x14)] public float speedMax;
+        [FieldOffset(0x18)] public float speedMinLength;
+        [FieldOffset(0x1C)] public float speedMaxLength;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 304)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x130)]
     public struct MiniBossWarshipCommonParam
     {
-        [FieldOffset(0)]   public MiniBossCommonConfig commonConfig;
-        [FieldOffset(64)]  public MiniBossWarshipSpeedParam speedParam;
-        [FieldOffset(92)]  public MiniBossWarshipAccelSpeed normalSpeedParam;
-        [FieldOffset(100)] public MiniBossWarshipAccelSpeed boostSpeedParam;
-        [FieldOffset(112)] public MiniBossWarshipWarpCameraParam warpCameraParam;
-        [FieldOffset(176)] public MiniBossWarshipEscapeCameraParam escapeCameraParam;
-        [FieldOffset(240)] public MiniBossWarshipObjectParam objectParam;
-        [FieldOffset(264)] public WarshipNearLaunchParam launchParam;
+        [FieldOffset(0x00)] public MiniBossCommonConfig commonConfig;
+        [FieldOffset(0x40)] public MiniBossWarshipSpeedParam speedParam;
+        [FieldOffset(0x5C)] public MiniBossWarshipAccelSpeed normalSpeedParam;
+        [FieldOffset(0x64)] public MiniBossWarshipAccelSpeed boostSpeedParam;
+        [FieldOffset(0x70)] public MiniBossWarshipWarpCameraParam warpCameraParam;
+        [FieldOffset(0xB0)] public MiniBossWarshipEscapeCameraParam escapeCameraParam;
+        [FieldOffset(0xF0)] public MiniBossWarshipObjectParam objectParam;
+        [FieldOffset(0x108)] public WarshipNearLaunchParam launchParam;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 52)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x34)]
     public struct MiniBossLevelCommonConfig
     {
-        [FieldOffset(0)]  public int maxHealthPoint;
-        [FieldOffset(4)]  public unsafe fixed float maxStunPoint[3];
-        [FieldOffset(16)] public float stunDecreaseStartTime;
-        [FieldOffset(20)] public float stunDecreaseSpeed;
-        [FieldOffset(24)] public unsafe fixed float maxStaggerPoint[3];
-        [FieldOffset(36)] public float staggerDecreaseStartTime;
-        [FieldOffset(40)] public float staggerDecreaseSpeed;
-        [FieldOffset(44)] public float attackRate;
-        [FieldOffset(48)] public ushort expItemNum;
-        [FieldOffset(50)] public ushort exp;
+        [FieldOffset(0x00)] public int maxHealthPoint;
+        [FieldOffset(0x04)] public unsafe fixed float maxStunPoint[3];
+        [FieldOffset(0x10)] public float stunDecreaseStartTime;
+        [FieldOffset(0x14)] public float stunDecreaseSpeed;
+        [FieldOffset(0x18)] public unsafe fixed float maxStaggerPoint[3];
+        [FieldOffset(0x24)] public float staggerDecreaseStartTime;
+        [FieldOffset(0x28)] public float staggerDecreaseSpeed;
+        [FieldOffset(0x2C)] public float attackRate;
+        [FieldOffset(0x30)] public ushort expItemNum;
+        [FieldOffset(0x32)] public ushort exp;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 56)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public struct MiniBossWarshipLevelParam
     {
-        [FieldOffset(0)] public int level;
-        [FieldOffset(4)] public MiniBossLevelCommonConfig commonConfig;
+        [FieldOffset(0x00)] public int level;
+        [FieldOffset(0x04)] public MiniBossLevelCommonConfig commonConfig;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct MiniBossWarshipLevelBand
     {
-        [FieldOffset(0)] public int level;
+        [FieldOffset(0x00)] public int level;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
+    public struct MiniBossWarshipRecoverBoostGaugeParam
+    {
+        [FieldOffset(0x00)] public float normal;
+        [FieldOffset(0x04)] public float boost;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
+    public struct MiniBossWarshipAttackStateParam
+    {
+        [FieldOffset(0x00)] public float moveSpeed;
+        [FieldOffset(0x04)] public float bombDropSpeed;
+        [FieldOffset(0x08)] public float bombInterval;
+        [FieldOffset(0x0C)] public float explosionRadius;
+        [FieldOffset(0x10)] public float bombPreDistEffectRange;
+        [FieldOffset(0x14)] public float lifeTime;
+        [FieldOffset(0x18)] public float preBombTime;
+        [FieldOffset(0x1C)] public float preBombStateSpeed;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
+    public struct MiniBossWarshipBattleFlagParam
+    {
+        [FieldOffset(0x00)] public float firstFinishTimer;
+        [FieldOffset(0x04)] public float finishTimer;
+        [FieldOffset(0x08)] public float disableHomingTime;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
+    public struct MiniBossWarshipNearBattleCameraParam
+    {
+        [FieldOffset(0x00)] public float distance;
+        [FieldOffset(0x04)] public float minElevation;
+        [FieldOffset(0x08)] public float maxElevation;
+        [FieldOffset(0x0C)] public float targetUpOffset;
+        [FieldOffset(0x10)] public float targetMinUpOffsetLimit;
+        [FieldOffset(0x14)] public float targetMaxUpOffsetLimit;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 8)]
-    public struct MiniBossWarshipRecoverBoostGaugeParam
-    {
-        [FieldOffset(0)] public float normal;
-        [FieldOffset(4)] public float boost;
-    }
-
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
-    public struct MiniBossWarshipAttackStateParam
-    {
-        [FieldOffset(0)]  public float moveSpeed;
-        [FieldOffset(4)]  public float bombDropSpeed;
-        [FieldOffset(8)]  public float bombInterval;
-        [FieldOffset(12)] public float explosionRadius;
-        [FieldOffset(16)] public float bombPreDistEffectRange;
-        [FieldOffset(20)] public float lifeTime;
-        [FieldOffset(24)] public float preBombTime;
-        [FieldOffset(28)] public float preBombStateSpeed;
-    }
-
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
-    public struct MiniBossWarshipBattleFlagParam
-    {
-        [FieldOffset(0)] public float firstFinishTimer;
-        [FieldOffset(4)] public float finishTimer;
-        [FieldOffset(8)] public float disableHomingTime;
-    }
-
-    [StructLayout(LayoutKind.Explicit, Size = 24)]
-    public struct MiniBossWarshipNearBattleCameraParam
-    {
-        [FieldOffset(0)]  public float distance;
-        [FieldOffset(4)]  public float minElevation;
-        [FieldOffset(8)]  public float maxElevation;
-        [FieldOffset(12)] public float targetUpOffset;
-        [FieldOffset(16)] public float targetMinUpOffsetLimit;
-        [FieldOffset(20)] public float targetMaxUpOffsetLimit;
-    }
-
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
-    public struct CString
+    public struct UnmanagedString
     {
         [FieldOffset(0)] public long pValue;
 
         public string Value
         {
-        	get => Marshal.PtrToStringAnsi((IntPtr)pValue);
-        	set => pValue = (long)Marshal.StringToHGlobalAnsi(value);
+            get
+            {
+                if (pValue == 0)
+                    return string.Empty;
+
+                return Marshal.PtrToStringAnsi((nint)pValue);
+            }
+
+            set => pValue = Marshal.StringToHGlobalAnsi(value);
+        }
+
+        public UnmanagedString(string in_value)
+        {
+            Value = in_value;
+        }
+
+        public static implicit operator UnmanagedString(string in_value)
+        {
+            return new UnmanagedString(in_value);
+        }
+
+        public static bool operator ==(UnmanagedString in_left, string in_right)
+        {
+            return in_left.Value == in_right;
+        }
+
+        public static bool operator !=(UnmanagedString in_left, string in_right)
+        {
+            return !(in_left == in_right);
+        }
+
+        public override bool Equals(object in_obj)
+        {
+            if (in_obj is string str)
+                return Value == str;
+
+            return base.Equals(in_obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Value;
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct WarshipPathSectionInfo
     {
-        [FieldOffset(0)] public bool enable;
-        [FieldOffset(4)] public float start;
-        [FieldOffset(8)] public float end;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public float start;
+        [FieldOffset(0x08)] public float end;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 1216)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x4C0)]
     public struct WarshipEscapePathInfo
     {
-        [FieldOffset(0)]   public CString followPaths;
-        [FieldOffset(16)]  public unsafe fixed byte /* WarshipPathSectionInfo[50] */ _usePathInfo[600];
+        [FieldOffset(0x00)] public UnmanagedString followPaths;
+        [FieldOffset(0x10)] public unsafe fixed byte /* WarshipPathSectionInfo[50] */ _usePathInfo[600];
 
         public unsafe WarshipPathSectionInfo* usePathInfo
         {
@@ -200,7 +245,7 @@ Library "MiniBossWarshipConfig"
             }
         }
 
-        [FieldOffset(616)] public unsafe fixed byte /* WarshipPathSectionInfo[50] */ _accelInfo[600];
+        [FieldOffset(0x268)] public unsafe fixed byte /* WarshipPathSectionInfo[50] */ _accelInfo[600];
 
         public unsafe WarshipPathSectionInfo* accelInfo
         {
@@ -212,10 +257,10 @@ Library "MiniBossWarshipConfig"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 6080)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x17C0)]
     public struct MiniBossWarshipEscapePathParam
     {
-        [FieldOffset(0)] public unsafe fixed byte /* WarshipEscapePathInfo[5] */ _escapePathInfo[6080];
+        [FieldOffset(0x00)] public unsafe fixed byte /* WarshipEscapePathInfo[5] */ _escapePathInfo[6080];
 
         public unsafe WarshipEscapePathInfo* escapePathInfo
         {
@@ -227,31 +272,31 @@ Library "MiniBossWarshipConfig"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 28)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct MiniBossWarshipBombAttackCameraParam
     {
-        [FieldOffset(0)]  public float lockonDistance;
-        [FieldOffset(4)]  public float unlockDistance;
-        [FieldOffset(8)]  public float duration;
-        [FieldOffset(12)] public float distance;
-        [FieldOffset(16)] public float minElevation;
-        [FieldOffset(20)] public float maxElevation;
-        [FieldOffset(24)] public float lockonFrameYOffset;
+        [FieldOffset(0x00)] public float lockonDistance;
+        [FieldOffset(0x04)] public float unlockDistance;
+        [FieldOffset(0x08)] public float duration;
+        [FieldOffset(0x0C)] public float distance;
+        [FieldOffset(0x10)] public float minElevation;
+        [FieldOffset(0x14)] public float maxElevation;
+        [FieldOffset(0x18)] public float lockonFrameYOffset;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 60)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x3C)]
     public struct MiniBossWarshipAttackStateCameraParam
     {
-        [FieldOffset(0)]  public float midCameraPosOffset;
-        [FieldOffset(4)]  public MiniBossWarshipBombAttackCameraParam firstCamera;
-        [FieldOffset(32)] public MiniBossWarshipBombAttackCameraParam secondCamera;
+        [FieldOffset(0x00)] public float midCameraPosOffset;
+        [FieldOffset(0x04)] public MiniBossWarshipBombAttackCameraParam firstCamera;
+        [FieldOffset(0x20)] public MiniBossWarshipBombAttackCameraParam secondCamera;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 31456)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x7AE0)]
     public struct MiniBossWarshipConfig
     {
-        [FieldOffset(0)]     public MiniBossWarshipCommonParam commonParam;
-        [FieldOffset(304)]   public unsafe fixed byte /* MiniBossWarshipLevelParam[5] */ _levelParams[280];
+        [FieldOffset(0x00)] public MiniBossWarshipCommonParam commonParam;
+        [FieldOffset(0x130)] public unsafe fixed byte /* MiniBossWarshipLevelParam[5] */ _levelParams[280];
 
         public unsafe MiniBossWarshipLevelParam* levelParams
         {
@@ -262,7 +307,7 @@ Library "MiniBossWarshipConfig"
             }
         }
 
-        [FieldOffset(584)]   public unsafe fixed byte /* MiniBossWarshipLevelBand[5] */ _levelBand[20];
+        [FieldOffset(0x248)] public unsafe fixed byte /* MiniBossWarshipLevelBand[5] */ _levelBand[20];
 
         public unsafe MiniBossWarshipLevelBand* levelBand
         {
@@ -273,21 +318,21 @@ Library "MiniBossWarshipConfig"
             }
         }
 
-        [FieldOffset(604)]   public float wanderMoveSpeed;
-        [FieldOffset(608)]   public float railMaxLength;
-        [FieldOffset(612)]   public MiniBossWarshipSpeedParam shiftStateMoveSpeedParam;
-        [FieldOffset(640)]   public float locatorDistance;
-        [FieldOffset(644)]   public float distanceEscapePathToStart;
-        [FieldOffset(648)]   public MiniBossWarshipRecoverBoostGaugeParam boostGaugeParam;
-        [FieldOffset(656)]   public MiniBossWarshipAttackStateParam attackStateParam;
-        [FieldOffset(688)]   public MiniBossWarshipBattleFlagParam battleFlagParam;
-        [FieldOffset(700)]   public MiniBossWarshipNearBattleCameraParam nearBattleCameraParam;
-        [FieldOffset(724)]   public float disableGimmickDistance;
-        [FieldOffset(728)]   public float warpTime;
-        [FieldOffset(732)]   public float cameraChangeTime;
-        [FieldOffset(736)]   public float cameraAppearTime;
-        [FieldOffset(740)]   public float spreadHomingDistance;
-        [FieldOffset(744)]   public unsafe fixed byte /* MiniBossWarshipEscapePathParam[5] */ _escapePathID[30400];
+        [FieldOffset(0x25C)] public float wanderMoveSpeed;
+        [FieldOffset(0x260)] public float railMaxLength;
+        [FieldOffset(0x264)] public MiniBossWarshipSpeedParam shiftStateMoveSpeedParam;
+        [FieldOffset(0x280)] public float locatorDistance;
+        [FieldOffset(0x284)] public float distanceEscapePathToStart;
+        [FieldOffset(0x288)] public MiniBossWarshipRecoverBoostGaugeParam boostGaugeParam;
+        [FieldOffset(0x290)] public MiniBossWarshipAttackStateParam attackStateParam;
+        [FieldOffset(0x2B0)] public MiniBossWarshipBattleFlagParam battleFlagParam;
+        [FieldOffset(0x2BC)] public MiniBossWarshipNearBattleCameraParam nearBattleCameraParam;
+        [FieldOffset(0x2D4)] public float disableGimmickDistance;
+        [FieldOffset(0x2D8)] public float warpTime;
+        [FieldOffset(0x2DC)] public float cameraChangeTime;
+        [FieldOffset(0x2E0)] public float cameraAppearTime;
+        [FieldOffset(0x2E4)] public float spreadHomingDistance;
+        [FieldOffset(0x2E8)] public unsafe fixed byte /* MiniBossWarshipEscapePathParam[5] */ _escapePathID[30400];
 
         public unsafe MiniBossWarshipEscapePathParam* escapePathID
         {
@@ -298,7 +343,7 @@ Library "MiniBossWarshipConfig"
             }
         }
 
-        [FieldOffset(31144)] public unsafe fixed byte /* MiniBossWarshipAttackStateCameraParam[5] */ _bombAttackCameraParam[300];
+        [FieldOffset(0x79A8)] public unsafe fixed byte /* MiniBossWarshipAttackStateCameraParam[5] */ _bombAttackCameraParam[300];
 
         public unsafe MiniBossWarshipAttackStateCameraParam* bombAttackCameraParam
         {

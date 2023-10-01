@@ -3,80 +3,80 @@ using System.Runtime.InteropServices;
 
 public class ObjHackingPlayerMachineConfigClass
 {
-    [StructLayout(LayoutKind.Explicit, Size = 144)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x90)]
     public struct PlayerMachineConfig
     {
-        [FieldOffset(0)]   public int baseHp;
-        [FieldOffset(4)]   public int lifeCount;
-        [FieldOffset(8)]   public int lifeUpFailedCount__arr0;
-        [FieldOffset(12)] public int lifeUpFailedCount__arr1;
-        [FieldOffset(16)] public int lifeUpFailedCount__arr2;
-        [FieldOffset(20)] public int lifeUpFailedCount__arr3;
-        [FieldOffset(24)] public int lifeUpFailedCount__arr4;
-        [FieldOffset(28)] public int lifeUpFailedCount__arr5;
-        [FieldOffset(32)]  public int lifeMax;
-        [FieldOffset(36)]  public float gageUpVolume;
-        [FieldOffset(40)]  public float gageMax;
-        [FieldOffset(44)]  public int laserNum;
-        [FieldOffset(48)]  public float laserInterval;
-        [FieldOffset(52)]  public float bulletInterval;
-        [FieldOffset(56)]  public float moveSpeed;
-        [FieldOffset(60)]  public float nodamageTime;
-        [FieldOffset(64)]  public float specialmoveTime;
-        [FieldOffset(68)]  public float bodyCol;
-        [FieldOffset(72)]  public float barrierCol;
-        [FieldOffset(76)]  public float attackRangeTime;
-        [FieldOffset(80)]  public float expandAttackCol;
-        [FieldOffset(96)]  public Vector3 hitPos;
-        [FieldOffset(112)] public Vector3 barrierPos;
-        [FieldOffset(128)] public Vector3 expandAttackPos;
+        [FieldOffset(0x00)] public int baseHp;
+        [FieldOffset(0x04)] public int lifeCount;
+        [FieldOffset(0x08)] public int lifeUpFailedCount__arr0;
+        [FieldOffset(0x0C)] public int lifeUpFailedCount__arr1;
+        [FieldOffset(0x10)] public int lifeUpFailedCount__arr2;
+        [FieldOffset(0x14)] public int lifeUpFailedCount__arr3;
+        [FieldOffset(0x18)] public int lifeUpFailedCount__arr4;
+        [FieldOffset(0x1C)] public int lifeUpFailedCount__arr5;
+        [FieldOffset(0x20)] public int lifeMax;
+        [FieldOffset(0x24)] public float gageUpVolume;
+        [FieldOffset(0x28)] public float gageMax;
+        [FieldOffset(0x2C)] public int laserNum;
+        [FieldOffset(0x30)] public float laserInterval;
+        [FieldOffset(0x34)] public float bulletInterval;
+        [FieldOffset(0x38)] public float moveSpeed;
+        [FieldOffset(0x3C)] public float nodamageTime;
+        [FieldOffset(0x40)] public float specialmoveTime;
+        [FieldOffset(0x44)] public float bodyCol;
+        [FieldOffset(0x48)] public float barrierCol;
+        [FieldOffset(0x4C)] public float attackRangeTime;
+        [FieldOffset(0x50)] public float expandAttackCol;
+        [FieldOffset(0x60)] public Vector3 hitPos;
+        [FieldOffset(0x70)] public Vector3 barrierPos;
+        [FieldOffset(0x80)] public Vector3 expandAttackPos;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct HomingLaserTrailConfig
     {
-        [FieldOffset(0)] public float length;
-        [FieldOffset(4)] public float minLength;
-        [FieldOffset(8)] public float texWidth;
+        [FieldOffset(0x00)] public float length;
+        [FieldOffset(0x04)] public float minLength;
+        [FieldOffset(0x08)] public float texWidth;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 48)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct HomingLaserConfig
     {
-        [FieldOffset(0)]  public float radius;
-        [FieldOffset(4)]  public float speed;
-        [FieldOffset(8)]  public float maxAccel;
-        [FieldOffset(12)] public float arrivalTime;
-        [FieldOffset(16)] public float lifeTime;
-        [FieldOffset(20)] public float minYaw;
-        [FieldOffset(24)] public float maxYaw;
-        [FieldOffset(28)] public float depthVelocity;
-        [FieldOffset(32)] public uint power;
-        [FieldOffset(36)] public HomingLaserTrailConfig trail;
+        [FieldOffset(0x00)] public float radius;
+        [FieldOffset(0x04)] public float speed;
+        [FieldOffset(0x08)] public float maxAccel;
+        [FieldOffset(0x0C)] public float arrivalTime;
+        [FieldOffset(0x10)] public float lifeTime;
+        [FieldOffset(0x14)] public float minYaw;
+        [FieldOffset(0x18)] public float maxYaw;
+        [FieldOffset(0x1C)] public float depthVelocity;
+        [FieldOffset(0x20)] public uint power;
+        [FieldOffset(0x24)] public HomingLaserTrailConfig trail;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct ElementBulletConfig
     {
-        [FieldOffset(0)]  public float radius;
-        [FieldOffset(4)]  public float speed;
-        [FieldOffset(8)]  public float scale;
-        [FieldOffset(12)] public uint power;
+        [FieldOffset(0x00)] public float radius;
+        [FieldOffset(0x04)] public float speed;
+        [FieldOffset(0x08)] public float scale;
+        [FieldOffset(0x0C)] public uint power;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct HackingConfig
     {
-        [FieldOffset(0)] public uint dummy;
+        [FieldOffset(0x00)] public uint dummy;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 224)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
     public struct ObjHackingPlayerMachineConfig
     {
-        [FieldOffset(0)]   public PlayerMachineConfig machine;
-        [FieldOffset(144)] public HomingLaserConfig laser;
-        [FieldOffset(192)] public ElementBulletConfig bullet;
-        [FieldOffset(208)] public HackingConfig hacking;
+        [FieldOffset(0x00)] public PlayerMachineConfig machine;
+        [FieldOffset(0x90)] public HomingLaserConfig laser;
+        [FieldOffset(0xC0)] public ElementBulletConfig bullet;
+        [FieldOffset(0xD0)] public HackingConfig hacking;
     }
 
 }

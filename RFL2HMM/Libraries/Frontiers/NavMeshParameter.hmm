@@ -5,34 +5,34 @@ Library "NavMeshParameter"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct World
     {
-        [FieldOffset(0)]  public Vector3 aabbMin;
-        [FieldOffset(16)] public Vector3 aabbMax;
+        [FieldOffset(0x00)] public Vector3 aabbMin;
+        [FieldOffset(0x10)] public Vector3 aabbMax;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct Rasterization
     {
-        [FieldOffset(0)] public float voxelSize;
-        [FieldOffset(4)] public float voxelHeight;
+        [FieldOffset(0x00)] public float voxelSize;
+        [FieldOffset(0x04)] public float voxelHeight;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct Agent
     {
-        [FieldOffset(0)]  public float radius;
-        [FieldOffset(4)]  public float height;
-        [FieldOffset(8)]  public float maxClimb;
-        [FieldOffset(12)] public float maxSlope;
+        [FieldOffset(0x00)] public float radius;
+        [FieldOffset(0x04)] public float height;
+        [FieldOffset(0x08)] public float maxClimb;
+        [FieldOffset(0x0C)] public float maxSlope;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct Region
     {
-        [FieldOffset(0)] public int minArea;
-        [FieldOffset(4)] public int mergeArea;
+        [FieldOffset(0x00)] public int minArea;
+        [FieldOffset(0x04)] public int mergeArea;
     }
 
     public enum Partition : byte
@@ -42,55 +42,55 @@ Library "NavMeshParameter"
         Layers = 2
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 1)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x01)]
     public struct Partitioning
     {
-        [FieldOffset(0)] public Partition type;
+        [FieldOffset(0x00)] public Partition type;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 3)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x03)]
     public struct Filtering
     {
-        [FieldOffset(0)] public bool lowHangingObstacles;
-        [FieldOffset(1)] public bool ledgeSpans;
-        [FieldOffset(2)] public bool walkableLowHeightSpans;
+        [FieldOffset(0x00)] public bool lowHangingObstacles;
+        [FieldOffset(0x01)] public bool ledgeSpans;
+        [FieldOffset(0x02)] public bool walkableLowHeightSpans;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct Polygonization
     {
-        [FieldOffset(0)] public float edgeMaxLength;
-        [FieldOffset(4)] public float maxSimplificationError;
-        [FieldOffset(8)] public int vertsPerPoly;
+        [FieldOffset(0x00)] public float edgeMaxLength;
+        [FieldOffset(0x04)] public float maxSimplificationError;
+        [FieldOffset(0x08)] public int vertsPerPoly;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct DetailMesh
     {
-        [FieldOffset(0)] public float sampleDistance;
-        [FieldOffset(4)] public float sampleMaxError;
+        [FieldOffset(0x00)] public float sampleDistance;
+        [FieldOffset(0x04)] public float sampleMaxError;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct Tiling
     {
-        [FieldOffset(0)] public float size;
-        [FieldOffset(4)] public int maxTiles;
-        [FieldOffset(8)] public bool cache;
+        [FieldOffset(0x00)] public float size;
+        [FieldOffset(0x04)] public int maxTiles;
+        [FieldOffset(0x08)] public bool cache;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 112)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public struct NavMeshParameter
     {
-        [FieldOffset(0)]  public World world;
-        [FieldOffset(32)] public Rasterization rasterization;
-        [FieldOffset(40)] public Agent agent;
-        [FieldOffset(56)] public Region region;
-        [FieldOffset(64)] public Partitioning partitioning;
-        [FieldOffset(65)] public Filtering filtering;
-        [FieldOffset(68)] public Polygonization polygonization;
-        [FieldOffset(80)] public DetailMesh detailMesh;
-        [FieldOffset(88)] public Tiling tiling;
+        [FieldOffset(0x00)] public World world;
+        [FieldOffset(0x20)] public Rasterization rasterization;
+        [FieldOffset(0x28)] public Agent agent;
+        [FieldOffset(0x38)] public Region region;
+        [FieldOffset(0x40)] public Partitioning partitioning;
+        [FieldOffset(0x41)] public Filtering filtering;
+        [FieldOffset(0x44)] public Polygonization polygonization;
+        [FieldOffset(0x50)] public DetailMesh detailMesh;
+        [FieldOffset(0x58)] public Tiling tiling;
     }
 
 }

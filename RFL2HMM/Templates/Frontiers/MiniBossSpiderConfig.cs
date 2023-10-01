@@ -3,71 +3,71 @@ using System.Runtime.InteropServices;
 
 public class MiniBossSpiderConfigClass
 {
-    [StructLayout(LayoutKind.Explicit, Size = 64)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public struct MiniBossCommonConfig
     {
-        [FieldOffset(0)]  public float scoutDistance;
-        [FieldOffset(4)]  public float scoutDistanceOutside;
-        [FieldOffset(8)]  public float zoomDistance;
-        [FieldOffset(16)] public Vector3 zoomOffset;
-        [FieldOffset(32)] public Vector3 zoomAngle;
-        [FieldOffset(48)] public float zoomFov;
+        [FieldOffset(0x00)] public float scoutDistance;
+        [FieldOffset(0x04)] public float scoutDistanceOutside;
+        [FieldOffset(0x08)] public float zoomDistance;
+        [FieldOffset(0x10)] public Vector3 zoomOffset;
+        [FieldOffset(0x20)] public Vector3 zoomAngle;
+        [FieldOffset(0x30)] public float zoomFov;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 20)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
     public struct MiniBossSpiderCameraShake
     {
-        [FieldOffset(0)]  public float time;
-        [FieldOffset(4)]  public float magnitude;
-        [FieldOffset(8)]  public int freq;
-        [FieldOffset(12)] public float attnRatio;
-        [FieldOffset(16)] public float shakeRange;
+        [FieldOffset(0x00)] public float time;
+        [FieldOffset(0x04)] public float magnitude;
+        [FieldOffset(0x08)] public int freq;
+        [FieldOffset(0x0C)] public float attnRatio;
+        [FieldOffset(0x10)] public float shakeRange;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 28)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct RingParameter
     {
-        [FieldOffset(0)]  public float suckedTime;
-        [FieldOffset(4)]  public float launchAngle;
-        [FieldOffset(8)]  public float launchMaxSpeed;
-        [FieldOffset(12)] public float launchMinSpeed;
-        [FieldOffset(16)] public float randomRangeMin;
-        [FieldOffset(20)] public float randomRangeMax;
-        [FieldOffset(24)] public float lifeTime;
+        [FieldOffset(0x00)] public float suckedTime;
+        [FieldOffset(0x04)] public float launchAngle;
+        [FieldOffset(0x08)] public float launchMaxSpeed;
+        [FieldOffset(0x0C)] public float launchMinSpeed;
+        [FieldOffset(0x10)] public float randomRangeMin;
+        [FieldOffset(0x14)] public float randomRangeMax;
+        [FieldOffset(0x18)] public float lifeTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 36)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x24)]
     public struct MiniBossSpiderWaveParam
     {
-        [FieldOffset(0)]  public float radius;
-        [FieldOffset(4)]  public float appearRadius;
-        [FieldOffset(8)]  public float keepRadius;
-        [FieldOffset(12)] public float disappearRadius;
-        [FieldOffset(16)] public float heightMin;
-        [FieldOffset(20)] public float heightMax;
-        [FieldOffset(24)] public float lifeTime;
-        [FieldOffset(28)] public float pauseBeginTime;
-        [FieldOffset(32)] public float pauseTime;
+        [FieldOffset(0x00)] public float radius;
+        [FieldOffset(0x04)] public float appearRadius;
+        [FieldOffset(0x08)] public float keepRadius;
+        [FieldOffset(0x0C)] public float disappearRadius;
+        [FieldOffset(0x10)] public float heightMin;
+        [FieldOffset(0x14)] public float heightMax;
+        [FieldOffset(0x18)] public float lifeTime;
+        [FieldOffset(0x1C)] public float pauseBeginTime;
+        [FieldOffset(0x20)] public float pauseTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 24)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct MiniBossSpiderCameraLockOn
     {
-        [FieldOffset(0)]  public float time;
-        [FieldOffset(4)]  public float distance;
-        [FieldOffset(8)]  public float minElevation;
-        [FieldOffset(12)] public float maxElevation;
-        [FieldOffset(16)] public float panningSuspensionK;
-        [FieldOffset(20)] public float interiorPanningSuspensionK;
+        [FieldOffset(0x00)] public float time;
+        [FieldOffset(0x04)] public float distance;
+        [FieldOffset(0x08)] public float minElevation;
+        [FieldOffset(0x0C)] public float maxElevation;
+        [FieldOffset(0x10)] public float panningSuspensionK;
+        [FieldOffset(0x14)] public float interiorPanningSuspensionK;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct DebrisParameter
     {
-        [FieldOffset(0)]  public int m_maxNumPieces;
-        [FieldOffset(4)]  public float gravity;
-        [FieldOffset(8)]  public float lifeTime;
-        [FieldOffset(12)] public float force;
+        [FieldOffset(0x00)] public int m_maxNumPieces;
+        [FieldOffset(0x04)] public float gravity;
+        [FieldOffset(0x08)] public float lifeTime;
+        [FieldOffset(0x0C)] public float force;
     }
 
     public enum MiniBossSpiderBreakType : sbyte
@@ -80,150 +80,150 @@ public class MiniBossSpiderConfigClass
         BREAK_ALL = 5
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct MiniBossSpiderLevelBandRate
     {
-        [FieldOffset(0)]  public float pressRate;
-        [FieldOffset(4)]  public float stompRate;
-        [FieldOffset(8)]  public float shotRate;
-        [FieldOffset(12)] public float chainRate;
-        [FieldOffset(16)] public float traceRate;
-        [FieldOffset(20)] public float laserStraightRate;
-        [FieldOffset(24)] public float laserTraceRate;
-        [FieldOffset(28)] public float jumpRate;
+        [FieldOffset(0x00)] public float pressRate;
+        [FieldOffset(0x04)] public float stompRate;
+        [FieldOffset(0x08)] public float shotRate;
+        [FieldOffset(0x0C)] public float chainRate;
+        [FieldOffset(0x10)] public float traceRate;
+        [FieldOffset(0x14)] public float laserStraightRate;
+        [FieldOffset(0x18)] public float laserTraceRate;
+        [FieldOffset(0x1C)] public float jumpRate;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct MiniBossSpiderLevelBandInterval
     {
-        [FieldOffset(0)]  public float pressInterval;
-        [FieldOffset(4)]  public float stompInterval;
-        [FieldOffset(8)]  public float shotInterval;
-        [FieldOffset(12)] public float chainInterval;
-        [FieldOffset(16)] public float traceInterval;
-        [FieldOffset(20)] public float laserStaightInterval;
-        [FieldOffset(24)] public float laserTraceInterval;
-        [FieldOffset(28)] public float jumpInterval;
+        [FieldOffset(0x00)] public float pressInterval;
+        [FieldOffset(0x04)] public float stompInterval;
+        [FieldOffset(0x08)] public float shotInterval;
+        [FieldOffset(0x0C)] public float chainInterval;
+        [FieldOffset(0x10)] public float traceInterval;
+        [FieldOffset(0x14)] public float laserStaightInterval;
+        [FieldOffset(0x18)] public float laserTraceInterval;
+        [FieldOffset(0x1C)] public float jumpInterval;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 196)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xC4)]
     public struct MiniBossSpiderActionParam
     {
-        [FieldOffset(0)]   public float nearRange;
-        [FieldOffset(4)]   public MiniBossSpiderLevelBandRate nearRates__arr0;
-        [FieldOffset(36)] public MiniBossSpiderLevelBandRate nearRates__arr1;
-        [FieldOffset(68)]  public MiniBossSpiderLevelBandRate farRates__arr0;
-        [FieldOffset(100)] public MiniBossSpiderLevelBandRate farRates__arr1;
-        [FieldOffset(132)] public MiniBossSpiderLevelBandInterval interval__arr0;
-        [FieldOffset(164)] public MiniBossSpiderLevelBandInterval interval__arr1;
+        [FieldOffset(0x00)] public float nearRange;
+        [FieldOffset(0x04)] public MiniBossSpiderLevelBandRate nearRates__arr0;
+        [FieldOffset(0x24)] public MiniBossSpiderLevelBandRate nearRates__arr1;
+        [FieldOffset(0x44)] public MiniBossSpiderLevelBandRate farRates__arr0;
+        [FieldOffset(0x64)] public MiniBossSpiderLevelBandRate farRates__arr1;
+        [FieldOffset(0x84)] public MiniBossSpiderLevelBandInterval interval__arr0;
+        [FieldOffset(0xA4)] public MiniBossSpiderLevelBandInterval interval__arr1;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 1520)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x5F0)]
     public struct MiniBossSpiderCommonParam
     {
-        [FieldOffset(0)]   public MiniBossCommonConfig commonConfig;
-        [FieldOffset(64)]  public float patrolWalkWaitTimeMin;
-        [FieldOffset(68)]  public float patrolWalkWaitTimeMax;
-        [FieldOffset(72)]  public float jumpSpeed;
-        [FieldOffset(76)]  public float pressDistance;
-        [FieldOffset(80)]  public float waveDistance;
-        [FieldOffset(84)]  public float waveModelScale;
-        [FieldOffset(88)]  public float waveModelDiameter;
-        [FieldOffset(92)]  public float waveWaitTime;
-        [FieldOffset(96)]  public float mineDistance;
-        [FieldOffset(100)] public float shotWaitTime;
-        [FieldOffset(104)] public float walkWaitTime;
-        [FieldOffset(108)] public float laserStraightDistance;
-        [FieldOffset(112)] public float laserStraightPrepairTime;
-        [FieldOffset(116)] public float laserStraightTime;
-        [FieldOffset(120)] public float laserStraightAngle;
-        [FieldOffset(124)] public float laserStraightWaitTime;
-        [FieldOffset(128)] public float laserTraceDistance;
-        [FieldOffset(132)] public float laserTracePrepairTime;
-        [FieldOffset(136)] public float laserTraceTime;
-        [FieldOffset(140)] public float laserTraceSpeed;
-        [FieldOffset(144)] public float laserTraceWaitTime;
-        [FieldOffset(148)] public float chainDistance;
-        [FieldOffset(152)] public float chainJumpDistance;
-        [FieldOffset(156)] public float chainWaitTime;
-        [FieldOffset(160)] public float traceDistance;
-        [FieldOffset(164)] public float traceJumpDistance;
-        [FieldOffset(168)] public float traceSpeed;
-        [FieldOffset(172)] public float traceRotSpeed;
-        [FieldOffset(176)] public float traceLifeTime;
-        [FieldOffset(180)] public float traceWidth;
-        [FieldOffset(184)] public float traceHeight;
-        [FieldOffset(188)] public float traceAppearDistance;
-        [FieldOffset(192)] public float traceKeepDistance;
-        [FieldOffset(196)] public float traceDisappearDistance;
-        [FieldOffset(200)] public float traceWaitTime;
-        [FieldOffset(204)] public float thornSpawnSpeed;
-        [FieldOffset(208)] public float thornSpawnRadiusMax;
-        [FieldOffset(212)] public float thornLifeTime;
-        [FieldOffset(216)] public float thornFlyingSpeed;
-        [FieldOffset(220)] public int protecterHp;
-        [FieldOffset(224)] public MiniBossSpiderCameraShake cameraShakeWalk;
-        [FieldOffset(244)] public MiniBossSpiderCameraShake cameraShakeAttack;
-        [FieldOffset(264)] public RingParameter ringParam;
-        [FieldOffset(292)] public MiniBossSpiderWaveParam waveParams__arr0;
-        [FieldOffset(328)] public MiniBossSpiderWaveParam waveParams__arr1;
-        [FieldOffset(364)] public MiniBossSpiderWaveParam waveParams__arr2;
-        [FieldOffset(400)] public MiniBossSpiderWaveParam waveParams__arr3;
-        [FieldOffset(436)] public MiniBossSpiderWaveParam waveParams__arr4;
-        [FieldOffset(472)] public MiniBossSpiderWaveParam waveParams__arr5;
-        [FieldOffset(508)] public MiniBossSpiderWaveParam waveParams__arr6;
-        [FieldOffset(544)] public MiniBossSpiderWaveParam waveParams__arr7;
-        [FieldOffset(580)] public MiniBossSpiderCameraLockOn cameraLockBreakArmor;
-        [FieldOffset(604)] public MiniBossSpiderCameraLockOn cameraLockBlownUp;
-        [FieldOffset(628)] public MiniBossSpiderCameraLockOn cameraLockBlownDown;
-        [FieldOffset(652)] public MiniBossSpiderCameraLockOn cameraLockFootUp;
-        [FieldOffset(676)] public MiniBossSpiderCameraLockOn cameraLockFall;
-        [FieldOffset(700)] public DebrisParameter debrisSet;
-        [FieldOffset(716)] public MiniBossSpiderBreakType rotationTypeTable__arr0;
-        [FieldOffset(717)] public MiniBossSpiderBreakType rotationTypeTable__arr1;
-        [FieldOffset(718)] public MiniBossSpiderBreakType rotationTypeTable__arr2;
-        [FieldOffset(719)] public MiniBossSpiderBreakType rotationTypeTable__arr3;
-        [FieldOffset(720)] public MiniBossSpiderBreakType rotationTypeTable__arr4;
-        [FieldOffset(721)] public MiniBossSpiderBreakType rotationTypeTable__arr5;
-        [FieldOffset(722)] public MiniBossSpiderBreakType rotationTypeTable__arr6;
-        [FieldOffset(723)] public MiniBossSpiderBreakType rotationTypeTable__arr7;
-        [FieldOffset(724)] public MiniBossSpiderActionParam rotationActionTable__arr0;
-        [FieldOffset(920)] public MiniBossSpiderActionParam rotationActionTable__arr1;
-        [FieldOffset(1116)] public MiniBossSpiderActionParam rotationActionTable__arr2;
-        [FieldOffset(1312)] public MiniBossSpiderActionParam rotationActionTable__arr3;
+        [FieldOffset(0x00)] public MiniBossCommonConfig commonConfig;
+        [FieldOffset(0x40)] public float patrolWalkWaitTimeMin;
+        [FieldOffset(0x44)] public float patrolWalkWaitTimeMax;
+        [FieldOffset(0x48)] public float jumpSpeed;
+        [FieldOffset(0x4C)] public float pressDistance;
+        [FieldOffset(0x50)] public float waveDistance;
+        [FieldOffset(0x54)] public float waveModelScale;
+        [FieldOffset(0x58)] public float waveModelDiameter;
+        [FieldOffset(0x5C)] public float waveWaitTime;
+        [FieldOffset(0x60)] public float mineDistance;
+        [FieldOffset(0x64)] public float shotWaitTime;
+        [FieldOffset(0x68)] public float walkWaitTime;
+        [FieldOffset(0x6C)] public float laserStraightDistance;
+        [FieldOffset(0x70)] public float laserStraightPrepairTime;
+        [FieldOffset(0x74)] public float laserStraightTime;
+        [FieldOffset(0x78)] public float laserStraightAngle;
+        [FieldOffset(0x7C)] public float laserStraightWaitTime;
+        [FieldOffset(0x80)] public float laserTraceDistance;
+        [FieldOffset(0x84)] public float laserTracePrepairTime;
+        [FieldOffset(0x88)] public float laserTraceTime;
+        [FieldOffset(0x8C)] public float laserTraceSpeed;
+        [FieldOffset(0x90)] public float laserTraceWaitTime;
+        [FieldOffset(0x94)] public float chainDistance;
+        [FieldOffset(0x98)] public float chainJumpDistance;
+        [FieldOffset(0x9C)] public float chainWaitTime;
+        [FieldOffset(0xA0)] public float traceDistance;
+        [FieldOffset(0xA4)] public float traceJumpDistance;
+        [FieldOffset(0xA8)] public float traceSpeed;
+        [FieldOffset(0xAC)] public float traceRotSpeed;
+        [FieldOffset(0xB0)] public float traceLifeTime;
+        [FieldOffset(0xB4)] public float traceWidth;
+        [FieldOffset(0xB8)] public float traceHeight;
+        [FieldOffset(0xBC)] public float traceAppearDistance;
+        [FieldOffset(0xC0)] public float traceKeepDistance;
+        [FieldOffset(0xC4)] public float traceDisappearDistance;
+        [FieldOffset(0xC8)] public float traceWaitTime;
+        [FieldOffset(0xCC)] public float thornSpawnSpeed;
+        [FieldOffset(0xD0)] public float thornSpawnRadiusMax;
+        [FieldOffset(0xD4)] public float thornLifeTime;
+        [FieldOffset(0xD8)] public float thornFlyingSpeed;
+        [FieldOffset(0xDC)] public int protecterHp;
+        [FieldOffset(0xE0)] public MiniBossSpiderCameraShake cameraShakeWalk;
+        [FieldOffset(0xF4)] public MiniBossSpiderCameraShake cameraShakeAttack;
+        [FieldOffset(0x108)] public RingParameter ringParam;
+        [FieldOffset(0x124)] public MiniBossSpiderWaveParam waveParams__arr0;
+        [FieldOffset(0x148)] public MiniBossSpiderWaveParam waveParams__arr1;
+        [FieldOffset(0x16C)] public MiniBossSpiderWaveParam waveParams__arr2;
+        [FieldOffset(0x190)] public MiniBossSpiderWaveParam waveParams__arr3;
+        [FieldOffset(0x1B4)] public MiniBossSpiderWaveParam waveParams__arr4;
+        [FieldOffset(0x1D8)] public MiniBossSpiderWaveParam waveParams__arr5;
+        [FieldOffset(0x1FC)] public MiniBossSpiderWaveParam waveParams__arr6;
+        [FieldOffset(0x220)] public MiniBossSpiderWaveParam waveParams__arr7;
+        [FieldOffset(0x244)] public MiniBossSpiderCameraLockOn cameraLockBreakArmor;
+        [FieldOffset(0x25C)] public MiniBossSpiderCameraLockOn cameraLockBlownUp;
+        [FieldOffset(0x274)] public MiniBossSpiderCameraLockOn cameraLockBlownDown;
+        [FieldOffset(0x28C)] public MiniBossSpiderCameraLockOn cameraLockFootUp;
+        [FieldOffset(0x2A4)] public MiniBossSpiderCameraLockOn cameraLockFall;
+        [FieldOffset(0x2BC)] public DebrisParameter debrisSet;
+        [FieldOffset(0x2CC)] public MiniBossSpiderBreakType rotationTypeTable__arr0;
+        [FieldOffset(0x2CD)] public MiniBossSpiderBreakType rotationTypeTable__arr1;
+        [FieldOffset(0x2CE)] public MiniBossSpiderBreakType rotationTypeTable__arr2;
+        [FieldOffset(0x2CF)] public MiniBossSpiderBreakType rotationTypeTable__arr3;
+        [FieldOffset(0x2D0)] public MiniBossSpiderBreakType rotationTypeTable__arr4;
+        [FieldOffset(0x2D1)] public MiniBossSpiderBreakType rotationTypeTable__arr5;
+        [FieldOffset(0x2D2)] public MiniBossSpiderBreakType rotationTypeTable__arr6;
+        [FieldOffset(0x2D3)] public MiniBossSpiderBreakType rotationTypeTable__arr7;
+        [FieldOffset(0x2D4)] public MiniBossSpiderActionParam rotationActionTable__arr0;
+        [FieldOffset(0x398)] public MiniBossSpiderActionParam rotationActionTable__arr1;
+        [FieldOffset(0x45C)] public MiniBossSpiderActionParam rotationActionTable__arr2;
+        [FieldOffset(0x520)] public MiniBossSpiderActionParam rotationActionTable__arr3;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 52)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x34)]
     public struct MiniBossLevelCommonConfig
     {
-        [FieldOffset(0)]  public int maxHealthPoint;
-        [FieldOffset(4)]  public float maxStunPoint__arr0;
-        [FieldOffset(8)] public float maxStunPoint__arr1;
-        [FieldOffset(12)] public float maxStunPoint__arr2;
-        [FieldOffset(16)] public float stunDecreaseStartTime;
-        [FieldOffset(20)] public float stunDecreaseSpeed;
-        [FieldOffset(24)] public float maxStaggerPoint__arr0;
-        [FieldOffset(28)] public float maxStaggerPoint__arr1;
-        [FieldOffset(32)] public float maxStaggerPoint__arr2;
-        [FieldOffset(36)] public float staggerDecreaseStartTime;
-        [FieldOffset(40)] public float staggerDecreaseSpeed;
-        [FieldOffset(44)] public float attackRate;
-        [FieldOffset(48)] public ushort expItemNum;
-        [FieldOffset(50)] public ushort exp;
+        [FieldOffset(0x00)] public int maxHealthPoint;
+        [FieldOffset(0x04)] public float maxStunPoint__arr0;
+        [FieldOffset(0x08)] public float maxStunPoint__arr1;
+        [FieldOffset(0x0C)] public float maxStunPoint__arr2;
+        [FieldOffset(0x10)] public float stunDecreaseStartTime;
+        [FieldOffset(0x14)] public float stunDecreaseSpeed;
+        [FieldOffset(0x18)] public float maxStaggerPoint__arr0;
+        [FieldOffset(0x1C)] public float maxStaggerPoint__arr1;
+        [FieldOffset(0x20)] public float maxStaggerPoint__arr2;
+        [FieldOffset(0x24)] public float staggerDecreaseStartTime;
+        [FieldOffset(0x28)] public float staggerDecreaseSpeed;
+        [FieldOffset(0x2C)] public float attackRate;
+        [FieldOffset(0x30)] public ushort expItemNum;
+        [FieldOffset(0x32)] public ushort exp;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 84)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x54)]
     public struct MiniBossSpiderLevelParam
     {
-        [FieldOffset(0)]  public int level;
-        [FieldOffset(4)]  public MiniBossLevelCommonConfig commonConfig;
-        [FieldOffset(56)] public float attackRate;
-        [FieldOffset(60)] public float stunTime;
-        [FieldOffset(64)] public float downTime;
-        [FieldOffset(68)] public float downTime2;
-        [FieldOffset(72)] public float reProtectWaitTime;
-        [FieldOffset(76)] public float patrolWalkWaitTimeMin;
-        [FieldOffset(80)] public float patrolWalkWaitTimeMax;
+        [FieldOffset(0x00)] public int level;
+        [FieldOffset(0x04)] public MiniBossLevelCommonConfig commonConfig;
+        [FieldOffset(0x38)] public float attackRate;
+        [FieldOffset(0x3C)] public float stunTime;
+        [FieldOffset(0x40)] public float downTime;
+        [FieldOffset(0x44)] public float downTime2;
+        [FieldOffset(0x48)] public float reProtectWaitTime;
+        [FieldOffset(0x4C)] public float patrolWalkWaitTimeMin;
+        [FieldOffset(0x50)] public float patrolWalkWaitTimeMax;
     }
 
     public enum MiniBossSpiderLevelBand_MiniBossSpiderBreakType : sbyte
@@ -236,79 +236,79 @@ public class MiniBossSpiderConfigClass
         MiniBossSpiderLevelBand_MiniBossSpiderBreakType_BREAK_ALL = 5
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct MiniBossSpiderLevelPhaseAction
     {
-        [FieldOffset(0)] public sbyte pressType;
-        [FieldOffset(1)] public byte pressNum;
-        [FieldOffset(4)] public float pressWaitTime;
-        [FieldOffset(8)] public sbyte stompType;
+        [FieldOffset(0x00)] public sbyte pressType;
+        [FieldOffset(0x01)] public byte pressNum;
+        [FieldOffset(0x04)] public float pressWaitTime;
+        [FieldOffset(0x08)] public sbyte stompType;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct MiniBossSpiderLevelPhaseDiving
     {
-        [FieldOffset(0)] public float divingEndHeight;
+        [FieldOffset(0x00)] public float divingEndHeight;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 336)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x150)]
     public struct MiniBossSpiderLevelBand
     {
-        [FieldOffset(0)]   public int level;
-        [FieldOffset(4)]   public float phaseChangeHpRatio;
-        [FieldOffset(8)]   public int walkWaveId;
-        [FieldOffset(12)]  public int stompWaveId;
-        [FieldOffset(16)]  public int pressWaveId;
-        [FieldOffset(20)]  public bool enableCounterKick;
-        [FieldOffset(21)]  public MiniBossSpiderLevelBand_MiniBossSpiderBreakType breakType;
-        [FieldOffset(24)]  public float mineRadius;
-        [FieldOffset(28)]  public float mineExplodeRadius;
-        [FieldOffset(32)]  public int mineNum;
-        [FieldOffset(36)]  public float mineStartSpeed;
-        [FieldOffset(40)]  public float mineDecelePower;
-        [FieldOffset(44)]  public float mineMinSpeed;
-        [FieldOffset(48)]  public float mineParriedSpeed;
-        [FieldOffset(52)]  public float mineLifeTime;
-        [FieldOffset(56)]  public float mineEnableParryRate;
-        [FieldOffset(60)]  public int mineHorizonMaxNum;
-        [FieldOffset(64)]  public int mineVerticalNum;
-        [FieldOffset(68)]  public int shotCount;
-        [FieldOffset(72)]  public float chainLifeTime;
-        [FieldOffset(76)]  public float chainTraceTime;
-        [FieldOffset(80)]  public float chainSpeed;
-        [FieldOffset(84)]  public float chainWaitTime;
-        [FieldOffset(88)]  public float chainRotateSpeed;
-        [FieldOffset(92)]  public int chainWaveNum;
-        [FieldOffset(96)]  public bool enableReProtect;
-        [FieldOffset(100)] public float nearRange;
-        [FieldOffset(104)] public MiniBossSpiderLevelBandRate nearRates__arr0;
-        [FieldOffset(136)] public MiniBossSpiderLevelBandRate nearRates__arr1;
-        [FieldOffset(168)] public MiniBossSpiderLevelBandRate farRates__arr0;
-        [FieldOffset(200)] public MiniBossSpiderLevelBandRate farRates__arr1;
-        [FieldOffset(232)] public MiniBossSpiderLevelPhaseAction phases__arr0;
-        [FieldOffset(244)] public MiniBossSpiderLevelPhaseAction phases__arr1;
-        [FieldOffset(256)] public MiniBossSpiderLevelBandInterval interval__arr0;
-        [FieldOffset(288)] public MiniBossSpiderLevelBandInterval interval__arr1;
-        [FieldOffset(320)] public MiniBossSpiderLevelPhaseDiving diving__arr0;
-        [FieldOffset(324)] public MiniBossSpiderLevelPhaseDiving diving__arr1;
-        [FieldOffset(328)] public float slowRate__arr0;
-        [FieldOffset(332)] public float slowRate__arr1;
+        [FieldOffset(0x00)] public int level;
+        [FieldOffset(0x04)] public float phaseChangeHpRatio;
+        [FieldOffset(0x08)] public int walkWaveId;
+        [FieldOffset(0x0C)] public int stompWaveId;
+        [FieldOffset(0x10)] public int pressWaveId;
+        [FieldOffset(0x14)] public bool enableCounterKick;
+        [FieldOffset(0x15)] public MiniBossSpiderLevelBand_MiniBossSpiderBreakType breakType;
+        [FieldOffset(0x18)] public float mineRadius;
+        [FieldOffset(0x1C)] public float mineExplodeRadius;
+        [FieldOffset(0x20)] public int mineNum;
+        [FieldOffset(0x24)] public float mineStartSpeed;
+        [FieldOffset(0x28)] public float mineDecelePower;
+        [FieldOffset(0x2C)] public float mineMinSpeed;
+        [FieldOffset(0x30)] public float mineParriedSpeed;
+        [FieldOffset(0x34)] public float mineLifeTime;
+        [FieldOffset(0x38)] public float mineEnableParryRate;
+        [FieldOffset(0x3C)] public int mineHorizonMaxNum;
+        [FieldOffset(0x40)] public int mineVerticalNum;
+        [FieldOffset(0x44)] public int shotCount;
+        [FieldOffset(0x48)] public float chainLifeTime;
+        [FieldOffset(0x4C)] public float chainTraceTime;
+        [FieldOffset(0x50)] public float chainSpeed;
+        [FieldOffset(0x54)] public float chainWaitTime;
+        [FieldOffset(0x58)] public float chainRotateSpeed;
+        [FieldOffset(0x5C)] public int chainWaveNum;
+        [FieldOffset(0x60)] public bool enableReProtect;
+        [FieldOffset(0x64)] public float nearRange;
+        [FieldOffset(0x68)] public MiniBossSpiderLevelBandRate nearRates__arr0;
+        [FieldOffset(0x88)] public MiniBossSpiderLevelBandRate nearRates__arr1;
+        [FieldOffset(0xA8)] public MiniBossSpiderLevelBandRate farRates__arr0;
+        [FieldOffset(0xC8)] public MiniBossSpiderLevelBandRate farRates__arr1;
+        [FieldOffset(0xE8)] public MiniBossSpiderLevelPhaseAction phases__arr0;
+        [FieldOffset(0xF4)] public MiniBossSpiderLevelPhaseAction phases__arr1;
+        [FieldOffset(0x100)] public MiniBossSpiderLevelBandInterval interval__arr0;
+        [FieldOffset(0x120)] public MiniBossSpiderLevelBandInterval interval__arr1;
+        [FieldOffset(0x140)] public MiniBossSpiderLevelPhaseDiving diving__arr0;
+        [FieldOffset(0x144)] public MiniBossSpiderLevelPhaseDiving diving__arr1;
+        [FieldOffset(0x148)] public float slowRate__arr0;
+        [FieldOffset(0x14C)] public float slowRate__arr1;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 3632)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xE30)]
     public struct MiniBossSpiderConfig
     {
-        [FieldOffset(0)]    public MiniBossSpiderCommonParam commonParam;
-        [FieldOffset(1520)] public MiniBossSpiderLevelParam levelParams__arr0;
-        [FieldOffset(1604)] public MiniBossSpiderLevelParam levelParams__arr1;
-        [FieldOffset(1688)] public MiniBossSpiderLevelParam levelParams__arr2;
-        [FieldOffset(1772)] public MiniBossSpiderLevelParam levelParams__arr3;
-        [FieldOffset(1856)] public MiniBossSpiderLevelParam levelParams__arr4;
-        [FieldOffset(1940)] public MiniBossSpiderLevelBand levelBands__arr0;
-        [FieldOffset(2276)] public MiniBossSpiderLevelBand levelBands__arr1;
-        [FieldOffset(2612)] public MiniBossSpiderLevelBand levelBands__arr2;
-        [FieldOffset(2948)] public MiniBossSpiderLevelBand levelBands__arr3;
-        [FieldOffset(3284)] public MiniBossSpiderLevelBand levelBands__arr4;
+        [FieldOffset(0x00)] public MiniBossSpiderCommonParam commonParam;
+        [FieldOffset(0x5F0)] public MiniBossSpiderLevelParam levelParams__arr0;
+        [FieldOffset(0x644)] public MiniBossSpiderLevelParam levelParams__arr1;
+        [FieldOffset(0x698)] public MiniBossSpiderLevelParam levelParams__arr2;
+        [FieldOffset(0x6EC)] public MiniBossSpiderLevelParam levelParams__arr3;
+        [FieldOffset(0x740)] public MiniBossSpiderLevelParam levelParams__arr4;
+        [FieldOffset(0x794)] public MiniBossSpiderLevelBand levelBands__arr0;
+        [FieldOffset(0x8E4)] public MiniBossSpiderLevelBand levelBands__arr1;
+        [FieldOffset(0xA34)] public MiniBossSpiderLevelBand levelBands__arr2;
+        [FieldOffset(0xB84)] public MiniBossSpiderLevelBand levelBands__arr3;
+        [FieldOffset(0xCD4)] public MiniBossSpiderLevelBand levelBands__arr4;
     }
 
 }

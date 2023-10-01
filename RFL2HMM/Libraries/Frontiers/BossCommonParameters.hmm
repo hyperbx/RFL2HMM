@@ -5,42 +5,87 @@ Library "BossCommonParameters"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
-    public struct CString
+    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    public struct UnmanagedString
     {
         [FieldOffset(0)] public long pValue;
 
         public string Value
         {
-        	get => Marshal.PtrToStringAnsi((IntPtr)pValue);
-        	set => pValue = (long)Marshal.StringToHGlobalAnsi(value);
+            get
+            {
+                if (pValue == 0)
+                    return string.Empty;
+
+                return Marshal.PtrToStringAnsi((nint)pValue);
+            }
+
+            set => pValue = Marshal.StringToHGlobalAnsi(value);
+        }
+
+        public UnmanagedString(string in_value)
+        {
+            Value = in_value;
+        }
+
+        public static implicit operator UnmanagedString(string in_value)
+        {
+            return new UnmanagedString(in_value);
+        }
+
+        public static bool operator ==(UnmanagedString in_left, string in_right)
+        {
+            return in_left.Value == in_right;
+        }
+
+        public static bool operator !=(UnmanagedString in_left, string in_right)
+        {
+            return !(in_left == in_right);
+        }
+
+        public override bool Equals(object in_obj)
+        {
+            if (in_obj is string str)
+                return Value == str;
+
+            return base.Equals(in_obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Value;
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 80)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x50)]
     public struct BossResourceInfo
     {
-        [FieldOffset(0)]  public CString modelName;
-        [FieldOffset(16)] public CString animName;
-        [FieldOffset(32)] public Vector3 scale;
-        [FieldOffset(48)] public CString stageName;
-        [FieldOffset(64)] public Vector3 stagePos;
+        [FieldOffset(0x00)] public UnmanagedString modelName;
+        [FieldOffset(0x10)] public UnmanagedString animName;
+        [FieldOffset(0x20)] public Vector3 scale;
+        [FieldOffset(0x30)] public UnmanagedString stageName;
+        [FieldOffset(0x40)] public Vector3 stagePos;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 80)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x50)]
     public struct HoldPoint
     {
-        [FieldOffset(0)]  public CString nodeName;
-        [FieldOffset(16)] public Vector3 offset;
-        [FieldOffset(32)] public Vector3 rot;
-        [FieldOffset(48)] public CString tagName;
-        [FieldOffset(64)] public int nextPointId;
+        [FieldOffset(0x00)] public UnmanagedString nodeName;
+        [FieldOffset(0x10)] public Vector3 offset;
+        [FieldOffset(0x20)] public Vector3 rot;
+        [FieldOffset(0x30)] public UnmanagedString tagName;
+        [FieldOffset(0x40)] public int nextPointId;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 10240)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x2800)]
     public struct HoldPointParameter
     {
-        [FieldOffset(0)] public unsafe fixed byte /* HoldPoint[128] */ _holdPoints[10240];
+        [FieldOffset(0x00)] public unsafe fixed byte /* HoldPoint[128] */ _holdPoints[10240];
 
         public unsafe HoldPoint* holdPoints
         {
@@ -60,22 +105,22 @@ Library "BossCommonParameters"
         SHAPE_CAPCULE = 3
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 96)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x60)]
     public struct CollisionPart
     {
-        [FieldOffset(0)]  public CString nodeName;
-        [FieldOffset(16)] public Shape shape;
-        [FieldOffset(17)] public bool isPhysics;
-        [FieldOffset(32)] public Vector3 size;
-        [FieldOffset(48)] public Vector3 offset;
-        [FieldOffset(64)] public Vector3 rot;
-        [FieldOffset(80)] public CString tagName;
+        [FieldOffset(0x00)] public UnmanagedString nodeName;
+        [FieldOffset(0x10)] public Shape shape;
+        [FieldOffset(0x11)] public bool isPhysics;
+        [FieldOffset(0x20)] public Vector3 size;
+        [FieldOffset(0x30)] public Vector3 offset;
+        [FieldOffset(0x40)] public Vector3 rot;
+        [FieldOffset(0x50)] public UnmanagedString tagName;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 3072)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xC00)]
     public struct CollisionPartParameter
     {
-        [FieldOffset(0)] public unsafe fixed byte /* CollisionPart[32] */ _colParts[3072];
+        [FieldOffset(0x00)] public unsafe fixed byte /* CollisionPart[32] */ _colParts[3072];
 
         public unsafe CollisionPart* colParts
         {
@@ -87,12 +132,12 @@ Library "BossCommonParameters"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 13392)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x3450)]
     public struct BossCommonParameters
     {
-        [FieldOffset(0)]     public BossResourceInfo resource;
-        [FieldOffset(80)]    public HoldPointParameter holdParam;
-        [FieldOffset(10320)] public CollisionPartParameter colParam;
+        [FieldOffset(0x00)] public BossResourceInfo resource;
+        [FieldOffset(0x50)] public HoldPointParameter holdParam;
+        [FieldOffset(0x2850)] public CollisionPartParameter colParam;
     }
 
 }

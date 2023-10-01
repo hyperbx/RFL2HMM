@@ -11,13 +11,13 @@ public class DecoConfigParamClass
         public byte B;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct DecoConfigParam
     {
-        [FieldOffset(0)]  public Color8 clientColor;
-        [FieldOffset(4)]  public byte windowAlpha;
-        [FieldOffset(8)]  public Color8 startGradationGuideColor;
-        [FieldOffset(12)] public Color8 endGradationGuideColor;
+        [FieldOffset(0x00)] public Color8 clientColor;
+        [FieldOffset(0x04)] public byte windowAlpha;
+        [FieldOffset(0x08)] public Color8 startGradationGuideColor;
+        [FieldOffset(0x0C)] public Color8 endGradationGuideColor;
     }
 
 }

@@ -43,24 +43,24 @@ Library "CyKnuckleHoleParameter"
         NUM_EASINGTYPES = 33
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct CyKnuckleHoleTransitionParameter
     {
-        [FieldOffset(0)] public float easeTime;
-        [FieldOffset(4)] public EasingType easing;
+        [FieldOffset(0x00)] public float easeTime;
+        [FieldOffset(0x04)] public EasingType easing;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 56)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public struct CyKnuckleHoleParameter
     {
-        [FieldOffset(0)]  public float radiusOpenSmall;
-        [FieldOffset(4)]  public float radiusOpen;
-        [FieldOffset(8)]  public CyKnuckleHoleTransitionParameter closeToOpenSmall;
-        [FieldOffset(16)] public CyKnuckleHoleTransitionParameter closeToOpen;
-        [FieldOffset(24)] public CyKnuckleHoleTransitionParameter openSmallToClose;
-        [FieldOffset(32)] public CyKnuckleHoleTransitionParameter openSmallToOpen;
-        [FieldOffset(40)] public CyKnuckleHoleTransitionParameter openToClose;
-        [FieldOffset(48)] public CyKnuckleHoleTransitionParameter openToOpenSmall;
+        [FieldOffset(0x00)] public float radiusOpenSmall;
+        [FieldOffset(0x04)] public float radiusOpen;
+        [FieldOffset(0x08)] public CyKnuckleHoleTransitionParameter closeToOpenSmall;
+        [FieldOffset(0x10)] public CyKnuckleHoleTransitionParameter closeToOpen;
+        [FieldOffset(0x18)] public CyKnuckleHoleTransitionParameter openSmallToClose;
+        [FieldOffset(0x20)] public CyKnuckleHoleTransitionParameter openSmallToOpen;
+        [FieldOffset(0x28)] public CyKnuckleHoleTransitionParameter openToClose;
+        [FieldOffset(0x30)] public CyKnuckleHoleTransitionParameter openToOpenSmall;
     }
 
 }

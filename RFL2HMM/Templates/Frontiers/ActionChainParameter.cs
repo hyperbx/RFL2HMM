@@ -3,183 +3,183 @@ using System.Runtime.InteropServices;
 
 public class ActionChainParameterClass
 {
-    [StructLayout(LayoutKind.Explicit, Size = 44)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x2C)]
     public struct ActionChainScoreParameter
     {
-        [FieldOffset(0)]  public uint score;
-        [FieldOffset(4)]  public uint level1Meter;
-        [FieldOffset(8)]  public uint level2Meter;
-        [FieldOffset(12)] public uint level3Meter;
-        [FieldOffset(16)] public uint level4Meter;
-        [FieldOffset(20)] public uint level5Meter;
-        [FieldOffset(24)] public uint level6Meter;
-        [FieldOffset(28)] public uint level7Meter;
-        [FieldOffset(32)] public uint level8Meter;
-        [FieldOffset(36)] public uint level9Meter;
-        [FieldOffset(40)] public float delay;
+        [FieldOffset(0x00)] public uint score;
+        [FieldOffset(0x04)] public uint level1Meter;
+        [FieldOffset(0x08)] public uint level2Meter;
+        [FieldOffset(0x0C)] public uint level3Meter;
+        [FieldOffset(0x10)] public uint level4Meter;
+        [FieldOffset(0x14)] public uint level5Meter;
+        [FieldOffset(0x18)] public uint level6Meter;
+        [FieldOffset(0x1C)] public uint level7Meter;
+        [FieldOffset(0x20)] public uint level8Meter;
+        [FieldOffset(0x24)] public uint level9Meter;
+        [FieldOffset(0x28)] public float delay;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct ActionChainAttackLevelParameter
     {
-        [FieldOffset(0)] public uint level1Param;
-        [FieldOffset(4)] public uint level99Param;
+        [FieldOffset(0x00)] public uint level1Param;
+        [FieldOffset(0x04)] public uint level99Param;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 80)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x50)]
     public struct ActionChainAttackScoreParameter
     {
-        [FieldOffset(0)]  public ActionChainAttackLevelParameter score;
-        [FieldOffset(8)]  public ActionChainAttackLevelParameter level1Meter;
-        [FieldOffset(16)] public ActionChainAttackLevelParameter level2Meter;
-        [FieldOffset(24)] public ActionChainAttackLevelParameter level3Meter;
-        [FieldOffset(32)] public ActionChainAttackLevelParameter level4Meter;
-        [FieldOffset(40)] public ActionChainAttackLevelParameter level5Meter;
-        [FieldOffset(48)] public ActionChainAttackLevelParameter level6Meter;
-        [FieldOffset(56)] public ActionChainAttackLevelParameter level7Meter;
-        [FieldOffset(64)] public ActionChainAttackLevelParameter level8Meter;
-        [FieldOffset(72)] public ActionChainAttackLevelParameter level9Meter;
+        [FieldOffset(0x00)] public ActionChainAttackLevelParameter score;
+        [FieldOffset(0x08)] public ActionChainAttackLevelParameter level1Meter;
+        [FieldOffset(0x10)] public ActionChainAttackLevelParameter level2Meter;
+        [FieldOffset(0x18)] public ActionChainAttackLevelParameter level3Meter;
+        [FieldOffset(0x20)] public ActionChainAttackLevelParameter level4Meter;
+        [FieldOffset(0x28)] public ActionChainAttackLevelParameter level5Meter;
+        [FieldOffset(0x30)] public ActionChainAttackLevelParameter level6Meter;
+        [FieldOffset(0x38)] public ActionChainAttackLevelParameter level7Meter;
+        [FieldOffset(0x40)] public ActionChainAttackLevelParameter level8Meter;
+        [FieldOffset(0x48)] public ActionChainAttackLevelParameter level9Meter;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 44)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x2C)]
     public struct ActionChainIntervalScoreParameter
     {
-        [FieldOffset(0)]  public float intervalTime;
-        [FieldOffset(4)]  public uint score;
-        [FieldOffset(8)]  public uint level1Meter;
-        [FieldOffset(12)] public uint level2Meter;
-        [FieldOffset(16)] public uint level3Meter;
-        [FieldOffset(20)] public uint level4Meter;
-        [FieldOffset(24)] public uint level5Meter;
-        [FieldOffset(28)] public uint level6Meter;
-        [FieldOffset(32)] public uint level7Meter;
-        [FieldOffset(36)] public uint level8Meter;
-        [FieldOffset(40)] public uint level9Meter;
+        [FieldOffset(0x00)] public float intervalTime;
+        [FieldOffset(0x04)] public uint score;
+        [FieldOffset(0x08)] public uint level1Meter;
+        [FieldOffset(0x0C)] public uint level2Meter;
+        [FieldOffset(0x10)] public uint level3Meter;
+        [FieldOffset(0x14)] public uint level4Meter;
+        [FieldOffset(0x18)] public uint level5Meter;
+        [FieldOffset(0x1C)] public uint level6Meter;
+        [FieldOffset(0x20)] public uint level7Meter;
+        [FieldOffset(0x24)] public uint level8Meter;
+        [FieldOffset(0x28)] public uint level9Meter;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 92)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x5C)]
     public struct ActionChainBoostScoreParameter
     {
-        [FieldOffset(0)]  public float intervalTime;
-        [FieldOffset(4)]  public float minSpeed;
-        [FieldOffset(8)]  public float maxSpeed;
-        [FieldOffset(12)] public ActionChainAttackLevelParameter score;
-        [FieldOffset(20)] public ActionChainAttackLevelParameter level1Meter;
-        [FieldOffset(28)] public ActionChainAttackLevelParameter level2Meter;
-        [FieldOffset(36)] public ActionChainAttackLevelParameter level3Meter;
-        [FieldOffset(44)] public ActionChainAttackLevelParameter level4Meter;
-        [FieldOffset(52)] public ActionChainAttackLevelParameter level5Meter;
-        [FieldOffset(60)] public ActionChainAttackLevelParameter level6Meter;
-        [FieldOffset(68)] public ActionChainAttackLevelParameter level7Meter;
-        [FieldOffset(76)] public ActionChainAttackLevelParameter level8Meter;
-        [FieldOffset(84)] public ActionChainAttackLevelParameter level9Meter;
+        [FieldOffset(0x00)] public float intervalTime;
+        [FieldOffset(0x04)] public float minSpeed;
+        [FieldOffset(0x08)] public float maxSpeed;
+        [FieldOffset(0x0C)] public ActionChainAttackLevelParameter score;
+        [FieldOffset(0x14)] public ActionChainAttackLevelParameter level1Meter;
+        [FieldOffset(0x1C)] public ActionChainAttackLevelParameter level2Meter;
+        [FieldOffset(0x24)] public ActionChainAttackLevelParameter level3Meter;
+        [FieldOffset(0x2C)] public ActionChainAttackLevelParameter level4Meter;
+        [FieldOffset(0x34)] public ActionChainAttackLevelParameter level5Meter;
+        [FieldOffset(0x3C)] public ActionChainAttackLevelParameter level6Meter;
+        [FieldOffset(0x44)] public ActionChainAttackLevelParameter level7Meter;
+        [FieldOffset(0x4C)] public ActionChainAttackLevelParameter level8Meter;
+        [FieldOffset(0x54)] public ActionChainAttackLevelParameter level9Meter;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 104)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x68)]
     public struct ActionChainSpinBoostScoreParameter
     {
-        [FieldOffset(0)]   public float intervalTime;
-        [FieldOffset(4)]   public float minSpeed;
-        [FieldOffset(8)]   public float maxSpeed;
-        [FieldOffset(12)]  public ActionChainAttackLevelParameter score;
-        [FieldOffset(20)]  public ActionChainAttackLevelParameter level1Meter;
-        [FieldOffset(28)]  public ActionChainAttackLevelParameter level2Meter;
-        [FieldOffset(36)]  public ActionChainAttackLevelParameter level3Meter;
-        [FieldOffset(44)]  public ActionChainAttackLevelParameter level4Meter;
-        [FieldOffset(52)]  public ActionChainAttackLevelParameter level5Meter;
-        [FieldOffset(60)]  public ActionChainAttackLevelParameter level6Meter;
-        [FieldOffset(68)]  public ActionChainAttackLevelParameter level7Meter;
-        [FieldOffset(76)]  public ActionChainAttackLevelParameter level8Meter;
-        [FieldOffset(84)]  public ActionChainAttackLevelParameter level9Meter;
-        [FieldOffset(92)]  public float minHeight;
-        [FieldOffset(96)]  public float maxHeight;
-        [FieldOffset(100)] public float maxHeightMagnification;
+        [FieldOffset(0x00)] public float intervalTime;
+        [FieldOffset(0x04)] public float minSpeed;
+        [FieldOffset(0x08)] public float maxSpeed;
+        [FieldOffset(0x0C)] public ActionChainAttackLevelParameter score;
+        [FieldOffset(0x14)] public ActionChainAttackLevelParameter level1Meter;
+        [FieldOffset(0x1C)] public ActionChainAttackLevelParameter level2Meter;
+        [FieldOffset(0x24)] public ActionChainAttackLevelParameter level3Meter;
+        [FieldOffset(0x2C)] public ActionChainAttackLevelParameter level4Meter;
+        [FieldOffset(0x34)] public ActionChainAttackLevelParameter level5Meter;
+        [FieldOffset(0x3C)] public ActionChainAttackLevelParameter level6Meter;
+        [FieldOffset(0x44)] public ActionChainAttackLevelParameter level7Meter;
+        [FieldOffset(0x4C)] public ActionChainAttackLevelParameter level8Meter;
+        [FieldOffset(0x54)] public ActionChainAttackLevelParameter level9Meter;
+        [FieldOffset(0x5C)] public float minHeight;
+        [FieldOffset(0x60)] public float maxHeight;
+        [FieldOffset(0x64)] public float maxHeightMagnification;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 3080)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xC08)]
     public struct ActionChainActionParameter
     {
-        [FieldOffset(0)]    public ActionChainScoreParameter dashRollerScore;
-        [FieldOffset(44)]   public ActionChainScoreParameter dashPanelScore;
-        [FieldOffset(88)]   public ActionChainScoreParameter jumpBoardScore;
-        [FieldOffset(132)]  public ActionChainScoreParameter jumpSelecterScore;
-        [FieldOffset(176)]  public ActionChainScoreParameter poleScore;
-        [FieldOffset(220)]  public ActionChainScoreParameter selectCannonScore;
-        [FieldOffset(264)]  public ActionChainScoreParameter springScore;
-        [FieldOffset(308)]  public ActionChainScoreParameter wideSpringScore;
-        [FieldOffset(352)]  public ActionChainScoreParameter springClassicScore;
-        [FieldOffset(396)]  public ActionChainScoreParameter balloonScore;
-        [FieldOffset(440)]  public ActionChainScoreParameter upReelScore;
-        [FieldOffset(484)]  public ActionChainScoreParameter wallJumpScore;
-        [FieldOffset(528)]  public ActionChainScoreParameter propellerSpringScore;
-        [FieldOffset(572)]  public ActionChainScoreParameter springPoleScore;
-        [FieldOffset(616)]  public ActionChainScoreParameter dashRingScore;
-        [FieldOffset(660)]  public ActionChainAttackScoreParameter acceleCombo1Score;
-        [FieldOffset(740)]  public ActionChainAttackScoreParameter acceleCombo2Score;
-        [FieldOffset(820)]  public ActionChainAttackScoreParameter comboFinishScore;
-        [FieldOffset(900)]  public ActionChainAttackScoreParameter acceleRushCombo1Score;
-        [FieldOffset(980)]  public ActionChainAttackScoreParameter acceleRushCombo2Score;
-        [FieldOffset(1060)] public ActionChainAttackScoreParameter acceleRushComboFinishScore;
-        [FieldOffset(1140)] public ActionChainAttackScoreParameter chargeAttackScore;
-        [FieldOffset(1220)] public ActionChainAttackScoreParameter smashScore;
-        [FieldOffset(1300)] public ActionChainAttackScoreParameter recoverySmashScore;
-        [FieldOffset(1380)] public ActionChainAttackScoreParameter sonicBoomScore;
-        [FieldOffset(1460)] public ActionChainAttackScoreParameter crasherScore;
-        [FieldOffset(1540)] public ActionChainAttackScoreParameter loopKickScore;
-        [FieldOffset(1620)] public ActionChainAttackScoreParameter spinSlashScore;
-        [FieldOffset(1700)] public ActionChainAttackScoreParameter stompingAttackScore;
-        [FieldOffset(1780)] public ActionChainAttackScoreParameter homingShotScore;
-        [FieldOffset(1860)] public ActionChainAttackScoreParameter crossSlashScore;
-        [FieldOffset(1940)] public ActionChainScoreParameter ringScore;
-        [FieldOffset(1984)] public ActionChainScoreParameter gismoScore;
-        [FieldOffset(2028)] public ActionChainScoreParameter homingScore;
-        [FieldOffset(2072)] public ActionChainAttackScoreParameter enemyHomingScore;
-        [FieldOffset(2152)] public ActionChainScoreParameter airTrickScore;
-        [FieldOffset(2196)] public ActionChainScoreParameter chainBoosterScore;
-        [FieldOffset(2240)] public ActionChainScoreParameter parryScore;
-        [FieldOffset(2284)] public ActionChainAttackScoreParameter quickCyloopScore;
-        [FieldOffset(2364)] public ActionChainScoreParameter defeatEnemyScore;
-        [FieldOffset(2408)] public ActionChainScoreParameter defeatMiniBossScore;
-        [FieldOffset(2452)] public ActionChainAttackScoreParameter slingShotScore;
-        [FieldOffset(2532)] public ActionChainScoreParameter rippleLaserScore;
-        [FieldOffset(2576)] public ActionChainIntervalScoreParameter grindRailScore;
-        [FieldOffset(2620)] public ActionChainIntervalScoreParameter pulleyScore;
-        [FieldOffset(2664)] public ActionChainIntervalScoreParameter fanScore;
-        [FieldOffset(2708)] public ActionChainIntervalScoreParameter wallRunScore;
-        [FieldOffset(2752)] public ActionChainBoostScoreParameter boostScore;
-        [FieldOffset(2844)] public ActionChainIntervalScoreParameter powerBoostScore;
-        [FieldOffset(2888)] public ActionChainIntervalScoreParameter sandSkiScore;
-        [FieldOffset(2932)] public ActionChainIntervalScoreParameter acceleRailScore;
-        [FieldOffset(2976)] public ActionChainSpinBoostScoreParameter spinBoostScore;
+        [FieldOffset(0x00)] public ActionChainScoreParameter dashRollerScore;
+        [FieldOffset(0x2C)] public ActionChainScoreParameter dashPanelScore;
+        [FieldOffset(0x58)] public ActionChainScoreParameter jumpBoardScore;
+        [FieldOffset(0x84)] public ActionChainScoreParameter jumpSelecterScore;
+        [FieldOffset(0xB0)] public ActionChainScoreParameter poleScore;
+        [FieldOffset(0xDC)] public ActionChainScoreParameter selectCannonScore;
+        [FieldOffset(0x108)] public ActionChainScoreParameter springScore;
+        [FieldOffset(0x134)] public ActionChainScoreParameter wideSpringScore;
+        [FieldOffset(0x160)] public ActionChainScoreParameter springClassicScore;
+        [FieldOffset(0x18C)] public ActionChainScoreParameter balloonScore;
+        [FieldOffset(0x1B8)] public ActionChainScoreParameter upReelScore;
+        [FieldOffset(0x1E4)] public ActionChainScoreParameter wallJumpScore;
+        [FieldOffset(0x210)] public ActionChainScoreParameter propellerSpringScore;
+        [FieldOffset(0x23C)] public ActionChainScoreParameter springPoleScore;
+        [FieldOffset(0x268)] public ActionChainScoreParameter dashRingScore;
+        [FieldOffset(0x294)] public ActionChainAttackScoreParameter acceleCombo1Score;
+        [FieldOffset(0x2E4)] public ActionChainAttackScoreParameter acceleCombo2Score;
+        [FieldOffset(0x334)] public ActionChainAttackScoreParameter comboFinishScore;
+        [FieldOffset(0x384)] public ActionChainAttackScoreParameter acceleRushCombo1Score;
+        [FieldOffset(0x3D4)] public ActionChainAttackScoreParameter acceleRushCombo2Score;
+        [FieldOffset(0x424)] public ActionChainAttackScoreParameter acceleRushComboFinishScore;
+        [FieldOffset(0x474)] public ActionChainAttackScoreParameter chargeAttackScore;
+        [FieldOffset(0x4C4)] public ActionChainAttackScoreParameter smashScore;
+        [FieldOffset(0x514)] public ActionChainAttackScoreParameter recoverySmashScore;
+        [FieldOffset(0x564)] public ActionChainAttackScoreParameter sonicBoomScore;
+        [FieldOffset(0x5B4)] public ActionChainAttackScoreParameter crasherScore;
+        [FieldOffset(0x604)] public ActionChainAttackScoreParameter loopKickScore;
+        [FieldOffset(0x654)] public ActionChainAttackScoreParameter spinSlashScore;
+        [FieldOffset(0x6A4)] public ActionChainAttackScoreParameter stompingAttackScore;
+        [FieldOffset(0x6F4)] public ActionChainAttackScoreParameter homingShotScore;
+        [FieldOffset(0x744)] public ActionChainAttackScoreParameter crossSlashScore;
+        [FieldOffset(0x794)] public ActionChainScoreParameter ringScore;
+        [FieldOffset(0x7C0)] public ActionChainScoreParameter gismoScore;
+        [FieldOffset(0x7EC)] public ActionChainScoreParameter homingScore;
+        [FieldOffset(0x818)] public ActionChainAttackScoreParameter enemyHomingScore;
+        [FieldOffset(0x868)] public ActionChainScoreParameter airTrickScore;
+        [FieldOffset(0x894)] public ActionChainScoreParameter chainBoosterScore;
+        [FieldOffset(0x8C0)] public ActionChainScoreParameter parryScore;
+        [FieldOffset(0x8EC)] public ActionChainAttackScoreParameter quickCyloopScore;
+        [FieldOffset(0x93C)] public ActionChainScoreParameter defeatEnemyScore;
+        [FieldOffset(0x968)] public ActionChainScoreParameter defeatMiniBossScore;
+        [FieldOffset(0x994)] public ActionChainAttackScoreParameter slingShotScore;
+        [FieldOffset(0x9E4)] public ActionChainScoreParameter rippleLaserScore;
+        [FieldOffset(0xA10)] public ActionChainIntervalScoreParameter grindRailScore;
+        [FieldOffset(0xA3C)] public ActionChainIntervalScoreParameter pulleyScore;
+        [FieldOffset(0xA68)] public ActionChainIntervalScoreParameter fanScore;
+        [FieldOffset(0xA94)] public ActionChainIntervalScoreParameter wallRunScore;
+        [FieldOffset(0xAC0)] public ActionChainBoostScoreParameter boostScore;
+        [FieldOffset(0xB1C)] public ActionChainIntervalScoreParameter powerBoostScore;
+        [FieldOffset(0xB48)] public ActionChainIntervalScoreParameter sandSkiScore;
+        [FieldOffset(0xB74)] public ActionChainIntervalScoreParameter acceleRailScore;
+        [FieldOffset(0xBA0)] public ActionChainSpinBoostScoreParameter spinBoostScore;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 28)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct ActionChainMeterParameter
     {
-        [FieldOffset(0)]  public uint meterMax;
-        [FieldOffset(4)]  public float meterDecreaseTime;
-        [FieldOffset(8)]  public uint meterDecrease;
-        [FieldOffset(12)] public float decreaseWaitTime;
-        [FieldOffset(16)] public float decreasePercent;
-        [FieldOffset(20)] public float decreaseWaitTimeAddMeter;
-        [FieldOffset(24)] public float meterResetDelayTime;
+        [FieldOffset(0x00)] public uint meterMax;
+        [FieldOffset(0x04)] public float meterDecreaseTime;
+        [FieldOffset(0x08)] public uint meterDecrease;
+        [FieldOffset(0x0C)] public float decreaseWaitTime;
+        [FieldOffset(0x10)] public float decreasePercent;
+        [FieldOffset(0x14)] public float decreaseWaitTimeAddMeter;
+        [FieldOffset(0x18)] public float meterResetDelayTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 3340)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xD0C)]
     public struct ActionChainParameter
     {
-        [FieldOffset(0)]    public ActionChainActionParameter actionParam;
-        [FieldOffset(3080)] public ActionChainMeterParameter level1MeterParam;
-        [FieldOffset(3108)] public ActionChainMeterParameter level2MeterParam;
-        [FieldOffset(3136)] public ActionChainMeterParameter level3MeterParam;
-        [FieldOffset(3164)] public ActionChainMeterParameter level4MeterParam;
-        [FieldOffset(3192)] public ActionChainMeterParameter level5MeterParam;
-        [FieldOffset(3220)] public ActionChainMeterParameter level6MeterParam;
-        [FieldOffset(3248)] public ActionChainMeterParameter level7MeterParam;
-        [FieldOffset(3276)] public ActionChainMeterParameter level8MeterParam;
-        [FieldOffset(3304)] public ActionChainMeterParameter level9MeterParam;
-        [FieldOffset(3332)] public float gimmickReuseTime;
-        [FieldOffset(3336)] public bool isChainBoosterLevelUp;
+        [FieldOffset(0x00)] public ActionChainActionParameter actionParam;
+        [FieldOffset(0xC08)] public ActionChainMeterParameter level1MeterParam;
+        [FieldOffset(0xC24)] public ActionChainMeterParameter level2MeterParam;
+        [FieldOffset(0xC40)] public ActionChainMeterParameter level3MeterParam;
+        [FieldOffset(0xC5C)] public ActionChainMeterParameter level4MeterParam;
+        [FieldOffset(0xC78)] public ActionChainMeterParameter level5MeterParam;
+        [FieldOffset(0xC94)] public ActionChainMeterParameter level6MeterParam;
+        [FieldOffset(0xCB0)] public ActionChainMeterParameter level7MeterParam;
+        [FieldOffset(0xCCC)] public ActionChainMeterParameter level8MeterParam;
+        [FieldOffset(0xCE8)] public ActionChainMeterParameter level9MeterParam;
+        [FieldOffset(0xD04)] public float gimmickReuseTime;
+        [FieldOffset(0xD08)] public bool isChainBoosterLevelUp;
     }
 
 }

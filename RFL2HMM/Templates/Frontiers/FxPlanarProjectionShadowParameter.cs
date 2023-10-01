@@ -3,21 +3,21 @@ using System.Runtime.InteropServices;
 
 public class FxPlanarProjectionShadowParameterClass
 {
-    [StructLayout(LayoutKind.Explicit, Size = 144)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x90)]
     public struct FxPlanarProjectionShadowParameter
     {
-        [FieldOffset(0)]   public bool enable;
-        [FieldOffset(16)]  public Vector4 projectionPlane;
-        [FieldOffset(32)]  public Vector3 lightPosition__arr0;
-        [FieldOffset(48)] public Vector3 lightPosition__arr1;
-        [FieldOffset(64)] public Vector3 lightPosition__arr2;
-        [FieldOffset(80)] public Vector3 lightPosition__arr3;
-        [FieldOffset(96)]  public sbyte lightCount;
-        [FieldOffset(100)] public float vanishStart;
-        [FieldOffset(104)] public float vanishDistance;
-        [FieldOffset(108)] public float projectionBias;
-        [FieldOffset(112)] public Vector3 shadowMapBoxSize;
-        [FieldOffset(128)] public Vector3 shadowMapBoxOffset;
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x10)] public Vector4 projectionPlane;
+        [FieldOffset(0x20)] public Vector3 lightPosition__arr0;
+        [FieldOffset(0x30)] public Vector3 lightPosition__arr1;
+        [FieldOffset(0x40)] public Vector3 lightPosition__arr2;
+        [FieldOffset(0x50)] public Vector3 lightPosition__arr3;
+        [FieldOffset(0x60)] public sbyte lightCount;
+        [FieldOffset(0x64)] public float vanishStart;
+        [FieldOffset(0x68)] public float vanishDistance;
+        [FieldOffset(0x6C)] public float projectionBias;
+        [FieldOffset(0x70)] public Vector3 shadowMapBoxSize;
+        [FieldOffset(0x80)] public Vector3 shadowMapBoxOffset;
     }
 
 }

@@ -3,121 +3,121 @@ using System.Runtime.InteropServices;
 
 public class EnemyBommerConfigClass
 {
-    [StructLayout(LayoutKind.Explicit, Size = 28)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct RingParameter
     {
-        [FieldOffset(0)]  public float suckedTime;
-        [FieldOffset(4)]  public float launchAngle;
-        [FieldOffset(8)]  public float launchMaxSpeed;
-        [FieldOffset(12)] public float launchMinSpeed;
-        [FieldOffset(16)] public float randomRangeMin;
-        [FieldOffset(20)] public float randomRangeMax;
-        [FieldOffset(24)] public float lifeTime;
+        [FieldOffset(0x00)] public float suckedTime;
+        [FieldOffset(0x04)] public float launchAngle;
+        [FieldOffset(0x08)] public float launchMaxSpeed;
+        [FieldOffset(0x0C)] public float launchMinSpeed;
+        [FieldOffset(0x10)] public float randomRangeMin;
+        [FieldOffset(0x14)] public float randomRangeMax;
+        [FieldOffset(0x18)] public float lifeTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct EnemyBommerPatrolConfig
     {
-        [FieldOffset(0)]  public float rotationDeceleration;
-        [FieldOffset(4)]  public float rotationAngleMax;
-        [FieldOffset(8)]  public float changeTimeIdlePatrolMin;
-        [FieldOffset(12)] public float changeTimeIdlePatrolMax;
+        [FieldOffset(0x00)] public float rotationDeceleration;
+        [FieldOffset(0x04)] public float rotationAngleMax;
+        [FieldOffset(0x08)] public float changeTimeIdlePatrolMin;
+        [FieldOffset(0x0C)] public float changeTimeIdlePatrolMax;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct EnemyBommerAimingConfig
     {
-        [FieldOffset(0)]  public float moveDecerleration;
-        [FieldOffset(4)]  public float rotationAngleMax;
-        [FieldOffset(8)]  public float chargeTime;
-        [FieldOffset(12)] public float rotateSpeed;
+        [FieldOffset(0x00)] public float moveDecerleration;
+        [FieldOffset(0x04)] public float rotationAngleMax;
+        [FieldOffset(0x08)] public float chargeTime;
+        [FieldOffset(0x0C)] public float rotateSpeed;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 20)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
     public struct EnemyBommerAttackConfig
     {
-        [FieldOffset(0)]  public float moveVelocity;
-        [FieldOffset(4)]  public float moveDecerleration;
-        [FieldOffset(8)]  public float moveDecelerationDamaged;
-        [FieldOffset(12)] public float cooldownTime;
-        [FieldOffset(16)] public float colliderOffsetRate;
+        [FieldOffset(0x00)] public float moveVelocity;
+        [FieldOffset(0x04)] public float moveDecerleration;
+        [FieldOffset(0x08)] public float moveDecelerationDamaged;
+        [FieldOffset(0x0C)] public float cooldownTime;
+        [FieldOffset(0x10)] public float colliderOffsetRate;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 52)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x34)]
     public struct EnemyBommerChaseConfig
     {
-        [FieldOffset(0)]  public float moveVelocity;
-        [FieldOffset(4)]  public float moveAccerleration;
-        [FieldOffset(8)]  public float amplitude;
-        [FieldOffset(12)] public float period;
-        [FieldOffset(16)] public float rotateSpeedInFront;
-        [FieldOffset(20)] public float rotateSpeedOnBack;
-        [FieldOffset(24)] public float chaseTime;
-        [FieldOffset(28)] public float parriedMoveDistance;
-        [FieldOffset(32)] public float parriedShortenTime;
-        [FieldOffset(36)] public float parriedCoolDownTime;
-        [FieldOffset(40)] public float colliderOffsetRate;
-        [FieldOffset(44)] public float cameraDistance;
-        [FieldOffset(48)] public float cameraElevation;
+        [FieldOffset(0x00)] public float moveVelocity;
+        [FieldOffset(0x04)] public float moveAccerleration;
+        [FieldOffset(0x08)] public float amplitude;
+        [FieldOffset(0x0C)] public float period;
+        [FieldOffset(0x10)] public float rotateSpeedInFront;
+        [FieldOffset(0x14)] public float rotateSpeedOnBack;
+        [FieldOffset(0x18)] public float chaseTime;
+        [FieldOffset(0x1C)] public float parriedMoveDistance;
+        [FieldOffset(0x20)] public float parriedShortenTime;
+        [FieldOffset(0x24)] public float parriedCoolDownTime;
+        [FieldOffset(0x28)] public float colliderOffsetRate;
+        [FieldOffset(0x2C)] public float cameraDistance;
+        [FieldOffset(0x30)] public float cameraElevation;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct DebrisParameter
     {
-        [FieldOffset(0)]  public int m_maxNumPieces;
-        [FieldOffset(4)]  public float gravity;
-        [FieldOffset(8)]  public float lifeTime;
-        [FieldOffset(12)] public float force;
+        [FieldOffset(0x00)] public int m_maxNumPieces;
+        [FieldOffset(0x04)] public float gravity;
+        [FieldOffset(0x08)] public float lifeTime;
+        [FieldOffset(0x0C)] public float force;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 208)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xD0)]
     public struct EnemyBommerCommonConfig
     {
-        [FieldOffset(0)]   public RingParameter ringParam;
-        [FieldOffset(28)]  public float mass;
-        [FieldOffset(32)]  public float slopeAngleMax;
-        [FieldOffset(36)]  public float checkBarrierDistance;
-        [FieldOffset(40)]  public float colliderRadius;
-        [FieldOffset(44)]  public float colliderHeight;
-        [FieldOffset(48)]  public float damageColliderRadiusOffset;
-        [FieldOffset(52)]  public float eyesightDistance;
-        [FieldOffset(56)]  public float eyesightDistanceMargin;
-        [FieldOffset(60)]  public EnemyBommerPatrolConfig patrolConfig;
-        [FieldOffset(76)]  public EnemyBommerAimingConfig aimingConfig;
-        [FieldOffset(92)]  public EnemyBommerAttackConfig attackConfig;
-        [FieldOffset(112)] public EnemyBommerChaseConfig chaseConfig;
-        [FieldOffset(164)] public float explodeSignalTime;
-        [FieldOffset(168)] public float explodeColliderRadius;
-        [FieldOffset(172)] public bool useUniqueDebrisSetting;
-        [FieldOffset(176)] public DebrisParameter debrisExplode;
-        [FieldOffset(192)] public DebrisParameter debrisCyloop;
+        [FieldOffset(0x00)] public RingParameter ringParam;
+        [FieldOffset(0x1C)] public float mass;
+        [FieldOffset(0x20)] public float slopeAngleMax;
+        [FieldOffset(0x24)] public float checkBarrierDistance;
+        [FieldOffset(0x28)] public float colliderRadius;
+        [FieldOffset(0x2C)] public float colliderHeight;
+        [FieldOffset(0x30)] public float damageColliderRadiusOffset;
+        [FieldOffset(0x34)] public float eyesightDistance;
+        [FieldOffset(0x38)] public float eyesightDistanceMargin;
+        [FieldOffset(0x3C)] public EnemyBommerPatrolConfig patrolConfig;
+        [FieldOffset(0x4C)] public EnemyBommerAimingConfig aimingConfig;
+        [FieldOffset(0x5C)] public EnemyBommerAttackConfig attackConfig;
+        [FieldOffset(0x70)] public EnemyBommerChaseConfig chaseConfig;
+        [FieldOffset(0xA4)] public float explodeSignalTime;
+        [FieldOffset(0xA8)] public float explodeColliderRadius;
+        [FieldOffset(0xAC)] public bool useUniqueDebrisSetting;
+        [FieldOffset(0xB0)] public DebrisParameter debrisExplode;
+        [FieldOffset(0xC0)] public DebrisParameter debrisCyloop;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct BommerCommonLevelConfig
     {
-        [FieldOffset(0)]  public int maxHealthPoint;
-        [FieldOffset(4)]  public float attackRate;
-        [FieldOffset(8)]  public ushort expItemNum;
-        [FieldOffset(10)] public ushort exp;
+        [FieldOffset(0x00)] public int maxHealthPoint;
+        [FieldOffset(0x04)] public float attackRate;
+        [FieldOffset(0x08)] public ushort expItemNum;
+        [FieldOffset(0x0A)] public ushort exp;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct EnemyBommerLevelConfig
     {
-        [FieldOffset(0)] public int level;
-        [FieldOffset(4)] public BommerCommonLevelConfig common;
+        [FieldOffset(0x00)] public int level;
+        [FieldOffset(0x04)] public BommerCommonLevelConfig common;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 288)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x120)]
     public struct EnemyBommerConfig
     {
-        [FieldOffset(0)]   public EnemyBommerCommonConfig commonParams;
-        [FieldOffset(208)] public EnemyBommerLevelConfig levelParams__arr0;
-        [FieldOffset(224)] public EnemyBommerLevelConfig levelParams__arr1;
-        [FieldOffset(240)] public EnemyBommerLevelConfig levelParams__arr2;
-        [FieldOffset(256)] public EnemyBommerLevelConfig levelParams__arr3;
-        [FieldOffset(272)] public EnemyBommerLevelConfig levelParams__arr4;
+        [FieldOffset(0x00)] public EnemyBommerCommonConfig commonParams;
+        [FieldOffset(0xD0)] public EnemyBommerLevelConfig levelParams__arr0;
+        [FieldOffset(0xE0)] public EnemyBommerLevelConfig levelParams__arr1;
+        [FieldOffset(0xF0)] public EnemyBommerLevelConfig levelParams__arr2;
+        [FieldOffset(0x100)] public EnemyBommerLevelConfig levelParams__arr3;
+        [FieldOffset(0x110)] public EnemyBommerLevelConfig levelParams__arr4;
     }
 
 }

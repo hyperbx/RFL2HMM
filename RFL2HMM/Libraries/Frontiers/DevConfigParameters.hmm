@@ -16,21 +16,21 @@ Library "DevConfigParameters"
         Default = 0
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct DevConfigParameters
     {
-        [FieldOffset(0)]  public bool autoSaveEnabled;
-        [FieldOffset(1)]  public bool gismoEnabled;
-        [FieldOffset(2)]  public bool reportEnabled;
-        [FieldOffset(3)]  public bool skillTreeEnabled;
-        [FieldOffset(4)]  public bool tutorialEnabled;
-        [FieldOffset(5)]  public bool arcadeModeEnabled;
-        [FieldOffset(6)]  public bool battleModeEnabled;
-        [FieldOffset(7)]  public bool cyberChallengeEnabled;
-        [FieldOffset(8)]  public bool practice;
-        [FieldOffset(9)]  public bool practiceTimeLimitEnabled;
-        [FieldOffset(10)] public bool creditsEnabled;
-        [FieldOffset(11)] public Value character;
+        [FieldOffset(0x00)] public bool autoSaveEnabled;
+        [FieldOffset(0x01)] public bool gismoEnabled;
+        [FieldOffset(0x02)] public bool reportEnabled;
+        [FieldOffset(0x03)] public bool skillTreeEnabled;
+        [FieldOffset(0x04)] public bool tutorialEnabled;
+        [FieldOffset(0x05)] public bool arcadeModeEnabled;
+        [FieldOffset(0x06)] public bool battleModeEnabled;
+        [FieldOffset(0x07)] public bool cyberChallengeEnabled;
+        [FieldOffset(0x08)] public bool practice;
+        [FieldOffset(0x09)] public bool practiceTimeLimitEnabled;
+        [FieldOffset(0x0A)] public bool creditsEnabled;
+        [FieldOffset(0x0B)] public Value character;
     }
 
 }

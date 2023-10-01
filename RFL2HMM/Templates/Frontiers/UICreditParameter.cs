@@ -3,15 +3,15 @@ using System.Runtime.InteropServices;
 
 public class UICreditParameterClass
 {
-    [StructLayout(LayoutKind.Explicit, Size = 24)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct UICreditParameter
     {
-        [FieldOffset(0)]  public float LicenseInterval;
-        [FieldOffset(4)]  public float NameInterval;
-        [FieldOffset(8)]  public float PostInterval;
-        [FieldOffset(12)] public float CompanyInterval;
-        [FieldOffset(16)] public float LogoInterval;
-        [FieldOffset(20)] public float WaitTime;
+        [FieldOffset(0x00)] public float LicenseInterval;
+        [FieldOffset(0x04)] public float NameInterval;
+        [FieldOffset(0x08)] public float PostInterval;
+        [FieldOffset(0x0C)] public float CompanyInterval;
+        [FieldOffset(0x10)] public float LogoInterval;
+        [FieldOffset(0x14)] public float WaitTime;
     }
 
 }

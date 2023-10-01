@@ -3,56 +3,56 @@ using System.Runtime.InteropServices;
 
 public class ObjMowingParameterClass
 {
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct ObjMowingGrassParameter
     {
-        [FieldOffset(0)] public float radius;
+        [FieldOffset(0x00)] public float radius;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 80)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x50)]
     public struct ObjBeeFlowerParameter
     {
-        [FieldOffset(0)]  public float modelScale;
-        [FieldOffset(4)]  public float capsuleRadiusSprouts;
-        [FieldOffset(8)]  public float capsuleRadiusFlower;
-        [FieldOffset(12)] public float capsuleHeightSprouts;
-        [FieldOffset(16)] public float capsuleHeightFlower;
-        [FieldOffset(32)] public Vector3 effectOffsetSprouts;
-        [FieldOffset(48)] public Vector3 effectOffsetFlower;
-        [FieldOffset(64)] public float beeAttractDist;
-        [FieldOffset(68)] public float efficacyTimeFlower;
+        [FieldOffset(0x00)] public float modelScale;
+        [FieldOffset(0x04)] public float capsuleRadiusSprouts;
+        [FieldOffset(0x08)] public float capsuleRadiusFlower;
+        [FieldOffset(0x0C)] public float capsuleHeightSprouts;
+        [FieldOffset(0x10)] public float capsuleHeightFlower;
+        [FieldOffset(0x20)] public Vector3 effectOffsetSprouts;
+        [FieldOffset(0x30)] public Vector3 effectOffsetFlower;
+        [FieldOffset(0x40)] public float beeAttractDist;
+        [FieldOffset(0x44)] public float efficacyTimeFlower;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 80)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x50)]
     public struct ObjBeeSwarmParameter
     {
-        [FieldOffset(0)]  public Vector3 targetOffset;
-        [FieldOffset(16)] public Vector3 targetOffsetFlower;
-        [FieldOffset(32)] public float collRadius;
-        [FieldOffset(36)] public float modelScale;
-        [FieldOffset(40)] public float beeMoveSpeed;
-        [FieldOffset(44)] public float reflectionAngle;
-        [FieldOffset(48)] public float coefAverage;
-        [FieldOffset(52)] public float coefCenter;
-        [FieldOffset(56)] public float coefRepulse;
-        [FieldOffset(60)] public float waitTimeAfterAttack;
-        [FieldOffset(64)] public float waitTimeAfterFlower;
+        [FieldOffset(0x00)] public Vector3 targetOffset;
+        [FieldOffset(0x10)] public Vector3 targetOffsetFlower;
+        [FieldOffset(0x20)] public float collRadius;
+        [FieldOffset(0x24)] public float modelScale;
+        [FieldOffset(0x28)] public float beeMoveSpeed;
+        [FieldOffset(0x2C)] public float reflectionAngle;
+        [FieldOffset(0x30)] public float coefAverage;
+        [FieldOffset(0x34)] public float coefCenter;
+        [FieldOffset(0x38)] public float coefRepulse;
+        [FieldOffset(0x3C)] public float waitTimeAfterAttack;
+        [FieldOffset(0x40)] public float waitTimeAfterFlower;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 176)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
     public struct ObjMowingParameterElement
     {
-        [FieldOffset(0)]  public ObjMowingGrassParameter grassParam;
-        [FieldOffset(16)] public ObjBeeFlowerParameter beeFlowerParam;
-        [FieldOffset(96)] public ObjBeeSwarmParameter beeSwarm;
+        [FieldOffset(0x00)] public ObjMowingGrassParameter grassParam;
+        [FieldOffset(0x10)] public ObjBeeFlowerParameter beeFlowerParam;
+        [FieldOffset(0x60)] public ObjBeeSwarmParameter beeSwarm;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 528)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x210)]
     public struct ObjMowingParameter
     {
-        [FieldOffset(0)] public ObjMowingParameterElement element__arr0;
-        [FieldOffset(176)] public ObjMowingParameterElement element__arr1;
-        [FieldOffset(352)] public ObjMowingParameterElement element__arr2;
+        [FieldOffset(0x00)] public ObjMowingParameterElement element__arr0;
+        [FieldOffset(0xB0)] public ObjMowingParameterElement element__arr1;
+        [FieldOffset(0x160)] public ObjMowingParameterElement element__arr2;
     }
 
 }

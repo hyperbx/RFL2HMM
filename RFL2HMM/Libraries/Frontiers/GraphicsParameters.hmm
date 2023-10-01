@@ -5,33 +5,78 @@ Library "GraphicsParameters"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
-    public struct CString
+    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    public struct UnmanagedString
     {
         [FieldOffset(0)] public long pValue;
 
         public string Value
         {
-        	get => Marshal.PtrToStringAnsi((IntPtr)pValue);
-        	set => pValue = (long)Marshal.StringToHGlobalAnsi(value);
+            get
+            {
+                if (pValue == 0)
+                    return string.Empty;
+
+                return Marshal.PtrToStringAnsi((nint)pValue);
+            }
+
+            set => pValue = Marshal.StringToHGlobalAnsi(value);
+        }
+
+        public UnmanagedString(string in_value)
+        {
+            Value = in_value;
+        }
+
+        public static implicit operator UnmanagedString(string in_value)
+        {
+            return new UnmanagedString(in_value);
+        }
+
+        public static bool operator ==(UnmanagedString in_left, string in_right)
+        {
+            return in_left.Value == in_right;
+        }
+
+        public static bool operator !=(UnmanagedString in_left, string in_right)
+        {
+            return !(in_left == in_right);
+        }
+
+        public override bool Equals(object in_obj)
+        {
+            if (in_obj is string str)
+                return Value == str;
+
+            return base.Equals(in_obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Value;
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 20)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
     public struct AuraEffectLerpNode
     {
-        [FieldOffset(0)]  public float distance;
-        [FieldOffset(4)]  public float noiseTextureScrollSpeed;
-        [FieldOffset(8)]  public float blurScale;
-        [FieldOffset(12)] public float colorGain;
-        [FieldOffset(16)] public float noiseGain;
+        [FieldOffset(0x00)] public float distance;
+        [FieldOffset(0x04)] public float noiseTextureScrollSpeed;
+        [FieldOffset(0x08)] public float blurScale;
+        [FieldOffset(0x0C)] public float colorGain;
+        [FieldOffset(0x10)] public float noiseGain;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 56)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public struct AuraEffectLerpParameter
     {
-        [FieldOffset(0)]  public CString name;
-        [FieldOffset(16)] public unsafe fixed byte /* AuraEffectLerpNode[2] */ _node[40];
+        [FieldOffset(0x00)] public UnmanagedString name;
+        [FieldOffset(0x10)] public unsafe fixed byte /* AuraEffectLerpNode[2] */ _node[40];
 
         public unsafe AuraEffectLerpNode* node
         {
@@ -43,10 +88,10 @@ Library "GraphicsParameters"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 224)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
     public struct AuraEffectParameters
     {
-        [FieldOffset(0)] public unsafe fixed byte /* AuraEffectLerpParameter[4] */ __params[224];
+        [FieldOffset(0x00)] public unsafe fixed byte /* AuraEffectLerpParameter[4] */ __params[224];
 
         public unsafe AuraEffectLerpParameter* _params
         {
@@ -58,25 +103,25 @@ Library "GraphicsParameters"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct EffectParameters
     {
-        [FieldOffset(0)] public float localLightIntensityScale;
-        [FieldOffset(4)] public bool dropPriorityEnabled;
-        [FieldOffset(5)] public sbyte dropPriority;
+        [FieldOffset(0x00)] public float localLightIntensityScale;
+        [FieldOffset(0x04)] public bool dropPriorityEnabled;
+        [FieldOffset(0x05)] public sbyte dropPriority;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 5)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x05)]
     public struct WeatherBlockParameter
     {
-        [FieldOffset(0)] public unsafe fixed byte blockWeights[5];
+        [FieldOffset(0x00)] public unsafe fixed byte blockWeights[5];
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 30)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1E)]
     public struct WeatherTypeParameter
     {
-        [FieldOffset(0)] public unsafe fixed byte transitWeights[5];
-        [FieldOffset(5)] public unsafe fixed byte /* WeatherBlockParameter[5] */ _blockParams[25];
+        [FieldOffset(0x00)] public unsafe fixed byte transitWeights[5];
+        [FieldOffset(0x05)] public unsafe fixed byte /* WeatherBlockParameter[5] */ _blockParams[25];
 
         public unsafe WeatherBlockParameter* blockParams
         {
@@ -88,27 +133,27 @@ Library "GraphicsParameters"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 2)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x02)]
     public struct WeatherTimeParameter
     {
-        [FieldOffset(0)] public byte hour;
-        [FieldOffset(1)] public byte minute;
+        [FieldOffset(0x00)] public byte hour;
+        [FieldOffset(0x01)] public byte minute;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 10)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x0A)]
     public struct WeatherTimeControlParameter
     {
-        [FieldOffset(0)] public WeatherTimeParameter sunriseBeginTime;
-        [FieldOffset(2)] public WeatherTimeParameter dayBeginTime;
-        [FieldOffset(4)] public WeatherTimeParameter sunsetBeginTime;
-        [FieldOffset(6)] public WeatherTimeParameter nightBeginTime;
-        [FieldOffset(8)] public WeatherTimeParameter blockTime;
+        [FieldOffset(0x00)] public WeatherTimeParameter sunriseBeginTime;
+        [FieldOffset(0x02)] public WeatherTimeParameter dayBeginTime;
+        [FieldOffset(0x04)] public WeatherTimeParameter sunsetBeginTime;
+        [FieldOffset(0x06)] public WeatherTimeParameter nightBeginTime;
+        [FieldOffset(0x08)] public WeatherTimeParameter blockTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 160)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
     public struct WeatherParameters
     {
-        [FieldOffset(0)]   public unsafe fixed byte /* WeatherTypeParameter[5] */ _type[150];
+        [FieldOffset(0x00)] public unsafe fixed byte /* WeatherTypeParameter[5] */ _type[150];
 
         public unsafe WeatherTypeParameter* type
         {
@@ -119,15 +164,15 @@ Library "GraphicsParameters"
             }
         }
 
-        [FieldOffset(150)] public WeatherTimeControlParameter timeControl;
+        [FieldOffset(0x96)] public WeatherTimeControlParameter timeControl;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 392)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x188)]
     public struct GraphicsParameters
     {
-        [FieldOffset(0)]   public AuraEffectParameters aura;
-        [FieldOffset(224)] public EffectParameters effect;
-        [FieldOffset(232)] public WeatherParameters weather;
+        [FieldOffset(0x00)] public AuraEffectParameters aura;
+        [FieldOffset(0xE0)] public EffectParameters effect;
+        [FieldOffset(0xE8)] public WeatherParameters weather;
     }
 
 }

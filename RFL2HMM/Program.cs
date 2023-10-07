@@ -5,7 +5,7 @@ namespace RFL2HMM
 {
     class Program
     {
-        private const string _version = "1.2.3";
+        private const string _version = "1.2.4";
         private const string _arrayDelimiter = "__arr";
 
         private static StringBuilder _output = new();
@@ -191,12 +191,18 @@ namespace RFL2HMM
 
                     if (File.Exists(libraryFilePath))
                     {
-                        string libraryCode = File.ReadAllText(libraryFilePath);
+                        var libraryCode = File.ReadAllLines(libraryFilePath);
 
-                        // Rename root struct since it'll share the name with the library class.
-                        libraryCode = libraryCode.Replace($"public struct {templateName}", "public struct Root");
+                        for (int i = libraryCode.Length - 1; i >= 0; i--)
+                        {
+                            if (libraryCode[i].Trim() == $"public struct {templateName}")
+                            {
+                                libraryCode[i] = "    public struct Root";
+                                break;
+                            }
+                        }
 
-                        _output.AppendLine($"\n{libraryCode}");
+                        _output.AppendLine($"\n{string.Join('\n', libraryCode)}");
                     }
                     else
                     {

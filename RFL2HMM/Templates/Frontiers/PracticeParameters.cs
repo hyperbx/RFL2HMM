@@ -211,15 +211,15 @@ public class PracticeParametersClass
     public struct PracticeText
     {
         [FieldOffset(0x00)] public UnmanagedString labels__arr0;
-        [FieldOffset(0xFF)] public UnmanagedString labels__arr1;
-        [FieldOffset(0x1FE)] public UnmanagedString labels__arr2;
-        [FieldOffset(0x2FD)] public UnmanagedString labels__arr3;
-        [FieldOffset(0x3FC)] public UnmanagedString labels__arr4;
-        [FieldOffset(0x4FB)] public UnmanagedString labels__arr5;
-        [FieldOffset(0x5FA)] public UnmanagedString labels__arr6;
-        [FieldOffset(0x6F9)] public UnmanagedString labels__arr7;
-        [FieldOffset(0x7F8)] public UnmanagedString labels__arr8;
-        [FieldOffset(0x8F7)] public UnmanagedString labels__arr9;
+        [FieldOffset(0x10)] public UnmanagedString labels__arr1;
+        [FieldOffset(0x20)] public UnmanagedString labels__arr2;
+        [FieldOffset(0x30)] public UnmanagedString labels__arr3;
+        [FieldOffset(0x40)] public UnmanagedString labels__arr4;
+        [FieldOffset(0x50)] public UnmanagedString labels__arr5;
+        [FieldOffset(0x60)] public UnmanagedString labels__arr6;
+        [FieldOffset(0x70)] public UnmanagedString labels__arr7;
+        [FieldOffset(0x80)] public UnmanagedString labels__arr8;
+        [FieldOffset(0x90)] public UnmanagedString labels__arr9;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x1C)]

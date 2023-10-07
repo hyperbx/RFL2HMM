@@ -146,14 +146,14 @@ public class GismoConfigDesignDataClass
     public struct MirageAnimData
     {
         [FieldOffset(0x00)] public UnmanagedString texSrtAnimName__arr0;
-        [FieldOffset(0xFF)] public UnmanagedString texSrtAnimName__arr1;
-        [FieldOffset(0x1FE)] public UnmanagedString texSrtAnimName__arr2;
+        [FieldOffset(0x10)] public UnmanagedString texSrtAnimName__arr1;
+        [FieldOffset(0x20)] public UnmanagedString texSrtAnimName__arr2;
         [FieldOffset(0x30)] public UnmanagedString texPatAnimName__arr0;
-        [FieldOffset(0x12F)] public UnmanagedString texPatAnimName__arr1;
-        [FieldOffset(0x22E)] public UnmanagedString texPatAnimName__arr2;
+        [FieldOffset(0x40)] public UnmanagedString texPatAnimName__arr1;
+        [FieldOffset(0x50)] public UnmanagedString texPatAnimName__arr2;
         [FieldOffset(0x60)] public UnmanagedString matAnimName__arr0;
-        [FieldOffset(0x15F)] public UnmanagedString matAnimName__arr1;
-        [FieldOffset(0x25E)] public UnmanagedString matAnimName__arr2;
+        [FieldOffset(0x70)] public UnmanagedString matAnimName__arr1;
+        [FieldOffset(0x80)] public UnmanagedString matAnimName__arr2;
     }
 
     public enum MotionType : byte

@@ -65,38 +65,38 @@ public class MonologueParametersClass
     {
         [FieldOffset(0x00)] public float playSpanTime;
         [FieldOffset(0x08)] public UnmanagedString labelNames__arr0;
-        [FieldOffset(0x107)] public UnmanagedString labelNames__arr1;
-        [FieldOffset(0x206)] public UnmanagedString labelNames__arr2;
-        [FieldOffset(0x305)] public UnmanagedString labelNames__arr3;
-        [FieldOffset(0x404)] public UnmanagedString labelNames__arr4;
-        [FieldOffset(0x503)] public UnmanagedString labelNames__arr5;
-        [FieldOffset(0x602)] public UnmanagedString labelNames__arr6;
-        [FieldOffset(0x701)] public UnmanagedString labelNames__arr7;
-        [FieldOffset(0x800)] public UnmanagedString labelNames__arr8;
-        [FieldOffset(0x8FF)] public UnmanagedString labelNames__arr9;
-        [FieldOffset(0x9FE)] public UnmanagedString labelNames__arr10;
-        [FieldOffset(0xAFD)] public UnmanagedString labelNames__arr11;
-        [FieldOffset(0xBFC)] public UnmanagedString labelNames__arr12;
-        [FieldOffset(0xCFB)] public UnmanagedString labelNames__arr13;
-        [FieldOffset(0xDFA)] public UnmanagedString labelNames__arr14;
-        [FieldOffset(0xEF9)] public UnmanagedString labelNames__arr15;
-        [FieldOffset(0xFF8)] public UnmanagedString labelNames__arr16;
-        [FieldOffset(0x10F7)] public UnmanagedString labelNames__arr17;
-        [FieldOffset(0x11F6)] public UnmanagedString labelNames__arr18;
-        [FieldOffset(0x12F5)] public UnmanagedString labelNames__arr19;
-        [FieldOffset(0x13F4)] public UnmanagedString labelNames__arr20;
-        [FieldOffset(0x14F3)] public UnmanagedString labelNames__arr21;
-        [FieldOffset(0x15F2)] public UnmanagedString labelNames__arr22;
-        [FieldOffset(0x16F1)] public UnmanagedString labelNames__arr23;
+        [FieldOffset(0x18)] public UnmanagedString labelNames__arr1;
+        [FieldOffset(0x28)] public UnmanagedString labelNames__arr2;
+        [FieldOffset(0x38)] public UnmanagedString labelNames__arr3;
+        [FieldOffset(0x48)] public UnmanagedString labelNames__arr4;
+        [FieldOffset(0x58)] public UnmanagedString labelNames__arr5;
+        [FieldOffset(0x68)] public UnmanagedString labelNames__arr6;
+        [FieldOffset(0x78)] public UnmanagedString labelNames__arr7;
+        [FieldOffset(0x88)] public UnmanagedString labelNames__arr8;
+        [FieldOffset(0x98)] public UnmanagedString labelNames__arr9;
+        [FieldOffset(0xA8)] public UnmanagedString labelNames__arr10;
+        [FieldOffset(0xB8)] public UnmanagedString labelNames__arr11;
+        [FieldOffset(0xC8)] public UnmanagedString labelNames__arr12;
+        [FieldOffset(0xD8)] public UnmanagedString labelNames__arr13;
+        [FieldOffset(0xE8)] public UnmanagedString labelNames__arr14;
+        [FieldOffset(0xF8)] public UnmanagedString labelNames__arr15;
+        [FieldOffset(0x108)] public UnmanagedString labelNames__arr16;
+        [FieldOffset(0x118)] public UnmanagedString labelNames__arr17;
+        [FieldOffset(0x128)] public UnmanagedString labelNames__arr18;
+        [FieldOffset(0x138)] public UnmanagedString labelNames__arr19;
+        [FieldOffset(0x148)] public UnmanagedString labelNames__arr20;
+        [FieldOffset(0x158)] public UnmanagedString labelNames__arr21;
+        [FieldOffset(0x168)] public UnmanagedString labelNames__arr22;
+        [FieldOffset(0x178)] public UnmanagedString labelNames__arr23;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public struct MonologueMultiTextParameters
     {
         [FieldOffset(0x00)] public UnmanagedString labelNames__arr0;
-        [FieldOffset(0xFF)] public UnmanagedString labelNames__arr1;
-        [FieldOffset(0x1FE)] public UnmanagedString labelNames__arr2;
-        [FieldOffset(0x2FD)] public UnmanagedString labelNames__arr3;
+        [FieldOffset(0x10)] public UnmanagedString labelNames__arr1;
+        [FieldOffset(0x20)] public UnmanagedString labelNames__arr2;
+        [FieldOffset(0x30)] public UnmanagedString labelNames__arr3;
     }
 
     public enum Value : sbyte

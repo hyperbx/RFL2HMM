@@ -71,10 +71,10 @@ public class EffectRecordTableClass
     {
         [FieldOffset(0)] public Record record;
         [FieldOffset(0x08)] public UnmanagedString emitterSetName__arr0;
-        [FieldOffset(0x107)] public UnmanagedString emitterSetName__arr1;
-        [FieldOffset(0x206)] public UnmanagedString emitterSetName__arr2;
-        [FieldOffset(0x305)] public UnmanagedString emitterSetName__arr3;
-        [FieldOffset(0x404)] public UnmanagedString emitterSetName__arr4;
+        [FieldOffset(0x18)] public UnmanagedString emitterSetName__arr1;
+        [FieldOffset(0x28)] public UnmanagedString emitterSetName__arr2;
+        [FieldOffset(0x38)] public UnmanagedString emitterSetName__arr3;
+        [FieldOffset(0x48)] public UnmanagedString emitterSetName__arr4;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x57A8)]

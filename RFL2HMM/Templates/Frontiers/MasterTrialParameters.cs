@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 public class MasterTrialParametersClass
 {
-    [StructLayout(LayoutKind.Explicit, Size = 0x24)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct MasterTrialStageParameter
     {
         [FieldOffset(0x00)] public byte prerequisite;
@@ -15,19 +15,20 @@ public class MasterTrialParametersClass
         [FieldOffset(0x18)] public uint recoveryHpPoint;
         [FieldOffset(0x1C)] public uint limitMistake;
         [FieldOffset(0x20)] public int damagePoint;
+        [FieldOffset(0x24)] public byte powerLevel;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x94)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xA4)]
     public struct MasterTrialParameterElement
     {
         [FieldOffset(0x00)] public int applicableFailedCount;
         [FieldOffset(0x04)] public MasterTrialStageParameter stages__arr0;
-        [FieldOffset(0x28)] public MasterTrialStageParameter stages__arr1;
-        [FieldOffset(0x4C)] public MasterTrialStageParameter stages__arr2;
-        [FieldOffset(0x70)] public MasterTrialStageParameter stages__arr3;
+        [FieldOffset(0x2C)] public MasterTrialStageParameter stages__arr1;
+        [FieldOffset(0x54)] public MasterTrialStageParameter stages__arr2;
+        [FieldOffset(0x7C)] public MasterTrialStageParameter stages__arr3;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x1E4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x400)]
     public struct MasterTrialParameters
     {
         [FieldOffset(0x00)] public float subjectViewTime;
@@ -41,8 +42,11 @@ public class MasterTrialParametersClass
         [FieldOffset(0x20)] public float kodamaFightTextTime;
         [FieldOffset(0x24)] public float kodamaSplendidTextTime;
         [FieldOffset(0x28)] public MasterTrialParameterElement element__arr0;
-        [FieldOffset(0xBC)] public MasterTrialParameterElement element__arr1;
-        [FieldOffset(0x150)] public MasterTrialParameterElement element__arr2;
+        [FieldOffset(0xCC)] public MasterTrialParameterElement element__arr1;
+        [FieldOffset(0x170)] public MasterTrialParameterElement element__arr2;
+        [FieldOffset(0x214)] public MasterTrialParameterElement elementEasy__arr0;
+        [FieldOffset(0x2B8)] public MasterTrialParameterElement elementEasy__arr1;
+        [FieldOffset(0x35C)] public MasterTrialParameterElement elementEasy__arr2;
     }
 
 }

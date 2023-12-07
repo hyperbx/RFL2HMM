@@ -5,7 +5,7 @@ Library "MasterTrialParameters"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x24)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct MasterTrialStageParameter
     {
         [FieldOffset(0x00)] public byte prerequisite;
@@ -17,13 +17,14 @@ Library "MasterTrialParameters"
         [FieldOffset(0x18)] public uint recoveryHpPoint;
         [FieldOffset(0x1C)] public uint limitMistake;
         [FieldOffset(0x20)] public int damagePoint;
+        [FieldOffset(0x24)] public byte powerLevel;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x94)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xA4)]
     public struct MasterTrialParameterElement
     {
         [FieldOffset(0x00)] public int applicableFailedCount;
-        [FieldOffset(0x04)] public unsafe fixed byte /* MasterTrialStageParameter[4] */ _stages[144];
+        [FieldOffset(0x04)] public unsafe fixed byte /* MasterTrialStageParameter[4] */ _stages[160];
 
         public unsafe MasterTrialStageParameter* stages
         {
@@ -35,7 +36,7 @@ Library "MasterTrialParameters"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x1E4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x400)]
     public struct MasterTrialParameters
     {
         [FieldOffset(0x00)] public float subjectViewTime;
@@ -48,7 +49,7 @@ Library "MasterTrialParameters"
         [FieldOffset(0x1C)] public float kodamaFightDelayTime;
         [FieldOffset(0x20)] public float kodamaFightTextTime;
         [FieldOffset(0x24)] public float kodamaSplendidTextTime;
-        [FieldOffset(0x28)] public unsafe fixed byte /* MasterTrialParameterElement[3] */ _element[444];
+        [FieldOffset(0x28)] public unsafe fixed byte /* MasterTrialParameterElement[3] */ _element[492];
 
         public unsafe MasterTrialParameterElement* element
         {
@@ -56,6 +57,17 @@ Library "MasterTrialParameters"
             {
                 fixed (byte* p_element = _element)
                     return (MasterTrialParameterElement*)p_element;
+            }
+        }
+
+        [FieldOffset(0x214)] public unsafe fixed byte /* MasterTrialParameterElement[3] */ _elementEasy[492];
+
+        public unsafe MasterTrialParameterElement* elementEasy
+        {
+            get
+            {
+                fixed (byte* p_elementEasy = _elementEasy)
+                    return (MasterTrialParameterElement*)p_elementEasy;
             }
         }
     }

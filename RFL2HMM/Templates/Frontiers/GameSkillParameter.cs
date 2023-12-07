@@ -31,6 +31,7 @@ public class GameSkillParameterClass
         AutoCombo = 14,
         NumUsed = 15,
         Dummy0 = 15,
+        CrossSlash2 = 15,
         Dummy1 = 16,
         Dummy2 = 17,
         Dummy3 = 18,

@@ -1,0 +1,170 @@
+Library "GameUIParameter"
+{
+    #load "System.Numerics.dll"
+
+    using System.Numerics;
+    using System.Runtime.InteropServices;
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
+    public struct GameUIBoostParam
+    {
+        [FieldOffset(0x00)] public float lossAnimRatio;
+        [FieldOffset(0x04)] public float useAnimRatio;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
+    public struct GameUICursorParam
+    {
+        [FieldOffset(0x00)] public float targetCursorOffsetY;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
+    public struct WhiteSpaceStageUIModelParam
+    {
+        [FieldOffset(0x00)] public Vector3 modelPos;
+        [FieldOffset(0x10)] public Vector3 cameraPos;
+        [FieldOffset(0x20)] public Vector3 cameraTarget;
+        [FieldOffset(0x30)] public float fovy;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x80)]
+    public struct WhiteSpaceStageUI
+    {
+        [FieldOffset(0x00)] public WhiteSpaceStageUIModelParam modelParam;
+        [FieldOffset(0x40)] public WhiteSpaceStageUIModelParam dwingModelParam;
+    }
+
+    public enum OpenState : int
+    {
+        Locked = 0,
+        Opened = 1
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    public struct UnmanagedString
+    {
+        [FieldOffset(0)] public long pValue;
+
+        public string Value
+        {
+            get
+            {
+                if (pValue == 0)
+                    return string.Empty;
+
+                return Marshal.PtrToStringAnsi((nint)pValue);
+            }
+
+            set => pValue = (long)Marshal.StringToHGlobalAnsi(value);
+        }
+
+        public UnmanagedString(string in_value)
+        {
+            Value = in_value;
+        }
+
+        public static implicit operator UnmanagedString(string in_value)
+        {
+            return new UnmanagedString(in_value);
+        }
+
+        public static bool operator ==(UnmanagedString in_left, string in_right)
+        {
+            return in_left.Value == in_right;
+        }
+
+        public static bool operator !=(UnmanagedString in_left, string in_right)
+        {
+            return !(in_left == in_right);
+        }
+
+        public override bool Equals(object in_obj)
+        {
+            if (in_obj is string str)
+                return Value == str;
+
+            return base.Equals(in_obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Value;
+        }
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
+    public struct WhiteSpaceQAPage
+    {
+        [FieldOffset(0x00)] public UnmanagedString headerLabel;
+        [FieldOffset(0x10)] public UnmanagedString textLabel;
+        [FieldOffset(0x20)] public UnmanagedString movieName;
+        [FieldOffset(0x30)] public UnmanagedString textureName;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x148)]
+    public struct WhiteSpaceQAInfo
+    {
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public OpenState openState;
+        [FieldOffset(0x08)] public unsafe fixed byte /* WhiteSpaceQAPage[5] */ _pages[320];
+
+        public unsafe WhiteSpaceQAPage* pages
+        {
+            get
+            {
+                fixed (byte* p_pages = _pages)
+                    return (WhiteSpaceQAPage*)p_pages;
+            }
+        }
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x3340)]
+    public struct WhiteSpaceQAParamter
+    {
+        [FieldOffset(0x00)] public unsafe fixed byte /* WhiteSpaceQAInfo[40] */ _infos[13120];
+
+        public unsafe WhiteSpaceQAInfo* infos
+        {
+            get
+            {
+                fixed (byte* p_infos = _infos)
+                    return (WhiteSpaceQAInfo*)p_infos;
+            }
+        }
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
+    public struct WhiteSpaceMapUI
+    {
+        [FieldOffset(0x00)] public float mapZoomScale;
+        [FieldOffset(0x04)] public float mapUnderGroundZoomScale;
+        [FieldOffset(0x08)] public float mapScale;
+        [FieldOffset(0x0C)] public float mapZoomAnimRatio;
+        [FieldOffset(0x10)] public float mapZoomRangeX;
+        [FieldOffset(0x14)] public float mapZoomRangeY;
+        [FieldOffset(0x20)] public Vector3 mapUnderGroundPos;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x3400)]
+    public struct GameUIWhiteSpaceParam
+    {
+        [FieldOffset(0x00)] public float itemInfoTimer;
+        [FieldOffset(0x10)] public WhiteSpaceStageUI stageUIParam;
+        [FieldOffset(0x90)] public WhiteSpaceQAParamter qaParam;
+        [FieldOffset(0x33D0)] public WhiteSpaceMapUI mapParam;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x3410)]
+    public struct GameUIParameter
+    {
+        [FieldOffset(0x00)] public GameUIBoostParam boostParam;
+        [FieldOffset(0x08)] public GameUICursorParam cursorParam;
+        [FieldOffset(0x10)] public GameUIWhiteSpaceParam whiteSpaceParam;
+    }
+
+}

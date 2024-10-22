@@ -1,0 +1,56 @@
+Library "EnemySoldierConfig"
+{
+    #load "System.Numerics.dll"
+
+    using System.Numerics;
+    using System.Runtime.InteropServices;
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
+    public struct TimeStopDamageVelocityParam
+    {
+        [FieldOffset(0x00)] public uint damage_num_threshold;
+        [FieldOffset(0x04)] public float velocity_scale_base;
+        [FieldOffset(0x08)] public float velocity_scale_linear;
+        [FieldOffset(0x0C)] public float velocity_acceleration;
+        [FieldOffset(0x10)] public float velocity_max;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0xF0)]
+    public struct EnemySoldierCommonParam
+    {
+        [FieldOffset(0x00)] public float killWaitTime;
+        [FieldOffset(0x04)] public int maxHealthPoint;
+        [FieldOffset(0x10)] public Vector3 colliderPositionOffset;
+        [FieldOffset(0x20)] public Vector3 damageColliderPositionOffset;
+        [FieldOffset(0x30)] public float colliderRadius;
+        [FieldOffset(0x34)] public float colliderHeight;
+        [FieldOffset(0x38)] public float damageColliderRadiusOffset;
+        [FieldOffset(0x3C)] public float damageColliderHeightOffset;
+        [FieldOffset(0x40)] public Vector3 colliderPositionOffsetWhileBlownUp;
+        [FieldOffset(0x50)] public float colliderRadiusOffsetWhileBlownUp;
+        [FieldOffset(0x54)] public float colliderHeightOffsetWhileBlownUp;
+        [FieldOffset(0x60)] public Vector3 attackBladeColliderPositionOffset;
+        [FieldOffset(0x70)] public Vector3 attackBladeColliderScale;
+        [FieldOffset(0x80)] public float readyAttackBladeWaitTime;
+        [FieldOffset(0x84)] public float attackingBladeTime;
+        [FieldOffset(0x88)] public float attackedBladeRecoveryTime;
+        [FieldOffset(0x8C)] public float superArmorDamageVelocityScale;
+        [FieldOffset(0x90)] public float attackableAngle;
+        [FieldOffset(0x94)] public float rotateSpeed;
+        [FieldOffset(0x98)] public float rotateSpeedWhileMoving;
+        [FieldOffset(0x9C)] public float rotateLimitAngle;
+        [FieldOffset(0xA0)] public float stunTime;
+        [FieldOffset(0xA4)] public float warpRadius;
+        [FieldOffset(0xA8)] public float warpHeight;
+        [FieldOffset(0xAC)] public TimeStopDamageVelocityParam timeStopDamageVelocityParams__arr0;
+        [FieldOffset(0xC0)] public TimeStopDamageVelocityParam timeStopDamageVelocityParams__arr1;
+        [FieldOffset(0xD4)] public TimeStopDamageVelocityParam timeStopDamageVelocityParams__arr2;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0xF0)]
+    public struct EnemySoldierConfig
+    {
+        [FieldOffset(0x00)] public EnemySoldierCommonParam commonParam;
+    }
+
+}

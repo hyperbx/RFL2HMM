@@ -1,0 +1,32 @@
+Library "WhitespaceMapData"
+{
+    #load "System.Numerics.dll"
+
+    using System.Numerics;
+    using System.Runtime.InteropServices;
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x02)]
+    public struct WhitespaceMapGridData
+    {
+        [FieldOffset(0x00)] public byte x;
+        [FieldOffset(0x01)] public byte y;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x06)]
+    public struct WhitespaceMapData
+    {
+        [FieldOffset(0x00)] public unsafe fixed byte /* WhitespaceMapGridData[2] */ _grid[4];
+
+        public unsafe WhitespaceMapGridData* grid
+        {
+            get
+            {
+                fixed (byte* p_grid = _grid)
+                    return (WhitespaceMapGridData*)p_grid;
+            }
+        }
+
+        [FieldOffset(0x04)] public ushort numReleaseGrids;
+    }
+
+}

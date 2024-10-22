@@ -1,0 +1,73 @@
+Library "PlayLogData"
+{
+    #load "System.Numerics.dll"
+
+    using System.Numerics;
+    using System.Runtime.InteropServices;
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
+    public struct PlayLogCoordData
+    {
+        [FieldOffset(0x00)] public ushort time;
+        [FieldOffset(0x02)] public ushort x;
+        [FieldOffset(0x04)] public ushort y;
+        [FieldOffset(0x06)] public ushort z;
+    }
+
+    public enum EventType : sbyte
+    {
+        InvalidEvent = -1,
+        Dead = 0,
+        Damage = 1,
+        BeginStage = 2,
+        CompleteStage = 3,
+        RestartStage = 4,
+        GiveupStage = 5,
+        EndStage = 6,
+        TimeStop = 7,
+        QteResult = 8,
+        BossPhaseChange = 9,
+        OpenCollectionBox = 10
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x0A)]
+    public struct PlayLogEventData
+    {
+        [FieldOffset(0x00)] public PlayLogCoordData coord;
+        [FieldOffset(0x08)] public EventType eventType;
+        [FieldOffset(0x09)] public sbyte option;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0xC0634)]
+    public struct PlayLogData
+    {
+        [FieldOffset(0x00)] public uint numFootMarks;
+        [FieldOffset(0x04)] public uint footMarksIndex;
+        [FieldOffset(0x08)] public unsafe fixed byte /* PlayLogCoordData[36000] */ _footmarks[288000];
+
+        public unsafe PlayLogCoordData* footmarks
+        {
+            get
+            {
+                fixed (byte* p_footmarks = _footmarks)
+                    return (PlayLogCoordData*)p_footmarks;
+            }
+        }
+
+        [FieldOffset(0x46508)] public uint numEvents;
+        [FieldOffset(0x4650C)] public uint eventsIndex;
+        [FieldOffset(0x46510)] public unsafe fixed byte /* PlayLogEventData[50000] */ _events[500000];
+
+        public unsafe PlayLogEventData* events
+        {
+            get
+            {
+                fixed (byte* p_events = _events)
+                    return (PlayLogEventData*)p_events;
+            }
+        }
+
+        [FieldOffset(0xC0630)] public uint wsPlayTime;
+    }
+
+}

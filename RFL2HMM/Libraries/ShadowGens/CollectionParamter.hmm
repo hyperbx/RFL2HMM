@@ -1,0 +1,288 @@
+Library "CollectionParamter"
+{
+    #load "System.Numerics.dll"
+
+    using System.Numerics;
+    using System.Runtime.InteropServices;
+
+    public enum OpenState : int
+    {
+        Locked = 0,
+        LockedCollectionBox = 1,
+        Opened = 2,
+        DLC_DDX = 3
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
+    public struct CollectionItemInfo
+    {
+        [FieldOffset(0x00)] public bool isEnable;
+        [FieldOffset(0x04)] public OpenState openState;
+        [FieldOffset(0x08)] public int textLabelNumber;
+        [FieldOffset(0x0C)] public int textureNumber;
+        [FieldOffset(0x10)] public int objNumber;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
+    public struct CollectionArtInfo
+    {
+        [FieldOffset(0x00)] public CollectionItemInfo info;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    public struct UnmanagedString
+    {
+        [FieldOffset(0)] public long pValue;
+
+        public string Value
+        {
+            get
+            {
+                if (pValue == 0)
+                    return string.Empty;
+
+                return Marshal.PtrToStringAnsi((nint)pValue);
+            }
+
+            set => pValue = (long)Marshal.StringToHGlobalAnsi(value);
+        }
+
+        public UnmanagedString(string in_value)
+        {
+            Value = in_value;
+        }
+
+        public static implicit operator UnmanagedString(string in_value)
+        {
+            return new UnmanagedString(in_value);
+        }
+
+        public static bool operator ==(UnmanagedString in_left, string in_right)
+        {
+            return in_left.Value == in_right;
+        }
+
+        public static bool operator !=(UnmanagedString in_left, string in_right)
+        {
+            return !(in_left == in_right);
+        }
+
+        public override bool Equals(object in_obj)
+        {
+            if (in_obj is string str)
+                return Value == str;
+
+            return base.Equals(in_obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Value;
+        }
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
+    public struct CollectionSoundInfo
+    {
+        [FieldOffset(0x00)] public CollectionItemInfo info;
+        [FieldOffset(0x18)] public UnmanagedString assetName;
+        [FieldOffset(0x28)] public int playTime;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x38)]
+    public struct CollectionMovieInfo
+    {
+        [FieldOffset(0x00)] public CollectionItemInfo info;
+        [FieldOffset(0x18)] public UnmanagedString assetName;
+        [FieldOffset(0x28)] public bool isEclipseMode;
+        [FieldOffset(0x2C)] public int wsLevel;
+        [FieldOffset(0x30)] public int eyeCount;
+        [FieldOffset(0x34)] public bool fps30;
+    }
+
+    public enum CollectionCharaKind : int
+    {
+        CollectionCharaKindShadow = 0,
+        CollectionCharaKindOmega = 1,
+        CollectionCharaKindBig = 2,
+        CollectionCharaKindMaria = 3,
+        CollectionCharaKindGerald = 4,
+        CollectionCharaKindOrbot = 5,
+        CollectionCharaKindCubot = 6,
+        CollectionCharaKindNum = 7,
+        CollectionCharaKindNone = -1
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
+    public struct CollectionCharacterInfo
+    {
+        [FieldOffset(0x00)] public CollectionItemInfo info;
+        [FieldOffset(0x14)] public CollectionCharaKind charaKind;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
+    public struct CollectionHistoryInfo
+    {
+        [FieldOffset(0x00)] public CollectionItemInfo info;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
+    public struct CollectionGeraldNoteInfo
+    {
+        [FieldOffset(0x00)] public CollectionItemInfo info;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
+    public struct CollectionCharacterModelParam
+    {
+        [FieldOffset(0x00)] public Vector3 modelPos;
+        [FieldOffset(0x10)] public Vector3 cameraPos;
+        [FieldOffset(0x20)] public Vector3 cameraTarget;
+        [FieldOffset(0x30)] public float fovy;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x1D0)]
+    public struct CollectionCharacterMenuParam
+    {
+        [FieldOffset(0x00)] public float turnSpeed;
+        [FieldOffset(0x10)] public unsafe fixed byte /* CollectionCharacterModelParam[7] */ _charaModelParams[448];
+
+        public unsafe CollectionCharacterModelParam* charaModelParams
+        {
+            get
+            {
+                fixed (byte* p_charaModelParams = _charaModelParams)
+                    return (CollectionCharacterModelParam*)p_charaModelParams;
+            }
+        }
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x44)]
+    public struct CollectionRoomPlayerAction
+    {
+        [FieldOffset(0x00)] public float moveSpeed;
+        [FieldOffset(0x04)] public float tolerance;
+        [FieldOffset(0x08)] public float chairTolerance;
+        [FieldOffset(0x0C)] public float chairStartWaitTime;
+        [FieldOffset(0x10)] public float chairStartMoveTime;
+        [FieldOffset(0x14)] public float chairStartPosOffsetY;
+        [FieldOffset(0x18)] public float chairEndWaitTime;
+        [FieldOffset(0x1C)] public float chairEndMoveTime;
+        [FieldOffset(0x20)] public float chairEndMoveDistance;
+        [FieldOffset(0x24)] public float bikeTolerance;
+        [FieldOffset(0x28)] public float bikeStartWaitTime;
+        [FieldOffset(0x2C)] public float bikeStartMoveTime;
+        [FieldOffset(0x30)] public float bikeStartMenuOpenWait;
+        [FieldOffset(0x34)] public float bikeStartPosOffsetY;
+        [FieldOffset(0x38)] public float bikeEndWaitTime;
+        [FieldOffset(0x3C)] public float bikeEndMoveTime;
+        [FieldOffset(0x40)] public float bikeEndMoveDistance;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
+    public struct CollectionGeraldNotePlayer
+    {
+        [FieldOffset(0x00)] public float moveSpeed;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
+    public struct CollectionRoomCamera
+    {
+        [FieldOffset(0x00)] public float beginInterpolateTime;
+        [FieldOffset(0x04)] public float endInterpolateTime;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
+    public struct CollectionSoundMenuParam
+    {
+        [FieldOffset(0x00)] public float endFadeTime;
+        [FieldOffset(0x04)] public float endWaitTime;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x28D0)]
+    public struct CollectionParamter
+    {
+        [FieldOffset(0x00)] public unsafe fixed byte /* CollectionArtInfo[121] */ _artInfos[2420];
+
+        public unsafe CollectionArtInfo* artInfos
+        {
+            get
+            {
+                fixed (byte* p_artInfos = _artInfos)
+                    return (CollectionArtInfo*)p_artInfos;
+            }
+        }
+
+        [FieldOffset(0x978)] public unsafe fixed byte /* CollectionSoundInfo[100] */ _soundInfos[4800];
+
+        public unsafe CollectionSoundInfo* soundInfos
+        {
+            get
+            {
+                fixed (byte* p_soundInfos = _soundInfos)
+                    return (CollectionSoundInfo*)p_soundInfos;
+            }
+        }
+
+        [FieldOffset(0x1C38)] public unsafe fixed byte /* CollectionMovieInfo[30] */ _movieInfos[1680];
+
+        public unsafe CollectionMovieInfo* movieInfos
+        {
+            get
+            {
+                fixed (byte* p_movieInfos = _movieInfos)
+                    return (CollectionMovieInfo*)p_movieInfos;
+            }
+        }
+
+        [FieldOffset(0x22C8)] public unsafe fixed byte /* CollectionCharacterInfo[7] */ _charaInfos[168];
+
+        public unsafe CollectionCharacterInfo* charaInfos
+        {
+            get
+            {
+                fixed (byte* p_charaInfos = _charaInfos)
+                    return (CollectionCharacterInfo*)p_charaInfos;
+            }
+        }
+
+        [FieldOffset(0x2370)] public unsafe fixed byte /* CollectionHistoryInfo[11] */ _historyInfos[220];
+
+        public unsafe CollectionHistoryInfo* historyInfos
+        {
+            get
+            {
+                fixed (byte* p_historyInfos = _historyInfos)
+                    return (CollectionHistoryInfo*)p_historyInfos;
+            }
+        }
+
+        [FieldOffset(0x244C)] public unsafe fixed byte /* CollectionGeraldNoteInfo[28] */ _noteInfos[560];
+
+        public unsafe CollectionGeraldNoteInfo* noteInfos
+        {
+            get
+            {
+                fixed (byte* p_noteInfos = _noteInfos)
+                    return (CollectionGeraldNoteInfo*)p_noteInfos;
+            }
+        }
+
+        [FieldOffset(0x2680)] public CollectionCharacterMenuParam charaMenuParam;
+        [FieldOffset(0x2850)] public CollectionRoomPlayerAction roomActionParam;
+        [FieldOffset(0x2894)] public CollectionGeraldNotePlayer notePlayerParam;
+        [FieldOffset(0x2898)] public CollectionRoomCamera artCamera;
+        [FieldOffset(0x28A0)] public CollectionRoomCamera soundCamera;
+        [FieldOffset(0x28A8)] public CollectionRoomCamera movieCamera;
+        [FieldOffset(0x28B0)] public CollectionRoomCamera charaCamera;
+        [FieldOffset(0x28B8)] public CollectionRoomCamera historyCamera;
+        [FieldOffset(0x28C0)] public CollectionRoomCamera noteCamera;
+        [FieldOffset(0x28C8)] public CollectionSoundMenuParam soundMenuParam;
+    }
+
+}

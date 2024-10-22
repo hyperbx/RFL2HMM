@@ -1,0 +1,182 @@
+Library "BossPerfectblackdoomConfig"
+{
+    #load "System.Numerics.dll"
+
+    using System.Numerics;
+    using System.Runtime.InteropServices;
+
+    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    public struct UnmanagedString
+    {
+        [FieldOffset(0)] public long pValue;
+
+        public string Value
+        {
+            get
+            {
+                if (pValue == 0)
+                    return string.Empty;
+
+                return Marshal.PtrToStringAnsi((nint)pValue);
+            }
+
+            set => pValue = (long)Marshal.StringToHGlobalAnsi(value);
+        }
+
+        public UnmanagedString(string in_value)
+        {
+            Value = in_value;
+        }
+
+        public static implicit operator UnmanagedString(string in_value)
+        {
+            return new UnmanagedString(in_value);
+        }
+
+        public static bool operator ==(UnmanagedString in_left, string in_right)
+        {
+            return in_left.Value == in_right;
+        }
+
+        public static bool operator !=(UnmanagedString in_left, string in_right)
+        {
+            return !(in_left == in_right);
+        }
+
+        public override bool Equals(object in_obj)
+        {
+            if (in_obj is string str)
+                return Value == str;
+
+            return base.Equals(in_obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Value;
+        }
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x38)]
+    public struct BossPerfectblackdoomSwitchLayerData
+    {
+        [FieldOffset(0x00)] public UnmanagedString layerName;
+        [FieldOffset(0x10)] public int phase;
+        [FieldOffset(0x14)] public int lifeMin;
+        [FieldOffset(0x18)] public int lifeMax;
+        [FieldOffset(0x20)] public UnmanagedString tag;
+        [FieldOffset(0x30)] public bool isChangePhaseEnable;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x708)]
+    public struct BossPerfectblackdoomCommonParam
+    {
+        [FieldOffset(0x00)] public float upperRotSpeed;
+        [FieldOffset(0x04)] public float upperResetRotSpeed;
+        [FieldOffset(0x08)] public unsafe fixed byte /* BossPerfectblackdoomSwitchLayerData[32] */ _switchLayers[1792];
+
+        public unsafe BossPerfectblackdoomSwitchLayerData* switchLayers
+        {
+            get
+            {
+                fixed (byte* p_switchLayers = _switchLayers)
+                    return (BossPerfectblackdoomSwitchLayerData*)p_switchLayers;
+            }
+        }
+    }
+
+    public enum ActionType : sbyte
+    {
+        INVALID_ACTION = 0,
+        PHASE2_IDLE = 1,
+        PHASE2_ATTACK_FIREBEAM = 2,
+        PHASE2_ATTACK_FIREBOMB = 3,
+        PHASE3_IDLE = 4,
+        ACTION_TYPE_NUM = 5
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    public struct BossPerfectblackdoomActionData
+    {
+        [FieldOffset(0x00)] public ActionType actionType;
+        [FieldOffset(0x04)] public float time;
+        [FieldOffset(0x08)] public int successSkip;
+        [FieldOffset(0x0C)] public int patternIndex;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x614)]
+    public struct BossPerfectblackdoomPhaseParam
+    {
+        [FieldOffset(0x00)] public int lifeCount;
+        [FieldOffset(0x04)] public int healthPoint;
+        [FieldOffset(0x08)] public unsafe fixed byte /* BossPerfectblackdoomActionData[24] */ _actionTable1[384];
+
+        public unsafe BossPerfectblackdoomActionData* actionTable1
+        {
+            get
+            {
+                fixed (byte* p_actionTable1 = _actionTable1)
+                    return (BossPerfectblackdoomActionData*)p_actionTable1;
+            }
+        }
+
+        [FieldOffset(0x188)] public unsafe fixed byte /* BossPerfectblackdoomActionData[24] */ _actionTable2[384];
+
+        public unsafe BossPerfectblackdoomActionData* actionTable2
+        {
+            get
+            {
+                fixed (byte* p_actionTable2 = _actionTable2)
+                    return (BossPerfectblackdoomActionData*)p_actionTable2;
+            }
+        }
+
+        [FieldOffset(0x308)] public unsafe fixed byte /* BossPerfectblackdoomActionData[24] */ _actionTable3[384];
+
+        public unsafe BossPerfectblackdoomActionData* actionTable3
+        {
+            get
+            {
+                fixed (byte* p_actionTable3 = _actionTable3)
+                    return (BossPerfectblackdoomActionData*)p_actionTable3;
+            }
+        }
+
+        [FieldOffset(0x488)] public unsafe fixed byte /* BossPerfectblackdoomActionData[24] */ _actionTable4[384];
+
+        public unsafe BossPerfectblackdoomActionData* actionTable4
+        {
+            get
+            {
+                fixed (byte* p_actionTable4 = _actionTable4)
+                    return (BossPerfectblackdoomActionData*)p_actionTable4;
+            }
+        }
+
+        [FieldOffset(0x608)] public int useActTblHealthPoint1;
+        [FieldOffset(0x60C)] public int useActTblHealthPoint2;
+        [FieldOffset(0x610)] public int useActTblHealthPoint3;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x1948)]
+    public struct BossPerfectblackdoomConfig
+    {
+        [FieldOffset(0x00)] public BossPerfectblackdoomCommonParam commonParam;
+        [FieldOffset(0x708)] public unsafe fixed byte /* BossPerfectblackdoomPhaseParam[3] */ _phaseParam[4668];
+
+        public unsafe BossPerfectblackdoomPhaseParam* phaseParam
+        {
+            get
+            {
+                fixed (byte* p_phaseParam = _phaseParam)
+                    return (BossPerfectblackdoomPhaseParam*)p_phaseParam;
+            }
+        }
+    }
+
+}

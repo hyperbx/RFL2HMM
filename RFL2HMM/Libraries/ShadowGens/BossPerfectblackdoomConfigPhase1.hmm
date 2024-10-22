@@ -1,0 +1,309 @@
+Library "BossPerfectblackdoomConfigPhase1"
+{
+    #load "System.Numerics.dll"
+
+    using System.Numerics;
+    using System.Runtime.InteropServices;
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
+    public struct BossPerfectblackdoomConfigPhase1CommonParam
+    {
+        [FieldOffset(0x00)] public float floatHeight;
+        [FieldOffset(0x04)] public sbyte laneNum;
+        [FieldOffset(0x08)] public float laneWidth;
+        [FieldOffset(0x0C)] public float distanceOfAttackBasePointFromPlayer;
+        [FieldOffset(0x10)] public float hormingDistanceOffset;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x38)]
+    public struct BossPerfectblackdoomAutorunParam
+    {
+        [FieldOffset(0x00)] public float speed;
+        [FieldOffset(0x04)] public float width;
+        [FieldOffset(0x08)] public float bossSpeedMax;
+        [FieldOffset(0x0C)] public float bossSpeedMin;
+        [FieldOffset(0x10)] public float bossAccelSpeed;
+        [FieldOffset(0x14)] public float bossDecelSpeed;
+        [FieldOffset(0x18)] public float bossKeepDistanceDefault;
+        [FieldOffset(0x1C)] public float bossKeepDistanceLimit;
+        [FieldOffset(0x20)] public float bossStanLostDistance;
+        [FieldOffset(0x24)] public float bossDefalutDistanceReturnTime;
+        [FieldOffset(0x28)] public float bossDefalutDistanceReturnSpeed;
+        [FieldOffset(0x2C)] public float nearBossAccelDecelTime;
+        [FieldOffset(0x30)] public float nearBossAccelSpeed;
+        [FieldOffset(0x34)] public float nearBossDecelSpeed;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    public struct UnmanagedString
+    {
+        [FieldOffset(0)] public long pValue;
+
+        public string Value
+        {
+            get
+            {
+                if (pValue == 0)
+                    return string.Empty;
+
+                return Marshal.PtrToStringAnsi((nint)pValue);
+            }
+
+            set => pValue = (long)Marshal.StringToHGlobalAnsi(value);
+        }
+
+        public UnmanagedString(string in_value)
+        {
+            Value = in_value;
+        }
+
+        public static implicit operator UnmanagedString(string in_value)
+        {
+            return new UnmanagedString(in_value);
+        }
+
+        public static bool operator ==(UnmanagedString in_left, string in_right)
+        {
+            return in_left.Value == in_right;
+        }
+
+        public static bool operator !=(UnmanagedString in_left, string in_right)
+        {
+            return !(in_left == in_right);
+        }
+
+        public override bool Equals(object in_obj)
+        {
+            if (in_obj is string str)
+                return Value == str;
+
+            return base.Equals(in_obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Value;
+        }
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
+    public struct BossPerfectblackdoomBattleLockOnCameraParam
+    {
+        [FieldOffset(0x00)] public UnmanagedString nodeName;
+        [FieldOffset(0x10)] public Vector3 offset;
+        [FieldOffset(0x20)] public float playerHeightOffset;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
+    public struct BossPerfectblackdoomPointCameraParam
+    {
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x04)] public float fovy;
+        [FieldOffset(0x08)] public float toPointDistanceMin;
+        [FieldOffset(0x0C)] public float toPointDistanceMax;
+        [FieldOffset(0x10)] public float distanceMin;
+        [FieldOffset(0x14)] public float distanceMax;
+        [FieldOffset(0x18)] public float gravityOffsetMin;
+        [FieldOffset(0x1C)] public float gravityOffsetMax;
+        [FieldOffset(0x20)] public Vector3 playerOffsetMin;
+        [FieldOffset(0x30)] public Vector3 playerOffsetMax;
+        [FieldOffset(0x40)] public Vector3 worldOffsetMin;
+        [FieldOffset(0x50)] public Vector3 worldOffsetMax;
+        [FieldOffset(0x60)] public Vector3 pointLocalOffsetMin;
+        [FieldOffset(0x70)] public Vector3 pointLocalOffsetMax;
+        [FieldOffset(0x80)] public UnmanagedString nodeName;
+        [FieldOffset(0x90)] public float roll;
+        [FieldOffset(0x94)] public float easeInTime;
+        [FieldOffset(0x98)] public float easeOutTime;
+        [FieldOffset(0x9C)] public float time;
+    }
+
+    public enum LaserDirectionKind : sbyte
+    {
+        UP_DIRECTION = 0,
+        DOWN_DIRECTION = 1,
+        RIGHT_DIRECTION = 2,
+        LEFT_DIRECTION = 3,
+        UP_DOWN_DIRECTION = 4,
+        LEFT_RIGHT_DIRECTION = 5,
+        UDLR_DIRECTION = 6
+    }
+
+    public enum InputGuideKind : sbyte
+    {
+        INPUT_GUIDE_KIND_NONE = 0,
+        INPUT_GUIDE_KIND_LEFT_STEP = 1,
+        INPUT_GUIDE_KIND_RIGHT_STEP = 2,
+        INPUT_GUIDE_KIND_NUM = 3
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
+    public struct BossPerfectblackdoomPhase1MeteoriteBeamInfo
+    {
+        [FieldOffset(0x00)] public sbyte laneNumber;
+        [FieldOffset(0x04)] public float height;
+        [FieldOffset(0x08)] public float createTime;
+        [FieldOffset(0x0C)] public LaserDirectionKind laserDirKind;
+        [FieldOffset(0x10)] public float rotSpeed;
+        [FieldOffset(0x14)] public float moveSpeedOffset;
+        [FieldOffset(0x18)] public float length;
+        [FieldOffset(0x1C)] public InputGuideKind inputGuideKind;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0xA08)]
+    public struct BossPerfectblackdoomPhase1MeteoriteBeamPatternData
+    {
+        [FieldOffset(0x00)] public float endWaitTime;
+        [FieldOffset(0x04)] public unsafe fixed byte /* BossPerfectblackdoomPhase1MeteoriteBeamInfo[80] */ _meteoriteBeamInfoTabel[2560];
+
+        public unsafe BossPerfectblackdoomPhase1MeteoriteBeamInfo* meteoriteBeamInfoTabel
+        {
+            get
+            {
+                fixed (byte* p_meteoriteBeamInfoTabel = _meteoriteBeamInfoTabel)
+                    return (BossPerfectblackdoomPhase1MeteoriteBeamInfo*)p_meteoriteBeamInfoTabel;
+            }
+        }
+
+        [FieldOffset(0xA04)] public uint randomSeed;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x3278)]
+    public struct BossPerfectblackdoomPhase1MeteoriteBeamParam
+    {
+        [FieldOffset(0x00)] public float laneOffsetDistance;
+        [FieldOffset(0x04)] public float backwardMoveDistance;
+        [FieldOffset(0x08)] public float startWarpWaitTime;
+        [FieldOffset(0x0C)] public float startWaitTime;
+        [FieldOffset(0x10)] public float endWarpWaitTime;
+        [FieldOffset(0x14)] public float colRadius;
+        [FieldOffset(0x18)] public float dsurfBlowColScale;
+        [FieldOffset(0x1C)] public float beamColRadius;
+        [FieldOffset(0x20)] public float curveTime;
+        [FieldOffset(0x24)] public float speed;
+        [FieldOffset(0x28)] public float blowSpeed;
+        [FieldOffset(0x2C)] public float lifeTime;
+        [FieldOffset(0x30)] public int blowHitDamagePoint;
+        [FieldOffset(0x34)] public float leaveDistance;
+        [FieldOffset(0x38)] public float blowCurvedTime;
+        [FieldOffset(0x3C)] public float blowCurvedYMax;
+        [FieldOffset(0x40)] public float floatHeight;
+        [FieldOffset(0x44)] public float moveStopDeltaTimeScale;
+        [FieldOffset(0x48)] public int requestMeteoriteBeamCaptionPatternNo;
+        [FieldOffset(0x4C)] public float requestMeteoriteBeamCaptionTime;
+        [FieldOffset(0x50)] public unsafe fixed byte /* BossPerfectblackdoomPhase1MeteoriteBeamPatternData[5] */ _meteoriteBeamPatterns[12840];
+
+        public unsafe BossPerfectblackdoomPhase1MeteoriteBeamPatternData* meteoriteBeamPatterns
+        {
+            get
+            {
+                fixed (byte* p_meteoriteBeamPatterns = _meteoriteBeamPatterns)
+                    return (BossPerfectblackdoomPhase1MeteoriteBeamPatternData*)p_meteoriteBeamPatterns;
+            }
+        }
+    }
+
+    public enum BossPerfectblackdoomPhase1MeteoriteHockeyInfo_InputGuideKind : sbyte
+    {
+        BossPerfectblackdoomPhase1MeteoriteHockeyInfo_InputGuideKind_INPUT_GUIDE_KIND_NONE = 0,
+        BossPerfectblackdoomPhase1MeteoriteHockeyInfo_InputGuideKind_INPUT_GUIDE_KIND_LEFT_STEP = 1,
+        BossPerfectblackdoomPhase1MeteoriteHockeyInfo_InputGuideKind_INPUT_GUIDE_KIND_RIGHT_STEP = 2,
+        BossPerfectblackdoomPhase1MeteoriteHockeyInfo_InputGuideKind_INPUT_GUIDE_KIND_NUM = 3
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
+    public struct BossPerfectblackdoomPhase1MeteoriteHockeyInfo
+    {
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x01)] public bool isToPlayer;
+        [FieldOffset(0x04)] public float createTime;
+        [FieldOffset(0x08)] public float moveSpeedOffset;
+        [FieldOffset(0x10)] public Vector3 createPos;
+        [FieldOffset(0x20)] public Vector3 shotVelocity;
+        [FieldOffset(0x30)] public BossPerfectblackdoomPhase1MeteoriteHockeyInfo_InputGuideKind inputGuideKind;
+        [FieldOffset(0x31)] public bool colliderEnable;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x1420)]
+    public struct BossPerfectblackdoomPhase1MeteoriteHockeyPatternData
+    {
+        [FieldOffset(0x00)] public float endWaitTime;
+        [FieldOffset(0x10)] public unsafe fixed byte /* BossPerfectblackdoomPhase1MeteoriteHockeyInfo[80] */ _meteoriteHockeyInfoTabel[5120];
+
+        public unsafe BossPerfectblackdoomPhase1MeteoriteHockeyInfo* meteoriteHockeyInfoTabel
+        {
+            get
+            {
+                fixed (byte* p_meteoriteHockeyInfoTabel = _meteoriteHockeyInfoTabel)
+                    return (BossPerfectblackdoomPhase1MeteoriteHockeyInfo*)p_meteoriteHockeyInfoTabel;
+            }
+        }
+
+        [FieldOffset(0x1410)] public uint randomSeed;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x64E0)]
+    public struct BossPerfectblackdoomPhase1MeteoriteHockeyParam
+    {
+        [FieldOffset(0x00)] public float backwardMoveDistance;
+        [FieldOffset(0x04)] public float startWarpWaitTime;
+        [FieldOffset(0x08)] public float startWaitTime;
+        [FieldOffset(0x0C)] public float endWarpWaitTime;
+        [FieldOffset(0x10)] public float meteoColRadius;
+        [FieldOffset(0x14)] public float dsurfBlowColScale;
+        [FieldOffset(0x18)] public float meteoStartMoveTime;
+        [FieldOffset(0x1C)] public float meteoSpeed;
+        [FieldOffset(0x20)] public float blowSpeed;
+        [FieldOffset(0x24)] public float lifeTime;
+        [FieldOffset(0x28)] public int blowHitDamagePoint;
+        [FieldOffset(0x2C)] public float leaveDistance;
+        [FieldOffset(0x30)] public float blowCurvedTime;
+        [FieldOffset(0x34)] public float blowCurvedYMax;
+        [FieldOffset(0x38)] public float floatHeight;
+        [FieldOffset(0x40)] public unsafe fixed byte /* BossPerfectblackdoomPhase1MeteoriteHockeyPatternData[5] */ _meteoriteHockeyPatterns[25760];
+
+        public unsafe BossPerfectblackdoomPhase1MeteoriteHockeyPatternData* meteoriteHockeyPatterns
+        {
+            get
+            {
+                fixed (byte* p_meteoriteHockeyPatterns = _meteoriteHockeyPatterns)
+                    return (BossPerfectblackdoomPhase1MeteoriteHockeyPatternData*)p_meteoriteHockeyPatterns;
+            }
+        }
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
+    public struct BossPerfectblackdoomPhase1DamageParam
+    {
+        [FieldOffset(0x00)] public float rushTime;
+        [FieldOffset(0x04)] public float rushCameraDelayTime;
+        [FieldOffset(0x08)] public float damageAfterTime;
+        [FieldOffset(0x0C)] public float damageAfterDistance;
+        [FieldOffset(0x10)] public float rushFinishDamageScale;
+        [FieldOffset(0x14)] public float blowPower;
+        [FieldOffset(0x18)] public float blowUpPower;
+        [FieldOffset(0x1C)] public float blowDeceleration;
+        [FieldOffset(0x20)] public float gravityPower;
+        [FieldOffset(0x24)] public float blowEndHeight;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x99F0)]
+    public struct BossPerfectblackdoomConfigPhase1
+    {
+        [FieldOffset(0x00)] public BossPerfectblackdoomConfigPhase1CommonParam common;
+        [FieldOffset(0x14)] public BossPerfectblackdoomAutorunParam autorun;
+        [FieldOffset(0x50)] public BossPerfectblackdoomBattleLockOnCameraParam mainCamera;
+        [FieldOffset(0x80)] public BossPerfectblackdoomPointCameraParam damageCamera;
+        [FieldOffset(0x120)] public BossPerfectblackdoomPointCameraParam attackChanceBeforeCamera;
+        [FieldOffset(0x1C0)] public BossPerfectblackdoomPointCameraParam rushDamageCamera;
+        [FieldOffset(0x260)] public BossPerfectblackdoomPhase1MeteoriteBeamParam meteoriteBeamParam;
+        [FieldOffset(0x34E0)] public BossPerfectblackdoomPhase1MeteoriteHockeyParam meteoriteHockeyParam;
+        [FieldOffset(0x99C0)] public BossPerfectblackdoomPhase1DamageParam damageParam;
+    }
+
+}

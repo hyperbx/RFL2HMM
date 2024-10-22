@@ -1,0 +1,266 @@
+Library "EnemyManConfig"
+{
+    #load "System.Numerics.dll"
+
+    using System.Numerics;
+    using System.Runtime.InteropServices;
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    public struct Movement
+    {
+        [FieldOffset(0x00)] public float rotateSpeedMin;
+        [FieldOffset(0x04)] public float rotateSpeedMax;
+        [FieldOffset(0x08)] public float rotateSpeedMaxSpeedMin;
+        [FieldOffset(0x0C)] public float rotateSpeedMinSpeedMax;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
+    public struct Eyesight
+    {
+        [FieldOffset(0x00)] public float distance;
+        [FieldOffset(0x04)] public float angle;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
+    public struct Fight
+    {
+        [FieldOffset(0x00)] public float attackRange;
+        [FieldOffset(0x04)] public float attackAngle;
+        [FieldOffset(0x08)] public float attackSpeed;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    public struct UnmanagedString
+    {
+        [FieldOffset(0)] public long pValue;
+
+        public string Value
+        {
+            get
+            {
+                if (pValue == 0)
+                    return string.Empty;
+
+                return Marshal.PtrToStringAnsi((nint)pValue);
+            }
+
+            set => pValue = (long)Marshal.StringToHGlobalAnsi(value);
+        }
+
+        public UnmanagedString(string in_value)
+        {
+            Value = in_value;
+        }
+
+        public static implicit operator UnmanagedString(string in_value)
+        {
+            return new UnmanagedString(in_value);
+        }
+
+        public static bool operator ==(UnmanagedString in_left, string in_right)
+        {
+            return in_left.Value == in_right;
+        }
+
+        public static bool operator !=(UnmanagedString in_left, string in_right)
+        {
+            return !(in_left == in_right);
+        }
+
+        public override bool Equals(object in_obj)
+        {
+            if (in_obj is string str)
+                return Value == str;
+
+            return base.Equals(in_obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Value;
+        }
+    }
+
+    public enum VolumeShape : sbyte
+    {
+        SPHERE = 0,
+        BOX = 1,
+        CYLINDER = 2,
+        CAPSULE = 3,
+        NUM = 4
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
+    public struct VolumeInfo
+    {
+        [FieldOffset(0x00)] public Vector3 volumeSize;
+        [FieldOffset(0x10)] public Vector3 volumeOffset;
+        [FieldOffset(0x20)] public Vector3 volumeRotation;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
+    public struct MappingPairInfo
+    {
+        [FieldOffset(0x00)] public UnmanagedString tagName;
+        [FieldOffset(0x10)] public sbyte pieceNum;
+        [FieldOffset(0x14)] public float pieceFuncFactor;
+        [FieldOffset(0x18)] public VolumeShape volumeShape;
+        [FieldOffset(0x20)] public UnmanagedString humanNodeName;
+        [FieldOffset(0x30)] public VolumeInfo humanVolume;
+        [FieldOffset(0x60)] public UnmanagedString eggNodeName;
+        [FieldOffset(0x70)] public VolumeInfo eggVolume;
+        [FieldOffset(0xA0)] public bool effectActive;
+        [FieldOffset(0xA1)] public bool debugDraw;
+        [FieldOffset(0xA2)] public bool debugDrawVolumeAxis;
+        [FieldOffset(0xA3)] public bool debugDrawAxis;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
+    public struct EnemyBlockCollisionParam
+    {
+        [FieldOffset(0x00)] public float collisionRadius;
+        [FieldOffset(0x04)] public float collisionHeight;
+        [FieldOffset(0x10)] public Vector3 collisionPosOffset;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x60)]
+    public struct EnemyCollisionParam
+    {
+        [FieldOffset(0x00)] public EnemyBlockCollisionParam blockCollisionParam;
+        [FieldOffset(0x20)] public float damageCollisionRadiusOffset;
+        [FieldOffset(0x24)] public float damageCollisionHeightOffset;
+        [FieldOffset(0x30)] public Vector3 damageCollisionPosOffset;
+        [FieldOffset(0x40)] public float touchCollisionRadiusOffset;
+        [FieldOffset(0x44)] public float touchCollisionHeightOffset;
+        [FieldOffset(0x50)] public Vector3 touchCollisionPosOffset;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
+    public struct EnemyComboParam
+    {
+        [FieldOffset(0x00)] public float warpRadius;
+        [FieldOffset(0x04)] public float warpHeight;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x1710)]
+    public struct EnemyManCommonConfig
+    {
+        [FieldOffset(0x00)] public Movement movement;
+        [FieldOffset(0x10)] public Eyesight eyesight;
+        [FieldOffset(0x18)] public Fight fight;
+        [FieldOffset(0x30)] public unsafe fixed byte /* MappingPairInfo[32] */ _mappingPairInfo[5632];
+
+        public unsafe MappingPairInfo* mappingPairInfo
+        {
+            get
+            {
+                fixed (byte* p_mappingPairInfo = _mappingPairInfo)
+                    return (MappingPairInfo*)p_mappingPairInfo;
+            }
+        }
+
+        [FieldOffset(0x1630)] public EnemyCollisionParam humanCollisionParam;
+        [FieldOffset(0x1690)] public EnemyComboParam humanComboParam;
+        [FieldOffset(0x16A0)] public EnemyCollisionParam eggCollisionParam;
+        [FieldOffset(0x1700)] public EnemyComboParam eggComboParam;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
+    public struct ManHumanActionRate
+    {
+        [FieldOffset(0x00)] public unsafe fixed float actionRate[6];
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x130)]
+    public struct EnemyManSingleConfig
+    {
+        [FieldOffset(0x00)] public int maxHealthPoint;
+        [FieldOffset(0x04)] public unsafe fixed float maxStunPoint[3];
+        [FieldOffset(0x10)] public float stunDecreaseStartTime;
+        [FieldOffset(0x14)] public float stunDecreaseSpeed;
+        [FieldOffset(0x18)] public unsafe fixed float maxStaggerPoint[3];
+        [FieldOffset(0x24)] public float staggerDecreaseStartTime;
+        [FieldOffset(0x28)] public float staggerDecreaseSpeed;
+        [FieldOffset(0x2C)] public float stunTime;
+        [FieldOffset(0x30)] public float attackRate;
+        [FieldOffset(0x34)] public float attackMotionSpeed;
+        [FieldOffset(0x38)] public float wallTime;
+        [FieldOffset(0x3C)] public int wallLife;
+        [FieldOffset(0x40)] public float guardTime;
+        [FieldOffset(0x44)] public float guardCoolTime;
+        [FieldOffset(0x48)] public unsafe fixed byte /* ManHumanActionRate[4] */ _rateTable[96];
+
+        public unsafe ManHumanActionRate* rateTable
+        {
+            get
+            {
+                fixed (byte* p_rateTable = _rateTable)
+                    return (ManHumanActionRate*)p_rateTable;
+            }
+        }
+
+        [FieldOffset(0xA8)] public unsafe fixed float coolTime[6];
+        [FieldOffset(0xC0)] public float attackCoolTime;
+        [FieldOffset(0xC4)] public unsafe fixed float actionDistance[6];
+        [FieldOffset(0xDC)] public float nearRange;
+        [FieldOffset(0xE0)] public int nearRateId;
+        [FieldOffset(0xE4)] public int farRateId;
+        [FieldOffset(0xE8)] public bool isCounterGuard;
+        [FieldOffset(0xE9)] public bool isCounterWall;
+        [FieldOffset(0xEA)] public bool isSpikeWall;
+        [FieldOffset(0xEC)] public int waveNum;
+        [FieldOffset(0xF0)] public float waveUpTime;
+        [FieldOffset(0xF4)] public float waveLifeTime;
+        [FieldOffset(0xF8)] public float waveDownTime;
+        [FieldOffset(0xFC)] public float waveRadius;
+        [FieldOffset(0x100)] public float waveAddRadius;
+        [FieldOffset(0x104)] public float waveSpawnTime;
+        [FieldOffset(0x108)] public float waveKeepRadius;
+        [FieldOffset(0x10C)] public float waveHeight;
+        [FieldOffset(0x110)] public float straightWaveUpTime;
+        [FieldOffset(0x114)] public float straightWaveWaitTime;
+        [FieldOffset(0x118)] public float straightWaveDownTime;
+        [FieldOffset(0x11C)] public float straightWaveSpeed;
+        [FieldOffset(0x120)] public float straightWaveWidth;
+        [FieldOffset(0x124)] public float straightWaveHeight;
+        [FieldOffset(0x128)] public int rushNum;
+        [FieldOffset(0x12C)] public float downTime;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
+    public struct EnemyManSquadConfig
+    {
+        [FieldOffset(0x00)] public int maxActionCount;
+        [FieldOffset(0x04)] public float spAttackWaitTime;
+        [FieldOffset(0x08)] public unsafe fixed int humanMaxActionCount[6];
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x150)]
+    public struct EnemyManTypeConfig
+    {
+        [FieldOffset(0x00)] public EnemyManSingleConfig single;
+        [FieldOffset(0x130)] public EnemyManSquadConfig squad;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x19B0)]
+    public struct EnemyManConfig
+    {
+        [FieldOffset(0x00)] public EnemyManCommonConfig commonParam;
+        [FieldOffset(0x1710)] public unsafe fixed byte /* EnemyManTypeConfig[2] */ _typeParams[672];
+
+        public unsafe EnemyManTypeConfig* typeParams
+        {
+            get
+            {
+                fixed (byte* p_typeParams = _typeParams)
+                    return (EnemyManTypeConfig*)p_typeParams;
+            }
+        }
+    }
+
+}

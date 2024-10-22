@@ -1,0 +1,88 @@
+Library "WhiteSpaceColoringParameters"
+{
+    #load "System.Numerics.dll"
+
+    using System.Numerics;
+    using System.Runtime.InteropServices;
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x24)]
+    public struct WhiteSpaceVanishingParameter
+    {
+        [FieldOffset(0x00)] public float m_startHeight;
+        [FieldOffset(0x04)] public float m_endHeight;
+        [FieldOffset(0x08)] public float m_coloringSpeed;
+        [FieldOffset(0x0C)] public float m_width;
+        [FieldOffset(0x10)] public float m_noisePower;
+        [FieldOffset(0x14)] public float m_noiseSpeed;
+        [FieldOffset(0x18)] public unsafe fixed float m_rgb[3];
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
+    public struct WhiteSpaceMaterialLuminesParameter
+    {
+        [FieldOffset(0x00)] public float m_width;
+        [FieldOffset(0x04)] public float m_luminesPower;
+        [FieldOffset(0x08)] public float m_luminesColoringWitdh;
+        [FieldOffset(0x0C)] public float m_luminesOffset;
+        [FieldOffset(0x10)] public unsafe fixed float m_rgb[3];
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x38)]
+    public struct WhiteSpaceColoringParameter
+    {
+        [FieldOffset(0x00)] public float m_startHeight;
+        [FieldOffset(0x04)] public float m_endHeight;
+        [FieldOffset(0x08)] public float m_coloringSpeed;
+        [FieldOffset(0x0C)] public float m_startEffectTime;
+        [FieldOffset(0x10)] public float m_cameraStartHeight;
+        [FieldOffset(0x14)] public float m_cameraEndHeight;
+        [FieldOffset(0x18)] public float m_middleHeight;
+        [FieldOffset(0x1C)] public WhiteSpaceMaterialLuminesParameter luminesParam;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x70)]
+    public struct WhiteSpaceStageGateColoringParameter
+    {
+        [FieldOffset(0x00)] public unsafe fixed byte /* WhiteSpaceColoringParameter[2] */ _coloringParam[112];
+
+        public unsafe WhiteSpaceColoringParameter* coloringParam
+        {
+            get
+            {
+                fixed (byte* p_coloringParam = _coloringParam)
+                    return (WhiteSpaceColoringParameter*)p_coloringParam;
+            }
+        }
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x424)]
+    public struct WhiteSpaceColoringParameters
+    {
+        [FieldOffset(0x00)] public WhiteSpaceVanishingParameter vainishParam;
+        [FieldOffset(0x24)] public unsafe fixed byte /* WhiteSpaceColoringParameter[5] */ _coloringParam[280];
+
+        public unsafe WhiteSpaceColoringParameter* coloringParam
+        {
+            get
+            {
+                fixed (byte* p_coloringParam = _coloringParam)
+                    return (WhiteSpaceColoringParameter*)p_coloringParam;
+            }
+        }
+
+        [FieldOffset(0x13C)] public unsafe fixed byte /* WhiteSpaceStageGateColoringParameter[6] */ _stagegateParam[672];
+
+        public unsafe WhiteSpaceStageGateColoringParameter* stagegateParam
+        {
+            get
+            {
+                fixed (byte* p_stagegateParam = _stagegateParam)
+                    return (WhiteSpaceStageGateColoringParameter*)p_stagegateParam;
+            }
+        }
+
+        [FieldOffset(0x3DC)] public WhiteSpaceVanishingParameter eclipseParam;
+        [FieldOffset(0x400)] public WhiteSpaceVanishingParameter eclipseEndParam;
+    }
+
+}

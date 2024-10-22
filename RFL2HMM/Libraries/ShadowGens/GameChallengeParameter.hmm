@@ -1,0 +1,188 @@
+Library "GameChallengeParameter"
+{
+    #load "System.Numerics.dll"
+
+    using System.Numerics;
+    using System.Runtime.InteropServices;
+
+    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    public struct UnmanagedString
+    {
+        [FieldOffset(0)] public long pValue;
+
+        public string Value
+        {
+            get
+            {
+                if (pValue == 0)
+                    return string.Empty;
+
+                return Marshal.PtrToStringAnsi((nint)pValue);
+            }
+
+            set => pValue = (long)Marshal.StringToHGlobalAnsi(value);
+        }
+
+        public UnmanagedString(string in_value)
+        {
+            Value = in_value;
+        }
+
+        public static implicit operator UnmanagedString(string in_value)
+        {
+            return new UnmanagedString(in_value);
+        }
+
+        public static bool operator ==(UnmanagedString in_left, string in_right)
+        {
+            return in_left.Value == in_right;
+        }
+
+        public static bool operator !=(UnmanagedString in_left, string in_right)
+        {
+            return !(in_left == in_right);
+        }
+
+        public override bool Equals(object in_obj)
+        {
+            if (in_obj is string str)
+                return Value == str;
+
+            return base.Equals(in_obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Value;
+        }
+    }
+
+    public enum ChallengeType : byte
+    {
+        Ring = 0,
+        OneRing = 1,
+        TargetAnnihilation = 2,
+        ChaosControllMaster = 3,
+        CleaningSea = 4,
+        DashRing = 5,
+        ArcEscape = 6,
+        BilliardBlow = 7,
+        SpearRunner = 8,
+        HighSpeedRailCanyon = 9,
+        StoneLabyrinth = 10,
+        DeathEggRobotPanic = 11,
+        GondolaSurveyTeam = 12,
+        Num = 13
+    }
+
+    public enum IconType : sbyte
+    {
+        RING = 0,
+        CLOCK = 1,
+        ENEMYCHAOS = 2,
+        ENEMYBEETLE = 3,
+        OBJCHAOSSPEAR = 4,
+        OBJDASHRING = 5,
+        OBJSURFSPIN = 6,
+        ENEMYEGGSTINGER = 7,
+        ENEMYTWISTER = 8,
+        None = 9,
+        NUM = 10
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    public struct ResultChallengeParam
+    {
+        [FieldOffset(0x00)] public float timeRankS;
+        [FieldOffset(0x04)] public float timeRankA;
+        [FieldOffset(0x08)] public float timeRankB;
+        [FieldOffset(0x0C)] public float timeRankC;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
+    public struct GameChallengeCollectionData
+    {
+        [FieldOffset(0x00)] public int clearCollectionNum;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x88)]
+    public struct GameChallengeAnnihilationData
+    {
+        [FieldOffset(0x00)] public unsafe fixed byte /* UnmanagedString[8] */ _targetIDs[2040];
+
+        public unsafe UnmanagedString* targetIDs
+        {
+            get
+            {
+                fixed (byte* p_targetIDs = _targetIDs)
+                    return (UnmanagedString*)p_targetIDs;
+            }
+        }
+
+        [FieldOffset(0x80)] public int clearAnnihilationNum;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x88)]
+    public struct GameChallengeTouchData
+    {
+        [FieldOffset(0x00)] public unsafe fixed byte /* UnmanagedString[8] */ _targetIDs[2040];
+
+        public unsafe UnmanagedString* targetIDs
+        {
+            get
+            {
+                fixed (byte* p_targetIDs = _targetIDs)
+                    return (UnmanagedString*)p_targetIDs;
+            }
+        }
+
+        [FieldOffset(0x80)] public int clearTouchNum;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x160)]
+    public struct GameChallengeData
+    {
+        [FieldOffset(0x00)] public UnmanagedString stageCode;
+        [FieldOffset(0x10)] public ChallengeType challenge;
+        [FieldOffset(0x11)] public IconType iconType;
+        [FieldOffset(0x14)] public float limitTime;
+        [FieldOffset(0x18)] public UnmanagedString titleLabel;
+        [FieldOffset(0x28)] public UnmanagedString explainLabel;
+        [FieldOffset(0x38)] public ResultChallengeParam resultData;
+        [FieldOffset(0x48)] public GameChallengeCollectionData chalengeRingData;
+        [FieldOffset(0x50)] public GameChallengeAnnihilationData challengeAnnihilationData;
+        [FieldOffset(0xD8)] public GameChallengeTouchData challengeTouchData;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x3B20)]
+    public struct GameChallengeParameter
+    {
+        [FieldOffset(0x00)] public unsafe fixed byte /* GameChallengeData[32] */ _datas[11264];
+
+        public unsafe GameChallengeData* datas
+        {
+            get
+            {
+                fixed (byte* p_datas = _datas)
+                    return (GameChallengeData*)p_datas;
+            }
+        }
+
+        [FieldOffset(0x2C00)] public unsafe fixed byte /* GameChallengeData[11] */ _hardChallenges[3872];
+
+        public unsafe GameChallengeData* hardChallenges
+        {
+            get
+            {
+                fixed (byte* p_hardChallenges = _hardChallenges)
+                    return (GameChallengeData*)p_hardChallenges;
+            }
+        }
+    }
+
+}

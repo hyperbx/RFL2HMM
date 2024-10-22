@@ -1,0 +1,105 @@
+Library "GameCollectionGearParameter"
+{
+    #load "System.Numerics.dll"
+
+    using System.Numerics;
+    using System.Runtime.InteropServices;
+
+    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    public struct UnmanagedString
+    {
+        [FieldOffset(0)] public long pValue;
+
+        public string Value
+        {
+            get
+            {
+                if (pValue == 0)
+                    return string.Empty;
+
+                return Marshal.PtrToStringAnsi((nint)pValue);
+            }
+
+            set => pValue = (long)Marshal.StringToHGlobalAnsi(value);
+        }
+
+        public UnmanagedString(string in_value)
+        {
+            Value = in_value;
+        }
+
+        public static implicit operator UnmanagedString(string in_value)
+        {
+            return new UnmanagedString(in_value);
+        }
+
+        public static bool operator ==(UnmanagedString in_left, string in_right)
+        {
+            return in_left.Value == in_right;
+        }
+
+        public static bool operator !=(UnmanagedString in_left, string in_right)
+        {
+            return !(in_left == in_right);
+        }
+
+        public override bool Equals(object in_obj)
+        {
+            if (in_obj is string str)
+                return Value == str;
+
+            return base.Equals(in_obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Value;
+        }
+    }
+
+    public enum Color : int
+    {
+        NotEarned = -1,
+        Yellow = 0,
+        Blue = 1,
+        Green = 2,
+        None = 3
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
+    public struct GameCollectionGearData
+    {
+        [FieldOffset(0x00)] public UnmanagedString stageID;
+        [FieldOffset(0x10)] public unsafe fixed byte /* Color[3] */ _color[12];
+
+        public unsafe Color* color
+        {
+            get
+            {
+                fixed (byte* p_color = _color)
+                    return (Color*)p_color;
+            }
+        }
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x800)]
+    public struct GameCollectionGearParameter
+    {
+        [FieldOffset(0x00)] public unsafe fixed byte /* GameCollectionGearData[64] */ _Datas[2048];
+
+        public unsafe GameCollectionGearData* Datas
+        {
+            get
+            {
+                fixed (byte* p_Datas = _Datas)
+                    return (GameCollectionGearData*)p_Datas;
+            }
+        }
+    }
+
+}

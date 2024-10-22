@@ -1,0 +1,110 @@
+Library "CaptionParameter"
+{
+    #load "System.Numerics.dll"
+
+    using System.Numerics;
+    using System.Runtime.InteropServices;
+
+    public enum DisplayType : sbyte
+    {
+        Caption = 0
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    public struct UnmanagedString
+    {
+        [FieldOffset(0)] public long pValue;
+
+        public string Value
+        {
+            get
+            {
+                if (pValue == 0)
+                    return string.Empty;
+
+                return Marshal.PtrToStringAnsi((nint)pValue);
+            }
+
+            set => pValue = (long)Marshal.StringToHGlobalAnsi(value);
+        }
+
+        public UnmanagedString(string in_value)
+        {
+            Value = in_value;
+        }
+
+        public static implicit operator UnmanagedString(string in_value)
+        {
+            return new UnmanagedString(in_value);
+        }
+
+        public static bool operator ==(UnmanagedString in_left, string in_right)
+        {
+            return in_left.Value == in_right;
+        }
+
+        public static bool operator !=(UnmanagedString in_left, string in_right)
+        {
+            return !(in_left == in_right);
+        }
+
+        public override bool Equals(object in_obj)
+        {
+            if (in_obj is string str)
+                return Value == str;
+
+            return base.Equals(in_obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Value;
+        }
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
+    public struct LabelData
+    {
+        [FieldOffset(0x00)] public DisplayType display;
+        [FieldOffset(0x08)] public UnmanagedString label;
+        [FieldOffset(0x18)] public float waitTime;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x288)]
+    public struct Discussion
+    {
+        [FieldOffset(0x00)] public unsafe fixed byte /* LabelData[20] */ _labels[640];
+
+        public unsafe LabelData* labels
+        {
+            get
+            {
+                fixed (byte* p_labels = _labels)
+                    return (LabelData*)p_labels;
+            }
+        }
+
+        [FieldOffset(0x280)] public bool isForcePlay;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x1950)]
+    public struct CaptionParameter
+    {
+        [FieldOffset(0x00)] public unsafe fixed byte /* Discussion[10] */ _discussions[6480];
+
+        public unsafe Discussion* discussions
+        {
+            get
+            {
+                fixed (byte* p_discussions = _discussions)
+                    return (Discussion*)p_discussions;
+            }
+        }
+    }
+
+}

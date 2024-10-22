@@ -1,0 +1,48 @@
+Library "TalkEventCameraPresetParameters"
+{
+    #load "System.Numerics.dll"
+
+    using System.Numerics;
+    using System.Runtime.InteropServices;
+
+    public enum GazePositionType : sbyte
+    {
+        Base = 0,
+        Head = 1,
+        Eye = 2,
+        Center = 3
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
+    public struct TalkEventCameraPresetParameter
+    {
+        [FieldOffset(0x00)] public bool enable;
+        [FieldOffset(0x01)] public GazePositionType primaryTarget;
+        [FieldOffset(0x02)] public GazePositionType secondaryTarget;
+        [FieldOffset(0x04)] public float targetRatio;
+        [FieldOffset(0x08)] public float rotateDegreePitch;
+        [FieldOffset(0x0C)] public float rotateDegreeYaw;
+        [FieldOffset(0x10)] public float cameraOffsetRatio;
+        [FieldOffset(0x14)] public float fovy;
+        [FieldOffset(0x18)] public float targetOffsetX;
+        [FieldOffset(0x1C)] public float targetOffsetY;
+        [FieldOffset(0x20)] public float targetOffsetZ;
+        [FieldOffset(0x24)] public float easeTime;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x280)]
+    public struct TalkEventCameraPresetParameters
+    {
+        [FieldOffset(0x00)] public unsafe fixed byte /* TalkEventCameraPresetParameter[16] */ _param[640];
+
+        public unsafe TalkEventCameraPresetParameter* param
+        {
+            get
+            {
+                fixed (byte* p_param = _param)
+                    return (TalkEventCameraPresetParameter*)p_param;
+            }
+        }
+    }
+
+}

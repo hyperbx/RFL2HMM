@@ -10,7 +10,8 @@ Library "CollectionParamter"
         Locked = 0,
         LockedCollectionBox = 1,
         Opened = 2,
-        DLC_DDX = 3
+        DLC_DDX = 3,
+        DLC_ADD = 4
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x14)]
@@ -204,7 +205,7 @@ Library "CollectionParamter"
         [FieldOffset(0x04)] public float endWaitTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x28D0)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x2980)]
     public struct CollectionParamter
     {
         [FieldOffset(0x00)] public unsafe fixed byte /* CollectionArtInfo[121] */ _artInfos[2420];
@@ -229,7 +230,7 @@ Library "CollectionParamter"
             }
         }
 
-        [FieldOffset(0x1C38)] public unsafe fixed byte /* CollectionMovieInfo[30] */ _movieInfos[1680];
+        [FieldOffset(0x1C38)] public unsafe fixed byte /* CollectionMovieInfo[33] */ _movieInfos[1848];
 
         public unsafe CollectionMovieInfo* movieInfos
         {
@@ -240,7 +241,7 @@ Library "CollectionParamter"
             }
         }
 
-        [FieldOffset(0x22C8)] public unsafe fixed byte /* CollectionCharacterInfo[7] */ _charaInfos[168];
+        [FieldOffset(0x2370)] public unsafe fixed byte /* CollectionCharacterInfo[7] */ _charaInfos[168];
 
         public unsafe CollectionCharacterInfo* charaInfos
         {
@@ -251,7 +252,7 @@ Library "CollectionParamter"
             }
         }
 
-        [FieldOffset(0x2370)] public unsafe fixed byte /* CollectionHistoryInfo[11] */ _historyInfos[220];
+        [FieldOffset(0x2418)] public unsafe fixed byte /* CollectionHistoryInfo[11] */ _historyInfos[220];
 
         public unsafe CollectionHistoryInfo* historyInfos
         {
@@ -262,7 +263,7 @@ Library "CollectionParamter"
             }
         }
 
-        [FieldOffset(0x244C)] public unsafe fixed byte /* CollectionGeraldNoteInfo[28] */ _noteInfos[560];
+        [FieldOffset(0x24F4)] public unsafe fixed byte /* CollectionGeraldNoteInfo[28] */ _noteInfos[560];
 
         public unsafe CollectionGeraldNoteInfo* noteInfos
         {
@@ -273,16 +274,16 @@ Library "CollectionParamter"
             }
         }
 
-        [FieldOffset(0x2680)] public CollectionCharacterMenuParam charaMenuParam;
-        [FieldOffset(0x2850)] public CollectionRoomPlayerAction roomActionParam;
-        [FieldOffset(0x2894)] public CollectionGeraldNotePlayer notePlayerParam;
-        [FieldOffset(0x2898)] public CollectionRoomCamera artCamera;
-        [FieldOffset(0x28A0)] public CollectionRoomCamera soundCamera;
-        [FieldOffset(0x28A8)] public CollectionRoomCamera movieCamera;
-        [FieldOffset(0x28B0)] public CollectionRoomCamera charaCamera;
-        [FieldOffset(0x28B8)] public CollectionRoomCamera historyCamera;
-        [FieldOffset(0x28C0)] public CollectionRoomCamera noteCamera;
-        [FieldOffset(0x28C8)] public CollectionSoundMenuParam soundMenuParam;
+        [FieldOffset(0x2730)] public CollectionCharacterMenuParam charaMenuParam;
+        [FieldOffset(0x2900)] public CollectionRoomPlayerAction roomActionParam;
+        [FieldOffset(0x2944)] public CollectionGeraldNotePlayer notePlayerParam;
+        [FieldOffset(0x2948)] public CollectionRoomCamera artCamera;
+        [FieldOffset(0x2950)] public CollectionRoomCamera soundCamera;
+        [FieldOffset(0x2958)] public CollectionRoomCamera movieCamera;
+        [FieldOffset(0x2960)] public CollectionRoomCamera charaCamera;
+        [FieldOffset(0x2968)] public CollectionRoomCamera historyCamera;
+        [FieldOffset(0x2970)] public CollectionRoomCamera noteCamera;
+        [FieldOffset(0x2978)] public CollectionSoundMenuParam soundMenuParam;
     }
 
 }

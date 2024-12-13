@@ -10,7 +10,8 @@ Library "CollectionParamter"
         Locked = 0,
         LockedCollectionBox = 1,
         Opened = 2,
-        DLC_DDX = 3
+        DLC_DDX = 3,
+        DLC_ADD = 4
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x14)]
@@ -201,7 +202,7 @@ Library "CollectionParamter"
         [FieldOffset(0x04)] public float endWaitTime;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x28D0)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x2980)]
     public struct CollectionParamter
     {
         [FieldOffset(0x00)] public CollectionArtInfo artInfos__arr0;
@@ -455,62 +456,65 @@ Library "CollectionParamter"
         [FieldOffset(0x2220)] public CollectionMovieInfo movieInfos__arr27;
         [FieldOffset(0x2258)] public CollectionMovieInfo movieInfos__arr28;
         [FieldOffset(0x2290)] public CollectionMovieInfo movieInfos__arr29;
-        [FieldOffset(0x22C8)] public CollectionCharacterInfo charaInfos__arr0;
-        [FieldOffset(0x22E0)] public CollectionCharacterInfo charaInfos__arr1;
-        [FieldOffset(0x22F8)] public CollectionCharacterInfo charaInfos__arr2;
-        [FieldOffset(0x2310)] public CollectionCharacterInfo charaInfos__arr3;
-        [FieldOffset(0x2328)] public CollectionCharacterInfo charaInfos__arr4;
-        [FieldOffset(0x2340)] public CollectionCharacterInfo charaInfos__arr5;
-        [FieldOffset(0x2358)] public CollectionCharacterInfo charaInfos__arr6;
-        [FieldOffset(0x2370)] public CollectionHistoryInfo historyInfos__arr0;
-        [FieldOffset(0x2384)] public CollectionHistoryInfo historyInfos__arr1;
-        [FieldOffset(0x2398)] public CollectionHistoryInfo historyInfos__arr2;
-        [FieldOffset(0x23AC)] public CollectionHistoryInfo historyInfos__arr3;
-        [FieldOffset(0x23C0)] public CollectionHistoryInfo historyInfos__arr4;
-        [FieldOffset(0x23D4)] public CollectionHistoryInfo historyInfos__arr5;
-        [FieldOffset(0x23E8)] public CollectionHistoryInfo historyInfos__arr6;
-        [FieldOffset(0x23FC)] public CollectionHistoryInfo historyInfos__arr7;
-        [FieldOffset(0x2410)] public CollectionHistoryInfo historyInfos__arr8;
-        [FieldOffset(0x2424)] public CollectionHistoryInfo historyInfos__arr9;
-        [FieldOffset(0x2438)] public CollectionHistoryInfo historyInfos__arr10;
-        [FieldOffset(0x244C)] public CollectionGeraldNoteInfo noteInfos__arr0;
-        [FieldOffset(0x2460)] public CollectionGeraldNoteInfo noteInfos__arr1;
-        [FieldOffset(0x2474)] public CollectionGeraldNoteInfo noteInfos__arr2;
-        [FieldOffset(0x2488)] public CollectionGeraldNoteInfo noteInfos__arr3;
-        [FieldOffset(0x249C)] public CollectionGeraldNoteInfo noteInfos__arr4;
-        [FieldOffset(0x24B0)] public CollectionGeraldNoteInfo noteInfos__arr5;
-        [FieldOffset(0x24C4)] public CollectionGeraldNoteInfo noteInfos__arr6;
-        [FieldOffset(0x24D8)] public CollectionGeraldNoteInfo noteInfos__arr7;
-        [FieldOffset(0x24EC)] public CollectionGeraldNoteInfo noteInfos__arr8;
-        [FieldOffset(0x2500)] public CollectionGeraldNoteInfo noteInfos__arr9;
-        [FieldOffset(0x2514)] public CollectionGeraldNoteInfo noteInfos__arr10;
-        [FieldOffset(0x2528)] public CollectionGeraldNoteInfo noteInfos__arr11;
-        [FieldOffset(0x253C)] public CollectionGeraldNoteInfo noteInfos__arr12;
-        [FieldOffset(0x2550)] public CollectionGeraldNoteInfo noteInfos__arr13;
-        [FieldOffset(0x2564)] public CollectionGeraldNoteInfo noteInfos__arr14;
-        [FieldOffset(0x2578)] public CollectionGeraldNoteInfo noteInfos__arr15;
-        [FieldOffset(0x258C)] public CollectionGeraldNoteInfo noteInfos__arr16;
-        [FieldOffset(0x25A0)] public CollectionGeraldNoteInfo noteInfos__arr17;
-        [FieldOffset(0x25B4)] public CollectionGeraldNoteInfo noteInfos__arr18;
-        [FieldOffset(0x25C8)] public CollectionGeraldNoteInfo noteInfos__arr19;
-        [FieldOffset(0x25DC)] public CollectionGeraldNoteInfo noteInfos__arr20;
-        [FieldOffset(0x25F0)] public CollectionGeraldNoteInfo noteInfos__arr21;
-        [FieldOffset(0x2604)] public CollectionGeraldNoteInfo noteInfos__arr22;
-        [FieldOffset(0x2618)] public CollectionGeraldNoteInfo noteInfos__arr23;
-        [FieldOffset(0x262C)] public CollectionGeraldNoteInfo noteInfos__arr24;
-        [FieldOffset(0x2640)] public CollectionGeraldNoteInfo noteInfos__arr25;
-        [FieldOffset(0x2654)] public CollectionGeraldNoteInfo noteInfos__arr26;
-        [FieldOffset(0x2668)] public CollectionGeraldNoteInfo noteInfos__arr27;
-        [FieldOffset(0x2680)] public CollectionCharacterMenuParam charaMenuParam;
-        [FieldOffset(0x2850)] public CollectionRoomPlayerAction roomActionParam;
-        [FieldOffset(0x2894)] public CollectionGeraldNotePlayer notePlayerParam;
-        [FieldOffset(0x2898)] public CollectionRoomCamera artCamera;
-        [FieldOffset(0x28A0)] public CollectionRoomCamera soundCamera;
-        [FieldOffset(0x28A8)] public CollectionRoomCamera movieCamera;
-        [FieldOffset(0x28B0)] public CollectionRoomCamera charaCamera;
-        [FieldOffset(0x28B8)] public CollectionRoomCamera historyCamera;
-        [FieldOffset(0x28C0)] public CollectionRoomCamera noteCamera;
-        [FieldOffset(0x28C8)] public CollectionSoundMenuParam soundMenuParam;
+        [FieldOffset(0x22C8)] public CollectionMovieInfo movieInfos__arr30;
+        [FieldOffset(0x2300)] public CollectionMovieInfo movieInfos__arr31;
+        [FieldOffset(0x2338)] public CollectionMovieInfo movieInfos__arr32;
+        [FieldOffset(0x2370)] public CollectionCharacterInfo charaInfos__arr0;
+        [FieldOffset(0x2388)] public CollectionCharacterInfo charaInfos__arr1;
+        [FieldOffset(0x23A0)] public CollectionCharacterInfo charaInfos__arr2;
+        [FieldOffset(0x23B8)] public CollectionCharacterInfo charaInfos__arr3;
+        [FieldOffset(0x23D0)] public CollectionCharacterInfo charaInfos__arr4;
+        [FieldOffset(0x23E8)] public CollectionCharacterInfo charaInfos__arr5;
+        [FieldOffset(0x2400)] public CollectionCharacterInfo charaInfos__arr6;
+        [FieldOffset(0x2418)] public CollectionHistoryInfo historyInfos__arr0;
+        [FieldOffset(0x242C)] public CollectionHistoryInfo historyInfos__arr1;
+        [FieldOffset(0x2440)] public CollectionHistoryInfo historyInfos__arr2;
+        [FieldOffset(0x2454)] public CollectionHistoryInfo historyInfos__arr3;
+        [FieldOffset(0x2468)] public CollectionHistoryInfo historyInfos__arr4;
+        [FieldOffset(0x247C)] public CollectionHistoryInfo historyInfos__arr5;
+        [FieldOffset(0x2490)] public CollectionHistoryInfo historyInfos__arr6;
+        [FieldOffset(0x24A4)] public CollectionHistoryInfo historyInfos__arr7;
+        [FieldOffset(0x24B8)] public CollectionHistoryInfo historyInfos__arr8;
+        [FieldOffset(0x24CC)] public CollectionHistoryInfo historyInfos__arr9;
+        [FieldOffset(0x24E0)] public CollectionHistoryInfo historyInfos__arr10;
+        [FieldOffset(0x24F4)] public CollectionGeraldNoteInfo noteInfos__arr0;
+        [FieldOffset(0x2508)] public CollectionGeraldNoteInfo noteInfos__arr1;
+        [FieldOffset(0x251C)] public CollectionGeraldNoteInfo noteInfos__arr2;
+        [FieldOffset(0x2530)] public CollectionGeraldNoteInfo noteInfos__arr3;
+        [FieldOffset(0x2544)] public CollectionGeraldNoteInfo noteInfos__arr4;
+        [FieldOffset(0x2558)] public CollectionGeraldNoteInfo noteInfos__arr5;
+        [FieldOffset(0x256C)] public CollectionGeraldNoteInfo noteInfos__arr6;
+        [FieldOffset(0x2580)] public CollectionGeraldNoteInfo noteInfos__arr7;
+        [FieldOffset(0x2594)] public CollectionGeraldNoteInfo noteInfos__arr8;
+        [FieldOffset(0x25A8)] public CollectionGeraldNoteInfo noteInfos__arr9;
+        [FieldOffset(0x25BC)] public CollectionGeraldNoteInfo noteInfos__arr10;
+        [FieldOffset(0x25D0)] public CollectionGeraldNoteInfo noteInfos__arr11;
+        [FieldOffset(0x25E4)] public CollectionGeraldNoteInfo noteInfos__arr12;
+        [FieldOffset(0x25F8)] public CollectionGeraldNoteInfo noteInfos__arr13;
+        [FieldOffset(0x260C)] public CollectionGeraldNoteInfo noteInfos__arr14;
+        [FieldOffset(0x2620)] public CollectionGeraldNoteInfo noteInfos__arr15;
+        [FieldOffset(0x2634)] public CollectionGeraldNoteInfo noteInfos__arr16;
+        [FieldOffset(0x2648)] public CollectionGeraldNoteInfo noteInfos__arr17;
+        [FieldOffset(0x265C)] public CollectionGeraldNoteInfo noteInfos__arr18;
+        [FieldOffset(0x2670)] public CollectionGeraldNoteInfo noteInfos__arr19;
+        [FieldOffset(0x2684)] public CollectionGeraldNoteInfo noteInfos__arr20;
+        [FieldOffset(0x2698)] public CollectionGeraldNoteInfo noteInfos__arr21;
+        [FieldOffset(0x26AC)] public CollectionGeraldNoteInfo noteInfos__arr22;
+        [FieldOffset(0x26C0)] public CollectionGeraldNoteInfo noteInfos__arr23;
+        [FieldOffset(0x26D4)] public CollectionGeraldNoteInfo noteInfos__arr24;
+        [FieldOffset(0x26E8)] public CollectionGeraldNoteInfo noteInfos__arr25;
+        [FieldOffset(0x26FC)] public CollectionGeraldNoteInfo noteInfos__arr26;
+        [FieldOffset(0x2710)] public CollectionGeraldNoteInfo noteInfos__arr27;
+        [FieldOffset(0x2730)] public CollectionCharacterMenuParam charaMenuParam;
+        [FieldOffset(0x2900)] public CollectionRoomPlayerAction roomActionParam;
+        [FieldOffset(0x2944)] public CollectionGeraldNotePlayer notePlayerParam;
+        [FieldOffset(0x2948)] public CollectionRoomCamera artCamera;
+        [FieldOffset(0x2950)] public CollectionRoomCamera soundCamera;
+        [FieldOffset(0x2958)] public CollectionRoomCamera movieCamera;
+        [FieldOffset(0x2960)] public CollectionRoomCamera charaCamera;
+        [FieldOffset(0x2968)] public CollectionRoomCamera historyCamera;
+        [FieldOffset(0x2970)] public CollectionRoomCamera noteCamera;
+        [FieldOffset(0x2978)] public CollectionSoundMenuParam soundMenuParam;
     }
 
 }

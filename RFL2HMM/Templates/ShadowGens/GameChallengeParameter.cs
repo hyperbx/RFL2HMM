@@ -77,7 +77,9 @@ Library "GameChallengeParameter"
         StoneLabyrinth = 10,
         DeathEggRobotPanic = 11,
         GondolaSurveyTeam = 12,
-        Num = 13
+        MovieDLC1 = 13,
+        MovieDLC2 = 14,
+        Num = 15
     }
 
     public enum IconType : sbyte
@@ -91,8 +93,9 @@ Library "GameChallengeParameter"
         OBJSURFSPIN = 6,
         ENEMYEGGSTINGER = 7,
         ENEMYTWISTER = 8,
-        None = 9,
-        NUM = 10
+        BALLOON = 9,
+        None = 10,
+        NUM = 11
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
@@ -153,7 +156,7 @@ Library "GameChallengeParameter"
         [FieldOffset(0xD8)] public GameChallengeTouchData challengeTouchData;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x3B20)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x3DE0)]
     public struct GameChallengeParameter
     {
         [FieldOffset(0x00)] public GameChallengeData datas__arr0;
@@ -199,6 +202,8 @@ Library "GameChallengeParameter"
         [FieldOffset(0x3700)] public GameChallengeData hardChallenges__arr8;
         [FieldOffset(0x3860)] public GameChallengeData hardChallenges__arr9;
         [FieldOffset(0x39C0)] public GameChallengeData hardChallenges__arr10;
+        [FieldOffset(0x3B20)] public GameChallengeData dlcChallenges__arr0;
+        [FieldOffset(0x3C80)] public GameChallengeData dlcChallenges__arr1;
     }
 
 }

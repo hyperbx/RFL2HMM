@@ -27,11 +27,12 @@ Library "GameUIParameter"
         [FieldOffset(0x30)] public float fovy;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x80)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
     public struct WhiteSpaceStageUI
     {
         [FieldOffset(0x00)] public WhiteSpaceStageUIModelParam modelParam;
         [FieldOffset(0x40)] public WhiteSpaceStageUIModelParam dwingModelParam;
+        [FieldOffset(0x80)] public WhiteSpaceStageUIModelParam dlcaddParam;
     }
 
     public enum OpenState : int
@@ -150,16 +151,16 @@ Library "GameUIParameter"
         [FieldOffset(0x20)] public Vector3 mapUnderGroundPos;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x3400)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x3440)]
     public struct GameUIWhiteSpaceParam
     {
         [FieldOffset(0x00)] public float itemInfoTimer;
         [FieldOffset(0x10)] public WhiteSpaceStageUI stageUIParam;
-        [FieldOffset(0x90)] public WhiteSpaceQAParamter qaParam;
-        [FieldOffset(0x33D0)] public WhiteSpaceMapUI mapParam;
+        [FieldOffset(0xD0)] public WhiteSpaceQAParamter qaParam;
+        [FieldOffset(0x3410)] public WhiteSpaceMapUI mapParam;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x3410)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x3450)]
     public struct GameUIParameter
     {
         [FieldOffset(0x00)] public GameUIBoostParam boostParam;

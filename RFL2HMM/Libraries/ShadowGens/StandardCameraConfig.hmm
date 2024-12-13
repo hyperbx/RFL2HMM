@@ -5,7 +5,7 @@ Library "StandardCameraConfig"
     using System.Numerics;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x70)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x7C)]
     public struct StandardCameraCommonParameter
     {
         [FieldOffset(0x00)] public float distance;
@@ -13,29 +13,32 @@ Library "StandardCameraConfig"
         [FieldOffset(0x08)] public float minElevation;
         [FieldOffset(0x0C)] public float maxElevation;
         [FieldOffset(0x10)] public float azimuthSensitivity;
-        [FieldOffset(0x14)] public float elevationUpSensitivity;
-        [FieldOffset(0x18)] public float elevationDownSensitivity;
-        [FieldOffset(0x1C)] public float elevationOffset;
-        [FieldOffset(0x20)] public float targetUpOffset;
-        [FieldOffset(0x24)] public float targetMinUpOffsetLimit;
-        [FieldOffset(0x28)] public float targetMaxUpOffsetLimit;
-        [FieldOffset(0x2C)] public float targetMinUpOffsetLimitDistance;
-        [FieldOffset(0x30)] public float targetMaxUpOffsetLimitDistance;
-        [FieldOffset(0x34)] public float targetOffsetSuspensionK;
-        [FieldOffset(0x38)] public float delayAllowDistance;
-        [FieldOffset(0x3C)] public float delayLimitDistance;
-        [FieldOffset(0x40)] public float delaySuspensionK;
-        [FieldOffset(0x44)] public float autocontrolDisabledTime;
-        [FieldOffset(0x48)] public float chaseSegmentSuspensionK;
-        [FieldOffset(0x4C)] public float chaseSegmentShortenSpeed;
-        [FieldOffset(0x50)] public int chaseSegmentMaxCount;
-        [FieldOffset(0x54)] public float inertiaMinDecel;
-        [FieldOffset(0x58)] public float inertiaOvershootAngle;
-        [FieldOffset(0x5C)] public float resetSuspensionK;
-        [FieldOffset(0x60)] public float downDirectionDotThreshold;
-        [FieldOffset(0x64)] public float baseUpLeanRate;
-        [FieldOffset(0x68)] public bool disableRotationControl;
-        [FieldOffset(0x6C)] public float fovy;
+        [FieldOffset(0x14)] public bool isAzimuthLimited;
+        [FieldOffset(0x18)] public float azimuthMax;
+        [FieldOffset(0x1C)] public float azimuthFront;
+        [FieldOffset(0x20)] public float elevationUpSensitivity;
+        [FieldOffset(0x24)] public float elevationDownSensitivity;
+        [FieldOffset(0x28)] public float elevationOffset;
+        [FieldOffset(0x2C)] public float targetUpOffset;
+        [FieldOffset(0x30)] public float targetMinUpOffsetLimit;
+        [FieldOffset(0x34)] public float targetMaxUpOffsetLimit;
+        [FieldOffset(0x38)] public float targetMinUpOffsetLimitDistance;
+        [FieldOffset(0x3C)] public float targetMaxUpOffsetLimitDistance;
+        [FieldOffset(0x40)] public float targetOffsetSuspensionK;
+        [FieldOffset(0x44)] public float delayAllowDistance;
+        [FieldOffset(0x48)] public float delayLimitDistance;
+        [FieldOffset(0x4C)] public float delaySuspensionK;
+        [FieldOffset(0x50)] public float autocontrolDisabledTime;
+        [FieldOffset(0x54)] public float chaseSegmentSuspensionK;
+        [FieldOffset(0x58)] public float chaseSegmentShortenSpeed;
+        [FieldOffset(0x5C)] public int chaseSegmentMaxCount;
+        [FieldOffset(0x60)] public float inertiaMinDecel;
+        [FieldOffset(0x64)] public float inertiaOvershootAngle;
+        [FieldOffset(0x68)] public float resetSuspensionK;
+        [FieldOffset(0x6C)] public float downDirectionDotThreshold;
+        [FieldOffset(0x70)] public float baseUpLeanRate;
+        [FieldOffset(0x74)] public bool disableRotationControl;
+        [FieldOffset(0x78)] public float fovy;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
@@ -154,19 +157,19 @@ Library "StandardCameraConfig"
         [FieldOffset(0x34)] public bool bIsActiveOption;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x1C4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1D0)]
     public struct StandardCameraConfig
     {
         [FieldOffset(0x00)] public StandardCameraCommonParameter common;
-        [FieldOffset(0x70)] public StandardCameraDashParameter dash;
-        [FieldOffset(0xA0)] public StandardCameraCyloopParameter cyloop;
-        [FieldOffset(0xC4)] public StandardCameraCyloopParameter cyloopSnipe;
-        [FieldOffset(0xE8)] public StandardCameraLockonParameter lockon;
-        [FieldOffset(0x120)] public StandardCameraWallParameter wall;
-        [FieldOffset(0x128)] public StandardCameraLoopParameter loop;
-        [FieldOffset(0x13C)] public StandardCameraBattleParameter battle;
-        [FieldOffset(0x17C)] public StandardCameraSurfParameter surf;
-        [FieldOffset(0x18C)] public StandardCameraOptionParameter option;
+        [FieldOffset(0x7C)] public StandardCameraDashParameter dash;
+        [FieldOffset(0xAC)] public StandardCameraCyloopParameter cyloop;
+        [FieldOffset(0xD0)] public StandardCameraCyloopParameter cyloopSnipe;
+        [FieldOffset(0xF4)] public StandardCameraLockonParameter lockon;
+        [FieldOffset(0x12C)] public StandardCameraWallParameter wall;
+        [FieldOffset(0x134)] public StandardCameraLoopParameter loop;
+        [FieldOffset(0x148)] public StandardCameraBattleParameter battle;
+        [FieldOffset(0x188)] public StandardCameraSurfParameter surf;
+        [FieldOffset(0x198)] public StandardCameraOptionParameter option;
     }
 
 }

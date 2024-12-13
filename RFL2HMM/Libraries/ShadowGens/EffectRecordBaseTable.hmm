@@ -68,11 +68,11 @@ Library "EffectRecordBaseTable"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x38)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x48)]
     public struct EffectRecord
     {
         [FieldOffset(0)] public Record record;
-        [FieldOffset(0x08)] public unsafe fixed byte /* UnmanagedString[3] */ _emitterSetName[765];
+        [FieldOffset(0x08)] public unsafe fixed byte /* UnmanagedString[4] */ _emitterSetName[1020];
 
         public unsafe UnmanagedString* emitterSetName
         {
@@ -84,10 +84,10 @@ Library "EffectRecordBaseTable"
         }
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x15E0)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C20)]
     public struct EffectRecordBaseTable
     {
-        [FieldOffset(0x00)] public unsafe fixed byte /* EffectRecord[100] */ _data[5600];
+        [FieldOffset(0x00)] public unsafe fixed byte /* EffectRecord[100] */ _data[7200];
 
         public unsafe EffectRecord* data
         {
